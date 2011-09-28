@@ -2,8 +2,8 @@
 /*
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
-Description: wpsc Support Tickets is an open source arcade plugin for Wordpress that allows you add support ticket capabilities to any Wordpress site.
-Version: 0.9.0
+Description: wpsc Support Tickets is an open source help desk and support ticket for Wordpress that allows you add support ticket capabilities to any Wordpress site.
+Version: 0.9.1
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -32,8 +32,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 0.90;
-$wpscSupportTickets_db_version = 0.90;
+$wpscSupportTickets_version = 0.91;
+$wpscSupportTickets_db_version = 0.91;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
 

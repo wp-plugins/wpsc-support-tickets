@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk
 Requires at least: 2.8.0
 Tested up to: 3.2.1
-Stable tag: 0.9.0
+Stable tag: 0.9.1
 
 == Description ==
 
@@ -59,6 +59,9 @@ Visit [our site](http://wpstorecart.com/wpsc-support-tickets/ "our site")
 6. The full options
 
 == Changelog ==
+
+= 0.9.1 =
+* Updated the description to remove references to this being an arcade plugin
 
 = 0.9.0 =
 * Everything has been finished for the first public beta
