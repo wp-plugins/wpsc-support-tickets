@@ -4,20 +4,23 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk
 Requires at least: 2.8.0
 Tested up to: 3.2.1
-Stable tag: 0.9.1
+Stable tag: 0.9.2
 
 == Description ==
 
-wpsc Support Tickets is an open source help desk and support ticket for Wordpress that allows you add support ticket capabilities to any Wordpress site.
+wpsc Support Tickets is an open source help desk and support ticket system for Wordpress that allows you add support ticket capabilities to any Wordpress site.
 
 For full documentation, support, addons, and related tools, visit [our site](http://wpstorecart.com/wpsc-support-tickets/ "our site")
 
+This isn't some port of another ticket system that's been hacked to run inside Wordpress.  This is a new plugin designed from the ground up specifically for Wordpress.
+
 **Hightlighted Features:**
+
  * Users can create support tickets and reply to their own tickets
  * Admins, and any user granted the manage_wpsc_support_tickets capability, can reply to, close, or delete any ticket
  * Front end support ticket interface is done in jQuery, and utilizes Ajax ticket loading
  * Customizable departments, email messages, and CSS for custom solutions
- * You can hide support ticket capabilities from a user who has not purchased a specific product (requires wpStoreCart 2.4.9 or higher)
+ * You can hide support ticket capabilities from a user who has not purchased a specific product (requires [wpStoreCart](http://wpstorecart.com/ "wpStoreCart") 2.4.9 or higher)
  * Admin dashboard widget shows all open tickets
  * Both the admin and frontend provides a WYSIWYG HTML editor for formatting
  * i18n ready and compatible
@@ -59,6 +62,9 @@ Visit [our site](http://wpstorecart.com/wpsc-support-tickets/ "our site")
 6. The full options
 
 == Changelog ==
+
+= 0.9.2 =
+* Updated the readme.txt
 
 = 0.9.1 =
 * Updated the description to remove references to this being an arcade plugin
