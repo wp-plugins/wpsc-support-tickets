@@ -4,14 +4,15 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 2.8.0
 Tested up to: 3.2.1
-Stable tag: 0.9.3
+Stable tag: 0.9.4
 
 == Description ==
 
-Support tickets are critical to most businesses that provide a product or service, 
-and is often used for clients, customers, members, authors, sponsors, pre-sale questions and more.   
 [wpsc Support Tickets](http://wpstorecart.com/wpsc-support-tickets/ "wpsc Support Tickets") is an open source Wordpress support ticket system.  
 This isn't some port of another ticket system that's been hacked to run inside Wordpress.  This is a new plugin designed from the ground up specifically for Wordpress.
+
+Support tickets are critical to most businesses that provide a product or service, 
+and is often used for clients, customers, members, authors, sponsors, pre-sale questions and more.   
 
 For full documentation, support, addons, and related tools, visit [our site](http://wpstorecart.com/wpsc-support-tickets/ "our site")
 
@@ -66,6 +67,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 0.9.4 =
+* Added: New option available to disable the inline styles which are by default put into the elements
 
 = 0.9.3 =
 * Added: Admin dashboard widget will now display a "No open tickets" message when there are no open tickets
