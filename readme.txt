@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 2.8.0
 Tested up to: 3.2.1
-Stable tag: 0.9.4
+Stable tag: 0.9.5
 
 == Description ==
 
@@ -67,6 +67,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 0.9.5 =
+* Fixed: Removed reference to a non-used method that was causing an error on some dashboards
 
 = 0.9.4 =
 * Added: New option available to disable the inline styles which are by default put into the elements

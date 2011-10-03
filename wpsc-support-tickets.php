@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 0.9.4
+Version: 0.9.5
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -32,8 +32,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 0.94;
-$wpscSupportTickets_db_version = 0.94;
+$wpscSupportTickets_version = 0.95;
+$wpscSupportTickets_db_version = 0.95;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
 
@@ -653,7 +653,6 @@ if (isset($wpscSupportTickets)) {
 	add_action('wp_dashboard_setup', array(&$wpscSupportTickets, 'wpscSupportTickets_main_add_dashboard_widgets') ); // Dashboard widget
         //add_action('wp_head', array(&$wpscSupportTickets, 'addHeaderCode')); // Place wpscSupportTickets comment into header
 	add_shortcode('wpscSupportTickets', array(&$wpscSupportTickets, 'wpscSupportTickets_mainshortcode'));
-	add_action('admin_head', array(&$wpscSupportTickets, 'placeAdminHeaderCode'), 1); // Place wpscSupportTickets comment into header
 	add_action("wp_print_scripts", array(&$wpscSupportTickets,"addHeaderCode"));
 }
  /**
