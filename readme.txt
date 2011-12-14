@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 2.8.0
 Tested up to: 3.2.1
-Stable tag: 0.9.5
+Stable tag: 1.0.0
 
 == Description ==
 
@@ -67,6 +67,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.0.0 =
+* Fixed: Removed the ability for non-approved user to see the admin dashboard widget
 
 = 0.9.5 =
 * Fixed: Removed reference to a non-used method that was causing an error on some dashboards
