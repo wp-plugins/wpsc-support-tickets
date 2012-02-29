@@ -12,6 +12,8 @@ global $current_user, $wpdb, $wpscSupportTickets, $wpStoreCart, $cart, $wpsc, $t
 
 $devOptions = $wpscSupportTickets->getAdminOptions();
 
+if (session_id() == "") {@session_start();};
+
 if ( current_user_can('manage_wpsc_support_tickets')) { // admin edits such as closing tickets should happen here first:
     if(@isset($_POST['wpscst_status']) && @isset($_POST['wpscst_department']) && is_numeric($_POST['wpscst_edit_primkey'])) {
         $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));
@@ -37,16 +39,25 @@ if($string=='') { // No blank replies allowed
 }
 
 // If there is a reply and we're still executing code, now we'll add the reply
-if(is_user_logged_in() && is_numeric($_POST['wpscst_edit_primkey'])) {
+if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST['wpscst_edit_primkey'])) {
 
     if(isset($wpStoreCart)) {
         $wpStoreCartdevOptions = $wpStoreCart->getAdminOptions();
     }
 
+    // Guest additions here
+    if(is_user_logged_in()) {
+        $wpscst_userid = $current_user->ID;
+        $wpscst_email = $current_user->user_email;
+    } else {
+        $wpscst_userid = 0;
+        $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);      
+    }    
+    
     $primkey = intval($_POST['wpscst_edit_primkey']);
 
     if ( !current_user_can('manage_wpsc_support_tickets')) {
-        $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}' AND `user_id`='{$current_user->ID}' LIMIT 0, 1;";
+        $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}' AND `user_id`='{$wpscst_userid}' AND `email`='{$wpscst_email}' LIMIT 0, 1;";
     } else {
         // This allows approved users, such as the admin, to reply to any support ticket
         $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}' LIMIT 0, 1;";
@@ -64,7 +75,7 @@ if(is_user_logged_in() && is_numeric($_POST['wpscst_edit_primkey'])) {
                 `message`
             )
             VALUES (
-                NULL , '{$primkey}', '{$current_user->ID}', '".time()."', '{$wpscst_message}'
+                NULL , '{$primkey}', '{$wpscst_userid}', '".time()."', '{$wpscst_message}'
             );
             ";
 

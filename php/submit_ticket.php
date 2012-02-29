@@ -12,7 +12,9 @@ global $current_user, $wpdb, $wpscSupportTickets, $wpStoreCart, $cart, $wpsc, $t
 
 $devOptions = $wpscSupportTickets->getAdminOptions();
 
-if(is_user_logged_in()) {
+if (session_id() == "") {@session_start();};
+if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
+    
 
     if(isset($wpStoreCart)) {
         $wpStoreCartdevOptions = $wpStoreCart->getAdminOptions();
@@ -27,6 +29,15 @@ if(is_user_logged_in()) {
     $wpscst_title = base64_encode(strip_tags($_POST['wpscst_title']));
     $wpscst_initial_message = base64_encode($_POST['wpscst_initial_message']);
     $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));
+    
+    // Guest additions here
+    if(is_user_logged_in()) {
+        $wpscst_userid = $current_user->ID;
+        $wpscst_email = $current_user->user_email;
+    } else {
+        $wpscst_userid = 0;
+        $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);      
+    }
 
     $sql = "
     INSERT INTO `{$wpdb->prefix}wpscst_tickets` (
@@ -34,8 +45,8 @@ if(is_user_logged_in()) {
             NULL,
             '{$wpscst_title}',
             '{$wpscst_initial_message}',
-            '{$current_user->ID}',
-            '{$current_user->user_email}',
+            '{$wpscst_userid}',
+            '{$wpscst_email}',
             '0',
             'Normal',
             'Open',
@@ -50,7 +61,7 @@ if(is_user_logged_in()) {
     $wpdb->query($sql);
     $lastID = $wpdb->insert_id;
 
-    $to      = $current_user->user_email; // Send this to the ticket creator
+    $to      = $wpscst_email; // Send this to the ticket creator
     $subject = $devOptions['email_new_ticket_subject'];
     $message = $devOptions['email_new_ticket_body'];
     $headers = 'From: ' . $devOptions['email'] . "\r\n" .

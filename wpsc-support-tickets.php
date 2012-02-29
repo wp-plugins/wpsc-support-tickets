@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.0.0
+Version: 1.1.0
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -32,8 +32,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 1.0;
-$wpscSupportTickets_db_version = 1.0;
+$wpscSupportTickets_version = 1.1;
+$wpscSupportTickets_db_version = 1.1;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
 
@@ -63,6 +63,7 @@ if (!class_exists("wpscSupportTickets")) {
     class wpscSupportTickets {
         var $adminOptionsName = "wpscSupportTicketsAdminOptions";
         var $wpscstSettings = null;
+        var $hasDisplayed = false;
 		
         function wpscSupportTickets() { //constructor
             // Let's make sure the admin is always in charge
@@ -97,7 +98,8 @@ if (!class_exists("wpscSupportTickets")) {
                                     'email_new_ticket_body' => 'Thank you for opening a new support ticket.  We will look into your issue and respond as soon as possible.',
                                     'email_new_reply_subject' => 'Your support ticket reply was received.',
                                     'email_new_reply_body' => 'A reply was posted to one of your support tickets.',
-                                    'disable_inline_styles' => 'false'
+                                    'disable_inline_styles' => 'false',
+                                    'allowguests' => 'false'
                                     );
 
             if($this->wpscstSettings!=NULL) {
@@ -148,7 +150,10 @@ if (!class_exists("wpscSupportTickets")) {
                     if (isset($_POST['disable_inline_styles'])) {
                             $devOptions['disable_inline_styles'] = $wpdb->escape($_POST['disable_inline_styles']);
                     }
-
+                    if (isset($_POST['allow_guests'])) {
+                            $devOptions['allow_guests'] = $wpdb->escape($_POST['allow_guests']);
+                    }
+                    
                     update_option($this->adminOptionsName, $devOptions);
 
                     echo '<div class="updated"><p><strong>';
@@ -219,6 +224,25 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '
                 </select>
 
+                <p><strong>Allow Guests:</strong> Set this to true if you want Guests to be able to use the support ticket system.  <br />
+                <select name="allow_guests">
+                 ';
+
+                  $pagesY[0] = 'true';
+                  $pagesY[1] = 'false';
+                  foreach ($pagesY as $pagg) {
+                        $option = '<option value="'.$pagg.'"';
+                        if($pagg==$devOptions['allow_guests']) {
+                                $option .= ' selected="selected"';
+                        }
+                        $option .='>';
+                        $option .= $pagg;
+                        $option .= '</option>';
+                        echo $option;
+                  }
+
+                echo '
+                </select>
 
             </div>
 
@@ -314,15 +338,22 @@ if (!class_exists("wpscSupportTickets")) {
                             $result2 = $wpdb->get_results( $sql , ARRAY_A );
                             if(isset($result2)) {
                                 foreach ($result2 as $resultsX) {
-                                    $user=get_userdata($resultsX['user_id']);
-                                    $userdata = new WP_User($resultsX['user_id']);
                                     $styleModifier1 = NULL;$styleModifier2 = NULL;
-                                    if ( $userdata->has_cap('manage_wpsc_support_tickets') ) {
-                                        $styleModifier1 = 'background:#FFF;';
-                                        $styleModifier2 = 'background:#e5e7fa;" ';
+                                    if($resultsX['user_id']!=0) {
+                                        @$user=get_userdata($resultsX['user_id']);
+                                        @$userdata = new WP_User($resultsX['user_id']);
+                                        if ( $userdata->has_cap('manage_wpsc_support_tickets') ) {
+                                            $styleModifier1 = 'background:#FFF;';
+                                            $styleModifier2 = 'background:#e5e7fa;" ';
+                                        }
+                                        $theusersname = $user->user_nicename;
+                                    } else {
+                                        $user = false; // Guest
+                                        $theusersname = __('Guest');
                                     }
+
                                     echo '<br /><table class="widefat" style="width:100%;'.$styleModifier1.'">';
-                                    echo '<thead><tr><th class="wpscst_results_posted_by" style="'.$styleModifier2.'">'.__('Posted by').' <a href="'.get_admin_url().'user-edit.php?user_id='.$resultsX['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$user->user_nicename.'</a> (<span class="wpscst_results_timestamp">'.date('Y-m-d g:i A',$resultsX['timestamp']).'</span>)<div style="float:right;"><a onclick="if(confirm(\'Are you sure you want to delete this reply?\')){return true;}return false;" href="'.plugins_url('/php/delete_ticket.php' , __FILE__).'?replyid='.$resultsX['primkey'].'&ticketid='.$primkey.'"><img src="'.plugins_url('/images/delete.png' , __FILE__).'" alt="delete" /> Delete Reply</a></div></th></tr></thead>';
+                                    echo '<thead><tr><th class="wpscst_results_posted_by" style="'.$styleModifier2.'">'.__('Posted by').' <a href="'.get_admin_url().'user-edit.php?user_id='.$resultsX['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a> (<span class="wpscst_results_timestamp">'.date('Y-m-d g:i A',$resultsX['timestamp']).'</span>)<div style="float:right;"><a onclick="if(confirm(\'Are you sure you want to delete this reply?\')){return true;}return false;" href="'.plugins_url('/php/delete_ticket.php' , __FILE__).'?replyid='.$resultsX['primkey'].'&ticketid='.$primkey.'"><img src="'.plugins_url('/images/delete.png' , __FILE__).'" alt="delete" /> Delete Reply</a></div></th></tr></thead>';
                                     echo '<tbody><tr><td class="wpscst_results_message"><br />'.strip_tags(base64_decode($resultsX['message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>').'</td></tr>';
                                     echo '</tbody></table>';
                                 }
@@ -373,8 +404,17 @@ if (!class_exists("wpscSupportTickets")) {
                         if(isset($results) && isset($results[0]['primkey'])) {
                             $output .= '<table class="widefat" style="width:100%"><thead><tr><th>'.__('Ticket').'</th><th>'.__('Status').'</th><th>'.__('User').'</th></tr></thead><tbody>';
                             foreach($results as $result) {
-                                    $user=get_userdata($result['user_id']);
-                                    $output .= '<tr><td><a href="admin.php?page=wpscSupportTickets-edit&primkey='.$result['primkey'].'" style="border:none;text-decoration:none;"><img style="float:left;border:none;margin-right:5px;" src="'.plugins_url('/images/page_edit.png' , __FILE__).'" alt="'.__('View').'"  /> '.base64_decode($result['title']).'</a></td><td>'.$result['resolution'].'</td><td><a href="'.get_admin_url().'user-edit.php?user_id='.$result['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$user->user_nicename.'</a></td></tr>';
+                                    if($results['user_id']!=0) {
+                                        @$user=get_userdata($results['user_id']);
+                                    } else {
+                                        $user = false; // Guest
+                                    }
+                                    if($user===false) { // Guest support added here
+                                        $theusersname = __('Guest');
+                                    } else {
+                                        $theusersname = $user->user_nicename;
+                                    }                                    
+                                    $output .= '<tr><td><a href="admin.php?page=wpscSupportTickets-edit&primkey='.$result['primkey'].'" style="border:none;text-decoration:none;"><img style="float:left;border:none;margin-right:5px;" src="'.plugins_url('/images/page_edit.png' , __FILE__).'" alt="'.__('View').'"  /> '.base64_decode($result['title']).'</a></td><td>'.$result['resolution'].'</td><td><a href="'.get_admin_url().'user-edit.php?user_id='.$result['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a></td></tr>';
                             }
                             $output .= '</tbody></table>';
                         } else {
@@ -401,9 +441,6 @@ if (!class_exists("wpscSupportTickets")) {
                     return $content;
                 }
 				
-		function loadTinyMce() {
-			wp_enqueue_script('tiny_mce');
-		}
 
 		// Installation ==============================================================================================		
 		function wpscSupportTickets_install() {
@@ -486,10 +523,29 @@ if (!class_exists("wpscSupportTickets")) {
 				'display' => 'tickets'
 			), $atts));
 
+                        if (session_id() == "") {@session_start();};
+                        
 			$output = '';
 			switch ($display) {
 				case 'tickets': // =========================================================
-					if(is_user_logged_in()) {
+                                        if($devOptions['allow_guests']=='true' && !is_user_logged_in() && !$this->hasDisplayed) {
+                                            if(@isset($_POST['guest_email'])) {
+                                                $_SESSION['wpsc_email'] = $wpdb->escape($_POST['guest_email']);
+                                            }
+
+                                            $output .= '<br />
+                                                <form name="wpscst-guestform" id="wpscst-guestcheckoutform" action="#" method="post">
+                                                    <table>
+                                                    <tr><td>'. __('Enter your email address') .': </td><td><input type="text" name="guest_email" value="'.$_SESSION['wpsc_email'].'" /></td></tr>
+                                                    <tr><td></td><td><input type="submit" value="'. __('Submit') .'" class="wpsc-button wpsc-checkout" /></td></tr>
+                                                    </table>
+                                                </form>
+                                                <br />
+                                                ';
+                                               
+                                        }                                     
+					if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
+                                            if(!$this->hasDisplayed) {
 						global $current_user;
 
 						$output .='
@@ -570,8 +626,19 @@ if (!class_exists("wpscSupportTickets")) {
                                                 </div>';
                                                 $output .= '</form>';
 
+                                                // Guest additions here
+                                                if(is_user_logged_in()) {
+                                                    $wpscst_userid = $current_user->ID;
+                                                    $wpscst_email = $current_user->user_email;
+                                                    $wpscst_username = $current_user->display_name;
+                                                } else {
+                                                    $wpscst_userid = 0;
+                                                    $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);   
+                                                    $wpscst_username = __('Guest').' ('.$wpscst_email.')';
+                                                }                                                    
+                                                
                                                 $output .= '<div id="wpscst_edit_div">';
-						$sql = "SELECT * FROM `{$table_name}` WHERE `user_id`={$current_user->ID} ORDER BY `last_updated` DESC;";
+						$sql = "SELECT * FROM `{$table_name}` WHERE `user_id`={$wpscst_userid} AND `email`='{$wpscst_email}' ORDER BY `last_updated` DESC;";
 						$results = $wpdb->get_results( $sql , ARRAY_A );
 						if(isset($results) && isset($results[0]['primkey'])) {
                                                     $output .= '<h3>'.__('View Previous Tickets:').'</h3>';
@@ -582,15 +649,21 @@ if (!class_exists("wpscSupportTickets")) {
                                                     $output .= '</table>';
 						}
                                                 $output .= '</div>';
+                                                
+                                            }
 						
 					} else {
 						$output .= __('Please').' <a href="'.wp_login_url( get_permalink() ).'">'.__('log in').'</a> '.__('or').' <a href="'.wp_login_url( get_permalink() ).'&action=register">'.__('register').'</a>.';
+
 					}
+                                        
+     
+                                        
 					break;
 				case 'topgames': // Top game shortcode =========================================================
 					break;					
 			}			
-			
+			$this->hasDisplayed = true;
 			return $output;
 		}
 		// END SHORTCODE ================================================
