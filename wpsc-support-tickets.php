@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.1.0
+Version: 1.2.0
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -32,8 +32,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 1.1;
-$wpscSupportTickets_db_version = 1.1;
+$wpscSupportTickets_version = 1.2;
+$wpscSupportTickets_db_version = 1.2;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
 
@@ -404,16 +404,14 @@ if (!class_exists("wpscSupportTickets")) {
                         if(isset($results) && isset($results[0]['primkey'])) {
                             $output .= '<table class="widefat" style="width:100%"><thead><tr><th>'.__('Ticket').'</th><th>'.__('Status').'</th><th>'.__('User').'</th></tr></thead><tbody>';
                             foreach($results as $result) {
-                                    if($results['user_id']!=0) {
-                                        @$user=get_userdata($results['user_id']);
+                                    if($result['user_id']!=0) {
+                                        @$user=get_userdata($result['user_id']);
+                                        $theusersname = $user->user_nicename;
                                     } else {
                                         $user = false; // Guest
-                                    }
-                                    if($user===false) { // Guest support added here
                                         $theusersname = __('Guest');
-                                    } else {
-                                        $theusersname = $user->user_nicename;
-                                    }                                    
+                                    }
+                                   
                                     $output .= '<tr><td><a href="admin.php?page=wpscSupportTickets-edit&primkey='.$result['primkey'].'" style="border:none;text-decoration:none;"><img style="float:left;border:none;margin-right:5px;" src="'.plugins_url('/images/page_edit.png' , __FILE__).'" alt="'.__('View').'"  /> '.base64_decode($result['title']).'</a></td><td>'.$result['resolution'].'</td><td><a href="'.get_admin_url().'user-edit.php?user_id='.$result['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a></td></tr>';
                             }
                             $output .= '</tbody></table>';
