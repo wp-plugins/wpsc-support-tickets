@@ -39,7 +39,16 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
         echo '<div id="wpscst_meta"><strong>'.base64_decode($results[0]['title']).'</strong> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
         echo '<table style="width:100%;">';
         echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by').' '.$wpscst_username.' (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
-        echo '<tbody><tr><td id="wpscst_results_initial_message"><br />'.strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>').'</td></tr>';
+
+        $messageData = strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
+        $messageData = explode ( '\\', $messageData);
+        $messageWhole = '';
+        foreach ($messageData as $messagePart){
+        $messageWhole .= $messagePart;	
+        }
+        echo '<tbody><tr><td id="wpscst_results_initial_message"><br />'.$messageWhole;        
+        
+        //echo '<tbody><tr><td id="wpscst_results_initial_message"><br />'.strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>').'</td></tr>';
         echo '</tbody></table>';
 
         $results = NULL;
@@ -64,7 +73,13 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
 
                 echo '<br /><table style="width:100%;" '.$classModifier1.'>';
                 echo '<thead '.$classModifier2.'><tr><th class="wpscst_results_posted_by">'.__('Posted by').' '.$theusersname.' (<span class="wpscst_results_timestamp">'.date('Y-m-d g:i A',$results['timestamp']).'</span>)</th></tr></thead>';
-                echo '<tbody '.$classModifier3.'><tr><td class="wpscst_results_message"><br />'.strip_tags(base64_decode($results['message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>').'</td></tr>';
+                $messageData = strip_tags(base64_decode($results['message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
+                $messageData = explode ( '\\', $messageData);
+                $messageWhole = '';
+                foreach ($messageData as $messagePart){
+                $messageWhole .= $messagePart;	
+                }
+                echo '<tbody '.$classModifier3.'><tr><td class="wpscst_results_message"><br />'.$messageWhole.'</td></tr>';
                 echo '</tbody></table>';
             }
         }

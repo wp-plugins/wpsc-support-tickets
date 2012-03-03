@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 2.8.0
 Tested up to: 3.2.1
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 
 == Description ==
 
@@ -22,6 +22,7 @@ This can optionally allow you to keep your support ticket system accessible only
 **Hightlighted Features:**
 
  * Users can create support tickets and reply to their own tickets
+ * Guests can use tickets as well, using just their email address.  Disabled by default.
  * Admins, and any user granted the manage_wpsc_support_tickets capability, can reply to, close, or delete any ticket
  * Front end support ticket interface is done in jQuery, and utilizes Ajax ticket loading
  * Customizable departments, email messages, and CSS for custom solutions
@@ -67,6 +68,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.3.0 =
+* Fixed: Patched the issue with improperly escaped URLs and quotes in the plugin.  Thanks for the help Bren!
 
 = 1.2.0 =
 * Fixed: Patched an issue with the admin dashboard widget declaring all ticket openers as Guest

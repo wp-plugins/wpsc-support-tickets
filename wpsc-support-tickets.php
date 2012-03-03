@@ -32,8 +32,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 1.2;
-$wpscSupportTickets_db_version = 1.2;
+$wpscSupportTickets_version = 1.3;
+$wpscSupportTickets_db_version = 1.3;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
 
@@ -330,7 +330,14 @@ if (!class_exists("wpscSupportTickets")) {
                             echo '<div id="wpscst_meta"><h1>'.base64_decode($results[0]['title']).'</h1> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
                             echo '<table class="widefat" style="width:100%;">';
                             echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by').' <a href="'.get_admin_url().'user-edit.php?user_id='.$results[0]['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$user->user_nicename.'</a> (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
-                            echo '<tbody><tr><td id="wpscst_results_initial_message"><br />'.strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font><span>').'</td></tr>';
+                            //echo '<tbody><tr><td id="wpscst_results_initial_message"><br />'.strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font><span>').'</td></tr>';
+                            $messageData = strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
+                            $messageData = explode ( '\\', $messageData);
+                            $messageWhole = '';
+                            foreach ($messageData as $messagePart){
+                            $messageWhole .= $messagePart;	
+                            }
+                            echo '<tbody><tr><td id="wpscst_results_initial_message"><br />'.$messageWhole;                            
                             echo '</tbody></table>';
 
 
@@ -354,7 +361,13 @@ if (!class_exists("wpscSupportTickets")) {
 
                                     echo '<br /><table class="widefat" style="width:100%;'.$styleModifier1.'">';
                                     echo '<thead><tr><th class="wpscst_results_posted_by" style="'.$styleModifier2.'">'.__('Posted by').' <a href="'.get_admin_url().'user-edit.php?user_id='.$resultsX['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a> (<span class="wpscst_results_timestamp">'.date('Y-m-d g:i A',$resultsX['timestamp']).'</span>)<div style="float:right;"><a onclick="if(confirm(\'Are you sure you want to delete this reply?\')){return true;}return false;" href="'.plugins_url('/php/delete_ticket.php' , __FILE__).'?replyid='.$resultsX['primkey'].'&ticketid='.$primkey.'"><img src="'.plugins_url('/images/delete.png' , __FILE__).'" alt="delete" /> Delete Reply</a></div></th></tr></thead>';
-                                    echo '<tbody><tr><td class="wpscst_results_message"><br />'.strip_tags(base64_decode($resultsX['message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>').'</td></tr>';
+                                    $messageData = strip_tags(base64_decode($resultsX['message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
+                                    $messageData = explode ( '\\', $messageData);
+                                    $messageWhole = '';
+                                    foreach ($messageData as $messagePart){
+                                    $messageWhole .= $messagePart;	
+                                    }
+                                    echo '<tbody><tr><td class="wpscst_results_message"><br />'.$messageWhole.'</td></tr>';
                                     echo '</tbody></table>';
                                 }
                             }
