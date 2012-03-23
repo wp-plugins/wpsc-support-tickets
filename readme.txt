@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 2.8.0
 Tested up to: 3.2.1
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 
 == Description ==
 
@@ -27,6 +27,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * Front end support ticket interface is done in jQuery, and utilizes Ajax ticket loading
  * Customizable departments, email messages, and CSS for custom solutions
  * You can hide support ticket capabilities from a user who has not purchased a specific product (requires [wpStoreCart](http://wordpress.org/extend/plugins/wpstorecart/ "wpStoreCart") 2.4.9 or higher)
+ * Seamless integration with open source wpStoreCart ecommerce plugin, including a shared Guest system 
  * Admin dashboard widget shows all open tickets
  * Both the admin and frontend provides a WYSIWYG HTML editor for formatting
  * i18n ready and compatible
@@ -68,6 +69,12 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.4.0 =
+* Added: You can now see who posted last on a ticket, either a staff member or the ticket creator.  This is in the front end, the admin panel, and the admin dashboard widget.  Note that staff replies that were made before you updated to this version will not work correctly.
+* Fixed: Patched issue where the register URL was not always correctly formatted when certain conditions were met.
+* Updated: More of the admin is now ready for language translations.
+* Fixed: Patched a few issues were the word Guest was not showing up for guests
 
 = 1.3.0 =
 * Fixed: Patched the issue with improperly escaped URLs and quotes in the plugin.  Thanks for the help Bren!

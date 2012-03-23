@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.2.0
+Version: 1.4.0
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -32,8 +32,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 1.3;
-$wpscSupportTickets_db_version = 1.3;
+$wpscSupportTickets_version = 1.4;
+$wpscSupportTickets_db_version = 1.4;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
 
@@ -170,7 +170,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             echo '
             <div class="updated" style="padding:5px 5px 0px 5px;font-size:11px;border-color:#DDD;background-color:#EFEFEF;width:450px;min-width:450px;max-width:450px;float:right;"><img src="'.plugins_url('/images/info.png' , __FILE__).'" alt="info" style="float:left;" />
-            <p><strong>Main Page:</strong> You need to use a Page as the base for wpsc Support Tickets.  <br />
+            <p><strong>'.__('Main Page').':</strong> '.__('You need to use a Page as the base for wpsc Support Tickets.').'  <br />
             <select name="wpscSupportTicketsmainpage">
              <option value="">';
               attribute_escape(__('Select page'));
@@ -192,19 +192,19 @@ if (!class_exists("wpscSupportTickets")) {
             </select>
 
             <div id="wpscst_full_options" style="display:none;margin:0 0 0 10px;">
-                <strong>Departments:</strong> Separate these values with a double pipe, like this || <br /><input name="departments" value="'.$devOptions['departments'].'" style="width:360px;" /><br /><br />
+                <strong>'.__('Departments').':</strong> '.__('Separate these values with a double pipe, like this ||').' <br /><input name="departments" value="'.$devOptions['departments'].'" style="width:360px;" /><br /><br />
 
-                <strong>Email:</strong> The admin email where all new ticket &amp; reply notification emails will be sent<br /><input name="email" value="'.$devOptions['email'].'" style="width:360px;" /><br /><br />
+                <strong>'.__('Email').':</strong> '.__('The admin email where all new ticket &amp; reply notification emails will be sent').'<br /><input name="email" value="'.$devOptions['email'].'" style="width:360px;" /><br /><br />
 
-                <strong>New Ticket Email</strong> The subject &amp; body of the email sent to the customer when creating a new ticket.<br /><input name="email_new_ticket_subject" value="'.$devOptions['email_new_ticket_subject'].'" style="width:360px;" />
+                <strong>'.__('New Ticket Email').'</strong> '.__('The subject &amp; body of the email sent to the customer when creating a new ticket.').'<br /><input name="email_new_ticket_subject" value="'.$devOptions['email_new_ticket_subject'].'" style="width:360px;" />
                 <textarea style="width:390px;" name="email_new_ticket_body">'.$devOptions['email_new_ticket_body'].'</textarea>
                 <br /><br />
 
-                <strong>New Reply Email</strong> The subject &amp; body of the email sent to the customer when there is a new reply.<br /><input name="email_new_reply_subject" value="'.$devOptions['email_new_reply_subject'].'" style="width:360px;" />
+                <strong>'.__('New Reply Email').'</strong> '.__('The subject &amp; body of the email sent to the customer when there is a new reply.').'<br /><input name="email_new_reply_subject" value="'.$devOptions['email_new_reply_subject'].'" style="width:360px;" />
                 <textarea style="width:390px;" name="email_new_reply_body">'.$devOptions['email_new_reply_body'].'</textarea>
                 <br /><br />
 
-                <p><strong>Disable inline styles:</strong> Set this to true if you want to disable the inline CSS styles.  <br />
+                <p><strong>'.__('Disable inline styles').':</strong> '.__('Set this to true if you want to disable the inline CSS styles.').'  <br />
                 <select name="disable_inline_styles">
                  ';
 
@@ -224,7 +224,7 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '
                 </select>
 
-                <p><strong>Allow Guests:</strong> Set this to true if you want Guests to be able to use the support ticket system.  <br />
+                <p><strong>'.__('Allow Guests').':</strong> '.__('Set this to true if you want Guests to be able to use the support ticket system.').'  <br />
                 <select name="allow_guests">
                  ';
 
@@ -280,8 +280,23 @@ if (!class_exists("wpscSupportTickets")) {
                             $output .= '<h3>View '.$resolution.' Tickets:</h3>';
                             $output .= '<table class="widefat" style="width:100%"><thead><tr><th>'.__('Ticket').'</th><th>'.__('Status').'</th><th>'.__('User').'</th><th>'.__('Last Reply').'</th></tr></thead><tbody>';
                             foreach($results as $result) {
-                                    $user=get_userdata($result['user_id']);
-                                    $output .= '<tr><td><a href="admin.php?page=wpscSupportTickets-edit&primkey='.$result['primkey'].'" style="border:none;text-decoration:none;"><img style="float:left;border:none;margin-right:5px;" src="'.plugins_url('/images/page_edit.png' , __FILE__).'" alt="'.__('View').'"  /> '.base64_decode($result['title']).'</a></td><td>'.$result['resolution'].'</td><td><a href="'.get_admin_url().'user-edit.php?user_id='.$result['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$user->user_nicename.'</a></td><td>'.date('Y-m-d g:i A',$result['last_updated']).'</td></tr>';
+                                    if($result['user_id']!=0) {
+                                        @$user=get_userdata($result['user_id']);
+                                        $theusersname = $user->user_nicename;
+                                    } else {
+                                        $user = false; // Guest
+                                        $theusersname = __('Guest');
+                                    }									
+									if(trim($result['last_staff_reply'])=='') {
+										$last_staff_reply = __('ticket creator');
+									} else {
+										if($result['last_updated'] > $result['last_staff_reply']) {
+											$last_staff_reply = __('ticket creator');
+										} else {
+											$last_staff_reply = '<strong>'.__('Staff Member').'</strong>';
+										}
+									}
+                                    $output .= '<tr><td><a href="admin.php?page=wpscSupportTickets-edit&primkey='.$result['primkey'].'" style="border:none;text-decoration:none;"><img style="float:left;border:none;margin-right:5px;" src="'.plugins_url('/images/page_edit.png' , __FILE__).'" alt="'.__('View').'"  /> '.base64_decode($result['title']).'</a></td><td>'.$result['resolution'].'</td><td><a href="'.get_admin_url().'user-edit.php?user_id='.$result['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a></td><td>'.date('Y-m-d g:i A',$result['last_updated']).' '.__('by').' '.$last_staff_reply.'</td></tr>';
                             }
                             $output .= '</tbody></table>';
                         }
@@ -326,11 +341,17 @@ if (!class_exists("wpscSupportTickets")) {
                         $results = $wpdb->get_results( $sql , ARRAY_A );
                         if(isset($results[0])) {
                             echo '<table class="widefat"><tr><td>';
-                            $user=get_userdata($results[0]['user_id']);
+							if($results[0]['user_id']!=0) {
+								@$user=get_userdata($results[0]['user_id']);
+								$theusersname = $user->user_nicename;
+							} else {
+								$user = false; // Guest
+								$theusersname = __('Guest');
+							}								
                             echo '<div id="wpscst_meta"><h1>'.base64_decode($results[0]['title']).'</h1> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
                             echo '<table class="widefat" style="width:100%;">';
-                            echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by').' <a href="'.get_admin_url().'user-edit.php?user_id='.$results[0]['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$user->user_nicename.'</a> (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
-                            //echo '<tbody><tr><td id="wpscst_results_initial_message"><br />'.strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font><span>').'</td></tr>';
+                            echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by').' <a href="'.get_admin_url().'user-edit.php?user_id='.$results[0]['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a> (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
+
                             $messageData = strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
                             $messageData = explode ( '\\', $messageData);
                             $messageWhole = '';
@@ -374,7 +395,7 @@ if (!class_exists("wpscSupportTickets")) {
                             echo '</td></tr></table>';
                         }
 
-                        $output .= '<form action="'.plugins_url('/php/reply_ticket.php' , __FILE__).'" method="post"><input type="hidden" name="wpscst_edit_primkey" value="'.$primkey.'" /><input type="hidden" name="wpscst_goback" value="yes" /> ';
+                        $output .= '<form action="'.plugins_url('/php/reply_ticket.php' , __FILE__).'" method="post"><input type="hidden" name="wpscst_is_staff_reply" value="yes" /><input type="hidden" name="wpscst_edit_primkey" value="'.$primkey.'" /><input type="hidden" name="wpscst_goback" value="yes" /> ';
                         $output .= '<table class="wpscst-table" style="width:100%">';
                         $output .= '<tr><td><h3>'.__('Your message').'</h3><div id="wpscst_nic_panel" style="display:block;width:100%;"></div> <textarea name="wpscst_reply" id="wpscst_reply" style="display:inline;width:100%;margin:0 auto 0 auto;" rows="5"></textarea></td></tr>';
                         $exploder = explode('||', $devOptions['departments']);
@@ -415,7 +436,7 @@ if (!class_exists("wpscSupportTickets")) {
                         $sql = "SELECT * FROM `{$table_name}` WHERE `resolution`='Open' ORDER BY `last_updated` DESC;";
                         $results = $wpdb->get_results( $sql , ARRAY_A );
                         if(isset($results) && isset($results[0]['primkey'])) {
-                            $output .= '<table class="widefat" style="width:100%"><thead><tr><th>'.__('Ticket').'</th><th>'.__('Status').'</th><th>'.__('User').'</th></tr></thead><tbody>';
+                            $output .= '<table class="widefat" style="width:100%"><thead><tr><th>'.__('Ticket').'</th><th>'.__('Status').'</th><th>'.__('Last Reply').'</th></tr></thead><tbody>';
                             foreach($results as $result) {
                                     if($result['user_id']!=0) {
                                         @$user=get_userdata($result['user_id']);
@@ -424,8 +445,17 @@ if (!class_exists("wpscSupportTickets")) {
                                         $user = false; // Guest
                                         $theusersname = __('Guest');
                                     }
-                                   
-                                    $output .= '<tr><td><a href="admin.php?page=wpscSupportTickets-edit&primkey='.$result['primkey'].'" style="border:none;text-decoration:none;"><img style="float:left;border:none;margin-right:5px;" src="'.plugins_url('/images/page_edit.png' , __FILE__).'" alt="'.__('View').'"  /> '.base64_decode($result['title']).'</a></td><td>'.$result['resolution'].'</td><td><a href="'.get_admin_url().'user-edit.php?user_id='.$result['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a></td></tr>';
+									if(trim($result['last_staff_reply'])=='') {
+										$last_staff_reply = __('ticket creator') .' <a href="'.get_admin_url().'user-edit.php?user_id='.$result['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a>';
+									} else {
+										if($result['last_updated'] > $result['last_staff_reply']) {
+											$last_staff_reply = __('ticket creator') .' <a href="'.get_admin_url().'user-edit.php?user_id='.$result['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a>';
+										} else {
+											$last_staff_reply = '<strong>'.__('Staff Member').'</strong>';
+										}
+									}
+									
+                                    $output .= '<tr><td><a href="admin.php?page=wpscSupportTickets-edit&primkey='.$result['primkey'].'" style="border:none;text-decoration:none;"><img style="float:left;border:none;margin-right:5px;" src="'.plugins_url('/images/page_edit.png' , __FILE__).'" alt="'.__('View').'"  /> '.base64_decode($result['title']).'</a></td><td>'.$result['resolution'].'</td><td>'.$last_staff_reply.'</td></tr>';
                             }
                             $output .= '</tbody></table>';
                         } else {
@@ -655,7 +685,16 @@ if (!class_exists("wpscSupportTickets")) {
                                                     $output .= '<h3>'.__('View Previous Tickets:').'</h3>';
                                                     $output .= '<table class="widefat" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="width:100%"';}$output.='><tr><th>'.__('Ticket').'</th><th>'.__('Status').'</th><th>'.__('Last Reply').'</th></tr>';
                                                     foreach($results as $result) {
-                                                            $output .= '<tr><td><a href="" onclick="loadTicket('.$result['primkey'].',\''.$result['resolution'].'\');return false;" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="border:none;text-decoration:none;"';}$output.='><img'; if($devOptions['disable_inline_styles']=='false'){$output.=' style="float:left;border:none;margin-right:5px;"';}$output.=' src="'.plugins_url('/images/page_edit.png' , __FILE__).'" alt="'.__('View').'"  /> '.base64_decode($result['title']).'</a></td><td>'.$result['resolution'].'</td><td>'.date('Y-m-d g:i A',$result['last_updated']).'</td></tr>';
+															if(trim($result['last_staff_reply'])=='') {
+																$last_staff_reply = __('you');
+															} else {
+																if($result['last_updated'] > $result['last_staff_reply']) {
+																	$last_staff_reply = __('you');
+																} else {
+																	$last_staff_reply = '<strong>'.__('Staff Member').'</strong>';
+																}
+															}													
+                                                            $output .= '<tr><td><a href="" onclick="loadTicket('.$result['primkey'].',\''.$result['resolution'].'\');return false;" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="border:none;text-decoration:none;"';}$output.='><img'; if($devOptions['disable_inline_styles']=='false'){$output.=' style="float:left;border:none;margin-right:5px;"';}$output.=' src="'.plugins_url('/images/page_edit.png' , __FILE__).'" alt="'.__('View').'"  /> '.base64_decode($result['title']).'</a></td><td>'.$result['resolution'].'</td><td>'.date('Y-m-d g:i A',$result['last_updated']).' '.__('by').' '.$last_staff_reply.'</td></tr>';
                                                     }
                                                     $output .= '</table>';
 						}
@@ -664,7 +703,7 @@ if (!class_exists("wpscSupportTickets")) {
                                             }
 						
 					} else {
-						$output .= __('Please').' <a href="'.wp_login_url( get_permalink() ).'">'.__('log in').'</a> '.__('or').' <a href="'.wp_login_url( get_permalink() ).'&action=register">'.__('register').'</a>.';
+						$output .= __('Please').' <a href="'.wp_login_url( get_permalink() ).'">'.__('log in').'</a> '.__('or').' <a href="'.site_url('/wp-login.php?action=register&redirect_to=' . get_permalink()).'">'.__('register').'</a>.';
 
 					}
                                         

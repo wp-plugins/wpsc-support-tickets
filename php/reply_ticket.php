@@ -83,7 +83,13 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
             $lastID = $wpdb->insert_id;
 
             // Update the Last Updated time stamp
-            $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".time()."' WHERE `primkey` ='{$primkey}';";
+			if($_POST['wpscst_is_staff_reply']=='yes' && current_user_can('manage_wpsc_support_tickets')) {
+				// This is a staff reply from the admin panel
+				$updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".time()."', `last_staff_reply` = '".time()."' WHERE `primkey` ='{$primkey}';";
+			} else {
+				// This is a reply from the front end
+				$updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".time()."' WHERE `primkey` ='{$primkey}';";
+			}
             $wpdb->query($updateSQL);
 
             $to      = $results[0]['email']; // Send this to the original ticket creator
