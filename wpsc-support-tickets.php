@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.4.0
+Version: 1.5.0
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -32,20 +32,10 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 1.4;
-$wpscSupportTickets_db_version = 1.4;
+$wpscSupportTickets_version = 1.5;
+$wpscSupportTickets_db_version = 1.5;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
-
-// Pre-2.6 compatibility, which is actually frivilous since we use the 2.8+ widget technique
-if ( ! defined( 'WP_CONTENT_URL' ) )
-	define( 'WP_CONTENT_URL', get_option( 'siteurl' ) . '/wp-content' );
-if ( ! defined( 'WP_CONTENT_DIR' ) )
-	define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
-if ( ! defined( 'WP_PLUGIN_URL' ) )
-	define( 'WP_PLUGIN_URL', WP_CONTENT_URL. '/plugins' );
-if ( ! defined( 'WP_PLUGIN_DIR' ) )
-	define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
 
 // Create the proper directory structure if it is not already created
 if(!is_dir(WP_CONTENT_DIR . '/uploads/')) {
@@ -92,14 +82,14 @@ if (!class_exists("wpscSupportTickets")) {
 
             $apAdminOptions = array('mainpage' => '',
                                     'turnon_wpscSupportTickets' => 'true',
-                                    'departments' => 'Support||Billing',
+                                    'departments' => __('Support').'||'.__('Billing'),
                                     'email' => get_bloginfo('admin_email'),
-                                    'email_new_ticket_subject' => 'Your support ticket was received.',
-                                    'email_new_ticket_body' => 'Thank you for opening a new support ticket.  We will look into your issue and respond as soon as possible.',
-                                    'email_new_reply_subject' => 'Your support ticket reply was received.',
-                                    'email_new_reply_body' => 'A reply was posted to one of your support tickets.',
-                                    'disable_inline_styles' => 'false',
-                                    'allowguests' => 'false'
+                                    'email_new_ticket_subject' => __('Your support ticket was received.'),
+                                    'email_new_ticket_body' => __('Thank you for opening a new support ticket.  We will look into your issue and respond as soon as possible.'),
+                                    'email_new_reply_subject' => __('Your support ticket reply was received.'),
+                                    'email_new_reply_body' => __('A reply was posted to one of your support tickets.'),
+                                    'disable_inline_styles' => __('false'),
+                                    'allowguests' => __('false')
                                     );
 
             if($this->wpscstSettings!=NULL) {
@@ -132,7 +122,7 @@ if (!class_exists("wpscSupportTickets")) {
                     if (isset($_POST['departments'])) {
                             $devOptions['departments'] = $wpdb->escape($_POST['departments']);
                     }
-                    if (isset($_POST['email'])) {
+                    if (isset($_POST['email'])) { 
                             $devOptions['email'] = $wpdb->escape($_POST['email']);
                     }
                     if (isset($_POST['email_new_ticket_subject'])) {
@@ -165,7 +155,7 @@ if (!class_exists("wpscSupportTickets")) {
             echo '
             <form method="post" action="'. $_SERVER["REQUEST_URI"].'">
             <div style="padding: 20px 10px 10px 10px;">
-            <div style="float:left;"><img src="'.WP_PLUGIN_URL.'/wpsc-support-tickets/images/logo.png" alt="wpscSupportTickets" /></div>
+            <div style="float:left;"><img src="'.plugins_url().'/wpsc-support-tickets/images/logo.png" alt="wpscSupportTickets" /></div>
             ';
 
             echo '
@@ -749,7 +739,7 @@ if (!function_exists("wpscSupportTicketsAdminPanel")) {
             return;
         }
         if (function_exists('add_menu_page')) {
-            add_menu_page('wpsc Support Tickets', 'Support Tickets', 'manage_wpsc_support_tickets', 'wpscSupportTickets-admin', array(&$wpscSupportTickets, 'printAdminPage'), WP_PLUGIN_URL.'/wpsc-support-tickets/images/controller.png');
+            add_menu_page('wpsc Support Tickets', 'Support Tickets', 'manage_wpsc_support_tickets', 'wpscSupportTickets-admin', array(&$wpscSupportTickets, 'printAdminPage'), plugins_url().'/wpsc-support-tickets/images/controller.png');
             $editPage = add_submenu_page(NULL,'Reply to Support Ticket', 'Reply to Support Tickets', 'manage_wpsc_support_tickets', 'wpscSupportTickets-edit', array(&$wpscSupportTickets, 'printAdminPageEdit'));
             add_action("admin_print_scripts-$editPage", array(&$wpscSupportTickets, 'addHeaderCode') );
         }

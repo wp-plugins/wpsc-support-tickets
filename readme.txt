@@ -2,9 +2,9 @@
 Contributors: jquindlen
 Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
-Requires at least: 2.8.0
+Requires at least: 3.0.0
 Tested up to: 3.2.1
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 
 == Description ==
 
@@ -69,6 +69,11 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.5.0 =
+* Fixed: SSL support added.  Removed references to WP_PLUGIN_URL and replaced them with plugin_url() which supports SSL
+* Updated: A few strings that were not previously translatable have now become so.  Expect a German translation soon.
+* Info: Minimum required Wordpress version changed to 3.0
 
 = 1.4.0 =
 * Added: You can now see who posted last on a ticket, either a staff member or the ticket creator.  This is in the front end, the admin panel, and the admin dashboard widget.  Note that staff replies that were made before you updated to this version will not work correctly.
