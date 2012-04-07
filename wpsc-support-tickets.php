@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.6.0
+Version: 1.6.1
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -35,7 +35,7 @@ global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_
 $wpscSupportTickets_version = 1.6;
 $wpscSupportTickets_db_version = 1.6;
 $APjavascriptQueue = NULL;
-$wpsc_error_reporting = true;
+$wpsc_error_reporting = false;
 
 // Create the proper directory structure if it is not already created
 if(!is_dir(WP_CONTENT_DIR . '/uploads/')) {

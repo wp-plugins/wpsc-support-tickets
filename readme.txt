@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.0.0
 Tested up to: 3.4
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 
 == Description ==
 
@@ -69,6 +69,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.6.1 =
+* Fixed: Turned off error reporting
 
 = 1.6.0 =
 * Updated: Fixed issue with Wordpress 3.4 Beta 1
