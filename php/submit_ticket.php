@@ -10,21 +10,30 @@ if (!function_exists('add_action'))
 
 global $current_user, $wpdb, $wpscSupportTickets, $wpStoreCart, $cart, $wpsc, $totalshippingcalculated;
 
+$devOptions = NULL;
 $devOptions = $wpscSupportTickets->getAdminOptions();
+if(!isset($devOptions['mainpage']) || $devOptions['mainpage']=='') {
+    $devOptions['mainpage'] = home_url();
+}
 
 if (session_id() == "") {@session_start();};
 if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
-    
-
-    if(isset($wpStoreCart)) {
-        $wpStoreCartdevOptions = $wpStoreCart->getAdminOptions();
-    }
+   
 
     if(trim($_POST['wpscst_initial_message'])=='' || trim($_POST['wpscst_title'])=='') {// No blank messages/titles allowed
-        header("HTTP/1.1 301 Moved Permanently");
-        header ('Location: '.get_permalink($devOptions['mainpage']));
-        exit();
-    } 
+            if(!headers_sent()) {
+                header("HTTP/1.1 301 Moved Permanently");
+                header ('Location: '.get_permalink($devOptions['mainpage']));
+                exit();
+            } else {
+                echo '<script type="text/javascript">
+                        <!--
+                        window.location = "'.get_permalink($devOptions['mainpage']).'"
+                        //-->
+                        </script>';
+            }
+        } 
+    
 
     $wpscst_title = base64_encode(strip_tags($_POST['wpscst_title']));
     $wpscst_initial_message = base64_encode($_POST['wpscst_initial_message']);
@@ -67,7 +76,7 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
     $headers = 'From: ' . $devOptions['email'] . "\r\n" .
         'Reply-To: ' . $devOptions['email'] .  "\r\n" .
         'X-Mailer: PHP/' . phpversion();
-    @mail($to, $subject, $message, $headers);
+    wp_mail($to, $subject, $message, $headers);
     
 
     $to      = $devOptions['email']; // Send this to the admin
@@ -76,12 +85,22 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
     $headers = 'From: ' . $devOptions['email'] . "\r\n" .
     'Reply-To: ' . $devOptions['email'] .  "\r\n" .
     'X-Mailer: PHP/' . phpversion();
-    @mail($to, $subject, $message, $headers);
+    wp_mail($to, $subject, $message, $headers);
 
 }
 
-header("HTTP/1.1 301 Moved Permanently");
-header ('Location: '.get_permalink($devOptions['mainpage']));
-exit();
+if(!headers_sent()) {
+    header("HTTP/1.1 301 Moved Permanently");
+    header ('Location: '.get_permalink($devOptions['mainpage']));
+    
+} else {
+    echo '<script type="text/javascript">
+            <!--
+            window.location = "'.get_permalink($devOptions['mainpage']).'"
+            //-->
+            </script>';
+}
+
+    exit();
 
 ?>

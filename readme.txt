@@ -3,8 +3,8 @@ Contributors: jquindlen
 Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.0.0
-Tested up to: 3.2.1
-Stable tag: 1.5.0
+Tested up to: 3.4
+Stable tag: 1.6.0
 
 == Description ==
 
@@ -69,6 +69,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.6.0 =
+* Updated: Fixed issue with Wordpress 3.4 Beta 1
 
 = 1.5.0 =
 * Fixed: SSL support added.  Removed references to WP_PLUGIN_URL and replaced them with plugin_url() which supports SSL
