@@ -8,18 +8,11 @@ if (!function_exists('add_action'))
     require_once("../../../../wp-config.php");
 }
 
-global $current_user, $wpdb, $wpscSupportTickets, $wpStoreCart, $cart, $wpsc, $totalshippingcalculated;
-
-$devOptions = $wpscSupportTickets->getAdminOptions();
+global $current_user, $wpdb;
 
 if (session_id() == "") {@session_start();};
 
 if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST['primkey'])) {
-
-    if(isset($wpStoreCart)) {
-        $wpStoreCartdevOptions = $wpStoreCart->getAdminOptions();
-    }
-
     // Guest additions here
     if(is_user_logged_in()) {
         $wpscst_userid = $current_user->ID;
@@ -28,7 +21,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
     } else {
         $wpscst_userid = 0;
         $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);   
-        $wpscst_username = __('Guest').' ('.$wpscst_email.')';
+        $wpscst_username = __('Guest', 'wpsc-support-tickets').' ('.$wpscst_email.')';
     }    
     
     $primkey = intval($_POST['primkey']);
@@ -38,7 +31,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
     if(isset($results[0])) {
         echo '<div id="wpscst_meta"><strong>'.base64_decode($results[0]['title']).'</strong> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
         echo '<table style="width:100%;">';
-        echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by').' '.$wpscst_username.' (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
+        echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' '.$wpscst_username.' (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
 
         $messageData = strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
         $messageData = explode ( '\\', $messageData);
@@ -68,11 +61,11 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
                     $theusersname = $user->user_nicename;
                 } else {
                     $user = false; // Guest
-                    $theusersname = __('Guest');
+                    $theusersname = __('Guest', 'wpsc-support-tickets');
                 }
 
                 echo '<br /><table style="width:100%;" '.$classModifier1.'>';
-                echo '<thead '.$classModifier2.'><tr><th class="wpscst_results_posted_by">'.__('Posted by').' '.$theusersname.' (<span class="wpscst_results_timestamp">'.date('Y-m-d g:i A',$results['timestamp']).'</span>)</th></tr></thead>';
+                echo '<thead '.$classModifier2.'><tr><th class="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' '.$theusersname.' (<span class="wpscst_results_timestamp">'.date('Y-m-d g:i A',$results['timestamp']).'</span>)</th></tr></thead>';
                 $messageData = strip_tags(base64_decode($results['message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
                 $messageData = explode ( '\\', $messageData);
                 $messageWhole = '';

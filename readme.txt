@@ -1,10 +1,11 @@
 === wpsc Support Tickets  ===
 Contributors: jquindlen
 Donate link: http://wpstorecart.com/
-Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
+Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska
 Requires at least: 3.0.0
 Tested up to: 3.4
-Stable tag: 1.6.1
+Stable tag: 1.7.0
+Text Domain: wpsc-support-tickets
 
 == Description ==
 
@@ -69,6 +70,12 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.7.0 =
+* Added: Swedish translation provided by Stefan Johansson
+* Added: Languages folder added.
+* Updated: Text domain of wpsc-support-tickets manually added to all translatable strings
+* Updated: A few missed translation strings were caught and are now translatable 
 
 = 1.6.1 =
 * Fixed: Turned off error reporting
