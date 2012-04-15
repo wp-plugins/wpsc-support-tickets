@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wpsc Support Tickets 1.6.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wpsc-support-tickets\n"
-"POT-Creation-Date: 2012-04-15 04:29:48+00:00\n"
-"PO-Revision-Date: 2012-04-14 21:39-0800\n"
+"POT-Creation-Date: 2012-04-15 04:57:59+00:00\n"
+"PO-Revision-Date: 2012-04-14 21:59-0800\n"
 "Last-Translator: wpStoreCart, LLC <admin@wpstorecart.com>\n"
 "Language-Team: wpStoreCart, LLC <admin@wpstorecart.com>\n"
 "MIME-Version: 1.0\n"
@@ -143,6 +143,10 @@ msgstr "Tillåt gäster"
 #: wpsc-support-tickets.php:218
 msgid "Set this to true if you want Guests to be able to use the support ticket system."
 msgstr "Sätt detta till sant om du vill kunna låta gäster skapa supportärenden."
+
+#: wpsc-support-tickets.php:241
+msgid "More Options"
+msgstr "Fler Alternativ"
 
 #: wpsc-support-tickets.php:241
 msgid "Update Settings"
@@ -328,7 +332,7 @@ msgstr "eller"
 msgid "register"
 msgstr "registrera"
 
-#. #-#-#-#-#  plugin.pot (wpsc Support Tickets 1.7.2)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (wpsc Support Tickets 1.7.4)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: wpsc-support-tickets.php:746
 msgid "wpsc Support Tickets"

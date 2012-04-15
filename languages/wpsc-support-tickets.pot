@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the wpsc Support Tickets package.
 msgid ""
 msgstr ""
-"Project-Id-Version: wpsc Support Tickets 1.7.2\n"
+"Project-Id-Version: wpsc Support Tickets 1.7.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wpsc-support-tickets\n"
-"POT-Creation-Date: 2012-04-15 04:29:48+00:00\n"
+"POT-Creation-Date: 2012-04-15 04:57:59+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -140,6 +140,10 @@ msgstr ""
 msgid ""
 "Set this to true if you want Guests to be able to use the support ticket "
 "system."
+msgstr ""
+
+#: wpsc-support-tickets.php:241
+msgid "More Options"
 msgstr ""
 
 #: wpsc-support-tickets.php:241
@@ -309,7 +313,7 @@ msgstr ""
 msgid "register"
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (wpsc Support Tickets 1.7.2)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (wpsc Support Tickets 1.7.4)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: wpsc-support-tickets.php:746
 msgid "wpsc Support Tickets"

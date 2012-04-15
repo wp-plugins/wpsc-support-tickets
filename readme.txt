@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska
 Requires at least: 3.0.0
 Tested up to: 3.4
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 
 == Description ==
 
@@ -74,6 +74,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.7.5 =
+* Updated: Updated the POT file in the /languages/ directory
+* Updated: Updated the Swedish translation
 
 = 1.7.4 =
 * Updated: A few missed translation strings were caught and are now translatable 
