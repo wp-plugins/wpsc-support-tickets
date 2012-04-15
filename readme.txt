@@ -4,8 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska
 Requires at least: 3.0.0
 Tested up to: 3.4
-Stable tag: 1.7.1
-Text Domain: wpsc-support-tickets
+Stable tag: 1.7.2
 
 == Description ==
 
@@ -33,6 +32,11 @@ This can optionally allow you to keep your support ticket system accessible only
  * Both the admin and frontend provides a WYSIWYG HTML editor for formatting
  * i18n ready and compatible
  * 100% free and open source under the LGPL
+
+**Languages Included**
+ 
+ * English
+ * Swedish (Svenska)
 
 == Installation ==
 
@@ -70,6 +74,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.7.2 =
+* Updated: A few missed translation strings were caught and are now translatable 
 
 = 1.7.1 =
 * Updated: Added the POT file into the /languages/ directory

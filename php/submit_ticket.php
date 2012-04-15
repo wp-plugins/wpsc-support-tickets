@@ -80,8 +80,8 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
     
 
     $to      = $devOptions['email']; // Send this to the admin
-    $subject = __("A new support ticket was received.");
-    $message = 'There is a new support ticket '.get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$lastID;
+    $subject = __("A new support ticket was received.", 'wpsc-support-tickets');
+    $message = __('There is a new support ticket: ','wpsc-support-tickets').get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$lastID;
     $headers = 'From: ' . $devOptions['email'] . "\r\n" .
     'Reply-To: ' . $devOptions['email'] .  "\r\n" .
     'X-Mailer: PHP/' . phpversion();

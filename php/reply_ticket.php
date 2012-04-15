@@ -41,10 +41,6 @@ if($string=='') { // No blank replies allowed
 // If there is a reply and we're still executing code, now we'll add the reply
 if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST['wpscst_edit_primkey'])) {
 
-    if(isset($wpStoreCart)) {
-        $wpStoreCartdevOptions = $wpStoreCart->getAdminOptions();
-    }
-
     // Guest additions here
     if(is_user_logged_in()) {
         $wpscst_userid = $current_user->ID;
@@ -80,7 +76,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
             ";
 
             $wpdb->query($sql);
-            $lastID = $wpdb->insert_id;
+
 
             // Update the Last Updated time stamp
 			if($_POST['wpscst_is_staff_reply']=='yes' && current_user_can('manage_wpsc_support_tickets')) {
@@ -102,8 +98,8 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
 
             if($devOptions['email']!=$results[0]['email']) { 
                 $to      = $devOptions['email']; // Send this to the admin
-                $subject = __("Reply to a support ticket was received.");
-                $message = 'There is a new reply on support ticket '.get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$primkey.'';
+                $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets');
+                $message = __('There is a new reply on support ticket: ','wpsc-support-tickets').get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$primkey.'';
                 $headers = 'From: ' . $devOptions['email'] . "\r\n" .
                 'Reply-To: ' . $devOptions['email'] .  "\r\n" .
                 'X-Mailer: PHP/' . phpversion();

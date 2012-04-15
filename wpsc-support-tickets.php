@@ -3,10 +3,11 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.7.1
+Version: 1.7.2
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
+Text Domain: wpsc-support-tickets
 */
 
 /*  
@@ -88,8 +89,8 @@ if (!class_exists("wpscSupportTickets")) {
                                     'email_new_ticket_body' => __('Thank you for opening a new support ticket.  We will look into your issue and respond as soon as possible.', 'wpsc-support-tickets'),
                                     'email_new_reply_subject' => __('Your support ticket reply was received.', 'wpsc-support-tickets'),
                                     'email_new_reply_body' => __('A reply was posted to one of your support tickets.', 'wpsc-support-tickets'),
-                                    'disable_inline_styles' => __('false', 'wpsc-support-tickets'),
-                                    'allowguests' => __('false', 'wpsc-support-tickets')
+                                    'disable_inline_styles' => 'false',
+                                    'allowguests' => 'false'
                                     );
 
             if($this->wpscstSettings!=NULL) {
@@ -147,7 +148,7 @@ if (!class_exists("wpscSupportTickets")) {
                     update_option($this->adminOptionsName, $devOptions);
 
                     echo '<div class="updated"><p><strong>';
-                    _e("Settings Updated.", "wpscSupportTickets");
+                    _e("Settings Updated.", "wpsc-support-tickets");
                     echo '</strong></p></div>';
 
             }
@@ -261,13 +262,17 @@ if (!class_exists("wpscSupportTickets")) {
                         }
 
                         echo '<br style="clear:both;" /><br />';
-                        echo 'Show tickets: [ <a href="'.get_admin_url().'admin.php?page=wpscSupportTickets-admin&resolution=Open">Open</a> | <a href="'.get_admin_url().'admin.php?page=wpscSupportTickets-admin&resolution=Closed">Closed</a> ] <br /> ';
+                        echo __('Show tickets:','wpsc-support-tickets').' [ <a href="'.get_admin_url().'admin.php?page=wpscSupportTickets-admin&resolution=Open">'.__('Open','wpsc-support-tickets').'</a> | <a href="'.get_admin_url().'admin.php?page=wpscSupportTickets-admin&resolution=Closed">'.__('Closed','wpsc-support-tickets').'</a> ] <br /> ';
                         $output .= '<div id="wpscst_edit_div">';
                         $table_name = $wpdb->prefix . "wpscst_tickets";
                         $sql = "SELECT * FROM `{$table_name}` WHERE `resolution`='{$resolution}' ORDER BY `last_updated` DESC;";
                         $results = $wpdb->get_results( $sql , ARRAY_A );
                         if(isset($results) && isset($results[0]['primkey'])) {
-                            $output .= '<h3>View '.$resolution.' Tickets:</h3>';
+                            if($resolution == 'Open') {
+                                $output .= '<h3>'.__('View Open Tickets:', 'wpsc-support-tickets').'</h3>';
+                            } elseif($resolution == 'Closed') {
+                                $output .= '<h3>'.__('View Closed Tickets:', 'wpsc-support-tickets').'</h3>';
+                            }
                             $output .= '<table class="widefat" style="width:100%"><thead><tr><th>'.__('Ticket', 'wpsc-support-tickets').'</th><th>'.__('Status', 'wpsc-support-tickets').'</th><th>'.__('User', 'wpsc-support-tickets').'</th><th>'.__('Last Reply', 'wpsc-support-tickets').'</th></tr></thead><tbody>';
                             foreach($results as $result) {
                                     if($result['user_id']!=0) {
@@ -371,7 +376,7 @@ if (!class_exists("wpscSupportTickets")) {
                                     }
 
                                     echo '<br /><table class="widefat" style="width:100%;'.$styleModifier1.'">';
-                                    echo '<thead><tr><th class="wpscst_results_posted_by" style="'.$styleModifier2.'">'.__('Posted by', 'wpsc-support-tickets').' <a href="'.get_admin_url().'user-edit.php?user_id='.$resultsX['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a> (<span class="wpscst_results_timestamp">'.date('Y-m-d g:i A',$resultsX['timestamp']).'</span>)<div style="float:right;"><a onclick="if(confirm(\'Are you sure you want to delete this reply?\')){return true;}return false;" href="'.plugins_url('/php/delete_ticket.php' , __FILE__).'?replyid='.$resultsX['primkey'].'&ticketid='.$primkey.'"><img src="'.plugins_url('/images/delete.png' , __FILE__).'" alt="delete" /> Delete Reply</a></div></th></tr></thead>';
+                                    echo '<thead><tr><th class="wpscst_results_posted_by" style="'.$styleModifier2.'">'.__('Posted by', 'wpsc-support-tickets').' <a href="'.get_admin_url().'user-edit.php?user_id='.$resultsX['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a> (<span class="wpscst_results_timestamp">'.date('Y-m-d g:i A',$resultsX['timestamp']).'</span>)<div style="float:right;"><a onclick="if(confirm(\''.__('Are you sure you want to delete this reply?', 'wpsc-support-tickets').'\')){return true;}return false;" href="'.plugins_url('/php/delete_ticket.php' , __FILE__).'?replyid='.$resultsX['primkey'].'&ticketid='.$primkey.'"><img src="'.plugins_url('/images/delete.png' , __FILE__).'" alt="delete" /> '.__('Delete Reply','wpsc-support-tickets').'</a></div></th></tr></thead>';
                                     $messageData = strip_tags(base64_decode($resultsX['message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
                                     $messageData = explode ( '\\', $messageData);
                                     $messageWhole = '';
@@ -630,7 +635,7 @@ if (!class_exists("wpscSupportTickets")) {
 						</script>		
 							';
 	
-						$output .= '<div id="wpscst_top_page" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:inline;"';} $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);"><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/Add.png' , __FILE__).'" alt="'.__('Create a New Ticket').'" /> '.__('Create a New Ticket').'</button><br /><br />';
+						$output .= '<div id="wpscst_top_page" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:inline;"';} $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);"><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/Add.png' , __FILE__).'" alt="'.__('Create a New Ticket', 'wpsc-support-tickets').'" /> '.__('Create a New Ticket', 'wpsc-support-tickets').'</button><br /><br />';
                                                 $output .= '<form action="'.plugins_url('/php/submit_ticket.php' , __FILE__).'" method="post">';
 						$output .= '<table class="wpscst-table" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="width:100%"';} $output .='><tr><th><img src="'.plugins_url('/images/Chat.png' , __FILE__).'" alt="'.__('Create a New Ticket', 'wpsc-support-tickets').'" /> '.__('Create a New Ticket', 'wpsc-support-tickets').'</th></tr>';
 						$output .= '<tr><td><h3>'.__('Title', 'wpsc-support-tickets').'</h3><input type="text" name="wpscst_title" id="wpscst_title" value=""  '; if($devOptions['disable_inline_styles']=='false'){$output.='style="width:100%"';} $output .=' /></td></tr>';
