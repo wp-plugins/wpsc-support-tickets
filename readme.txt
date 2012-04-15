@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska
 Requires at least: 3.0.0
 Tested up to: 3.4
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 Text Domain: wpsc-support-tickets
 
 == Description ==
@@ -70,6 +70,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.7.1 =
+* Updated: Added the POT file into the /languages/ directory
+* Updated: Updated the Swedish translation
 
 = 1.7.0 =
 * Added: Swedish translation provided by Stefan Johansson
