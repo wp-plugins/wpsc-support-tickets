@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.7.3
+Version: 1.7.4
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -195,7 +195,7 @@ if (!class_exists("wpscSupportTickets")) {
                 <textarea style="width:390px;" name="email_new_reply_body">'.$devOptions['email_new_reply_body'].'</textarea>
                 <br /><br />
 
-                <p><strong>'.__('Disable inline styles').':</strong> '.__('Set this to true if you want to disable the inline CSS styles.', 'wpsc-support-tickets').'  <br />
+                <p><strong>'.__('Disable inline styles', 'wpsc-support-tickets').':</strong> '.__('Set this to true if you want to disable the inline CSS styles.', 'wpsc-support-tickets').'  <br />
                 <select name="disable_inline_styles">
                  ';
 
@@ -238,7 +238,7 @@ if (!class_exists("wpscSupportTickets")) {
             </div>
 
             <input type="hidden" name="update_wpscSupportTicketsSettings" value="update" />
-            <div style="float:right;margin:0px 10px 10px 10px;"><button onclick="jQuery(\'#wpscst_full_options\').fadeToggle(\'slow\');return false;" style="clear:both;float:left;" class="button-secondary">More Options</button> <input class="button-primary"  type="submit" name="update_wpscSupportTicketsSettings_submit" value="'; _e('Update Settings', 'wpscSupportTickets'); echo'" /></div>
+            <div style="float:right;margin:0px 10px 10px 10px;"><button onclick="jQuery(\'#wpscst_full_options\').fadeToggle(\'slow\');return false;" style="clear:both;float:left;" class="button-secondary">'.__('More Options', 'wpsc-support-tickets').'</button> <input class="button-primary"  type="submit" name="update_wpscSupportTicketsSettings_submit" value="'; _e('Update Settings', 'wpsc-support-tickets'); echo'" /></div>
             </form></p>
             </div>';
         }

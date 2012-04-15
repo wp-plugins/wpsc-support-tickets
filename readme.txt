@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska
 Requires at least: 3.0.0
 Tested up to: 3.4
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 
 == Description ==
 
@@ -30,7 +30,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * Seamless integration with open source wpStoreCart ecommerce plugin, including a shared Guest system 
  * Admin dashboard widget shows all open tickets
  * Both the admin and frontend provides a WYSIWYG HTML editor for formatting
- * i18n ready and compatible
+ * i18n ready and compatible (POT file included in the /languages/ directory)
  * 100% free and open source under the LGPL
 
 **Languages Included**
@@ -74,6 +74,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.7.4 =
+* Updated: A few missed translation strings were caught and are now translatable 
 
 = 1.7.3 =
 * Updated: Updated the POT file in the /languages/ directory
