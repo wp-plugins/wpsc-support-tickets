@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.7.5
+Version: 1.7.7
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -11,7 +11,7 @@ Text Domain: wpsc-support-tickets
 */
 
 /*  
-Copyright 2011 wpStoreCart, LLC  (email : admin@wpstorecart.com)
+Copyright 2012 wpStoreCart, LLC  (email : admin@wpstorecart.com)
 
 This library is free software; you can redistribute it and/or modify it under the terms 
 of the GNU Lesser General Public License as published by the Free Software Foundation; 
@@ -648,7 +648,7 @@ if (!class_exists("wpscSupportTickets")) {
                                                         $output .= '<option value="'.$exploded.'">'.$exploded.'</option>';
                                                     }
                                                 }
-                                                $output .= '</select><button onclick="cancelAdd();return false;"  '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';} $output.=' ><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/stop.png' , __FILE__).'" alt="'.__('Cancel').'" /> '.__('Cancel').'</button><button type="submit" name="wpscst_submit" id="wpscst_submit" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';}$output.='><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/page_white_text.png' , __FILE__).'" alt="'.__('Submit Ticket').'" /> '.__('Submit Ticket').'</button></td></tr>';
+                                                $output .= '</select><button class="wpscst-button" id="wpscst_cancel" onclick="cancelAdd();return false;"  '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';} $output.=' ><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/stop.png' , __FILE__).'" alt="'.__('Cancel').'" /> '.__('Cancel').'</button><button class="wpscst-button" type="submit" name="wpscst_submit" id="wpscst_submit" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';}$output.='><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/page_white_text.png' , __FILE__).'" alt="'.__('Submit Ticket').'" /> '.__('Submit Ticket').'</button></td></tr>';
                                            
 
 						$output .= '</table></form>';
@@ -657,7 +657,7 @@ if (!class_exists("wpscSupportTickets")) {
                                                 $output .= '<div id="wpscst_edit_ticket"><div id="wpscst_edit_ticket_inner"><center><img src="'.plugins_url('/images/loading.gif' , __FILE__).'" alt="'.__('Loading', 'wpsc-support-tickets').'" /></center></div>
                                                     <table '; if($devOptions['disable_inline_styles']=='false'){$output.='style="width:100%"';} $output.=' id="wpscst_reply_editor_table"><tbody>
                                                     <tr id="wpscst_reply_editor_table_tr1"><td><h3>'.__('Your reply', 'wpsc-support-tickets').'</h3><div id="wpscst_nic_panel2" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:block;width:100%;"';}$output.='></div> <textarea name="wpscst_reply" id="wpscst_reply" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:inline;width:100%;margin:0 auto 0 auto;" rows="5"';} $output .='></textarea></td></tr>
-                                                    <tr id="wpscst_reply_editor_table_tr2"><td><button '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';} $output.=' onclick="cancelEdit();return false;"><img src="'.plugins_url('/images/stop.png' , __FILE__).'" alt="'.__('Cancel', 'wpsc-support-tickets').'" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' /> '.__('Cancel', 'wpsc-support-tickets').'</button><button type="submit" name="wpscst_submit2" id="wpscst_submit2" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';} $output.='><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/page_white_text.png' , __FILE__).'" alt="'.__('Submit Reply', 'wpsc-support-tickets').'" /> '.__('Submit Reply', 'wpsc-support-tickets').'</button></td></tr>
+                                                    <tr id="wpscst_reply_editor_table_tr2"><td><button class="wpscst-button" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';} $output.=' onclick="cancelEdit();return false;"><img src="'.plugins_url('/images/stop.png' , __FILE__).'" alt="'.__('Cancel', 'wpsc-support-tickets').'" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' /> '.__('Cancel', 'wpsc-support-tickets').'</button><button class="wpscst-button" type="submit" name="wpscst_submit2" id="wpscst_submit2" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';} $output.='><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/page_white_text.png' , __FILE__).'" alt="'.__('Submit Reply', 'wpsc-support-tickets').'" /> '.__('Submit Reply', 'wpsc-support-tickets').'</button></td></tr>
                                                     </tbody></table>
                                                 </div>';
                                                 $output .= '</form>';

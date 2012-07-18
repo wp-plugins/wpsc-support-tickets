@@ -1,10 +1,10 @@
 === wpsc Support Tickets  ===
 Contributors: jquindlen
 Donate link: http://wpstorecart.com/
-Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska
+Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français
 Requires at least: 3.0.0
 Tested up to: 3.4
-Stable tag: 1.7.5
+Stable tag: 1.7.7
 
 == Description ==
 
@@ -36,7 +36,9 @@ This can optionally allow you to keep your support ticket system accessible only
 **Languages Included**
  
  * English
- * Swedish (Svenska)
+ * Swedish (Svenska) by Stefan Johansson
+ * Norwegian (Norsk) by Rune Kristoffersen
+ * French (le Français) by Hawaien88
 
 == Installation ==
 
@@ -74,6 +76,14 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.7.7 =
+* Added: Norwegian translation provided by Rune Kristoffersen
+* Added: Hawaien88 for the French translate. -> Merci à Hawaien88 pour la traduction Française.
+
+= 1.7.6 =
+* Updated: Added a few missing classes from buttons
+* Updated: Updated the Swedish translation
 
 = 1.7.5 =
 * Updated: Updated the POT file in the /languages/ directory
