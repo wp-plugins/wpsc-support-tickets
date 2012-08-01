@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français
 Requires at least: 3.0.0
 Tested up to: 3.5
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 
 == Description ==
 
@@ -76,6 +76,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.8.1 =
+* Fixed: Fixed a javascript error regression that emerged in the 1.8.0 release.
 
 = 1.8.0 =
 * Fixed: Theme compatibility greatly improved.  Some themes break inline javascript, so I removed inline javascript function definitions, and localized them for Wordpress.
