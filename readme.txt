@@ -3,8 +3,8 @@ Contributors: jquindlen
 Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français
 Requires at least: 3.0.0
-Tested up to: 3.4
-Stable tag: 1.7.7
+Tested up to: 3.5
+Stable tag: 1.8.0
 
 == Description ==
 
@@ -34,7 +34,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * 100% free and open source under the LGPL
 
 **Languages Included**
- 
+
  * English
  * Swedish (Svenska) by Stefan Johansson
  * Norwegian (Norsk) by Rune Kristoffersen
@@ -76,6 +76,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.8.0 =
+* Fixed: Theme compatibility greatly improved.  Some themes break inline javascript, so I removed inline javascript function definitions, and localized them for Wordpress.
+* Updated: Updated the French translation
 
 = 1.7.7 =
 * Added: Norwegian translation provided by Rune Kristoffersen

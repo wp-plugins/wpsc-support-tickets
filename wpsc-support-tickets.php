@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.7.7
+Version: 1.8.0
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -33,8 +33,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 1.7;
-$wpscSupportTickets_db_version = 1.7;
+$wpscSupportTickets_version = 1.8;
+$wpscSupportTickets_db_version = 1.8;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
 
@@ -550,7 +550,7 @@ if (!class_exists("wpscSupportTickets")) {
 		// Shortcode =========================================
 		function wpscSupportTickets_mainshortcode($atts) {
 			global $wpdb;
-			
+                     
 			$table_name = $wpdb->prefix . "wpscst_tickets";
 		
 			$devOptions = $this->getAdminOptions();		
@@ -584,57 +584,6 @@ if (!class_exists("wpscSupportTickets")) {
                                             if(!$this->hasDisplayed) {
 						global $current_user;
 
-						$output .='
-						<script type="text/javascript">
-						/* <![CDATA[ */	
-                                                    jQuery(document).ready(function(){
-                                                            var myNicEditor = new nicEditor({buttonList : [\'fontSize\',\'bold\',\'italic\',\'underline\',\'strikethrough\',\'ul\', \'subscript\',\'superscript\',\'image\',\'link\',\'unlink\'], iconsPath:"'.plugins_url('/js/nicedit/nicEditorIcons.gif' , __FILE__).'"});
-                                                            myNicEditor.setPanel("wpscst_nic_panel");
-                                                            myNicEditor.addInstance("wpscst_initial_message");
-                                                            var myNicEditor2 = new nicEditor({buttonList : [\'fontSize\',\'bold\',\'italic\',\'underline\',\'strikethrough\',\'ul\', \'subscript\',\'superscript\',\'image\',\'link\',\'unlink\'], iconsPath:"'.plugins_url('/js/nicedit/nicEditorIcons.gif' , __FILE__).'"});
-                                                            myNicEditor2.setPanel("wpscst_nic_panel2");
-                                                            myNicEditor2.addInstance("wpscst_reply");
-                                                            jQuery(".wpscst-table").toggle();
-                                                            jQuery("#wpscst_edit_ticket").toggle();
-                                                    });
-
-                                                    function loadTicket(primkey, resolution) {
-                                                        jQuery(".wpscst-table").fadeOut("slow");
-                                                        jQuery("#wpscst_edit_div").fadeOut("slow");
-                                                        jQuery("#wpscst-new").fadeOut("slow");
-                                                        jQuery("#wpscst_edit_ticket").fadeIn("slow");
-                                                        jQuery("#wpscst_edit_ticket_inner").load("'.plugins_url('/php/load_ticket.php' , __FILE__).'", {"primkey":primkey});
-                                                        jQuery("#wpscst_edit_primkey").val(primkey);
-                                                        jQuery("html, body").animate({scrollTop: jQuery("#wpscst_top_page").offset().top}, 2000);
-                                                        if(resolution=="Closed") {
-                                                            jQuery("#wpscst_reply_editor_table_tr1").fadeOut("slow");
-                                                            jQuery("#wpscst_submit2").fadeOut("slow");
-                                                        }
-                                                    }
-
-                                                    function cancelEdit() {
-                                                        jQuery("#wpscst_reply_editor_table_tr1").fadeIn("slow");
-                                                        jQuery("#wpscst_submit2").fadeIn("slow");
-                                                        jQuery("#wpscst_edit_div").fadeIn("slow");
-                                                        jQuery("#wpscst-new").fadeIn("slow");
-                                                        jQuery("#wpscst_edit_ticket").fadeOut("slow");
-                                                        jQuery("#wpscst_edit_primkey").val(0);
-                                                        jQuery("#wpscst_reply").html("");
-                                                        jQuery(".nicEdit-main").html("");
-                                                        jQuery("#wpscst_edit_ticket_inner").html(\'<center><img src="'.plugins_url('/images/loading.gif' , __FILE__).'" alt="'.__('Loading', 'wpsc-support-tickets').'" /></center>\');
-                                                        jQuery("html, body").animate({scrollTop: jQuery("#wpscst_top_page").offset().top}, 2000);
-                                                    }
-
-                                                    function cancelAdd() {
-                                                        jQuery("#wpscst_edit_div").fadeIn("slow");
-                                                        jQuery("#wpscst-new").fadeIn("slow");
-                                                        jQuery(".wpscst-table").fadeOut("slow");
-                                                        jQuery("html, body").animate({scrollTop: jQuery("#wpscst_top_page").offset().top}, 2000);
-                                                    }
-						/* ]]> */
-						</script>		
-							';
-	
 						$output .= '<div id="wpscst_top_page" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:inline;"';} $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);"><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/Add.png' , __FILE__).'" alt="'.__('Create a New Ticket', 'wpsc-support-tickets').'" /> '.__('Create a New Ticket', 'wpsc-support-tickets').'</button><br /><br />';
                                                 $output .= '<form action="'.plugins_url('/php/submit_ticket.php' , __FILE__).'" method="post">';
 						$output .= '<table class="wpscst-table" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="width:100%"';} $output .='><tr><th><img src="'.plugins_url('/images/Chat.png' , __FILE__).'" alt="'.__('Create a New Ticket', 'wpsc-support-tickets').'" /> '.__('Create a New Ticket', 'wpsc-support-tickets').'</th></tr>';
@@ -755,8 +704,13 @@ if (!function_exists("wpscSupportTicketsAdminPanel")) {
  */
  
 
-function wpscLoadTestDomain() {
+function wpscLoadInit() {
     load_plugin_textdomain( 'wpsc-support-tickets', false, '/wpsc-support-tickets/languages/' );
+    wp_enqueue_script('wpsc-support-tickets', plugins_url().'/wpsc-support-tickets/js/wpsc-support-tickets.js', array('jquery'));
+    $wpscst_params = array(
+            'wpscstPluginsUrl' => plugins_url(),
+    );                        
+    wp_localize_script( 'wpsc-support-tickets', 'wpscstScriptParams', $wpscst_params );     
 }
 
 
@@ -772,6 +726,8 @@ if (class_exists("wpscSupportTickets")) {
 //Actions and Filters   
 if (isset($wpscSupportTickets)) {
     //Actions
+
+
 	register_activation_hook(__FILE__, array(&$wpscSupportTickets, 'wpscSupportTickets_install')); // Install DB schema
 	add_action('wpsc-support-tickets/wpscSupportTickets.php',  array(&$wpscSupportTickets, 'init')); // Create options on activation
 	add_action('admin_menu', 'wpscSupportTicketsAdminPanel'); // Create admin panel
@@ -779,7 +735,8 @@ if (isset($wpscSupportTickets)) {
         //add_action('wp_head', array(&$wpscSupportTickets, 'addHeaderCode')); // Place wpscSupportTickets comment into header
 	add_shortcode('wpscSupportTickets', array(&$wpscSupportTickets, 'wpscSupportTickets_mainshortcode'));
 	add_action("wp_print_scripts", array(&$wpscSupportTickets,"addHeaderCode"));
-        add_action('init', 'wpscLoadTestDomain'); // Load other languages
+        add_action('init', 'wpscLoadInit'); // Load other languages, and javascript
+       
 }
  /**
  * ===============================================================================================================

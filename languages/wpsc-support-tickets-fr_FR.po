@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-07-16 19:52+0100\n"
+"PO-Revision-Date: 2012-07-18 12:36+0100\n"
 "Last-Translator: hawaien <hawaien88@free.fr>\n"
 "Language-Team: hawaien88 <LL@li.org>\n"
 "X-Poedit-Language: French\n"
@@ -100,7 +100,7 @@ msgstr "Sections"
 
 #: wpsc-support-tickets.php:186
 msgid "Separate these values with a double pipe, like this ||"
-msgstr "Séparé les valeurs par un double trait, comme cela ||"
+msgstr "Séparez les valeurs par un double trait, comme cela ||"
 
 #: wpsc-support-tickets.php:188
 msgid "Email"
@@ -108,11 +108,11 @@ msgstr "Email"
 
 #: wpsc-support-tickets.php:188
 msgid "The admin email where all new ticket &amp; reply notification emails will be sent"
-msgstr "Email de l'administrateur où les notifications des nouveaux tickets incidents &amp; réponses seront envoyés"
+msgstr "Email de l'administrateur où les notifications des nouveaux tickets incidents &amp; réponses seront envoyées"
 
 #: wpsc-support-tickets.php:190
 msgid "New Ticket Email"
-msgstr "Nouvel email de ticket"
+msgstr "Nouvel email de ticket :"
 
 #: wpsc-support-tickets.php:190
 msgid "The subject &amp; body of the email sent to the customer when creating a new ticket."
@@ -170,7 +170,7 @@ msgstr "Voir les tickets ouverts:"
 
 #: wpsc-support-tickets.php:274
 msgid "View Closed Tickets:"
-msgstr "Vir les tickets fermés:"
+msgstr "Voir les tickets fermés:"
 
 #: wpsc-support-tickets.php:276
 #: wpsc-support-tickets.php:434
