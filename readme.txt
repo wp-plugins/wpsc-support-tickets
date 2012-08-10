@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro
 Requires at least: 3.0.0
 Tested up to: 3.5
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 
 == Description ==
 
@@ -77,6 +77,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.8.3 =
+* Fixed: Corrected two strings that were not properly registered for translation
 
 = 1.8.2 =
 * Added: Brazilian Portuguese translation provided by Thiago Bernardi, e-mail address: thiagobernardi@outlook.com

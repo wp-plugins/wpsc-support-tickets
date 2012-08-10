@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.8.2
+Version: 1.8.3
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -597,7 +597,7 @@ if (!class_exists("wpscSupportTickets")) {
                                                         $output .= '<option value="'.$exploded.'">'.$exploded.'</option>';
                                                     }
                                                 }
-                                                $output .= '</select><button class="wpscst-button" id="wpscst_cancel" onclick="cancelAdd();return false;"  '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';} $output.=' ><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/stop.png' , __FILE__).'" alt="'.__('Cancel').'" /> '.__('Cancel').'</button><button class="wpscst-button" type="submit" name="wpscst_submit" id="wpscst_submit" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';}$output.='><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/page_white_text.png' , __FILE__).'" alt="'.__('Submit Ticket').'" /> '.__('Submit Ticket').'</button></td></tr>';
+                                                $output .= '</select><button class="wpscst-button" id="wpscst_cancel" onclick="cancelAdd();return false;"  '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';} $output.=' ><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/stop.png' , __FILE__).'" alt="'.__('Cancel', 'wpsc-support-tickets').'" /> '.__('Cancel', 'wpsc-support-tickets').'</button><button class="wpscst-button" type="submit" name="wpscst_submit" id="wpscst_submit" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:right;"';}$output.='><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/page_white_text.png' , __FILE__).'" alt="'.__('Submit Ticket', 'wpsc-support-tickets').'" /> '.__('Submit Ticket', 'wpsc-support-tickets').'</button></td></tr>';
                                            
 
 						$output .= '</table></form>';
