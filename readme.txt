@@ -1,10 +1,10 @@
 === wpsc Support Tickets  ===
 Contributors: jquindlen
 Donate link: http://wpstorecart.com/
-Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch
+Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi
 Requires at least: 3.0.0
 Tested up to: 3.5
-Stable tag: 1.8.4
+Stable tag: 1.8.5
 
 == Description ==
 
@@ -41,6 +41,8 @@ This can optionally allow you to keep your support ticket system accessible only
  * French (le Français) by Hawaien88
  * Brazilian Portuguese (português brasileiro) by Thiago Bernardi
  * German (Deutsch) by Markus Scheffknecht
+ * Dutch (Nederlands) by Jos Wolbers
+ * Finnish (Suomi) by Mikko Ohtonen
 
 == Installation ==
 
@@ -78,6 +80,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.8.5 =
+* Added: Finnish (Suomi) translation provided by Mikko Ohtonen http://twitter.com/mopetti
+* Added: Dutch (Nederlands) translation provided by Jos Wolbers
 
 = 1.8.4 =
 * Added: German translation provided by Markus Scheffknecht, contact at https://twitter.com/Scheffhauser
