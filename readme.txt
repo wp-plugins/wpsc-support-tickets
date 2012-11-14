@@ -1,10 +1,10 @@
 === wpsc Support Tickets  ===
 Contributors: jquindlen
 Donate link: http://wpstorecart.com/
-Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian
+Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית
 Requires at least: 3.0.0
 Tested up to: 3.5
-Stable tag: 1.8.7
+Stable tag: 1.8.8
 
 == Description ==
 
@@ -45,6 +45,8 @@ This can optionally allow you to keep your support ticket system accessible only
  * Finnish (Suomi) by Mikko Ohtonen
  * Russian (ру́сский язы́к, russkiy yazyk) by Login Roman
  * Italian (Italiano) by Pino Cinelli
+ * Spanish (Español) translation provided by Víctor Belgrano
+ * Hebrew (עִבְרִית) translation provided by http://atar4u.com/
 
 == Installation ==
 
@@ -82,6 +84,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.8.8 =
+* Added: Spanish (Español) translation provided by Víctor Belgrano url: http://www.pymessoft.com email: info@pymessoft.com
+* Added: Hebrew (עִבְרִית) translation provided by http://atar4u.com/
 
 = 1.8.7 =
 * Added: Italian (Italiano) translation provided by Pino Cinelli
