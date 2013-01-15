@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.8.8
+Version: 1.8.9
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -55,6 +55,8 @@ if (!class_exists("wpscSupportTickets")) {
         var $adminOptionsName = "wpscSupportTicketsAdminOptions";
         var $wpscstSettings = null;
         var $hasDisplayed = false;
+        var $hasDisplayedCompat = false; // hack for Jetpack compatibility
+        var $hasDisplayedCompat2 = false; // hack for Jetpack compatibility
 		
         function wpscSupportTickets() { //constructor
             // Let's make sure the admin is always in charge
@@ -561,6 +563,10 @@ if (!class_exists("wpscSupportTickets")) {
 
                         if (session_id() == "") {@session_start();};
                         
+                        if($display==null || trim($display) =='') {
+                            $display = 'tickets';
+                        }
+                        
 			$output = '';
 			switch ($display) {
 				case 'tickets': // =========================================================
@@ -655,8 +661,29 @@ if (!class_exists("wpscSupportTickets")) {
                                         
 					break;
 			
-			}			
-			$this->hasDisplayed = true;
+			}		
+                        
+                        // Jetpack incompatibilities hack
+                        if(@!file_exists(WP_PLUGIN_DIR.'/jetpack/jetpack.php')) {
+                            $this->hasDisplayed = true;
+                        } else {
+                            @include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+                            if (@is_plugin_active(WP_PLUGIN_DIR.'/jetpack/jetpack.php')) {
+                            
+                                if($this->hasDisplayedCompat == true) {
+                                    if($this->hasDisplayedCompat2 == true) {
+                                        $this->hasDisplayed = true;
+                                    }
+                                    $this->hasDisplayedCompat2 = true;
+                                }
+                                $this->hasDisplayedCompat = true;
+                                
+                            } else {
+                                $this->hasDisplayed = true;
+                            }
+                        }
+                        
+			
 			return $output;
 		}
 		// END SHORTCODE ================================================
