@@ -1,7 +1,7 @@
 === wpsc Support Tickets  ===
 Contributors: jquindlen
 Donate link: http://wpstorecart.com/
-Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית
+Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian
 Requires at least: 3.0.0
 Tested up to: 3.5
 Stable tag: 1.8.11
@@ -47,6 +47,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * Italian (Italiano) by Pino Cinelli
  * Spanish (Español) translation provided by Víctor Belgrano
  * Hebrew (עִבְרִית) translation provided by http://atar4u.com/
+ * Serbian (српски) translation provided by WPdiscounts @ http://wpdiscounts.com
 
 == Installation ==
 
@@ -86,6 +87,7 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 == Changelog ==
 
 = 1.8.11 =
+* Added: Serbian (српски) translation provided by WPdiscounts @ http://wpdiscounts.com
 * Updated: NL translation minor update
 
 = 1.8.10 =
