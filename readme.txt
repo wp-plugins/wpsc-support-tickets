@@ -1,10 +1,10 @@
 === wpsc Support Tickets  ===
 Contributors: jquindlen
 Donate link: http://wpstorecart.com/
-Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian
+Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,العربية,Arabic
 Requires at least: 3.0.0
 Tested up to: 3.5
-Stable tag: 1.8.11
+Stable tag: 1.8.12
 
 == Description ==
 
@@ -30,6 +30,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * Seamless integration with open source wpStoreCart ecommerce plugin, including a shared Guest system 
  * Admin dashboard widget shows all open tickets
  * Both the admin and frontend provides a WYSIWYG HTML editor for formatting
+ * Available in 14 languages
  * i18n ready and compatible (POT file included in the /languages/ directory)
  * 100% free and open source under the LGPL
 
@@ -48,6 +49,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * Spanish (Español) translation provided by Víctor Belgrano
  * Hebrew (עִבְרִית) translation provided by http://atar4u.com/
  * Serbian (српски) translation provided by WPdiscounts @ http://wpdiscounts.com
+ * Arabic (العربية) translation provided by Ahmed Raslan @ http://www.nilecode.com/
 
 == Installation ==
 
@@ -85,6 +87,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.8.12 =
+* Added: Arabic (العربية) translation provided by Ahmed Raslan @ http://www.nilecode.com/
 
 = 1.8.11 =
 * Added: Serbian (српски) translation provided by WPdiscounts @ http://wpdiscounts.com
