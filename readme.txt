@@ -4,7 +4,7 @@ Donate link: http://wpstorecart.com/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic
 Requires at least: 3.0.0
 Tested up to: 3.5
-Stable tag: 1.8.12
+Stable tag: 1.9.0
 
 == Description ==
 
@@ -87,6 +87,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 1.9.0 =
+* Updated: Admin can now see the guests email address
 
 = 1.8.12 =
 * Added: Arabic (العربية) translation provided by Ahmed Raslan @ http://www.nilecode.com/

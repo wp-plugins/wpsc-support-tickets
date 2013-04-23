@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.8.11
+Version: 1.9.0
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -33,8 +33,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 1.8;
-$wpscSupportTickets_db_version = 1.8;
+$wpscSupportTickets_version = 1.9;
+$wpscSupportTickets_db_version = 1.9;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
 
@@ -340,14 +340,14 @@ if (!class_exists("wpscSupportTickets")) {
                             echo '<table class="widefat"><tr><td>';
 							if($results[0]['user_id']!=0) {
 								@$user=get_userdata($results[0]['user_id']);
-								$theusersname = $user->user_nicename;
+								$theusersname = '<a href="'.get_admin_url().'user-edit.php?user_id='.$results[0]['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'. $user->user_nicename .' </a>';
 							} else {
 								$user = false; // Guest
-								$theusersname = __('Guest', 'wpsc-support-tickets');
+								$theusersname = __('Guest', 'wpsc-support-tickets') . ' - <strong>'.$results[0]['email'].'</strong>';
 							}								
                             echo '<div id="wpscst_meta"><h1>'.base64_decode($results[0]['title']).'</h1> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
                             echo '<table class="widefat" style="width:100%;">';
-                            echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' <a href="'.get_admin_url().'user-edit.php?user_id='.$results[0]['user_id'].'&wp_http_referer='.urlencode(get_admin_url().'admin.php?page=wpscSupportTickets-admin').'">'.$theusersname.'</a> (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
+                            echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' '.$theusersname.' (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
 
                             $messageData = strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
                             $messageData = explode ( '\\', $messageData);
