@@ -89,7 +89,7 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 == Changelog ==
 
 = 1.9.0 =
-* Updated: Admin can now see the guests email address
+* Updated: Admin can now see the guests email address.
 
 = 1.8.12 =
 * Added: Arabic (العربية) translation provided by Ahmed Raslan @ http://www.nilecode.com/
