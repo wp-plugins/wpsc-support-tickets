@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpstorecart.com/wpsc-support-tickets/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 1.9.0
+Version: 1.9.1
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -586,12 +586,15 @@ if (!class_exists("wpscSupportTickets")) {
                                                 ';
                                                
                                         }                                     
-					if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
+					if(is_user_logged_in() || @isset($_SESSION['wpsc_email']) || @isset($_POST['guest_email']) ) {
                                             if(!$this->hasDisplayed) {
 						global $current_user;
 
 						$output .= '<div id="wpscst_top_page" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:inline;"';} $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);"><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/Add.png' , __FILE__).'" alt="'.__('Create a New Ticket', 'wpsc-support-tickets').'" /> '.__('Create a New Ticket', 'wpsc-support-tickets').'</button><br /><br />';
                                                 $output .= '<form action="'.plugins_url('/php/submit_ticket.php' , __FILE__).'" method="post">';
+                                                if(@isset($_POST['guest_email'])) {
+                                                    $output .= '<input type="hidden" name="guest_email" value="'.$wpdb->escape($_POST['guest_email']).'" />';
+                                                }
 						$output .= '<table class="wpscst-table" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="width:100%"';} $output .='><tr><th><img src="'.plugins_url('/images/Chat.png' , __FILE__).'" alt="'.__('Create a New Ticket', 'wpsc-support-tickets').'" /> '.__('Create a New Ticket', 'wpsc-support-tickets').'</th></tr>';
 						$output .= '<tr><td><h3>'.__('Title', 'wpsc-support-tickets').'</h3><input type="text" name="wpscst_title" id="wpscst_title" value=""  '; if($devOptions['disable_inline_styles']=='false'){$output.='style="width:100%"';} $output .=' /></td></tr>';
 						$output .= '<tr><td><h3>'.__('Your message', 'wpsc-support-tickets').'</h3><div id="wpscst_nic_panel" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:block;width:100%;"';} $output.='></div> <textarea name="wpscst_initial_message" id="wpscst_initial_message" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:inline;width:100%;margin:0 auto 0 auto;" rows="5"';} $output.='></textarea></td></tr>';
@@ -609,6 +612,9 @@ if (!class_exists("wpscSupportTickets")) {
 						$output .= '</table></form>';
 
                                                 $output .= '<form action="'.plugins_url('/php/reply_ticket.php' , __FILE__).'" method="post"><input type="hidden" value="0" id="wpscst_edit_primkey" name="wpscst_edit_primkey" />';
+                                                if(@isset($_POST['guest_email'])) {
+                                                    $output .= '<input type="hidden" name="guest_email" value="'.$wpdb->escape($_POST['guest_email']).'" />';
+                                                }                                                
                                                 $output .= '<div id="wpscst_edit_ticket"><div id="wpscst_edit_ticket_inner"><center><img src="'.plugins_url('/images/loading.gif' , __FILE__).'" alt="'.__('Loading', 'wpsc-support-tickets').'" /></center></div>
                                                     <table '; if($devOptions['disable_inline_styles']=='false'){$output.='style="width:100%"';} $output.=' id="wpscst_reply_editor_table"><tbody>
                                                     <tr id="wpscst_reply_editor_table_tr1"><td><h3>'.__('Your reply', 'wpsc-support-tickets').'</h3><div id="wpscst_nic_panel2" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:block;width:100%;"';}$output.='></div> <textarea name="wpscst_reply" id="wpscst_reply" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:inline;width:100%;margin:0 auto 0 auto;" rows="5"';} $output .='></textarea></td></tr>

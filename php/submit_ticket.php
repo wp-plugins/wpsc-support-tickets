@@ -45,7 +45,10 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
         $wpscst_email = $current_user->user_email;
     } else {
         $wpscst_userid = 0;
-        $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);      
+        $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);     
+        if(trim($wpscst_email)=='') {
+            $wpscst_email = @$wpdb->escape($_POST['guest_email']);
+        }
     }
 
     $sql = "
