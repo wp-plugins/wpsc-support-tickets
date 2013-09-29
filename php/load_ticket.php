@@ -13,6 +13,9 @@ global $current_user, $wpdb;
 if (session_id() == "") {@session_start();};
 
 if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST['primkey'])) {
+    
+    $devOptions = get_option('wpscSupportTicketsAdminOptions');
+    
     // Guest additions here
     if(is_user_logged_in()) {
         $wpscst_userid = $current_user->ID;
@@ -26,7 +29,13 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
     
     $primkey = intval($_POST['primkey']);
 
-    $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}' AND `user_id`='{$wpscst_userid}' AND `email`='{$wpscst_email}' LIMIT 0, 1;";
+    if($devOptions['allow_all_tickets_to_be_viewed']=='true') {
+        $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}' LIMIT 0, 1;";
+    }                                                
+    if($devOptions['allow_all_tickets_to_be_viewed']=='false') {
+        $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}' AND `user_id`='{$wpscst_userid}' AND `email`='{$wpscst_email}' LIMIT 0, 1;";
+    }    
+    
     $results = $wpdb->get_results( $sql , ARRAY_A );
     if(isset($results[0])) {
         echo '<div id="wpscst_meta"><strong>'.base64_decode($results[0]['title']).'</strong> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
@@ -76,6 +85,9 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
                 echo '</tbody></table>';
             }
         }
+        
+
+        
     }
 }
 

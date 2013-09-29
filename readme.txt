@@ -1,20 +1,20 @@
 === wpsc Support Tickets  ===
 Contributors: jquindlen
-Donate link: http://wpstorecart.com/
-Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic
+Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
+Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,
 Requires at least: 3.0.0
-Tested up to: 3.5
-Stable tag: 1.9.1
+Tested up to: 3.7
+Stable tag: 2.0.0
 
 == Description ==
 
-[wpsc Support Tickets](http://wpstorecart.com/wpsc-support-tickets/ "wpsc Support Tickets") is an open source Wordpress support ticket system.  
+[wpsc Support Tickets](http://wpscsupporttickets.com/wordpress-support-ticket-plugin/ "wpsc Support Tickets") is an open source Wordpress support ticket system.  
 This isn't some port of another ticket system that's been hacked to run inside Wordpress.  This is a new plugin designed from the ground up specifically for Wordpress.
 
 Support tickets are critical to most businesses that provide a product or service, 
 and is often used for clients, customers, members, authors, sponsors, pre-sale questions and more.   
 
-For full documentation, support, addons, and related tools, visit [our site](http://wpstorecart.com/wpsc-support-tickets/ "our site")
+For full documentation, support, addons, and related tools, visit [our site](http://wpscsupporttickets.com/wordpress-support-ticket-plugin/ "our site")
 
 While completely optional, wpsc Support Tickets can work in unison with [wpStoreCart](http://wordpress.org/extend/plugins/wpstorecart/ "wpStoreCart"), an open source ecommerce plugin for Wordpress.
 This can optionally allow you to keep your support ticket system accessible only to paying customers and/or current members.
@@ -30,9 +30,8 @@ This can optionally allow you to keep your support ticket system accessible only
  * Seamless integration with open source wpStoreCart ecommerce plugin, including a shared Guest system 
  * Admin dashboard widget shows all open tickets
  * Both the admin and frontend provides a WYSIWYG HTML editor for formatting
- * Available in 14 languages
+ * Available in 15 languages
  * i18n ready and compatible (POT file included in the /languages/ directory)
- * 100% free and open source under the LGPL
 
 **Languages Included**
 
@@ -45,6 +44,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * Dutch (Nederlands) by Jos Wolbers
  * Finnish (Suomi) by Mikko Ohtonen
  * Russian (ру́сский язы́к, russkiy yazyk) by Login Roman
+ * Romanian (limba Română) by Nutu Valea
  * Italian (Italiano) by Pino Cinelli
  * Spanish (Español) translation provided by Víctor Belgrano
  * Hebrew (עִבְרִית) translation provided by http://atar4u.com/
@@ -70,7 +70,7 @@ Or, if you want to install manually:
 == Frequently Asked Questions ==
 
 = I have questions, where can I find answers? =
-For full documentation, support, addons, and related tools, visit [our site](http://wpstorecart.com/wpsc-support-tickets/ "our site")
+For full documentation, support, addons, and related tools, visit [our site](http://wpscsupporttickets.com/wordpress-support-ticket-plugin/ "our site")
 
 == Screenshots ==
  
@@ -87,6 +87,12 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 2.0.0 =
+* Added: Tons of new features for PRO users
+* Added: Created options page
+* Added: Added many action hooks to extend functionality
+* Updated: Removed depreciated functions 
 
 = 1.9.1 =
 * Fixed: For users with session issues, guest accounts should now work properly

@@ -24,6 +24,17 @@
                 jQuery("#wpscst_reply_editor_table_tr1").fadeOut("slow");
                 jQuery("#wpscst_submit2").fadeOut("slow");
             }
+            if(resolution=="Reopenable") {
+                jQuery("#wpscst_reply_editor_table_tr1").fadeOut("slow");
+                jQuery("#wpscst_set_status").val('Closed');
+            }  
+            if(resolution=="Open") {
+                try {
+                    jQuery("#wpscst_set_status").val('Open');
+                } catch (e) {
+                    
+                }
+            }
         }
     }
 
