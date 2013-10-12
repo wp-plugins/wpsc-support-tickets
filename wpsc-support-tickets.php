@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 2.0.1
+Version: 2.0.2
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -320,7 +320,19 @@ if (!class_exists("wpscSupportTickets")) {
             </div>
             </div>
             </form>
+            
+
         ';            
+            
+            if (!function_exists('wpscSupportTicketsPRO')) {
+                echo '
+                <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    jQuery(\'#buypro\').append(\'<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="REYXW5BR8H5MU"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>\');
+                });
+                </script>
+            ';
+            }
             
         }
         
@@ -993,28 +1005,7 @@ if (!function_exists('wpscSupportTicketsPRO')) {
         </select>
         </p>     </div>       
         
-        <center><div style="border:3px solid red;width:40%;padding:10px;background:#FFF;position:relative;top:-480px;">
-            Upgrade to wpsc Support Tickets PRO to unlock this page of settings, and much more, including:<br /><br />
-            <ul style="text-align:left;font-size:0.8em;font-weight:bold;">
-                <li>File Uploads & attachments (optional)</li>
-                <li>Minimum level to access admin panel can be set by admin</li>
-                <li>Bulk edit many tickets at a time</li>
-                <li>Send HTML Emails</li>
-                <li>Optionally allow all users to see all tickets</li>
-                <li>Advanced ticketing system with severity, categories, departments</li>
-                <li>Optionally allow users to reopen their own tickets</li> 
-                <li>Advanced ticket overview in admin panel</li>       
-                <li>3 Premium Wordpress Themes</li>   
-            </ul>
-            <br />
-            $19.99 USD<br />
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="REYXW5BR8H5MU">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-            </form>            
-        </div></center>
+        <center><div style="border:3px solid red;width:40%;padding:10px;background:#FFF;position:relative;top:-480px;">Upgrade to wpsc Support Tickets PRO to unlock this page of settings, and much more, including:<br /><br /><ul style="text-align:left;font-size:0.8em;font-weight:bold;"><li>File Uploads & attachments (optional)</li><li>Minimum level to access admin panel can be set by admin</li><li>Bulk edit many tickets at a time</li><li>Send HTML Emails</li><li>Optionally allow all users to see all tickets</li><li>Advanced ticketing system with severity, categories, departments</li><li>Optionally allow users to reopen their own tickets</li> <li>Advanced ticket overview in admin panel</li>       <li>3 Premium Wordpress Themes</li>   </ul><br />$19.99 USD<br /><div  id="buypro"></div></div></center>
 
         ';
     }

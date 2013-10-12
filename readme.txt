@@ -88,6 +88,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 
 == Changelog ==
 
+= 2.0.2 =
+* Fixed: Patched an issue where settings were not saving correctly
+
 = 2.0.1 =
 * Updated: Language .POT file updated for changes in 2.0
 
