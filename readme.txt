@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,
 Requires at least: 3.0.0
 Tested up to: 3.7
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 
 == Description ==
 
@@ -87,6 +87,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 2.0.4 =
+* Fixed: Hopefully patched some bugs affecting some users
 
 = 2.0.3 =
 * Minor update
