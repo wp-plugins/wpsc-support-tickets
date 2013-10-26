@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 2.0.5
+Version: 2.1.0
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -33,8 +33,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsc_error_reporting;
-$wpscSupportTickets_version = 2;
-$wpscSupportTickets_db_version = 2;
+$wpscSupportTickets_version = 2.1;
+$wpscSupportTickets_db_version = 2.1;
 $APjavascriptQueue = NULL;
 $wpsc_error_reporting = false;
 
@@ -192,13 +192,13 @@ if (!class_exists("wpscSupportTickets")) {
                             $devOptions['email_new_ticket_subject'] = esc_sql($_POST['email_new_ticket_subject']);
                     }
                     if (isset($_POST['email_new_ticket_body'])) {
-                            $devOptions['email_new_ticket_body'] = $_POST['email_new_ticket_body'];
+                            $devOptions['email_new_ticket_body'] = stripslashes($_POST['email_new_ticket_body']);
                     }
                     if (isset($_POST['email_new_reply_subject'])) {
                             $devOptions['email_new_reply_subject'] = esc_sql($_POST['email_new_reply_subject']);
                     }
                     if (isset($_POST['email_new_reply_body'])) {
-                            $devOptions['email_new_reply_body'] = $_POST['email_new_reply_body'];
+                            $devOptions['email_new_reply_body'] = stripslashes($_POST['email_new_reply_body']);
                     }
                     if (isset($_POST['disable_inline_styles'])) {
                             $devOptions['disable_inline_styles'] = esc_sql($_POST['disable_inline_styles']);
@@ -320,7 +320,7 @@ if (!class_exists("wpscSupportTickets")) {
             </div>
 
             <input type="hidden" name="update_wpscSupportTicketsSettings" value="update" />
-            <div style="float:right;position:relative;top:-20px;"> <input class="button-primary"  type="submit" name="update_wpscSupportTicketsSettings_submit" value="'; _e('Update Settings', 'wpsc-support-tickets'); echo'" /></div>
+            <div style="float:right;position:relative;top:-20px;"> <input class="button-primary" style="position:relative;z-index:999999;" type="submit" name="update_wpscSupportTicketsSettings_submit" value="'; _e('Update Settings', 'wpsc-support-tickets'); echo'" /></div>
             
 
             </div>
@@ -471,20 +471,10 @@ if (!class_exists("wpscSupportTickets")) {
 
                         echo '<br style="clear:both;" /><br />';
 
-                        echo '
+                        
 
-                        <script type="text/javascript">
-                        /* <![CDATA[ */
-                            jQuery(document).ready(function(){
-                                    var myNicEditor = new nicEditor({buttonList : [\'fontSize\',\'bold\',\'italic\',\'underline\',\'strikethrough\',\'ul\', \'subscript\',\'superscript\',\'image\',\'link\',\'unlink\'], iconsPath:"'.plugins_url('/js/nicedit/nicEditorIcons.gif' , __FILE__).'"});
-                                    myNicEditor.setPanel("wpscst_nic_panel");
-                                    myNicEditor.addInstance("wpscst_reply");
-                            });
-
-                        /* ]]> */
-                        </script>
-                                ';
-
+                        
+                        
                         $primkey = intval($_GET['primkey']);
 
                         $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}' LIMIT 0, 1;";
@@ -544,10 +534,20 @@ if (!class_exists("wpscSupportTickets")) {
                             }
                             echo '</td></tr></table>';
                         }
-
+                        $output .= '
+                            <script>
+                                jQuery(document).ready(function(){
+                                    jQuery(".nicEdit-main").width("100%");
+                                    jQuery(".nicEdit-main").parent().width("100%");
+                                    jQuery(".nicEdit-main").height("270px");
+                                    jQuery(".nicEdit-main").parent().height("270px");                                    
+                                    jQuery(".nicEdit-main").parent().css( "background-color", "white" );
+                                });
+                            </script>
+                            ';
                         $output .= '<form action="'.plugins_url('/php/reply_ticket.php' , __FILE__).'" method="post" enctype="multipart/form-data"><input type="hidden" name="wpscst_is_staff_reply" value="yes" /><input type="hidden" name="wpscst_edit_primkey" value="'.$primkey.'" /><input type="hidden" name="wpscst_goback" value="yes" /> ';
-                        $output .= '<table class="wpscst-table" style="width:100%">';
-                        $output .= '<tr><td><h3>'.__('Your message', 'wpsc-support-tickets').'</h3><div id="wpscst_nic_panel" style="display:block;width:100%;"></div> <textarea name="wpscst_reply" id="wpscst_reply" style="display:inline;width:100%;margin:0 auto 0 auto;" rows="5"></textarea>';
+                        $output .= '<table class="wpscst-table" style="width:100%;display:none;">';
+                        $output .= '<tr><td><h3>'.__('Your message', 'wpsc-support-tickets').'</h3><div id="wpscst_nic_panel2" style="display:block;width:100%;"></div> <textarea name="wpscst_reply" id="wpscst_reply" style="display:block;width:100%;margin:0 auto 0 auto;background-color:#FFF;" rows="5" columns="6"></textarea>';
                         $output .= '</td></tr>';
                         $exploder = explode('||', $devOptions['departments']);
 
@@ -631,7 +631,9 @@ if (!class_exists("wpscSupportTickets")) {
 		function  addHeaderCode() {
                         wp_enqueue_script('jquery-ui-core');
                         wp_enqueue_script('jquery-ui-tabs');
-			wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js' , __FILE__), array('jquery'),'1.3.2');
+                        if (!class_exists('AGCA')) {
+                            wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js' , __FILE__), array('jquery'),'1.3.2');
+                        }
                         wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css' , __FILE__), false, 2, false);
                 }
 		
@@ -825,7 +827,11 @@ if (!class_exists("wpscSupportTickets")) {
                                                     $output .= '<table class="widefat" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="width:100%"';}$output.='><tr><th>'.__('Ticket', 'wpsc-support-tickets').'</th><th>'.__('Status', 'wpsc-support-tickets').'</th><th>'.__('Last Reply', 'wpsc-support-tickets').'</th></tr>';
                                                     foreach($results as $result) {
                                                             if(trim($result['last_staff_reply'])=='') {
+                                                                if($devOptions['allow_all_tickets_to_be_viewed']=='false') {
                                                                     $last_staff_reply = __('you', 'wpsc-support-tickets');
+                                                                } else {
+                                                                    $last_staff_reply = $result['email'];
+                                                                }
                                                             } else {
                                                                     if($result['last_updated'] > $result['last_staff_reply']) {
                                                                             $last_staff_reply = __('you', 'wpsc-support-tickets');

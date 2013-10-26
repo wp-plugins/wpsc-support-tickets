@@ -1,13 +1,22 @@
     jQuery(document).ready(function(){
         if(jQuery('.wpscst-table').length != 0) {
-            var myNicEditor = new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikethrough','ul', 'subscript','superscript','image','link','unlink'], iconsPath:wpscstScriptParams.wpscstPluginsUrl + "/wpsc-support-tickets/js/nicedit/nicEditorIcons.gif"});
-            myNicEditor.setPanel("wpscst_nic_panel");
-            myNicEditor.addInstance("wpscst_initial_message");
-            var myNicEditor2 = new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikethrough','ul', 'subscript','superscript','image','link','unlink'], iconsPath:wpscstScriptParams.wpscstPluginsUrl + "/wpsc-support-tickets/js/nicedit/nicEditorIcons.gif"});
-            myNicEditor2.setPanel("wpscst_nic_panel2");
-            myNicEditor2.addInstance("wpscst_reply");
+            try {
+                if(jQuery('#wpscst_nic_panel').length > 0) {
+                    var myNicEditor = new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikethrough','ul', 'subscript','superscript','image','link','unlink'], iconsPath:wpscstScriptParams.wpscstPluginsUrl + "/wpsc-support-tickets/js/nicedit/nicEditorIcons.gif"});
+                    myNicEditor.setPanel("wpscst_nic_panel");
+                    myNicEditor.addInstance("wpscst_initial_message");
+                }
+                if(jQuery('#wpscst_nic_panel2').length > 0) {
+                    var myNicEditor2 = new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikethrough','ul', 'subscript','superscript','image','link','unlink'], iconsPath:wpscstScriptParams.wpscstPluginsUrl + "/wpsc-support-tickets/js/nicedit/nicEditorIcons.gif"});
+                    myNicEditor2.setPanel("wpscst_nic_panel2");
+                    myNicEditor2.addInstance("wpscst_reply");
+                }
+            } catch(err) {
+                
+            }                
             jQuery(".wpscst-table").toggle();
             jQuery("#wpscst_edit_ticket").toggle();
+
         }
     });
 
