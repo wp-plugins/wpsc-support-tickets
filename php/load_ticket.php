@@ -38,6 +38,9 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
     
     $results = $wpdb->get_results( $sql , ARRAY_A );
     if(isset($results[0])) {
+        if($devOptions['allow_all_tickets_to_be_viewed']=='true') {
+            $wpscst_username = $results[0]['email'];
+        }        
         echo '<div id="wpscst_meta"><strong>'.base64_decode($results[0]['title']).'</strong> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
         echo '<table style="width:100%;">';
         echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' '.$wpscst_username.' (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
@@ -46,7 +49,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
         $messageData = explode ( '\\', $messageData);
         $messageWhole = '';
         foreach ($messageData as $messagePart){
-        $messageWhole .= $messagePart;	
+         $messageWhole .= $messagePart;	
         }
         echo '<tbody><tr><td id="wpscst_results_initial_message"><br />'.$messageWhole;        
         

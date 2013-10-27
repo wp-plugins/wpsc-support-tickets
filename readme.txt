@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,
 Requires at least: 3.0.0
 Tested up to: 3.7
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 
 == Description ==
 
@@ -87,6 +87,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 2.1.1 =
+* Fixed: Patched a bug where if all users could view all tickets, clicking on most tickets incorrectly stated they were last updated by you
 
 = 2.1.0 =
 * Fixed: Resolved a plugin conflict between this and the AG Custom Admin plugin
