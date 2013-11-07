@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 2.1.1
+Version: 2.1.2
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -141,7 +141,7 @@ if (!class_exists("wpscSupportTickets")) {
         function adminHeader() {
 
             if ( function_exists('current_user_can') && !current_user_can('manage_wpsc_support_tickets') ) {
-                    die(__('Cheatin&#8217; uh?', 'wpsc-support-tickets'));
+                    die(__('Unable to Authenticate', 'wpsc-support-tickets'));
             }
 
 
@@ -352,7 +352,7 @@ if (!class_exists("wpscSupportTickets")) {
 
 			$devOptions = $this->getAdminOptions();
 			if ( function_exists('current_user_can') && !current_user_can('manage_wpsc_support_tickets') ) {
-				die(__('Cheatin&#8217; uh?', 'wpsc-support-tickets'));
+				die(__('Unable to Authenticate', 'wpsc-support-tickets'));
 			}
                         
                         
@@ -463,7 +463,7 @@ if (!class_exists("wpscSupportTickets")) {
 
 			$devOptions = $this->getAdminOptions();
 			if ( function_exists('current_user_can') && !current_user_can('manage_wpsc_support_tickets') && is_numeric($_GET['primkey']) ) {
-				die(__('Cheatin&#8217; uh?', 'wpsc-support-tickets'));
+				die(__('Unable to Authenticate', 'wpsc-support-tickets'));
 			}
 			echo '<div class="wrap">';
 
