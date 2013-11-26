@@ -51,7 +51,7 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
 
     $wpscst_initial_message = '';
     
-    if($devOptions['allow_uploads']=='true') {
+    if($devOptions['allow_uploads']=='true' && function_exists('wpscSupportTicketsPRO') && @isset($_FILES["wpscst_file"]) ) {
 	/* Handles the error output. This error message will be sent to the uploadSuccess event handler.  The event handler
 	will have to check for any error messages and react as needed. */
 	function HandleError($message) {
