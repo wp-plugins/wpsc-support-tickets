@@ -3,7 +3,7 @@
 Plugin Name: wpsc Support Tickets
 Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-Version: 2.2.0
+Version: 2.2.1
 Author: wpStoreCart, LLC
 Author URI: URI: http://wpstorecart.com/
 License: LGPL
@@ -749,7 +749,7 @@ if (!class_exists("wpscSupportTickets")) {
                                             if(!$this->hasDisplayed) {
 						global $current_user;
 
-						$output .= '<div id="wpscst_top_page" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:inline;"';} $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);"><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/Add.png' , __FILE__).'" alt="'.__('Create a New Ticket', 'wpsc-support-tickets').'" /> '.__('Create a New Ticket', 'wpsc-support-tickets').'</button><br /><br />';
+						$output .= '<div id="wpscst_top_page" '; if($devOptions['disable_inline_styles']=='false'){$output.='style="display:inline;"';} $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);return false;"><img '; if($devOptions['disable_inline_styles']=='false'){$output.='style="float:left;border:none;margin-right:5px;"';} $output.=' src="'.plugins_url('/images/Add.png' , __FILE__).'" alt="'.__('Create a New Ticket', 'wpsc-support-tickets').'" /> '.__('Create a New Ticket', 'wpsc-support-tickets').'</button><br /><br />';
                                                 $output .= '<form action="'.plugins_url('/php/submit_ticket.php' , __FILE__).'" method="post" enctype="multipart/form-data">';
                                                 if(@isset($_POST['guest_email'])) {
                                                     $output .= '<input type="hidden" name="guest_email" value="'.esc_sql($_POST['guest_email']).'" />';
