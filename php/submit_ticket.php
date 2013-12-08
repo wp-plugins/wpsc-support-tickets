@@ -159,8 +159,8 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
             '0',
             'Normal',
             'Open',
-            '".time()."',
-            '".time()."',
+            '".current_time( 'timestamp' )."',
+            '".current_time( 'timestamp' )."',
             '',
             '2 days',
             '{$wpscst_department}'

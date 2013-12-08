@@ -20,7 +20,7 @@ if ( current_user_can('manage_wpsc_support_tickets')) { // admin edits such as c
         $wpscst_status = $wpdb->escape($_POST['wpscst_status']);
         $primkey = intval($_POST['wpscst_edit_primkey']);
         // Update the Last Updated time stamp
-        $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".time()."', `type`='{$wpscst_department}', `resolution`='{$wpscst_status}' WHERE `primkey` ='{$primkey}';";
+        $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."', `type`='{$wpscst_department}', `resolution`='{$wpscst_status}' WHERE `primkey` ='{$primkey}';";
         $wpdb->query($updateSQL);
     }
 }
@@ -188,7 +188,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
                 `message`
             )
             VALUES (
-                NULL , '{$primkey}', '{$wpscst_userid}', '".time()."', '{$wpscst_message}'
+                NULL , '{$primkey}', '{$wpscst_userid}', '".current_time( 'timestamp' )."', '{$wpscst_message}'
             );
             ";
 
@@ -198,10 +198,10 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
             // Update the Last Updated time stamp
             if($_POST['wpscst_is_staff_reply']=='yes' && current_user_can('manage_wpsc_support_tickets')) {
                     // This is a staff reply from the admin panel
-                    $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".time()."', `last_staff_reply` = '".time()."' WHERE `primkey` ='{$primkey}';";
+                    $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."', `last_staff_reply` = '".time()."' WHERE `primkey` ='{$primkey}';";
             } else {
                     // This is a reply from the front end
-                    $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".time()."' WHERE `primkey` ='{$primkey}';";
+                    $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."' WHERE `primkey` ='{$primkey}';";
             }
             $wpdb->query($updateSQL);
 
