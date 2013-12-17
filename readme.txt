@@ -1,10 +1,10 @@
 === wpsc Support Tickets  ===
 Contributors: jquindlen
 Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
-Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,
+Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,Czech
 Requires at least: 3.0.0
 Tested up to: 3.8
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 
 == Description ==
 
@@ -30,7 +30,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * Seamless integration with open source wpStoreCart ecommerce plugin, including a shared Guest system 
  * Admin dashboard widget shows all open tickets
  * Both the admin and frontend provides a WYSIWYG HTML editor for formatting
- * Available in 15 languages
+ * Available in 16 languages
  * i18n ready and compatible (POT file included in the /languages/ directory)
 
 **Languages Included**
@@ -50,6 +50,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * Hebrew (עִבְרִית) translation provided by http://atar4u.com/
  * Serbian (српски) translation provided by WPdiscounts @ http://wpdiscounts.com
  * Arabic (العربية) translation provided by Ahmed Raslan @ http://www.nilecode.com/
+ * Czech by Jan Drda
 
 == Installation ==
 
@@ -87,6 +88,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 3.0.7 =
+* Added: Czech translation added
 
 = 3.0.6 =
 * Removed: Unused script
