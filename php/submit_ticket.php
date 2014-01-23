@@ -50,6 +50,53 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
     }
 
     $wpscst_initial_message = '';
+
+    // Code for Session Cookie workaround
+    if (isset($_POST["PHPSESSID"])) {
+            session_id($_POST["PHPSESSID"]);
+    } else if (isset($_GET["PHPSESSID"])) {
+            session_id($_GET["PHPSESSID"]);
+    }
+
+    session_start();
+    
+    
+    // Custom form fields first checked here (Added in 4.0)
+    $custom_field_problem = false;
+    $custom_field_problem_text = __('There was a problem with your form.  Please resubmit after you add the required information for the following:', 'wpsc-support-ticket');
+    
+    $table_name33 = $wpdb->prefix . "wpstorecart_meta";
+    $grabrecord = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-requiredinfo' ORDER BY `foreignkey` ASC;";
+
+    $resultscf = $wpdb->get_results( $grabrecord , ARRAY_A );
+    if(isset($resultscf)) {
+            foreach ($resultscf as $field) {
+                $specific_items = explode("||", $field['value']);
+                if($specific_items[1]=='required') { // Required field, let's verify it has a value:
+                    if( @isset($_POST['wpsct_custom_'.$field['primkey']]) && @trim($_POST['wpsct_custom_'.$field['primkey']]) != '' ) {
+                        $_SESSION['wpsct_custom_'.$field['primkey']] = $_POST['wpsct_custom_'.$field['primkey']];
+                    } else {
+                        // The required field had no value
+                        $custom_field_problem = true;
+                        $custom_field_problem_text .= ' '. $specific_items[0];
+                    }
+                }
+            }
+    }
+    
+    if($custom_field_problem==true) {
+            echo '<script type="text/javascript">
+                    <!--
+                    alert("'.$custom_field_problem_text.'");
+                    window.history.back()
+                    //-->
+                    </script>';
+            exit();
+        
+    }
+    // End custom field check (we'll revisit the custom form fields and save them after writing our initial ticket to the DB)
+        
+    
     
     if($devOptions['allow_uploads']=='true' && function_exists('wpscSupportTicketsPRO') && @isset($_FILES["wpscst_file"]) && @$_FILES["wpscst_file"]["error"] != 4 ) {
 	/* Handles the error output. This error message will be sent to the uploadSuccess event handler.  The event handler
@@ -58,14 +105,6 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
 		echo '<script type="text/javascript">alert("'.$message.'");</script>'.$message.'';
 	}
 
-	// Code for Session Cookie workaround
-		if (isset($_POST["PHPSESSID"])) {
-			session_id($_POST["PHPSESSID"]);
-		} else if (isset($_GET["PHPSESSID"])) {
-			session_id($_GET["PHPSESSID"]);
-		}
-
-		session_start();
 
 	// Check post_max_size (http://us3.php.net/manual/en/features.file-upload.php#73762)
 		$POST_MAX_SIZE = @ini_get('post_max_size');
@@ -143,10 +182,12 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
                     $wpscst_initial_message .= '<img src="'.plugins_url().'/wpsc-support-tickets-pro/images/attachment.png" alt="" /> <strong>'.__('ATTACHMENT','wpsc-support-tickets').'</strong>: <a href="'.$wpsc_wordpress_upload_dir['baseurl'].'/wpsc-support-tickets/'.$file_name.'" target="_blank">'.$wpsc_wordpress_upload_dir['baseurl'].'/wpsc-support-tickets/'.$file_name.'</a></p>';
                 }       
     }    
-    
+
+
     $wpscst_title = base64_encode(strip_tags($_POST['wpscst_title']));
     $wpscst_initial_message = base64_encode($_POST['wpscst_initial_message'] . $wpscst_initial_message);
     $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));    
+    
     
     $sql = "
     INSERT INTO `{$wpdb->prefix}wpscst_tickets` (
@@ -170,7 +211,30 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
     $wpdb->query($sql);
     $lastID = $wpdb->insert_id;
 
-
+    // Save custom fields
+    if(isset($resultscf)) {
+            foreach ($resultscf as $field) {
+                $specific_items = explode("||", $field['value']);
+                if($specific_items[1]=='required') { // Required field, let's verify it has a value:
+                    if( @isset($_POST['wpsct_custom_'.$field['primkey']]) && @trim($_POST['wpsct_custom_'.$field['primkey']]) != '' ) {
+                        $val = base64_encode(strip_tags($_POST['wpsct_custom_'.$field['primkey']]));
+                        $insertw = "
+                        INSERT INTO `{$table_name33}` (
+                        `primkey`, `value`, `type`, `foreignkey`)
+                        VALUES (
+                                NULL,
+                                '{$val}',
+                                'wpsct_custom_{$field['primkey']}',
+                                '{$lastID}'
+                        );
+                        ";
+                        $wpdb->query($insertw);
+                        $_SESSION['wpsct_custom_'.$field['primkey']] = $_POST['wpsct_custom_'.$field['primkey']];
+                    }
+                }
+            }
+    }
+    // End custom fields 
     
     
     $to      = $wpscst_email; // Send this to the ticket creator

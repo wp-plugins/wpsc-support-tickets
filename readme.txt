@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,Czech
 Requires at least: 3.0.0
 Tested up to: 3.9
-Stable tag: 3.0.9
+Stable tag: 4.0.0
 
 == Description ==
 
@@ -42,8 +42,8 @@ This can optionally allow you to keep your support ticket system accessible only
  * Brazilian Portuguese (português brasileiro) by Thiago Bernardi
  * German (Deutsch) by Markus Scheffknecht
  * Dutch (Nederlands) by Jos Wolbers
- * Finnish (Suomi) by Mikko Ohtonen
- * Russian (ру́сский язы́к, russkiy yazyk) by Login Roman
+ * Finnish (Suomi) by Mikko Ohtonen 
+* Russian (ру́сский язы́к, russkiy yazyk) by Login Roman
  * Romanian (limba Română) by Nutu Valea
  * Italian (Italiano) by Pino Cinelli
  * Spanish (Español) translation provided by Víctor Belgrano
@@ -89,8 +89,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 
 == Changelog ==
 
-= 3.0.9 =
-* Updated: Minor cosmetic update
+= 4.0.0 =
+* Added: Custom fields added
+* Fixed: Misc PHP warnings were fixed
+* Fixed: Minor small tweaks and fixes
 
 = 3.0.8 =
 * Updated: .POT language file updated to the latest version
