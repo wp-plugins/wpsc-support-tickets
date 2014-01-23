@@ -215,23 +215,23 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
     if(isset($resultscf)) {
             foreach ($resultscf as $field) {
                 $specific_items = explode("||", $field['value']);
-                if($specific_items[1]=='required') { // Required field, let's verify it has a value:
-                    if( @isset($_POST['wpsct_custom_'.$field['primkey']]) && @trim($_POST['wpsct_custom_'.$field['primkey']]) != '' ) {
-                        $val = base64_encode(strip_tags($_POST['wpsct_custom_'.$field['primkey']]));
-                        $insertw = "
-                        INSERT INTO `{$table_name33}` (
-                        `primkey`, `value`, `type`, `foreignkey`)
-                        VALUES (
-                                NULL,
-                                '{$val}',
-                                'wpsct_custom_{$field['primkey']}',
-                                '{$lastID}'
-                        );
-                        ";
-                        $wpdb->query($insertw);
-                        $_SESSION['wpsct_custom_'.$field['primkey']] = $_POST['wpsct_custom_'.$field['primkey']];
-                    }
+
+                if( @isset($_POST['wpsct_custom_'.$field['primkey']]) && @trim($_POST['wpsct_custom_'.$field['primkey']]) != '' ) {
+                    $val = base64_encode(strip_tags($_POST['wpsct_custom_'.$field['primkey']]));
+                    $insertw = "
+                    INSERT INTO `{$table_name33}` (
+                    `primkey`, `value`, `type`, `foreignkey`)
+                    VALUES (
+                            NULL,
+                            '{$val}',
+                            'wpsct_custom_{$field['primkey']}',
+                            '{$lastID}'
+                    );
+                    ";
+                    $wpdb->query($insertw);
+                    $_SESSION['wpsct_custom_'.$field['primkey']] = $_POST['wpsct_custom_'.$field['primkey']];
                 }
+                
             }
     }
     // End custom fields 
