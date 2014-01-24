@@ -10,6 +10,29 @@ if (!function_exists('add_action'))
 
 global $current_user, $wpdb;
 
+
+function wpsctDisplayCustomFieldsToFrontend($primkey) {
+    global $wpdb;
+    // Custom fields
+    $table_name33 = $wpdb->prefix . "wpstorecart_meta";
+
+    $grabrecord = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-requiredinfo' ORDER BY `foreignkey` ASC;";
+
+    $resultscf = $wpdb->get_results( $grabrecord , ARRAY_A );
+    if(isset($resultscf)) {
+            echo '<table style="width:100%;"><tbody>';
+            foreach ($resultscf as $field) {
+                $specific_items = explode("||", $field['value']);
+                $res = $wpdb->get_results("SELECT * FROM `{$table_name33}` WHERE `type`='wpsct_custom_{$field['primkey']}' AND `foreignkey`='{$primkey}';", ARRAY_A);
+                if(@isset($res[0]['primkey'])) {
+                    echo '<tr><td><h4 style="display:inline;">'.$specific_items[0].':</h4> '.strip_tags(base64_decode($res[0]['value'])).'</td></tr>';
+
+                }
+            }
+            echo '</tbody></table>';                        
+    }     
+}
+
 if (session_id() == "") {@session_start();};
 
 if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST['primkey'])) {
@@ -41,7 +64,18 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
         if($devOptions['allow_all_tickets_to_be_viewed']=='true') {
             $wpscst_username = $results[0]['email'];
         }        
-        echo '<div id="wpscst_meta"><strong>'.base64_decode($results[0]['title']).'</strong> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
+        echo '<div id="wpscst_meta">';
+        
+        if($devOptions['custom_field_frontend_position']=='before everything') {
+            wpsctDisplayCustomFieldsToFrontend($primkey);
+        }
+        
+        echo '<strong>'.base64_decode($results[0]['title']).'</strong> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
+        
+        if($devOptions['custom_field_frontend_position']=='before message') {
+            wpsctDisplayCustomFieldsToFrontend($primkey);
+        }        
+        
         echo '<table style="width:100%;">';
         echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' '.$wpscst_username.' (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
 
@@ -88,6 +122,10 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
                 echo '</tbody></table>';
             }
         }
+        
+        if($devOptions['custom_field_frontend_position']=='after message') {
+            wpsctDisplayCustomFieldsToFrontend($primkey);
+        } 
         
 
         
