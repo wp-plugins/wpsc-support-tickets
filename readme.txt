@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,Czech
 Requires at least: 3.0.0
 Tested up to: 3.9
-Stable tag: 4.1.0
+Stable tag: 4.1.1
 
 == Description ==
 
@@ -43,7 +43,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * German (Deutsch) by Markus Scheffknecht
  * Dutch (Nederlands) by Jos Wolbers
  * Finnish (Suomi) by Mikko Ohtonen 
-* Russian (ру́сский язы́к, russkiy yazyk) by Login Roman
+ * Russian (ру́сский язы́к, russkiy yazyk) by Login Roman
  * Romanian (limba Română) by Nutu Valea
  * Italian (Italiano) by Pino Cinelli
  * Spanish (Español) translation provided by Víctor Belgrano
@@ -88,6 +88,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 4.1.1 =
+* Updated: .POT language file updated to the latest version
 
 = 4.1.0 =
 * Added: 2 new settings added so that you can control where your custom fields are displayed on ticket creation, and on the frontend. Options are before everything, before message, after message, or after attachment.
