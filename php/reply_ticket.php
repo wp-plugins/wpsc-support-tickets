@@ -14,7 +14,7 @@ $devOptions = $wpscSupportTickets->getAdminOptions();
 
 if (session_id() == "") {@session_start();};
 
-if ( current_user_can('manage_wpsc_support_tickets')) { // admin edits such as closing tickets should happen here first:
+if ( current_user_can('manage_wpsct_support_tickets')) { // admin edits such as closing tickets should happen here first:
     if(@isset($_POST['wpscst_status']) && @isset($_POST['wpscst_department']) && is_numeric($_POST['wpscst_edit_primkey'])) {
         $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));
         $wpscst_status = $wpdb->escape($_POST['wpscst_status']);
