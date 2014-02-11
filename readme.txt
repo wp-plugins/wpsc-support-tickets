@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,Czech
 Requires at least: 3.0.0
 Tested up to: 3.9
-Stable tag: 4.1.2
+Stable tag: 4.2.0
 
 == Description ==
 
@@ -23,7 +23,7 @@ This can optionally allow you to keep your support ticket system accessible only
 
  * Users can create support tickets and reply to their own tickets
  * Guests can use tickets as well, using just their email address.  Disabled by default.
- * Admins, and any user granted the manage_wpsc_support_tickets capability, can reply to, close, or delete any ticket
+ * Admins, and any user granted the manage_wpsct_support_tickets capability, can reply to, close, or delete any ticket
  * Front end support ticket interface is done in jQuery, and utilizes Ajax ticket loading
  * Customizable departments, email messages, and CSS for custom solutions
  * You can hide support ticket capabilities from a user who has not purchased a specific product (requires [wpStoreCart](http://wordpress.org/extend/plugins/wpstorecart/ "wpStoreCart") 2.4.9 or higher)
@@ -88,6 +88,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 4.2.0 =
+* Fixed: Bugfix where saving custom fields weren't saving or sorting, and other misc issues
 
 = 4.1.2 =
 * Fixed: Bugfix as reported here: https://github.com/wp-plugins/wpsc-support-tickets/pull/1

@@ -64,7 +64,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
     
     $primkey = intval($_POST['wpscst_edit_primkey']);
 
-    if ( !current_user_can('manage_wpsc_support_tickets')) {
+    if ( !current_user_can('manage_wpsct_support_tickets')) {
         
         if($devOptions['allow_all_tickets_to_be_replied']=='true' && $devOptions['allow_all_tickets_to_be_viewed']=='true') {
             $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}' LIMIT 0, 1;";
@@ -196,7 +196,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
 
 
             // Update the Last Updated time stamp
-            if($_POST['wpscst_is_staff_reply']=='yes' && current_user_can('manage_wpsc_support_tickets')) {
+            if($_POST['wpscst_is_staff_reply']=='yes' && current_user_can('manage_wpsct_support_tickets')) {
                     // This is a staff reply from the admin panel
                     $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."', `last_staff_reply` = '".time()."' WHERE `primkey` ='{$primkey}';";
             } else {

@@ -14,7 +14,7 @@ if ( 0 == $current_user->ID ) {
     // Not logged in.
 } else {
 
-    if (function_exists('current_user_can') && !current_user_can('manage_wpsc_support_tickets') ) {
+    if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets') ) {
         die(__('Unable to Authenticate', 'wpsc-support-tickets'));
     }
 

@@ -11,7 +11,7 @@ if (!function_exists('add_action'))
 global $current_user, $wpdb, $wpscSupportTickets;
 
 if(is_user_logged_in()) {
-    if ( function_exists('current_user_can') && !current_user_can('manage_wpsc_support_tickets')) {
+    if ( function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) {
             die(__('Cheatin&#8217; uh?', 'wpsc-support-tickets'));
     }
 

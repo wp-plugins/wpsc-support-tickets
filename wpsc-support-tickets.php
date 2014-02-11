@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.1.2
+  Version: 4.2.0
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -33,8 +33,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting;
-$wpscSupportTickets_version = 4.1;
-$wpscSupportTickets_db_version = 4.1;
+$wpscSupportTickets_version = 4.2;
+$wpscSupportTickets_db_version = 4.2;
 $APjavascriptQueue = NULL;
 $wpsct_error_reporting = false;
 
@@ -1110,6 +1110,90 @@ if (!class_exists("wpscSupportTickets")) {
         
         //END Prints out the admin page ================================================================================		
 
+        function printAdminPageCreateTicket() {
+            global $wpdb;
+
+            $devOptions = $this->getAdminOptions();
+            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets') && is_numeric($_GET['primkey'])) {
+                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
+            }
+            echo '<div class="wrap">';
+
+            $this->adminHeader();
+
+            echo  '<br style="clear:both;" /><br />';
+            
+            echo  '<form action="' . plugins_url('/php/submit_ticket.php', __FILE__) . '" method="post" enctype="multipart/form-data">';
+            if (@isset($_POST['guest_email'])) {
+                echo  '<input type="hidden" name="guest_email" value="' . esc_sql($_POST['guest_email']) . '" />';
+            }
+            echo  '<table class="wpscst-table" ';
+            if ($devOptions['disable_inline_styles'] == 'false') {
+                echo 'style="width:100%"';
+            } 
+            echo '><tr><th><img src="' . plugins_url('/images/Chat.png', __FILE__) . '" alt="' . __('Create a New Ticket', 'wpsc-support-tickets') . '" /> ' . __('Create a New Ticket', 'wpsc-support-tickets') . '</th></tr>';
+
+            if($devOptions['custom_field_position'] == 'before everything') {
+                echo  wpsctPromptForCustomFields();
+            }                            
+
+            echo  '<tr><td><h3>' . __('Title', 'wpsc-support-tickets') . '</h3><input type="text" name="wpscst_title" id="wpscst_title" value=""  ';
+            if ($devOptions['disable_inline_styles'] == 'false') {
+                echo 'style="width:100%"';
+            } echo ' /></td></tr>';
+
+            if($devOptions['custom_field_position'] == 'before message') {
+                echo  wpsctPromptForCustomFields();
+            }                            
+
+            echo  '<tr><td><h3>' . __('Your message', 'wpsc-support-tickets') . '</h3><div id="wpscst_nic_panel" ';
+            if ($devOptions['disable_inline_styles'] == 'false') {
+                echo 'style="display:block;width:100%;"';
+            } echo '></div> <textarea name="wpscst_initial_message" id="wpscst_initial_message" ';
+            if ($devOptions['disable_inline_styles'] == 'false') {
+                echo 'style="display:inline;width:100%;margin:0 auto 0 auto;" rows="5"';
+            } echo '></textarea></td></tr>';                            
+
+            if($devOptions['custom_field_position'] == 'after message') {
+                echo  wpsctPromptForCustomFields();
+            }
+
+            if ($devOptions['allow_uploads'] == 'true') {
+                echo  '<tr><td><h3>' . __('Attach a file', 'wpsc-support-tickets') . '</h3> <input type="file" name="wpscst_file" id="wpscst_file"></td></tr>';
+            }
+            $exploder = explode('||', $devOptions['departments']);
+
+            if($devOptions['custom_field_position'] == 'after everything') {
+                echo  wpsctPromptForCustomFields();
+            }                            
+
+            echo  '<tr><td><h3>' . __('Department', 'wpsc-support-tickets') . '</h3><select name="wpscst_department" id="wpscst_department">';
+            if (isset($exploder[0])) {
+                foreach ($exploder as $exploded) {
+                    echo  '<option value="' . $exploded . '">' . $exploded . '</option>';
+                }
+            }
+            echo  '</select><button class="wpscst-button" id="wpscst_cancel" onclick="cancelAdd();return false;"  ';
+            if ($devOptions['disable_inline_styles'] == 'false') {
+                echo 'style="float:right;"';
+            } echo ' ><img ';
+            if ($devOptions['disable_inline_styles'] == 'false') {
+                echo 'style="float:left;border:none;margin-right:5px;"';
+            } echo ' src="' . plugins_url('/images/stop.png', __FILE__) . '" alt="' . __('Cancel', 'wpsc-support-tickets') . '" /> ' . __('Cancel', 'wpsc-support-tickets') . '</button><button class="wpscst-button" type="submit" name="wpscst_submit" id="wpscst_submit" ';
+            if ($devOptions['disable_inline_styles'] == 'false') {
+                echo 'style="float:right;"';
+            }echo '><img ';
+            if ($devOptions['disable_inline_styles'] == 'false') {
+                echo 'style="float:left;border:none;margin-right:5px;"';
+            } echo ' src="' . plugins_url('/images/page_white_text.png', __FILE__) . '" alt="' . __('Submit Ticket', 'wpsc-support-tickets') . '" /> ' . __('Submit Ticket', 'wpsc-support-tickets') . '</button></td></tr>';
+
+
+            echo  '</table></form>';
+            echo '</div></div></div></div>';
+
+        }
+        
+        
         function printAdminPageEdit() {
             global $wpdb;
 
@@ -1699,6 +1783,7 @@ if (!function_exists("wpscSupportTicketsAdminPanel")) {
         }
         if (function_exists('add_menu_page')) {
             add_menu_page(__('wpsc Support Tickets', 'wpsc-support-tickets'), __('Support Tickets', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-admin', array(&$wpscSupportTickets, 'printAdminPage'), plugins_url() . '/wpsc-support-tickets/images/controller.png');
+            //$newTicketPage = add_submenu_page('wpscSupportTickets-admin', __('Create Ticket', 'wpsc-support-tickets'), __('Create Ticket', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-newticket', array(&$wpscSupportTickets, 'printAdminPageCreateTicket'));
             $settingsPage = add_submenu_page('wpscSupportTickets-admin', __('Settings', 'wpsc-support-tickets'), __('Settings', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-settings', array(&$wpscSupportTickets, 'printAdminPageSettings'));
             $editPage = add_submenu_page(NULL, __('Reply to Support Ticket', 'wpsc-support-tickets'), __('Reply to Support Tickets', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-edit', array(&$wpscSupportTickets, 'printAdminPageEdit'));
             $statsPage = add_submenu_page('wpscSupportTickets-admin', __('Statistics', 'wpsc-support-tickets'), __('Statistics', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-stats', array(&$wpscSupportTickets, 'printAdminPageStats'));
@@ -1708,6 +1793,7 @@ if (!function_exists("wpscSupportTicketsAdminPanel")) {
                 $statsHeaderCode = 'addHeaderCode';
             }
             $fieldsPage = add_submenu_page('wpscSupportTickets-admin', __('Edit User Fields Collected', 'wpsc-support-tickets'), __('User Fields', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-fields', array(&$wpscSupportTickets, 'printAdminPageFields'));
+            //add_action("admin_print_scripts-$newTicketPage", array(&$wpscSupportTickets, 'addHeaderCode'));
             add_action("admin_print_scripts-$editPage", array(&$wpscSupportTickets, 'addHeaderCode'));
             add_action("admin_print_scripts-$statsPage", array(&$wpscSupportTickets, $statsHeaderCode));
             add_action("admin_print_scripts-$settingsPage", array(&$wpscSupportTickets, 'addHeaderCode'));            
