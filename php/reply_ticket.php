@@ -48,7 +48,7 @@ if($string=='') { // No blank replies allowed
 }
 
 // If there is a reply and we're still executing code, now we'll add the reply
-if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST['wpscst_edit_primkey'])) {
+if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POST['wpscst_edit_primkey'])) {
 
     // Guest additions here
     if(is_user_logged_in()) {
@@ -56,7 +56,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
         $wpscst_email = $current_user->user_email;
     } else {
         $wpscst_userid = 0;
-        $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);  
+        $wpscst_email = $wpdb->escape($_SESSION['wpsct_email']);  
         if(trim($wpscst_email)=='') {
             $wpscst_email = @$wpdb->escape($_POST['guest_email']);
         }        

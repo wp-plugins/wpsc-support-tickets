@@ -11,13 +11,14 @@ if (!function_exists('add_action'))
 global $current_user, $wpdb, $wpscSupportTickets;
 
 $devOptions = NULL;
-$devOptions = $wpscSupportTickets->getAdminOptions();
+$devOptions = get_option("wpscSupportTicketsAdminOptions");
 if(!isset($devOptions['mainpage']) || $devOptions['mainpage']=='') {
     $devOptions['mainpage'] = home_url();
 }
+$direct_to = get_permalink($devOptions['mainpage']);
 
 if (session_id() == "") {@session_start();};
-if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
+if(is_user_logged_in() || @isset($_SESSION['wpsct_email'])) {
    
     if(is_user_logged_in() && @isset($_POST['admin_created_ticket']) && function_exists('current_user_can') && current_user_can('manage_wpsct_support_tickets') ) {
         // redirect back to admin
@@ -59,7 +60,7 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
         }
     } else {
         $wpscst_userid = 0;
-        $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);     
+        $wpscst_email = $wpdb->escape($_SESSION['wpsct_email']);     
         if(trim($wpscst_email)=='') {
             $wpscst_email = @$wpdb->escape($_POST['guest_email']);
         }

@@ -35,7 +35,7 @@ function wpsctDisplayCustomFieldsToFrontend($primkey) {
 
 if (session_id() == "") {@session_start();};
 
-if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST['primkey'])) {
+if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POST['primkey'])) {
     
     $devOptions = get_option('wpscSupportTicketsAdminOptions');
     
@@ -46,7 +46,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsc_email'])) && is_numeric($_POST
         $wpscst_username = $current_user->display_name;
     } else {
         $wpscst_userid = 0;
-        $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);   
+        $wpscst_email = $wpdb->escape($_SESSION['wpsct_email']);   
         $wpscst_username = __('Guest', 'wpsc-support-tickets').' ('.$wpscst_email.')';
     }    
     
