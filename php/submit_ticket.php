@@ -19,28 +19,44 @@ if(!isset($devOptions['mainpage']) || $devOptions['mainpage']=='') {
 if (session_id() == "") {@session_start();};
 if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
    
+    if(is_user_logged_in() && @isset($_POST['admin_created_ticket']) && function_exists('current_user_can') && current_user_can('manage_wpsct_support_tickets') ) {
+        // redirect back to admin
+        $direct_to = get_admin_url().'admin.php?page=wpscSupportTickets-admin';
+    } else {
+        // redirect back to ticket page
+        $direct_to = get_permalink($devOptions['mainpage']);
+    }
 
     if(trim($_POST['wpscst_initial_message'])=='' || trim($_POST['wpscst_title'])=='') {// No blank messages/titles allowed
             if(!headers_sent()) {
                 header("HTTP/1.1 301 Moved Permanently");
-                header ('Location: '.get_permalink($devOptions['mainpage']));
+                header ('Location: '.$direct_to);
                 exit();
             } else {
                 echo '<script type="text/javascript">
                         <!--
-                        window.location = "'.get_permalink($devOptions['mainpage']).'"
+                        window.location = "'.$direct_to.'"
                         //-->
                         </script>';
             }
-        } 
+    } 
     
 
 
     
     // Guest additions here
     if(is_user_logged_in()) {
-        $wpscst_userid = $current_user->ID;
-        $wpscst_email = $current_user->user_email;
+        if (@isset($_POST['wpscst_ticket_creator_assign']) && current_user_can('manage_wpsct_support_tickets') && @isset($_POST['admin_created_ticket'])  ) {
+            // Save from the admin panel
+            $wpscst_userid = intval($_POST['wpscst_ticket_creator_assign']);
+            global $user_info;
+            $user_info = get_userdata($wpscst_userid);      
+            $wpscst_email = $user_info->user_email;
+        } else {
+            // Save from the front end
+            $wpscst_userid = $current_user->ID;
+            $wpscst_email = $current_user->user_email;
+        }
     } else {
         $wpscst_userid = 0;
         $wpscst_email = $wpdb->escape($_SESSION['wpsc_email']);     
@@ -268,12 +284,12 @@ if(is_user_logged_in() || @isset($_SESSION['wpsc_email'])) {
 
 if(!headers_sent()) {
     header("HTTP/1.1 301 Moved Permanently");
-    header ('Location: '.get_permalink($devOptions['mainpage']));
+    header ('Location: '.$direct_to);
     
 } else {
     echo '<script type="text/javascript">
             <!--
-            window.location = "'.get_permalink($devOptions['mainpage']).'"
+            window.location = "'.$direct_to.'"
             //-->
             </script>';
 }
