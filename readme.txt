@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,Czech
 Requires at least: 3.0.0
 Tested up to: 3.9
-Stable tag: 4.3.2
+Stable tag: 4.4.0
 
 == Description ==
 
@@ -88,6 +88,12 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 4.4.0 =
+* Added: Two new options allow you to include the ticket or replies content inside the emails that are sent on new tickets and new replies
+* Added: New ticket and reply email subject lines now include the ticket's title
+* Added: Added the Report a Bug, and Suggest a Feature links into the header.
+* Updated: Settings page got a slight redesign
 
 = 4.3.2 =
 * Updated: .POT language file updated to the latest version

@@ -206,8 +206,14 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
             $wpdb->query($updateSQL);
 
             $to      = $results[0]['email']; // Send this to the original ticket creator
-            $subject = $devOptions['email_new_reply_subject'];
+            $subject = $devOptions['email_new_reply_subject'] .' "'. strip_tags(base64_decode($results[0]['title'])).'"';
             $message = $devOptions['email_new_reply_body'];
+            if($devOptions['use_reply_in_email']=='true') {
+                $message .= "\r\n";
+                $message .= "\r\n";
+                $cleaned_message = __("The content of the reply is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_reply']) .'"';
+                $message .= $cleaned_message;
+            }            
             $headers = '';
             if($devOptions['allow_html']=='true') {
                 $headers .= 'MIME-Version: 1.0' . "\r\n";
@@ -220,8 +226,14 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
 
             if($devOptions['email']!=$results[0]['email']) { 
                 $to      = $devOptions['email']; // Send this to the admin
-                $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets');
+                $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets').' "'. strip_tags(base64_decode($results[0]['title'])).'"';
                 $message = __('There is a new reply on support ticket: ','wpsc-support-tickets').get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$primkey.'';
+                if($devOptions['use_reply_in_email']=='true') {
+                    $message .= "\r\n";
+                    $message .= "\r\n";
+                    $cleaned_message = __("The content of the reply is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_reply']) .'"';
+                    $message .= $cleaned_message;
+                }
                 $headers = '';
                 if($devOptions['allow_html']=='true') {
                     $headers .= 'MIME-Version: 1.0' . "\r\n";

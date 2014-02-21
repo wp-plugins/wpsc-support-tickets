@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.3.2
+  Version: 4.4.0
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -33,8 +33,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting;
-$wpscSupportTickets_version = 4.3;
-$wpscSupportTickets_db_version = 4.3;
+$wpscSupportTickets_version = 4.4;
+$wpscSupportTickets_db_version = 4.4;
 $APjavascriptQueue = NULL;
 $wpsct_error_reporting = false;
 
@@ -499,7 +499,9 @@ if (!class_exists("wpscSupportTickets")) {
                 'allow_closing_ticket' => 'false',
                 'allow_uploads' => 'false',
                 'custom_field_position' => 'after message',
-                'custom_field_frontend_position' => 'after message'
+                'custom_field_frontend_position' => 'after message',
+                'use_ticket_in_email' => 'true',
+                'use_reply_in_email' => 'true'
             );
 
             if ($this->wpscstSettings != NULL) {
@@ -536,6 +538,9 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '<div style="float:left;"><img src="' . plugins_url() . '/wpsc-support-tickets-pro/images/logo_pro.png" alt="wpscSupportTickets" /></div>';
             }
 
+            echo '<a href="http://wpbugtracktor.com/bug-tracker/?issue_tracker=bug&wpbt_project=2" target="_blank"><button> <center><img src="' . plugins_url() . '/wpsc-support-tickets/images/bug_report.png" alt="wpscSupportTickets" /><br /> '.__('Report a bug', 'wpsc-support-tickets').'</center></button></a> ';
+            echo '<a href="http://wpbugtracktor.com/bug-tracker/?issue_tracker=feature&wpbt_project=2" target="_blank"><button> <center><img src="' . plugins_url() . '/wpsc-support-tickets/images/feature_request.png" alt="wpscSupportTickets" /><br /> '.__('Feature request', 'wpsc-support-tickets').'</center></button></a>';
+            
             echo '
             </div>
             <br style="clear:both;" />
@@ -589,7 +594,13 @@ if (!class_exists("wpscSupportTickets")) {
                 }     
                 if (isset($_POST['custom_field_frontend_position'])) {
                     $devOptions['custom_field_frontend_position'] = esc_sql($_POST['custom_field_frontend_position']);
-                }                
+                }  
+                if (isset($_POST['use_ticket_in_email'])) {
+                    $devOptions['use_ticket_in_email'] = esc_sql($_POST['use_ticket_in_email']);
+                } 
+                if (isset($_POST['use_reply_in_email'])) {
+                    $devOptions['use_reply_in_email'] = esc_sql($_POST['use_reply_in_email']);
+                }                   
 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -619,82 +630,148 @@ if (!class_exists("wpscSupportTickets")) {
 
             <div id="wst_tabs-1">
 
-            <p><strong>' . __('Main Page', 'wpsc-support-tickets') . ':</strong> ' . __('You need to use a Page as the base for wpsc Support Tickets.', 'wpsc-support-tickets') . '  <br />
-            <select name="wpscSupportTicketsmainpage">
-             <option value="">';
-            attribute_escape(__('Select page', 'wpsc-support-tickets'));
-            echo '</option>';
+            <br />
+            <h2>' . __('General', 'wpsc-support-tickets') . '</h2>
+            <table class="widefat" style="background:transparent;"><tr><td>
 
-            $pages = get_pages();
-            foreach ($pages as $pagg) {
-                $option = '<option value="' . $pagg->ID . '"';
-                if ($pagg->ID == $devOptions['mainpage']) {
-                    $option .= ' selected="selected"';
+                <p><strong>' . __('Main Page', 'wpsc-support-tickets') . ':</strong> ' . __('You need to use a Page as the base for wpsc Support Tickets.', 'wpsc-support-tickets') . '  <br />
+                <select name="wpscSupportTicketsmainpage">
+                 <option value="">';
+                attribute_escape(__('Select page', 'wpsc-support-tickets'));
+                echo '</option>';
+
+                $pages = get_pages();
+                foreach ($pages as $pagg) {
+                    $option = '<option value="' . $pagg->ID . '"';
+                    if ($pagg->ID == $devOptions['mainpage']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg->post_title;
+                    $option .= '</option>';
+                    echo $option;
                 }
-                $option .='>';
-                $option .= $pagg->post_title;
-                $option .= '</option>';
-                echo $option;
-            }
 
-            echo '
-            </select>
-            </p>
+                echo '
+                </select>
+                </p>
 
                 <strong>' . __('Departments', 'wpsc-support-tickets') . ':</strong> ' . __('Separate these values with a double pipe, like this ||', 'wpsc-support-tickets') . ' <br /><input name="departments" value="' . $devOptions['departments'] . '" style="width:95%;" /><br /><br />
+
+            </td></tr></table>
+            <br /><br /><br />
+            <h2>' . __('Email', 'wpsc-support-tickets') . '</h2>
+            <table class="widefat" style="background:transparent;"><tr><td>                
 
                 <strong>' . __('Email', 'wpsc-support-tickets') . ':</strong> ' . __('The admin email where all new ticket &amp; reply notification emails will be sent', 'wpsc-support-tickets') . '<br /><input name="email" value="' . $devOptions['email'] . '" style="width:95%;" /><br /><br />
 
                 <strong>' . __('New Ticket Email', 'wpsc-support-tickets') . '</strong> ' . __('The subject &amp; body of the email sent to the customer when creating a new ticket.', 'wpsc-support-tickets') . '<br /><input name="email_new_ticket_subject" value="' . $devOptions['email_new_ticket_subject'] . '" style="width:95%;" />
                 <textarea style="width:95%;" name="email_new_ticket_body">' . $devOptions['email_new_ticket_body'] . '</textarea>
                 <br /><br />
+                
+                <p><strong>' . __('Include the ticket in New Ticket Email', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want the content of the ticket included in the new ticket email.', 'wpsc-support-tickets') . '  <br />
+                <select name="use_ticket_in_email">
+                 ';
+
+                $pagesY[0] = 'true';
+                $pagesY[1] = 'false';
+                foreach ($pagesY as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['use_ticket_in_email']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                </p>
 
                 <strong>' . __('New Reply Email', 'wpsc-support-tickets') . '</strong> ' . __('The subject &amp; body of the email sent to the customer when there is a new reply.', 'wpsc-support-tickets') . '<br /><input name="email_new_reply_subject" value="' . $devOptions['email_new_reply_subject'] . '" style="width:95%;" />
                 <textarea style="width:95%;" name="email_new_reply_body">' . $devOptions['email_new_reply_body'] . '</textarea>
                 <br /><br />
+                
+                <p><strong>' . __('Include the reply in New Reply Email', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want the content of the reply included in the new reply email.', 'wpsc-support-tickets') . '  <br />
+                <select name="use_reply_in_email">
+                 ';
+
+                $pagesY[0] = 'true';
+                $pagesY[1] = 'false';
+                foreach ($pagesY as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['use_reply_in_email']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                </p>
+
+            </td></tr></table>
+            <br /><br /><br />
+            <h2>' . __('Styling', 'wpsc-support-tickets') . '</h2>
+            <table class="widefat" style="background:transparent;"><tr><td> 
 
                 <p><strong>' . __('Disable inline styles', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want to disable the inline CSS styles.', 'wpsc-support-tickets') . '  <br />
                 <select name="disable_inline_styles">
                  ';
 
-            $pagesX[0] = 'true';
-            $pagesX[1] = 'false';
-            foreach ($pagesX as $pagg) {
-                $option = '<option value="' . $pagg . '"';
-                if ($pagg == $devOptions['disable_inline_styles']) {
-                    $option .= ' selected="selected"';
+                $pagesX[0] = 'true';
+                $pagesX[1] = 'false';
+                foreach ($pagesX as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['disable_inline_styles']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
                 }
-                $option .='>';
-                $option .= $pagg;
-                $option .= '</option>';
-                echo $option;
-            }
 
-            echo '
+                echo '
                 </select>
                 </p>
+
+            </td></tr></table>
+            <br /><br /><br />
+            <h2>' . __('Guests', 'wpsc-support-tickets') . '</h2>
+            <table class="widefat" style="background:transparent;"><tr><td> 
 
                 <p><strong>' . __('Allow Guests', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want Guests to be able to use the support ticket system.', 'wpsc-support-tickets') . '  <br />
                 <select name="allow_guests">
                  ';
 
-            $pagesY[0] = 'true';
-            $pagesY[1] = 'false';
-            foreach ($pagesY as $pagg) {
-                $option = '<option value="' . $pagg . '"';
-                if ($pagg == $devOptions['allow_guests']) {
-                    $option .= ' selected="selected"';
+                $pagesY[0] = 'true';
+                $pagesY[1] = 'false';
+                foreach ($pagesY as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['allow_guests']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
                 }
-                $option .='>';
-                $option .= $pagg;
-                $option .= '</option>';
-                echo $option;
-            }
 
-            echo '
+                echo '
                 </select>
                 </p>
                 
+            </td></tr></table>
+            <br /><br /><br />
+            <h2>' . __('Custom Fields', 'wpsc-support-tickets') . '</h2>
+            <table class="widefat" style="background:transparent;"><tr><td> 
+
                 <p><strong>' . __('Place custom form fields', 'wpsc-support-tickets') . ':</strong> ' . __('When creating a ticket, this determines where your custom fields are placed on the ticket submission form.', 'wpsc-support-tickets') . '  <br />
                 <select name="custom_field_position">
                  ';
@@ -742,9 +819,11 @@ if (!class_exists("wpscSupportTickets")) {
                 </select>
                 </p>
                 <br /><br /><br /><br />
+            </td></tr></table>
+
 
             </div>
-                <div id="wst_tabs-2">';
+            <div id="wst_tabs-2">';
 
             wpscSupportTickets_settings(); // Action hook
 
@@ -1136,9 +1215,9 @@ if (!class_exists("wpscSupportTickets")) {
                 echo  '<input type="hidden" name="guest_email" value="' . esc_sql($_POST['guest_email']) . '" />';
             }
             echo  '<table class="widefat" ';
-            if ($devOptions['disable_inline_styles'] == 'false') {
-                echo 'style="width:100%"';
-            } 
+
+            echo 'style="width:100%;margin:12px;"';
+
             echo '><tr><th><img src="' . plugins_url('/images/Chat.png', __FILE__) . '" alt="' . __('Create a New Ticket', 'wpsc-support-tickets') . '" /> ' . __('Create a New Ticket', 'wpsc-support-tickets') . '</th></tr>';
 
             echo  '<tr><td><h3>' . __('Create ticket on behalf of user', 'wpsc-support-tickets') . ':</h3>';
@@ -1159,7 +1238,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             echo  '<tr><td><h3>' . __('Title', 'wpsc-support-tickets') . '</h3><input type="text" name="wpscst_title" id="wpscst_title" value=""  ';
             if ($devOptions['disable_inline_styles'] == 'false') {
-                echo 'style="width:100%"';
+                echo 'style="width:100%;margin:12px;"';
             } echo ' /></td></tr>';
 
             if($devOptions['custom_field_position'] == 'before message') {
