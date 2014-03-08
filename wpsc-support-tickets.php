@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.4.1
+  Version: 4.4.2
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -81,367 +81,142 @@ if(!function_exists('wpsctSlug')) {
         }
 }
 
+if(!function_exists('wpsctPromptForCustomFields')) {
+    /**
+     * 
+     * @global type $wpdb
+     * @return string
+     */
+    function wpsctPromptForCustomFields() {
+        global $wpdb;
 
-function wpsctPromptForCustomFields() {
-    global $wpdb;
-    
-    $devOptions = get_option('wpscSupportTicketsAdminOptions');
-    $output = '';
-    if (session_id() == "") {@session_start();};
-    
-    // Custom form fields here
-    $table_name33 = $wpdb->prefix . "wpstorecart_meta";
-    $grabrecord = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-requiredinfo' ORDER BY `foreignkey` ASC;";
+        $devOptions = get_option('wpscSupportTicketsAdminOptions');
+        $output = '';
+        if (session_id() == "") {@session_start();};
 
-    $resultscf = $wpdb->get_results( $grabrecord , ARRAY_A );
-    if(isset($resultscf)) {
-            foreach ($resultscf as $field) {
-                $specific_items = explode("||", $field['value']);
-                $prev_val = $_SESSION['wpsct_custom_'.$field['primkey']];
-                if($specific_items[2]=='input (text)') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'.$_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .='  /></td></tr>';
-                }
-                if($specific_items[2]=='shippingcity') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'.$_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .=' /></td></tr>';
-                }                
-                if($specific_items[2]=='firstname') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'.$_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .=' /></td></tr>';
-                }
-                if($specific_items[2]=='lastname') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'.$_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .=' /></td></tr>';
-                }                
-                if($specific_items[2]=='shippingaddress') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'.$_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .=' /></td></tr>';
-                }                
-                if($specific_items[2]=='input (numeric)') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'.$_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .=' /></td></tr>';
-                }
-                if($specific_items[2]=='zipcode') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text" size="22" value="'.$_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .=' /></td></tr>';
-                }                
-                if($specific_items[2]=='textarea') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><textarea  id="wpsct_custom_'.$field['primkey'].'" name="wpsct_custom_'.$field['primkey'].'" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .='>'.$_SESSION['wpsct_custom_'.$field['primkey']].'</textarea></td></tr>';
-                }
-                if($specific_items[2]=='states' || $specific_items[2]=='taxstates') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><select  name="wpsct_custom_'.$field['primkey'].'" class="wpsct-states" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .='>
-                    <option value="not applicable"'; if($prev_val==''){$output.=' selected="selected" ';}; $output.='>'.__('Other (Non-US)', 'wpsc-support-tickets').'</option>
-                    <option value="AL"'; if($prev_val=='AL'){$output.=' selected="selected" ';}; $output.='>'.__('Alabama', 'wpsc-support-tickets').'</option>
-                    <option value="AK"'; if($prev_val=='AK'){$output.=' selected="selected" ';}; $output.='>'.__('Alaska', 'wpsc-support-tickets').'</option>
-                    <option value="AZ"'; if($prev_val=='AZ'){$output.=' selected="selected" ';}; $output.='>'.__('Arizona', 'wpsc-support-tickets').'</option>
-                    <option value="AR"'; if($prev_val=='AR'){$output.=' selected="selected" ';}; $output.='>'.__('Arkansas', 'wpsc-support-tickets').'</option>
-                    <option value="CA"'; if($prev_val=='CA'){$output.=' selected="selected" ';}; $output.='>'.__('California', 'wpsc-support-tickets').'</option>
-                    <option value="CO"'; if($prev_val=='CO'){$output.=' selected="selected" ';}; $output.='>'.__('Colorado', 'wpsc-support-tickets').'</option>
-                    <option value="CT"'; if($prev_val=='CT'){$output.=' selected="selected" ';}; $output.='>'.__('Connecticut', 'wpsc-support-tickets').'</option>
-                    <option value="DE"'; if($prev_val=='DE'){$output.=' selected="selected" ';}; $output.='>'.__('Delaware', 'wpsc-support-tickets').'</option>
-                    <option value="DC"'; if($prev_val=='DC'){$output.=' selected="selected" ';}; $output.='>'.__('District Of Columbia', 'wpsc-support-tickets').'</option>
-                    <option value="FL"'; if($prev_val=='FL'){$output.=' selected="selected" ';}; $output.='>'.__('Florida', 'wpsc-support-tickets').'</option>
-                    <option value="GA"'; if($prev_val=='GA'){$output.=' selected="selected" ';}; $output.='>'.__('Georgia', 'wpsc-support-tickets').'</option>
-                    <option value="HI"'; if($prev_val=='HI'){$output.=' selected="selected" ';}; $output.='>'.__('Hawaii', 'wpsc-support-tickets').'</option>
-                    <option value="ID"'; if($prev_val=='ID'){$output.=' selected="selected" ';}; $output.='>'.__('Idaho', 'wpsc-support-tickets').'</option>
-                    <option value="IL"'; if($prev_val=='IL'){$output.=' selected="selected" ';}; $output.='>'.__('Illinois', 'wpsc-support-tickets').'</option>
-                    <option value="IN"'; if($prev_val=='IN'){$output.=' selected="selected" ';}; $output.='>'.__('Indiana', 'wpsc-support-tickets').'</option>
-                    <option value="IA"'; if($prev_val=='IA'){$output.=' selected="selected" ';}; $output.='>'.__('Iowa', 'wpsc-support-tickets').'</option>
-                    <option value="KS"'; if($prev_val=='KS'){$output.=' selected="selected" ';}; $output.='>'.__('Kansas', 'wpsc-support-tickets').'</option>
-                    <option value="KY"'; if($prev_val=='KY'){$output.=' selected="selected" ';}; $output.='>'.__('Kentucky', 'wpsc-support-tickets').'</option>
-                    <option value="LA"'; if($prev_val=='LA'){$output.=' selected="selected" ';}; $output.='>'.__('Louisiana', 'wpsc-support-tickets').'</option>
-                    <option value="ME"'; if($prev_val=='ME'){$output.=' selected="selected" ';}; $output.='>'.__('Maine', 'wpsc-support-tickets').'</option>
-                    <option value="MD"'; if($prev_val=='MD'){$output.=' selected="selected" ';}; $output.='>'.__('Maryland', 'wpsc-support-tickets').'</option>
-                    <option value="MA"'; if($prev_val=='MA'){$output.=' selected="selected" ';}; $output.='>'.__('Massachusetts', 'wpsc-support-tickets').'</option>
-                    <option value="MI"'; if($prev_val=='MI'){$output.=' selected="selected" ';}; $output.='>'.__('Michigan', 'wpsc-support-tickets').'</option>
-                    <option value="MN"'; if($prev_val=='MN'){$output.=' selected="selected" ';}; $output.='>'.__('Minnesota', 'wpsc-support-tickets').'</option>
-                    <option value="MS"'; if($prev_val=='MS'){$output.=' selected="selected" ';}; $output.='>'.__('Mississippi', 'wpsc-support-tickets').'</option>
-                    <option value="MO"'; if($prev_val=='MO'){$output.=' selected="selected" ';}; $output.='>'.__('Missouri', 'wpsc-support-tickets').'</option>
-                    <option value="MT"'; if($prev_val=='MT'){$output.=' selected="selected" ';}; $output.='>'.__('Montana', 'wpsc-support-tickets').'</option>
-                    <option value="NE"'; if($prev_val=='NE'){$output.=' selected="selected" ';}; $output.='>'.__('Nebraska', 'wpsc-support-tickets').'</option>
-                    <option value="NV"'; if($prev_val=='NV'){$output.=' selected="selected" ';}; $output.='>'.__('Nevada', 'wpsc-support-tickets').'</option>
-                    <option value="NH"'; if($prev_val=='NH'){$output.=' selected="selected" ';}; $output.='>'.__('New Hampshire', 'wpsc-support-tickets').'</option>
-                    <option value="NJ"'; if($prev_val=='NJ'){$output.=' selected="selected" ';}; $output.='>'.__('New Jersey', 'wpsc-support-tickets').'</option>
-                    <option value="NM"'; if($prev_val=='NM'){$output.=' selected="selected" ';}; $output.='>'.__('New Mexico', 'wpsc-support-tickets').'</option>
-                    <option value="NY"'; if($prev_val=='NY'){$output.=' selected="selected" ';}; $output.='>'.__('New York', 'wpsc-support-tickets').'</option>
-                    <option value="NC"'; if($prev_val=='NC'){$output.=' selected="selected" ';}; $output.='>'.__('North Carolina', 'wpsc-support-tickets').'</option>
-                    <option value="ND"'; if($prev_val=='ND'){$output.=' selected="selected" ';}; $output.='>'.__('North Dakota', 'wpsc-support-tickets').'</option>
-                    <option value="OH"'; if($prev_val=='OH'){$output.=' selected="selected" ';}; $output.='>'.__('Ohio', 'wpsc-support-tickets').'</option>
-                    <option value="OK"'; if($prev_val=='OK'){$output.=' selected="selected" ';}; $output.='>'.__('Oklahoma', 'wpsc-support-tickets').'</option>
-                    <option value="OR"'; if($prev_val=='OR'){$output.=' selected="selected" ';}; $output.='>'.__('Oregon', 'wpsc-support-tickets').'</option>
-                    <option value="PA"'; if($prev_val=='PA'){$output.=' selected="selected" ';}; $output.='>'.__('Pennsylvania', 'wpsc-support-tickets').'</option>
-                    <option value="RI"'; if($prev_val=='RI'){$output.=' selected="selected" ';}; $output.='>'.__('Rhode Island', 'wpsc-support-tickets').'</option>
-                    <option value="SC"'; if($prev_val=='SC'){$output.=' selected="selected" ';}; $output.='>'.__('South Carolina', 'wpsc-support-tickets').'</option>
-                    <option value="SD"'; if($prev_val=='SD'){$output.=' selected="selected" ';}; $output.='>'.__('South Dakota', 'wpsc-support-tickets').'</option>
-                    <option value="TN"'; if($prev_val=='TN'){$output.=' selected="selected" ';}; $output.='>'.__('Tennessee', 'wpsc-support-tickets').'</option>
-                    <option value="TX"'; if($prev_val=='TX'){$output.=' selected="selected" ';}; $output.='>'.__('Texas', 'wpsc-support-tickets').'</option>
-                    <option value="UT"'; if($prev_val=='UT'){$output.=' selected="selected" ';}; $output.='>'.__('Utah', 'wpsc-support-tickets').'</option>
-                    <option value="VT"'; if($prev_val=='VT'){$output.=' selected="selected" ';}; $output.='>'.__('Vermont', 'wpsc-support-tickets').'</option>
-                    <option value="VA"'; if($prev_val=='VA'){$output.=' selected="selected" ';}; $output.='>'.__('Virginia', 'wpsc-support-tickets').'</option>
-                    <option value="WA"'; if($prev_val=='WA'){$output.=' selected="selected" ';}; $output.='>'.__('Washington', 'wpsc-support-tickets').'</option>
-                    <option value="WV"'; if($prev_val=='WV'){$output.=' selected="selected" ';}; $output.='>'.__('West Virginia', 'wpsc-support-tickets').'</option>
-                    <option value="WI"'; if($prev_val=='WI'){$output.=' selected="selected" ';}; $output.='>'.__('Wisconsin', 'wpsc-support-tickets').'</option>
-                    <option value="WY"'; if($prev_val=='WY'){$output.=' selected="selected" ';}; $output.='>'.__('Wyoming', 'wpsc-support-tickets').'</option>
-                    </select></td></tr>';
-                }
-                if($specific_items[2]=='countries' || $specific_items[2]=='taxcountries') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><select  name="wpsct_custom_'.$field['primkey'].'" class="wpsct-countries" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .='>
-                    <option value="United States"'; if($prev_val=='United States'){$output.=' selected="selected" ';}; $output.='>'.__('United States', 'wpsc-support-tickets').'</option>
-                    <option value="Canada"'; if($prev_val=='Canada'){$output.=' selected="selected" ';}; $output.='>'.__('Canada', 'wpsc-support-tickets').'</option>
-                    <option value="United Kingdom"'; if($prev_val=='United Kingdom'){$output.=' selected="selected" ';}; $output.=' >'.__('United Kingdom', 'wpsc-support-tickets').'</option>
-                    <option value="Ireland"'; if($prev_val=='Ireland'){$output.=' selected="selected" ';}; $output.=' >'.__('Ireland', 'wpsc-support-tickets').'</option>
-                    <option value="Australia"'; if($prev_val=='Australia'){$output.=' selected="selected" ';}; $output.=' >'.__('Australia', 'wpsc-support-tickets').'</option>
-                    <option value="New Zealand"'; if($prev_val=='New Zealand'){$output.=' selected="selected" ';}; $output.=' >'.__('New Zealand', 'wpsc-support-tickets').'</option>
-                    <option value="Afghanistan"'; if($prev_val=='Afghanistan'){$output.=' selected="selected" ';}; $output.='>'.__('Afghanistan', 'wpsc-support-tickets').'</option>
-                    <option value="Albania"'; if($prev_val=='Albania'){$output.=' selected="selected" ';}; $output.='>'.__('Albania', 'wpsc-support-tickets').'</option>
-                    <option value="Algeria"'; if($prev_val=='Algeria'){$output.=' selected="selected" ';}; $output.='>'.__('Algeria', 'wpsc-support-tickets').'</option>
-                    <option value="American Samoa"'; if($prev_val=='American Samoa'){$output.=' selected="selected" ';}; $output.='>'.__('American Samoa', 'wpsc-support-tickets').'</option>
-                    <option value="Andorra"'; if($prev_val=='Andorra'){$output.=' selected="selected" ';}; $output.='>'.__('Andorra', 'wpsc-support-tickets').'</option>
-                    <option value="Angola"'; if($prev_val=='Angola'){$output.=' selected="selected" ';}; $output.='>'.__('Angola', 'wpsc-support-tickets').'</option>
-                    <option value="Anguilla"'; if($prev_val=='Anguilla'){$output.=' selected="selected" ';}; $output.='>'.__('Anguilla', 'wpsc-support-tickets').'</option>
-                    <option value="Antarctica"'; if($prev_val=='Antarctica'){$output.=' selected="selected" ';}; $output.='>'.__('Antarctica', 'wpsc-support-tickets').'</option>
-                    <option value="Antigua and Barbuda"'; if($prev_val=='Antigua and Barbuda'){$output.=' selected="selected" ';}; $output.='>'.__('Antigua and Barbuda', 'wpsc-support-tickets').'</option>
-                    <option value="Argentina"'; if($prev_val=='Argentina'){$output.=' selected="selected" ';}; $output.='>'.__('Argentina', 'wpsc-support-tickets').'</option>
-                    <option value="Armenia"'; if($prev_val=='Armenia'){$output.=' selected="selected" ';}; $output.='>'.__('Armenia', 'wpsc-support-tickets').'</option>
-                    <option value="Aruba"'; if($prev_val=='Aruba'){$output.=' selected="selected" ';}; $output.='>'.__('Aruba', 'wpsc-support-tickets').'</option>
-                    <option value="Australia"'; if($prev_val=='Australia'){$output.=' selected="selected" ';}; $output.='>'.__('Australia', 'wpsc-support-tickets').'</option>
-                    <option value="Austria"'; if($prev_val=='Austria'){$output.=' selected="selected" ';}; $output.='>'.__('Austria', 'wpsc-support-tickets').'</option>
-                    <option value="Azerbaijan"'; if($prev_val=='Azerbaijan'){$output.=' selected="selected" ';}; $output.='>'.__('Azerbaijan', 'wpsc-support-tickets').'</option>
-                    <option value="Bahamas"'; if($prev_val=='Bahamas'){$output.=' selected="selected" ';}; $output.='>'.__('Bahamas', 'wpsc-support-tickets').'</option>
-                    <option value="Bahrain"'; if($prev_val=='Bahrain'){$output.=' selected="selected" ';}; $output.='>'.__('Bahrain', 'wpsc-support-tickets').'</option>
-                    <option value="Bangladesh"'; if($prev_val=='Bangladesh'){$output.=' selected="selected" ';}; $output.='>'.__('Bangladesh', 'wpsc-support-tickets').'</option>
-                    <option value="Barbados"'; if($prev_val=='Barbados'){$output.=' selected="selected" ';}; $output.='>'.__('Barbados', 'wpsc-support-tickets').'</option>
-                    <option value="Belarus"'; if($prev_val=='Belarus'){$output.=' selected="selected" ';}; $output.='>'.__('Belarus', 'wpsc-support-tickets').'</option>
-                    <option value="Belgium"'; if($prev_val=='Belgium'){$output.=' selected="selected" ';}; $output.='>'.__('Belgium', 'wpsc-support-tickets').'</option>
-                    <option value="Belize"'; if($prev_val=='Belize'){$output.=' selected="selected" ';}; $output.='>'.__('Belize', 'wpsc-support-tickets').'</option>
-                    <option value="Benin"'; if($prev_val=='Benin'){$output.=' selected="selected" ';}; $output.='>'.__('Benin', 'wpsc-support-tickets').'</option>
-                    <option value="Bermuda"'; if($prev_val=='Bermuda'){$output.=' selected="selected" ';}; $output.='>'.__('Bermuda', 'wpsc-support-tickets').'</option>
-                    <option value="Bhutan"'; if($prev_val=='Bhutan'){$output.=' selected="selected" ';}; $output.='>'.__('Bhutan', 'wpsc-support-tickets').'</option>
-                    <option value="Bolivia"'; if($prev_val=='Bolivia'){$output.=' selected="selected" ';}; $output.='>'.__('Bolivia', 'wpsc-support-tickets').'</option>
-                    <option value="Bosnia and Herzegovina"'; if($prev_val=='Bosnia and Herzegovina'){$output.=' selected="selected" ';}; $output.='>'.__('Bosnia and Herzegovina', 'wpsc-support-tickets').'</option>
-                    <option value="Botswana"'; if($prev_val=='Botswana'){$output.=' selected="selected" ';}; $output.='>'.__('Botswana', 'wpsc-support-tickets').'</option>
-                    <option value="Bouvet Island"'; if($prev_val=='Bouvet Island'){$output.=' selected="selected" ';}; $output.='>'.__('Bouvet Island', 'wpsc-support-tickets').'</option>
-                    <option value="Brazil"'; if($prev_val=='Brazil'){$output.=' selected="selected" ';}; $output.='>'.__('Brazil', 'wpsc-support-tickets').'</option>
-                    <option value="British Indian Ocean Territory"'; if($prev_val=='British Indian Ocean Territory'){$output.=' selected="selected" ';}; $output.='>'.__('British Indian Ocean Territory', 'wpsc-support-tickets').'</option>
-                    <option value="Brunei Darussalam"'; if($prev_val=='Brunei Darussalam'){$output.=' selected="selected" ';}; $output.='>'.__('Brunei Darussalam', 'wpsc-support-tickets').'</option>
-                    <option value="Bulgaria"'; if($prev_val=='Bulgaria'){$output.=' selected="selected" ';}; $output.='>'.__('Bulgaria', 'wpsc-support-tickets').'</option>
-                    <option value="Burkina Faso"'; if($prev_val=='Burkina Faso'){$output.=' selected="selected" ';}; $output.='>'.__('Burkina Faso', 'wpsc-support-tickets').'</option>
-                    <option value="Burundi"'; if($prev_val=='Burundi'){$output.=' selected="selected" ';}; $output.='>'.__('Burundi', 'wpsc-support-tickets').'</option>
-                    <option value="Cambodia"'; if($prev_val=='Cambodia'){$output.=' selected="selected" ';}; $output.='>'.__('Cambodia', 'wpsc-support-tickets').'</option>
-                    <option value="Cameroon"'; if($prev_val=='Cameroon'){$output.=' selected="selected" ';}; $output.='>'.__('Cameroon', 'wpsc-support-tickets').'</option>
-                    <option value="Canada"'; if($prev_val=='Canada'){$output.=' selected="selected" ';}; $output.='>'.__('Canada', 'wpsc-support-tickets').'</option>
-                    <option value="Cape Verde"'; if($prev_val=='Cape Verde'){$output.=' selected="selected" ';}; $output.='>'.__('Cape Verde', 'wpsc-support-tickets').'</option>
-                    <option value="Cayman Islands"'; if($prev_val=='Cayman Islands'){$output.=' selected="selected" ';}; $output.='>'.__('Cayman Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Central African Republic"'; if($prev_val=='Central African Republic'){$output.=' selected="selected" ';}; $output.='>'.__('Central African Republic', 'wpsc-support-tickets').'</option>
-                    <option value="Chad"'; if($prev_val=='Chad'){$output.=' selected="selected" ';}; $output.='>'.__('Chad', 'wpsc-support-tickets').'</option>
-                    <option value="Chile"'; if($prev_val=='Chile'){$output.=' selected="selected" ';}; $output.='>'.__('Chile', 'wpsc-support-tickets').'</option>
-                    <option value="China"'; if($prev_val=='China'){$output.=' selected="selected" ';}; $output.='>'.__('China', 'wpsc-support-tickets').'</option>
-                    <option value="Christmas Island"'; if($prev_val=='Christmas Island'){$output.=' selected="selected" ';}; $output.='>'.__('Christmas Island', 'wpsc-support-tickets').'</option>
-                    <option value="Cocos (Keeling) Islands"'; if($prev_val=='Cocos (Keeling) Islands'){$output.=' selected="selected" ';}; $output.='>'.__('Cocos (Keeling) Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Colombia"'; if($prev_val=='Colombia'){$output.=' selected="selected" ';}; $output.='>'.__('Colombia', 'wpsc-support-tickets').'</option>
-                    <option value="Comoros"'; if($prev_val=='Comoros'){$output.=' selected="selected" ';}; $output.='>'.__('Comoros', 'wpsc-support-tickets').'</option>
-                    <option value="Congo"'; if($prev_val=='Congo'){$output.=' selected="selected" ';}; $output.='>'.__('Congo', 'wpsc-support-tickets').'</option>
-                    <option value="Congo, The Democratic Republic of The"'; if($prev_val=='Congo, The Democratic Republic of The'){$output.=' selected="selected" ';}; $output.='>'.__('Congo, The Democratic Republic of The', 'wpsc-support-tickets').'</option>
-                    <option value="Cook Islands"'; if($prev_val=='Cook Islands'){$output.=' selected="selected" ';}; $output.='>'.__('Cook Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Costa Rica"'; if($prev_val=='Costa Rica'){$output.=' selected="selected" ';}; $output.='>'.__('Costa Rica', 'wpsc-support-tickets').'</option>
-                    <option value="Cote D\'ivoire"'; if($prev_val=='Cote D\'ivoire'){$output.=' selected="selected" ';}; $output.='>'.__('Cote D\'ivoire', 'wpsc-support-tickets').'</option>
-                    <option value="Croatia"'; if($prev_val=='Croatia'){$output.=' selected="selected" ';}; $output.='>'.__('Croatia', 'wpsc-support-tickets').'</option>
-                    <option value="Cuba"'; if($prev_val=='Cuba'){$output.=' selected="selected" ';}; $output.='>'.__('Cuba', 'wpsc-support-tickets').'</option>
-                    <option value="Cyprus"'; if($prev_val=='Cyprus'){$output.=' selected="selected" ';}; $output.='>'.__('Cyprus', 'wpsc-support-tickets').'</option>
-                    <option value="Czech Republic"'; if($prev_val=='Czech Republic'){$output.=' selected="selected" ';}; $output.='>'.__('Czech Republic', 'wpsc-support-tickets').'</option>
-                    <option value="Denmark"'; if($prev_val=='Denmark'){$output.=' selected="selected" ';}; $output.='>'.__('Denmark', 'wpsc-support-tickets').'</option>
-                    <option value="Djibouti"'; if($prev_val=='Djibouti'){$output.=' selected="selected" ';}; $output.='>'.__('Djibouti', 'wpsc-support-tickets').'</option>
-                    <option value="Dominica"'; if($prev_val=='Dominica'){$output.=' selected="selected" ';}; $output.='>'.__('Dominica', 'wpsc-support-tickets').'</option>
-                    <option value="Dominican Republic"'; if($prev_val=='Dominican Republic'){$output.=' selected="selected" ';}; $output.='>'.__('Dominican Republic', 'wpsc-support-tickets').'</option>
-                    <option value="Ecuador"'; if($prev_val=='Ecuador'){$output.=' selected="selected" ';}; $output.='>'.__('Ecuador', 'wpsc-support-tickets').'</option>
-                    <option value="Egypt"'; if($prev_val=='Egypt'){$output.=' selected="selected" ';}; $output.='>'.__('Egypt', 'wpsc-support-tickets').'</option>
-                    <option value="El Salvador"'; if($prev_val=='El Salvador'){$output.=' selected="selected" ';}; $output.='>'.__('El Salvador', 'wpsc-support-tickets').'</option>
-                    <option value="Equatorial Guinea"'; if($prev_val=='Equatorial Guinea'){$output.=' selected="selected" ';}; $output.='>'.__('Equatorial Guinea', 'wpsc-support-tickets').'</option>
-                    <option value="Eritrea"'; if($prev_val=='Eritrea'){$output.=' selected="selected" ';}; $output.='>'.__('Eritrea', 'wpsc-support-tickets').'</option>
-                    <option value="Estonia"'; if($prev_val=='Estonia'){$output.=' selected="selected" ';}; $output.='>'.__('Estonia', 'wpsc-support-tickets').'</option>
-                    <option value="Ethiopia"'; if($prev_val=='Ethiopia'){$output.=' selected="selected" ';}; $output.='>'.__('Ethiopia', 'wpsc-support-tickets').'</option>
-                    <option value="Falkland Islands (Malvinas)"'; if($prev_val=='Falkland Islands (Malvinas)'){$output.=' selected="selected" ';}; $output.='>'.__('Falkland Islands (Malvinas)', 'wpsc-support-tickets').'</option>
-                    <option value="Faroe Islands"'; if($prev_val=='Faroe Islands'){$output.=' selected="selected" ';}; $output.='>'.__('Faroe Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Fiji"'; if($prev_val=='Fiji'){$output.=' selected="selected" ';}; $output.='>'.__('Fiji', 'wpsc-support-tickets').'</option>
-                    <option value="Finland"'; if($prev_val=='Finland'){$output.=' selected="selected" ';}; $output.='>'.__('Finland', 'wpsc-support-tickets').'</option>
-                    <option value="France"'; if($prev_val=='France'){$output.=' selected="selected" ';}; $output.='>'.__('France', 'wpsc-support-tickets').'</option>
-                    <option value="French Guiana"'; if($prev_val=='French Guiana'){$output.=' selected="selected" ';}; $output.='>'.__('French Guiana', 'wpsc-support-tickets').'</option>
-                    <option value="French Polynesia"'; if($prev_val=='French Polynesia'){$output.=' selected="selected" ';}; $output.='>'.__('French Polynesia', 'wpsc-support-tickets').'</option>
-                    <option value="French Southern Territories"'; if($prev_val=='French Southern Territories'){$output.=' selected="selected" ';}; $output.='>'.__('French Southern Territories', 'wpsc-support-tickets').'</option>
-                    <option value="Gabon"'; if($prev_val=='Gabon'){$output.=' selected="selected" ';}; $output.='>'.__('Gabon', 'wpsc-support-tickets').'</option>
-                    <option value="Gambia"'; if($prev_val=='Gambia'){$output.=' selected="selected" ';}; $output.='>'.__('Gambia', 'wpsc-support-tickets').'</option>
-                    <option value="Georgia"'; if($prev_val=='Georgia'){$output.=' selected="selected" ';}; $output.='>'.__('Georgia', 'wpsc-support-tickets').'</option>
-                    <option value="Germany"'; if($prev_val=='Germany'){$output.=' selected="selected" ';}; $output.='>'.__('Germany', 'wpsc-support-tickets').'</option>
-                    <option value="Ghana"'; if($prev_val=='Ghana'){$output.=' selected="selected" ';}; $output.='>'.__('Ghana', 'wpsc-support-tickets').'</option>
-                    <option value="Gibraltar"'; if($prev_val=='Gibraltar'){$output.=' selected="selected" ';}; $output.='>'.__('Gibraltar', 'wpsc-support-tickets').'</option>
-                    <option value="Greece"'; if($prev_val=='Greece'){$output.=' selected="selected" ';}; $output.='>'.__('Greece', 'wpsc-support-tickets').'</option>
-                    <option value="Greenland"'; if($prev_val=='Greenland'){$output.=' selected="selected" ';}; $output.='>'.__('Greenland', 'wpsc-support-tickets').'</option>
-                    <option value="Grenada"'; if($prev_val=='Grenada'){$output.=' selected="selected" ';}; $output.='>'.__('Grenada', 'wpsc-support-tickets').'</option>
-                    <option value="Guadeloupe"'; if($prev_val=='Guadeloupe'){$output.=' selected="selected" ';}; $output.='>'.__('Guadeloupe', 'wpsc-support-tickets').'</option>
-                    <option value="Guam"'; if($prev_val=='Guam'){$output.=' selected="selected" ';}; $output.='>'.__('Guam', 'wpsc-support-tickets').'</option>
-                    <option value="Guatemala"'; if($prev_val=='Guatemala'){$output.=' selected="selected" ';}; $output.='>'.__('Guatemala', 'wpsc-support-tickets').'</option>
-                    <option value="Guinea"'; if($prev_val=='Guinea'){$output.=' selected="selected" ';}; $output.='>'.__('Guinea', 'wpsc-support-tickets').'</option>
-                    <option value="Guinea-bissau"'; if($prev_val=='Guinea-bissau'){$output.=' selected="selected" ';}; $output.='>'.__('Guinea-bissau', 'wpsc-support-tickets').'</option>
-                    <option value="Guyana"'; if($prev_val=='Guyana'){$output.=' selected="selected" ';}; $output.='>'.__('Guyana', 'wpsc-support-tickets').'</option>
-                    <option value="Haiti"'; if($prev_val=='Haiti'){$output.=' selected="selected" ';}; $output.='>'.__('Haiti', 'wpsc-support-tickets').'</option>
-                    <option value="Heard Island and Mcdonald Islands"'; if($prev_val=='Heard Island and Mcdonald Islands'){$output.=' selected="selected" ';}; $output.='>'.__('Heard Island and Mcdonald Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Holy See (Vatican City State)"'; if($prev_val=='Holy See (Vatican City State)'){$output.=' selected="selected" ';}; $output.='>'.__('Holy See (Vatican City State)', 'wpsc-support-tickets').'</option>
-                    <option value="Honduras"'; if($prev_val=='Honduras'){$output.=' selected="selected" ';}; $output.='>'.__('Honduras', 'wpsc-support-tickets').'</option>
-                    <option value="Hong Kong"'; if($prev_val=='Hong Kong'){$output.=' selected="selected" ';}; $output.='>'.__('Hong Kong', 'wpsc-support-tickets').'</option>
-                    <option value="Hungary"'; if($prev_val=='Hungary'){$output.=' selected="selected" ';}; $output.='>'.__('Hungary', 'wpsc-support-tickets').'</option>
-                    <option value="Iceland"'; if($prev_val=='Iceland'){$output.=' selected="selected" ';}; $output.='>'.__('Iceland', 'wpsc-support-tickets').'</option>
-                    <option value="India"'; if($prev_val=='India'){$output.=' selected="selected" ';}; $output.='>'.__('India', 'wpsc-support-tickets').'</option>
-                    <option value="Indonesia"'; if($prev_val=='Indonesia'){$output.=' selected="selected" ';}; $output.='>'.__('Indonesia', 'wpsc-support-tickets').'</option>
-                    <option value="Iran, Islamic Republic of"'; if($prev_val=='Iran, Islamic Republic of'){$output.=' selected="selected" ';}; $output.='>'.__('Iran, Islamic Republic of', 'wpsc-support-tickets').'</option>
-                    <option value="Iraq"'; if($prev_val=='Iraq'){$output.=' selected="selected" ';}; $output.='>'.__('Iraq', 'wpsc-support-tickets').'</option>
-                    <option value="Ireland"'; if($prev_val=='Ireland'){$output.=' selected="selected" ';}; $output.='>'.__('Ireland', 'wpsc-support-tickets').'</option>
-                    <option value="Israel"'; if($prev_val=='Israel'){$output.=' selected="selected" ';}; $output.='>'.__('Israel', 'wpsc-support-tickets').'</option>
-                    <option value="Italy"'; if($prev_val=='Italy'){$output.=' selected="selected" ';}; $output.='>'.__('Italy', 'wpsc-support-tickets').'</option>
-                    <option value="Jamaica"'; if($prev_val=='Jamaica'){$output.=' selected="selected" ';}; $output.='>'.__('Jamaica', 'wpsc-support-tickets').'</option>
-                    <option value="Japan"'; if($prev_val=='Japan'){$output.=' selected="selected" ';}; $output.='>'.__('Japan', 'wpsc-support-tickets').'</option>
-                    <option value="Jordan"'; if($prev_val=='Jordan'){$output.=' selected="selected" ';}; $output.='>'.__('Jordan', 'wpsc-support-tickets').'</option>
-                    <option value="Kazakhstan"'; if($prev_val=='Kazakhstan'){$output.=' selected="selected" ';}; $output.='>'.__('Kazakhstan', 'wpsc-support-tickets').'</option>
-                    <option value="Kenya"'; if($prev_val=='Kenya'){$output.=' selected="selected" ';}; $output.='>'.__('Kenya', 'wpsc-support-tickets').'</option>
-                    <option value="Kiribati"'; if($prev_val=='Kiribati'){$output.=' selected="selected" ';}; $output.='>'.__('Kiribati', 'wpsc-support-tickets').'</option>
-                    <option value="Korea, Democratic People\'s Republic of"'; if($prev_val=='Korea, Democratic People\'s Republic of'){$output.=' selected="selected" ';}; $output.='>'.__('Korea, Democratic People\'s Republic of', 'wpsc-support-tickets').'</option>
-                    <option value="Korea, Republic of"'; if($prev_val=='Korea, Republic of'){$output.=' selected="selected" ';}; $output.='>'.__('Korea, Republic of', 'wpsc-support-tickets').'</option>
-                    <option value="Kuwait"'; if($prev_val=='Kuwait'){$output.=' selected="selected" ';}; $output.='>'.__('Kuwait', 'wpsc-support-tickets').'</option>
-                    <option value="Kyrgyzstan"'; if($prev_val=='Kyrgyzstan'){$output.=' selected="selected" ';}; $output.='>'.__('Kyrgyzstan', 'wpsc-support-tickets').'</option>
-                    <option value="Lao People\'s Democratic Republic"'; if($prev_val=='Lao People\'s Democratic Republic'){$output.=' selected="selected" ';}; $output.='>'.__('Lao People\'s Democratic Republic', 'wpsc-support-tickets').'</option>
-                    <option value="Latvia"'; if($prev_val=='Latvia'){$output.=' selected="selected" ';}; $output.='>'.__('Latvia', 'wpsc-support-tickets').'</option>
-                    <option value="Lebanon"'; if($prev_val=='Lebanon'){$output.=' selected="selected" ';}; $output.='>'.__('Lebanon', 'wpsc-support-tickets').'</option>
-                    <option value="Lesotho"'; if($prev_val=='Lesotho'){$output.=' selected="selected" ';}; $output.='>'.__('Lesotho', 'wpsc-support-tickets').'</option>
-                    <option value="Liberia"'; if($prev_val=='Liberia'){$output.=' selected="selected" ';}; $output.='>'.__('Liberia', 'wpsc-support-tickets').'</option>
-                    <option value="Libyan Arab Jamahiriya"'; if($prev_val=='Libyan Arab Jamahiriya'){$output.=' selected="selected" ';}; $output.='>'.__('Libyan Arab Jamahiriya', 'wpsc-support-tickets').'</option>
-                    <option value="Liechtenstein"'; if($prev_val=='Liechtenstein'){$output.=' selected="selected" ';}; $output.='>'.__('Liechtenstein', 'wpsc-support-tickets').'</option>
-                    <option value="Lithuania"'; if($prev_val=='Lithuania'){$output.=' selected="selected" ';}; $output.='>'.__('Lithuania', 'wpsc-support-tickets').'</option>
-                    <option value="Luxembourg"'; if($prev_val=='Luxembourg'){$output.=' selected="selected" ';}; $output.='>'.__('Luxembourg', 'wpsc-support-tickets').'</option>
-                    <option value="Macao"'; if($prev_val=='Macao'){$output.=' selected="selected" ';}; $output.='>'.__('Macao', 'wpsc-support-tickets').'</option>
-                    <option value="Macedonia, The Former Yugoslav Republic of"'; if($prev_val=='Macedonia, The Former Yugoslav Republic of'){$output.=' selected="selected" ';}; $output.='>'.__('Macedonia, The Former Yugoslav Republic of', 'wpsc-support-tickets').'</option>
-                    <option value="Madagascar"'; if($prev_val=='Madagascar'){$output.=' selected="selected" ';}; $output.='>'.__('Madagascar', 'wpsc-support-tickets').'</option>
-                    <option value="Malawi"'; if($prev_val=='Malawi'){$output.=' selected="selected" ';}; $output.='>'.__('Malawi', 'wpsc-support-tickets').'</option>
-                    <option value="Malaysia"'; if($prev_val=='Malaysia'){$output.=' selected="selected" ';}; $output.='>'.__('Malaysia', 'wpsc-support-tickets').'</option>
-                    <option value="Maldives"'; if($prev_val=='Maldives'){$output.=' selected="selected" ';}; $output.='>'.__('Maldives', 'wpsc-support-tickets').'</option>
-                    <option value="Mali"'; if($prev_val=='Mali'){$output.=' selected="selected" ';}; $output.='>'.__('Mali', 'wpsc-support-tickets').'</option>
-                    <option value="Malta"'; if($prev_val=='Malta'){$output.=' selected="selected" ';}; $output.='>'.__('Malta', 'wpsc-support-tickets').'</option>
-                    <option value="Marshall Islands"'; if($prev_val=='Marshall Islands'){$output.=' selected="selected" ';}; $output.='>'.__('Marshall Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Martinique"'; if($prev_val=='Martinique'){$output.=' selected="selected" ';}; $output.='>'.__('Martinique', 'wpsc-support-tickets').'</option>
-                    <option value="Mauritania"'; if($prev_val=='Mauritania'){$output.=' selected="selected" ';}; $output.='>'.__('Mauritania', 'wpsc-support-tickets').'</option>
-                    <option value="Mauritius"'; if($prev_val=='Mauritius'){$output.=' selected="selected" ';}; $output.='>'.__('Mauritius', 'wpsc-support-tickets').'</option>
-                    <option value="Mayotte"'; if($prev_val=='Mayotte'){$output.=' selected="selected" ';}; $output.='>'.__('Mayotte', 'wpsc-support-tickets').'</option>
-                    <option value="Mexico"'; if($prev_val=='Mexico'){$output.=' selected="selected" ';}; $output.='>'.__('Mexico', 'wpsc-support-tickets').'</option>
-                    <option value="Micronesia, Federated States of"'; if($prev_val=='Micronesia, Federated States of'){$output.=' selected="selected" ';}; $output.='>'.__('Micronesia, Federated States of', 'wpsc-support-tickets').'</option>
-                    <option value="Moldova, Republic of"'; if($prev_val=='Moldova, Republic of'){$output.=' selected="selected" ';}; $output.='>'.__('Moldova, Republic of', 'wpsc-support-tickets').'</option>
-                    <option value="Monaco"'; if($prev_val=='Monaco'){$output.=' selected="selected" ';}; $output.='>'.__('Monaco', 'wpsc-support-tickets').'</option>
-                    <option value="Mongolia"'; if($prev_val=='Mongolia'){$output.=' selected="selected" ';}; $output.='>'.__('Mongolia', 'wpsc-support-tickets').'</option>
-                    <option value="Montserrat"'; if($prev_val=='Montserrat'){$output.=' selected="selected" ';}; $output.='>'.__('Montserrat', 'wpsc-support-tickets').'</option>
-                    <option value="Morocco"'; if($prev_val=='Morocco'){$output.=' selected="selected" ';}; $output.='>'.__('Morocco', 'wpsc-support-tickets').'</option>
-                    <option value="Mozambique"'; if($prev_val=='Mozambique'){$output.=' selected="selected" ';}; $output.='>'.__('Mozambique', 'wpsc-support-tickets').'</option>
-                    <option value="Myanmar"'; if($prev_val=='Myanmar'){$output.=' selected="selected" ';}; $output.='>'.__('Myanmar', 'wpsc-support-tickets').'</option>
-                    <option value="Namibia"'; if($prev_val=='Namibia'){$output.=' selected="selected" ';}; $output.='>'.__('Namibia', 'wpsc-support-tickets').'</option>
-                    <option value="Nauru"'; if($prev_val=='Nauru'){$output.=' selected="selected" ';}; $output.='>'.__('Nauru', 'wpsc-support-tickets').'</option>
-                    <option value="Nepal"'; if($prev_val=='Nepal'){$output.=' selected="selected" ';}; $output.='>'.__('Nepal', 'wpsc-support-tickets').'</option>
-                    <option value="Netherlands"'; if($prev_val=='Netherlands'){$output.=' selected="selected" ';}; $output.='>'.__('Netherlands', 'wpsc-support-tickets').'</option>
-                    <option value="Netherlands Antilles"'; if($prev_val=='Netherlands Antilles'){$output.=' selected="selected" ';}; $output.='>'.__('Netherlands Antilles', 'wpsc-support-tickets').'</option>
-                    <option value="New Caledonia"'; if($prev_val=='New Caledonia'){$output.=' selected="selected" ';}; $output.='>'.__('New Caledonia', 'wpsc-support-tickets').'</option>
-                    <option value="New Zealand"'; if($prev_val=='New Zealand'){$output.=' selected="selected" ';}; $output.='>'.__('New Zealand', 'wpsc-support-tickets').'</option>
-                    <option value="Nicaragua"'; if($prev_val=='Nicaragua'){$output.=' selected="selected" ';}; $output.='>'.__('Nicaragua', 'wpsc-support-tickets').'</option>
-                    <option value="Niger"'; if($prev_val=='Niger'){$output.=' selected="selected" ';}; $output.='>'.__('Niger', 'wpsc-support-tickets').'</option>
-                    <option value="Nigeria"'; if($prev_val=='Nigeria'){$output.=' selected="selected" ';}; $output.='>'.__('Nigeria', 'wpsc-support-tickets').'</option>
-                    <option value="Niue"'; if($prev_val=='Niue'){$output.=' selected="selected" ';}; $output.='>'.__('Niue', 'wpsc-support-tickets').'</option>
-                    <option value="Norfolk Island"'; if($prev_val=='Norfolk Island'){$output.=' selected="selected" ';}; $output.='>'.__('Norfolk Island', 'wpsc-support-tickets').'</option>
-                    <option value="Northern Mariana Islands"'; if($prev_val=='Northern Mariana Islands'){$output.=' selected="selected" ';}; $output.='>'.__('Northern Mariana Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Norway"'; if($prev_val=='Norway'){$output.=' selected="selected" ';}; $output.='>'.__('Norway', 'wpsc-support-tickets').'</option>
-                    <option value="Oman"'; if($prev_val=='Oman'){$output.=' selected="selected" ';}; $output.='>'.__('Oman', 'wpsc-support-tickets').'</option>
-                    <option value="Pakistan"'; if($prev_val=='Pakistan'){$output.=' selected="selected" ';}; $output.='>'.__('Pakistan', 'wpsc-support-tickets').'</option>
-                    <option value="Palau"'; if($prev_val=='Palau'){$output.=' selected="selected" ';}; $output.='>'.__('Palau', 'wpsc-support-tickets').'</option>
-                    <option value="Palestinian Territory, Occupied"'; if($prev_val=='Palestinian Territory, Occupied'){$output.=' selected="selected" ';}; $output.='>'.__('Palestinian Territory, Occupied', 'wpsc-support-tickets').'</option>
-                    <option value="Panama"'; if($prev_val=='Panama'){$output.=' selected="selected" ';}; $output.='>'.__('Panama', 'wpsc-support-tickets').'</option>
-                    <option value="Papua New Guinea"'; if($prev_val=='Papua New Guinea'){$output.=' selected="selected" ';}; $output.='>'.__('Papua New Guinea', 'wpsc-support-tickets').'</option>
-                    <option value="Paraguay"'; if($prev_val=='Paraguay'){$output.=' selected="selected" ';}; $output.='>'.__('Paraguay', 'wpsc-support-tickets').'</option>
-                    <option value="Peru"'; if($prev_val=='Peru'){$output.=' selected="selected" ';}; $output.='>'.__('Peru', 'wpsc-support-tickets').'</option>
-                    <option value="Philippines"'; if($prev_val=='Philippines'){$output.=' selected="selected" ';}; $output.='>'.__('Philippines', 'wpsc-support-tickets').'</option>
-                    <option value="Pitcairn"'; if($prev_val=='Pitcairn'){$output.=' selected="selected" ';}; $output.='>'.__('Pitcairn', 'wpsc-support-tickets').'</option>
-                    <option value="Poland"'; if($prev_val=='Poland'){$output.=' selected="selected" ';}; $output.='>'.__('Poland', 'wpsc-support-tickets').'</option>
-                    <option value="Portugal"'; if($prev_val=='Portugal'){$output.=' selected="selected" ';}; $output.='>'.__('Portugal', 'wpsc-support-tickets').'</option>
-                    <option value="Puerto Rico"'; if($prev_val=='Puerto Rico'){$output.=' selected="selected" ';}; $output.='>'.__('Puerto Rico', 'wpsc-support-tickets').'</option>
-                    <option value="Qatar"'; if($prev_val=='Qatar'){$output.=' selected="selected" ';}; $output.='>'.__('Qatar', 'wpsc-support-tickets').'</option>
-                    <option value="Reunion"'; if($prev_val=='Reunion'){$output.=' selected="selected" ';}; $output.='>'.__('Reunion', 'wpsc-support-tickets').'</option>
-                    <option value="Romania"'; if($prev_val=='Romania'){$output.=' selected="selected" ';}; $output.='>'.__('Romania', 'wpsc-support-tickets').'</option>
-                    <option value="Russian Federation"'; if($prev_val=='Russian Federation'){$output.=' selected="selected" ';}; $output.='>'.__('Russian Federation', 'wpsc-support-tickets').'</option>
-                    <option value="Rwanda"'; if($prev_val=='Rwanda'){$output.=' selected="selected" ';}; $output.='>'.__('Rwanda', 'wpsc-support-tickets').'</option>
-                    <option value="Saint Helena"'; if($prev_val=='Saint Helena'){$output.=' selected="selected" ';}; $output.='>'.__('Saint Helena', 'wpsc-support-tickets').'</option>
-                    <option value="Saint Kitts and Nevis"'; if($prev_val=='Saint Kitts and Nevis'){$output.=' selected="selected" ';}; $output.='>'.__('Saint Kitts and Nevis', 'wpsc-support-tickets').'</option>
-                    <option value="Saint Lucia"'; if($prev_val=='Saint Lucia'){$output.=' selected="selected" ';}; $output.='>'.__('Saint Lucia', 'wpsc-support-tickets').'</option>
-                    <option value="Saint Pierre and Miquelon"'; if($prev_val=='Saint Pierre and Miquelon'){$output.=' selected="selected" ';}; $output.='>'.__('Saint Pierre and Miquelon', 'wpsc-support-tickets').'</option>
-                    <option value="Saint Vincent and The Grenadines"'; if($prev_val=='Saint Vincent and The Grenadines'){$output.=' selected="selected" ';}; $output.='>'.__('Saint Vincent and The Grenadines', 'wpsc-support-tickets').'</option>
-                    <option value="Samoa"'; if($prev_val=='Samoa'){$output.=' selected="selected" ';}; $output.='>'.__('Samoa', 'wpsc-support-tickets').'</option>
-                    <option value="San Marino"'; if($prev_val=='San Marino'){$output.=' selected="selected" ';}; $output.='>'.__('San Marino', 'wpsc-support-tickets').'</option>
-                    <option value="Sao Tome and Principe"'; if($prev_val=='Sao Tome and Principe'){$output.=' selected="selected" ';}; $output.='>'.__('Sao Tome and Principe', 'wpsc-support-tickets').'</option>
-                    <option value="Saudi Arabia"'; if($prev_val=='Saudi Arabia'){$output.=' selected="selected" ';}; $output.='>'.__('Saudi Arabia', 'wpsc-support-tickets').'</option>
-                    <option value="Senegal"'; if($prev_val=='Senegal'){$output.=' selected="selected" ';}; $output.='>'.__('Senegal', 'wpsc-support-tickets').'</option>
-                    <option value="Serbia and Montenegro"'; if($prev_val=='Serbia and Montenegro'){$output.=' selected="selected" ';}; $output.='>'.__('Serbia and Montenegro', 'wpsc-support-tickets').'</option>
-                    <option value="Seychelles"'; if($prev_val=='Seychelles'){$output.=' selected="selected" ';}; $output.='>'.__('Seychelles', 'wpsc-support-tickets').'</option>
-                    <option value="Sierra Leone"'; if($prev_val=='Sierra Leone'){$output.=' selected="selected" ';}; $output.='>'.__('Sierra Leone', 'wpsc-support-tickets').'</option>
-                    <option value="Singapore"'; if($prev_val=='Singapore'){$output.=' selected="selected" ';}; $output.='>'.__('Singapore', 'wpsc-support-tickets').'</option>
-                    <option value="Slovakia"'; if($prev_val=='Slovakia'){$output.=' selected="selected" ';}; $output.='>'.__('Slovakia', 'wpsc-support-tickets').'</option>
-                    <option value="Slovenia"'; if($prev_val=='Slovenia'){$output.=' selected="selected" ';}; $output.='>'.__('Slovenia', 'wpsc-support-tickets').'</option>
-                    <option value="Solomon Islands"'; if($prev_val=='Solomon Islands'){$output.=' selected="selected" ';}; $output.='>'.__('Solomon Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Somalia"'; if($prev_val=='Somalia'){$output.=' selected="selected" ';}; $output.='>'.__('Somalia', 'wpsc-support-tickets').'</option>
-                    <option value="South Africa"'; if($prev_val=='South Africa'){$output.=' selected="selected" ';}; $output.='>'.__('South Africa', 'wpsc-support-tickets').'</option>
-                    <option value="South Georgia and The South Sandwich Islands"'; if($prev_val=='South Georgia and The South Sandwich Islands'){$output.=' selected="selected" ';}; $output.='>'.__('South Georgia and The South Sandwich Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Spain"'; if($prev_val=='Spain'){$output.=' selected="selected" ';}; $output.='>'.__('Spain', 'wpsc-support-tickets').'</option>
-                    <option value="Sri Lanka"'; if($prev_val=='Sri Lanka'){$output.=' selected="selected" ';}; $output.='>'.__('Sri Lanka', 'wpsc-support-tickets').'</option>
-                    <option value="Sudan"'; if($prev_val=='Sudan'){$output.=' selected="selected" ';}; $output.='>'.__('Sudan', 'wpsc-support-tickets').'</option>
-                    <option value="Suriname"'; if($prev_val=='Suriname'){$output.=' selected="selected" ';}; $output.='>'.__('Suriname', 'wpsc-support-tickets').'</option>
-                    <option value="Svalbard and Jan Mayen"'; if($prev_val=='Svalbard and Jan Mayen'){$output.=' selected="selected" ';}; $output.='>'.__('Svalbard and Jan Mayen', 'wpsc-support-tickets').'</option>
-                    <option value="Swaziland"'; if($prev_val=='Swaziland'){$output.=' selected="selected" ';}; $output.='>'.__('Swaziland', 'wpsc-support-tickets').'</option>
-                    <option value="Sweden"'; if($prev_val=='Sweden'){$output.=' selected="selected" ';}; $output.='>'.__('Sweden', 'wpsc-support-tickets').'</option>
-                    <option value="Switzerland"'; if($prev_val=='Switzerland'){$output.=' selected="selected" ';}; $output.='>'.__('Switzerland', 'wpsc-support-tickets').'</option>
-                    <option value="Syrian Arab Republic"'; if($prev_val=='Syrian Arab Republic'){$output.=' selected="selected" ';}; $output.='>'.__('Syrian Arab Republic', 'wpsc-support-tickets').'</option>
-                    <option value="Taiwan, Province of China"'; if($prev_val=='Taiwan, Province of China'){$output.=' selected="selected" ';}; $output.='>'.__('Taiwan, Province of China', 'wpsc-support-tickets').'</option>
-                    <option value="Tajikistan"'; if($prev_val=='Tajikistan'){$output.=' selected="selected" ';}; $output.='>'.__('Tajikistan', 'wpsc-support-tickets').'</option>
-                    <option value="Tanzania, United Republic of"'; if($prev_val=='Tanzania, United Republic of'){$output.=' selected="selected" ';}; $output.='>'.__('Tanzania, United Republic of', 'wpsc-support-tickets').'</option>
-                    <option value="Thailand"'; if($prev_val=='Thailand'){$output.=' selected="selected" ';}; $output.='>'.__('Thailand', 'wpsc-support-tickets').'</option>
-                    <option value="Timor-leste"'; if($prev_val=='Timor-leste'){$output.=' selected="selected" ';}; $output.='>'.__('Timor-leste', 'wpsc-support-tickets').'</option>
-                    <option value="Togo"'; if($prev_val=='Togo'){$output.=' selected="selected" ';}; $output.='>'.__('Togo', 'wpsc-support-tickets').'</option>
-                    <option value="Tokelau"'; if($prev_val=='Tokelau'){$output.=' selected="selected" ';}; $output.='>'.__('Tokelau', 'wpsc-support-tickets').'</option>
-                    <option value="Tonga"'; if($prev_val=='Tonga'){$output.=' selected="selected" ';}; $output.='>'.__('Tonga', 'wpsc-support-tickets').'</option>
-                    <option value="Trinidad and Tobago"'; if($prev_val=='Trinidad and Tobago'){$output.=' selected="selected" ';}; $output.='>'.__('Trinidad and Tobago', 'wpsc-support-tickets').'</option>
-                    <option value="Tunisia"'; if($prev_val=='Tunisia'){$output.=' selected="selected" ';}; $output.='>'.__('Tunisia', 'wpsc-support-tickets').'</option>
-                    <option value="Turkey"'; if($prev_val=='Turkey'){$output.=' selected="selected" ';}; $output.='>'.__('Turkey', 'wpsc-support-tickets').'</option>
-                    <option value="Turkmenistan"'; if($prev_val=='Turkmenistan'){$output.=' selected="selected" ';}; $output.='>'.__('Turkmenistan', 'wpsc-support-tickets').'</option>
-                    <option value="Turks and Caicos Islands"'; if($prev_val=='Turks and Caicos Islands'){$output.=' selected="selected" ';}; $output.='>'.__('Turks and Caicos Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Tuvalu"'; if($prev_val=='Tuvalu'){$output.=' selected="selected" ';}; $output.='>'.__('Tuvalu', 'wpsc-support-tickets').'</option>
-                    <option value="Uganda"'; if($prev_val=='Uganda'){$output.=' selected="selected" ';}; $output.='>'.__('Uganda', 'wpsc-support-tickets').'</option>
-                    <option value="Ukraine"'; if($prev_val=='Ukraine'){$output.=' selected="selected" ';}; $output.='>'.__('Ukraine', 'wpsc-support-tickets').'</option>
-                    <option value="United Arab Emirates"'; if($prev_val=='United Arab Emirates'){$output.=' selected="selected" ';}; $output.='>'.__('United Arab Emirates', 'wpsc-support-tickets').'</option>
-                    <option value="United States Minor Outlying Islands"'; if($prev_val=='United States Minor Outlying Islands'){$output.=' selected="selected" ';}; $output.='>'.__('United States Minor Outlying Islands', 'wpsc-support-tickets').'</option>
-                    <option value="Uruguay"'; if($prev_val=='Uruguay'){$output.=' selected="selected" ';}; $output.='>'.__('Uruguay', 'wpsc-support-tickets').'</option>
-                    <option value="Uzbekistan"'; if($prev_val=='Uzbekistan'){$output.=' selected="selected" ';}; $output.='>'.__('Uzbekistan', 'wpsc-support-tickets').'</option>
-                    <option value="Vanuatu"'; if($prev_val=='Vanuatu'){$output.=' selected="selected" ';}; $output.='>'.__('Vanuatu', 'wpsc-support-tickets').'</option>
-                    <option value="Venezuela"'; if($prev_val=='Venezuela'){$output.=' selected="selected" ';}; $output.='>'.__('Venezuela', 'wpsc-support-tickets').'</option>
-                    <option value="Viet Nam"'; if($prev_val=='Viet Nam'){$output.=' selected="selected" ';}; $output.='>'.__('Viet Nam', 'wpsc-support-tickets').'</option>
-                    <option value="Virgin Islands, British"'; if($prev_val=='Virgin Islands, British'){$output.=' selected="selected" ';}; $output.='>'.__('Virgin Islands, British', 'wpsc-support-tickets').'</option>
-                    <option value="Virgin Islands, U.S."'; if($prev_val=='Virgin Islands, U.S.'){$output.=' selected="selected" ';}; $output.='>'.__('Virgin Islands, U.S.', 'wpsc-support-tickets').'</option>
-                    <option value="Wallis and Futuna"'; if($prev_val=='Wallis and Futuna'){$output.=' selected="selected" ';}; $output.='>'.__('Wallis and Futuna', 'wpsc-support-tickets').'</option>
-                    <option value="Western Sahara"'; if($prev_val=='Western Sahara'){$output.=' selected="selected" ';}; $output.='>'.__('Western Sahara', 'wpsc-support-tickets').'</option>
-                    <option value="Yemen"'; if($prev_val=='Yemen'){$output.=' selected="selected" ';}; $output.='>'.__('Yemen', 'wpsc-support-tickets').'</option>
-                    <option value="Zambia"'; if($prev_val=='Zambia'){$output.=' selected="selected" ';}; $output.='>'.__('Zambia', 'wpsc-support-tickets').'</option>
-                    <option value="Zimbabwe"'; if($prev_val=='Zimbabwe'){$output.=' selected="selected" ';}; $output.='>'.__('Zimbabwe', 'wpsc-support-tickets').'</option>
-                    </select></td></tr>';
-                }
-                if($specific_items[2]=='email') {
-                    $output .= '<tr><td><h3>'. $specific_items[0] ;if($specific_items[1]=='required'){$output .= '<ins><div class="wpst-required-symbol" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="display:inline;"'; }  $output .='>* </div></ins>';}$output.='</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'.$_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" '; if ($devOptions['disable_inline_styles'] == 'false') { $output.='style="width:100%"'; }  $output .=' /></td></tr>';
-                }
-                if($specific_items[2]=='separator') {
-                    $output .= '<tr><td><center>'.$specific_items[0].'</center></td></tr>';
-                }
-                if($specific_items[2]=='header') {
-                    $output .= '<tr><td><h2>'.$specific_items[0] .'</h2></td></tr>';
-                }
-                if($specific_items[2]=='text') {
-                    $output .= '<tr><td>'.$specific_items[0] .'</td></tr>';
-                }
+        // Custom form fields here
+        $table_name33 = $wpdb->prefix . "wpstorecart_meta";
+        $grabrecord = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-requiredinfo' ORDER BY `foreignkey` ASC;";
 
-            }
-    }       
-    
-    return $output;
+        $resultscf = $wpdb->get_results( $grabrecord , ARRAY_A );
+
+        $wpsct_text_fields = array(
+            'input (text)','shippingcity','firstname','lastname',
+            'shippingaddress','input (numeric)','zipcode'
+        );
+        $wpsct_states = array(
+            "not applicable" => 'Other (Non-US)',
+            "AL" => 'Alabama',      "AK" => 'Alaska',       "AZ" => 'Arizona',      "CA" => 'California',
+            "CO" => 'Colorado',     "CT" => 'Connecticut',  "DE" => 'Delaware',     "DC" => 'District Of Columbia',
+            "FL" => 'Florida',      "GA" => 'Georgia',      "HI" => 'Hawaii',       "ID" => 'Idaho', 
+            "IL" => 'Illinois',     "IN" => 'Indiana',      "IA" => 'Iowa',         "KS" => 'Kansas',       
+            "KY" => 'Kentucky',     "LA" => 'Louisiana',    "ME" => 'Maine',        "MD" => 'Maryland',
+            "MA" => 'Massachusetts',"MI" => 'Michigan',     "MN" => 'Minnesota',    "MS" => 'Mississippi',  
+            "MO" => 'Missouri',     "MT" => 'Montana',      "NE" => 'Nebraska',     "NV" => 'Nevada',       
+            "NH" => 'New Hampshire',"NJ" => 'New Jersey',   "NM" => 'New Mexico',   "NY" => 'New York',
+            "NC" => 'North Carolina',"ND" => 'North Dakota',"OH" => 'Ohio',         "OK" => 'Oklahoma',
+            "OR" => 'Oregon',       "PA" => 'Pennsylvania', "RI" => 'Rhode Island', "SC" => 'South Carolina',
+            "SD" => 'South Dakota', "TN" => 'Tennessee',    "TX" => 'Texas',        "UT" => 'Utah',
+            "VT" => 'Vermont',      "VA" => 'Virginia',     "WA" => 'Washington',   "WV" => 'West Virginia',
+            "WI" => 'Wisconsin',    "WY" => 'Wyoming',
+        );    
+        $wpsct_countries = array(
+            "United States", "Canada","United Kingdom","Ireland","Australia","New Zealand","Afghanistan","Albania","Algeria","American Samoa",
+            "Andorra","Angola","Anguilla","Antarctica","Antigua and Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan",
+            "Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia and Herzegovina",
+            "Botswana","Bouvet Island","Brazil","British Indian Ocean Territory","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cambodia",
+            "Cameroon","Canada","Cape Verde","Cayman Islands","Central African Republic","Chad","Chile","China","Christmas Island","Cocos (Keeling) Islands",
+            "Colombia","Comoros","Congo","Congo, The Democratic Republic of The","Cook Islands","Costa Rica","Cote D\'ivoire","Croatia","Cuba","Cyprus",
+            "Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia",
+            "Ethiopia","Falkland Islands (Malvinas)","Faroe Islands","Fiji","Finland","France","French Guiana","French Polynesia","French Southern Territories",
+            "Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guadeloupe","Guam","Guatemala","Guinea","Guinea-bissau",
+            "Guyana","Haiti","Heard Island and Mcdonald Islands","Holy See (Vatican City State)","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia",
+            "Iran, Islamic Republic of","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea, Democratic People\'s Republic of",
+            "Korea, Republic of","Kuwait","Kyrgyzstan","Lao People\'s Democratic Republic","Latvia","Lebanon","Lesotho","Liberia","Libyan Arab Jamahiriya",
+            "Liechtenstein","Lithuania","Luxembourg","Macao","Macedonia, The Former Yugoslav Republic of","Madagascar","Malawi","Malaysia","Maldives","Mali",
+            "Malta","Marshall Islands","Martinique","Mauritania","Mauritius","Mayotte","Mexico","Micronesia, Federated States of","Moldova, Republic of",
+            "Monaco","Mongolia","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","Netherlands Antilles","New Caledonia",
+            "New Zealand","Nicaragua","Niger","Nigeria","Niue","Norfolk Island","Northern Mariana Islands","Norway","Oman","Pakistan","Palau",
+            "Palestinian Territory, Occupied","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Pitcairn","Poland","Portugal","Puerto Rico",
+            "Qatar","Reunion","Romania","Russian Federation","Rwanda","Saint Helena","Saint Kitts and Nevis","Saint Lucia","Saint Pierre and Miquelon",
+            "Saint Vincent and The Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia and Montenegro","Seychelles",
+            "Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Georgia and The South Sandwich Islands","Spain",
+            "Sri Lanka","Sudan","Suriname","Svalbard and Jan Mayen","Swaziland","Sweden","Switzerland","Syrian Arab Republic","Taiwan, Province of China",
+            "Tajikistan","Tanzania, United Republic of","Thailand","Timor-leste","Togo","Tokelau","Tonga","Trinidad and Tobago","Tunisia","Turkey",
+            "Turkmenistan","Turks and Caicos Islands","Tuvalu","Uganda","Ukraine","United Arab Emirates","United States Minor Outlying Islands","Uruguay",
+            "Uzbekistan","Vanuatu","Venezuela","Viet Nam","Virgin Islands, British","Virgin Islands, U.S.","Wallis and Futuna","Western Sahara","Yemen",
+            "Zambia","Zimbabwe",
+        );    
+
+        $wpsct_style_width = '';
+        $wpsct_style_inline = '';
+        if ($devOptions['disable_inline_styles'] == 'false') {
+            $wpsct_style_width ='style="width:100%"';
+            $wpsct_style_inline = 'style="display:inline;"';
+        }  
+
+        if(isset($resultscf)) {
+                foreach ($resultscf as $field) {
+                    $specific_items = explode("||", $field['value']);
+                    $wpsct_required_item = '';
+                    if ($specific_items[1]=='required'){ 
+                        $wpsct_required_item = '<ins><div class="wpst-required-symbol" ' . $wpsct_style_inline . '>* </div></ins>';
+                    }
+                    $prev_val = $_SESSION['wpsct_custom_'.$field['primkey']];
+                    foreach ($wpsct_text_fields as $wpsct_text_field) {
+                        if($specific_items[2]==$wpsct_text_field) {
+                            $output .= '<tr><td><h3>'. $specific_items[0] . $wpsct_required_item
+                                . '</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'
+                                . $_SESSION['wpsct_custom_'.$field['primkey']] .'" name="wpsct_custom_'.$field['primkey'].'" ' 
+                                . $wpsct_style_width . '  /></td></tr>';
+                        }
+                    }
+                    if ($specific_items[2] == 'textarea') {
+                        $output .= '<tr><td><h3>' . $specific_items[0] . $wpsct_required_item
+                            . '</h3><textarea  id="wpsct_custom_' . $field['primkey'] . '" name="wpsct_custom_' 
+                            . $field['primkey'] . '" ' . $wpsct_style_width . '>' 
+                            . $_SESSION['wpsct_custom_' . $field['primkey']] . '</textarea></td></tr>';
+                    }
+                    if($specific_items[2]=='states' || $specific_items[2]=='taxstates') {
+                        $selected[$prev_val] = ' selected="selected"';
+                        $output .= '<tr><td><h3>'. $specific_items[0] . $wpsct_required_item 
+                            . '</h3><select name="wpsct_custom_'.$field['primkey'].'" class="wpsct-states" ' . $wpsct_style_width . ">\n"
+                            . "<option value=\"not applicable\" {$selected['']}>" . __('Other (Non-US)', 'wpsc-support-tickets').'</option>'; 
+                        foreach ($wpsct_states as $wpsct_code => $wpcst_state) {
+                            $output .="<option value=\"$wpsct_code\" {$selected[$wpsct_code]}>" . __($wpcst_state, 'wpsc-support-tickets').'</option>\n'; 
+                        }
+                        $output.= '</select></td></tr>';
+                    }
+                    if($specific_items[2]=='countries' || $specific_items[2]=='taxcountries') {
+                        $output .= '<tr><td><h3>'. $specific_items[0] . $wpsct_required_item
+                            . '</h3><select  name="wpsct_custom_'.$field['primkey'].'" class="wpsct-countries" '. $wpsct_style_width . ">\n";
+                        $selected[$prev_val] = ' selected="selected"';
+                        foreach ($wpsct_countries as $wpsct_country) {
+                            $output .="<option value=\"$wpsct_country\" {$selected[$wpsct_country]}>" . __($wpsct_country, 'wpsc-support-tickets').'</option>\n'; 
+                        }
+                        $output.= '</select></td></tr>';                    
+                    }
+                    if($specific_items[2]=='email') {
+                        $output .= '<tr><td><h3>'. $specific_items[0] . $wpsct_required_item
+                            . '</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'
+                            . $_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" ' . $wpsct_style_width
+                            . ' /></td></tr>';
+                    }
+                    if($specific_items[2]=='separator') {
+                        $output .= '<tr><td><center>'.$specific_items[0].'</center></td></tr>';
+                    }
+                    if($specific_items[2]=='header') {
+                        $output .= '<tr><td><h2>'.$specific_items[0] .'</h2></td></tr>';
+                    }
+                    if($specific_items[2]=='text') {
+                        $output .= '<tr><td>'.$specific_items[0] .'</td></tr>';
+                    }
+
+                }
+        }       
+
+        return $output;
+    }
 }
 
 /**
