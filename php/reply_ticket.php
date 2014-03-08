@@ -222,7 +222,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
             $headers .= 'From: ' . $devOptions['email'] . "\r\n" .
             'Reply-To: ' . $devOptions['email'] .  "\r\n" .
             'X-Mailer: PHP/' . phpversion();
-            @mail($to, $subject, $message, $headers);
+            wp_mail($to, $subject, $message, $headers);
 
             if($devOptions['email']!=$results[0]['email']) { 
                 $to      = $devOptions['email']; // Send this to the admin
@@ -242,7 +242,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
                 $headers .= 'From: ' . $devOptions['email'] . "\r\n" .
                 'Reply-To: ' . $devOptions['email'] .  "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
-                @mail($to, $subject, $message, $headers);
+                wp_mail($to, $subject, $message, $headers);
             }
     }
 }
