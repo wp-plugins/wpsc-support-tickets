@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.4.3
+  Version: 4.5.0
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -33,8 +33,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting;
-$wpscSupportTickets_version = 4.4;
-$wpscSupportTickets_db_version = 4.4;
+$wpscSupportTickets_version = 4.5;
+$wpscSupportTickets_db_version = 4.5;
 $APjavascriptQueue = NULL;
 $wpsct_error_reporting = false;
 
@@ -211,7 +211,17 @@ if(!function_exists('wpsctPromptForCustomFields')) {
                     if($specific_items[2]=='text') {
                         $output .= '<tr><td>'.$specific_items[0] .'</td></tr>';
                     }
-
+                    /** Added in 4.4.4 **/
+                    if($specific_items[2]=='dropdown') {
+                        
+                    }
+                    if($specific_items[2]=='checkbox') {
+                        
+                    }
+                    if($specific_items[2]=='radio') {
+                        
+                    }                    
+                    
                 }
         }       
 
@@ -834,7 +844,8 @@ if (!class_exists("wpscSupportTickets")) {
 
                 function addwpscfield() {
                     jQuery.ajax({ url: "'.plugins_url().'/wpsc-support-tickets/php/add_field.php", type:"POST", data:"createnewfieldname="+jQuery("#createnewfieldname").val()+"&createnewfieldtype="+jQuery("#createnewfieldtype").val()+"&createnewfieldrequired="+jQuery("input:radio[name=createnewfieldrequired]:checked").val(), success: function(txt){
-                        jQuery("#requiredul").prepend("<li style=\'font-size:90%;cursor:move;background: url('.plugins_url().'/wpsc-support-tickets/images/sort.png) top left no-repeat;width:823px;min-width:823px;height:55px;min-height:55px;padding:4px 0 0 30px;margin-bottom:-8px;\' id=\'requiredinfo_"+txt+"\'><img onclick=\'delwpscfield("+txt+");\' style=\'cursor:pointer;position:relative;top:4px;\' src=\''.plugins_url().'/wpsc-support-tickets/images/delete.png\' /><input type=\'text\' value=\'"+jQuery("#createnewfieldname").val()+"\' name=\'required_info_name[]\' /><input type=\'hidden\' name=\'required_info_key[]\' value=\'"+txt+"\' /><select name=\'required_info_type[]\' id=\'ri_"+txt+"\'><option value=\'firstname\'>'.__('First name', 'wpsc-support-tickets').'</option><option value=\'lastname\'>'.__('Last name', 'wpsc-support-tickets').'</option><option value=\'shippingaddress\'>'.__('Address', 'wpsc-support-tickets').'</option><option value=\'shippingcity\'>'.__('City', 'wpsc-support-tickets').'</option><option value=\'taxstates\'>'.__('US States', 'wpsc-support-tickets').'</option><option value=\'taxcountries\'>'.__('Countries', 'wpsc-support-tickets').'</option><option value=\'zipcode\'>'.__('Zipcode', 'wpsc-support-tickets').'</option><option value=\'email\'>'.__('Email Address', 'wpsc-support-tickets').'</option><option value=\'input (text)\'>'.__('Input (text)', 'wpsc-support-tickets').'</option><option value=\'input (numeric)\'>'.__('Input (numeric)', 'wpsc-support-tickets').'</option><option value=\'textarea\'>'.__('Input textarea', 'wpsc-support-tickets').'</option><option value=\'separator\'>--- '.__('Separator', 'wpsc-support-tickets').' ---</option><option value=\'header\'>'.__('Header', 'wpsc-support-tickets').' &lt;h2&gt;&lt;/h2&gt;</option><option value=\'text\'>'.__('Text', 'wpsc-support-tickets').' &lt;p&gt;&lt;/p&gt;</option></select><label for=\'required_info_required_"+txt+"\'><input type=\'radio\' id=\'required_info_required_"+txt+"_yes\' name=\'required_info_required_"+txt+"\' value=\'required\' /> '.__('Required', 'wpsc-support-tickets').'</label>&nbsp;&nbsp;&nbsp;&nbsp;<label for=\'required_info_required_"+txt+"_no\'><input type=\'radio\' id=\'required_info_required_"+txt+"_no\' name=\'required_info_required_"+txt+"\' value=\'optional\' /> '.__('Optional', 'wpsc-support-tickets').'</label></li>");
+                        //jQuery("#requiredul").prepend("<li style=\'font-size:90%;cursor:move;background: url('.plugins_url().'/wpsc-support-tickets/images/sort.png) top left no-repeat;width:823px;min-width:823px;height:55px;min-height:55px;padding:4px 0 0 30px;margin-bottom:-8px;\' id=\'requiredinfo_"+txt+"\'><img onclick=\'delwpscfield("+txt+");\' style=\'cursor:pointer;position:relative;top:4px;\' src=\''.plugins_url().'/wpsc-support-tickets/images/delete.png\' /><input type=\'text\' value=\'"+jQuery("#createnewfieldname").val()+"\' name=\'required_info_name[]\' /><input type=\'hidden\' name=\'required_info_key[]\' value=\'"+txt+"\' /><select name=\'required_info_type[]\' id=\'ri_"+txt+"\'><option value=\'firstname\'>'.__('First name', 'wpsc-support-tickets').'</option><option value=\'lastname\'>'.__('Last name', 'wpsc-support-tickets').'</option><option value=\'shippingaddress\'>'.__('Address', 'wpsc-support-tickets').'</option><option value=\'shippingcity\'>'.__('City', 'wpsc-support-tickets').'</option><option value=\'taxstates\'>'.__('US States', 'wpsc-support-tickets').'</option><option value=\'taxcountries\'>'.__('Countries', 'wpsc-support-tickets').'</option><option value=\'zipcode\'>'.__('Zipcode', 'wpsc-support-tickets').'</option><option value=\'email\'>'.__('Email Address', 'wpsc-support-tickets').'</option><option value=\'input (text)\'>'.__('Input (text)', 'wpsc-support-tickets').'</option><option value=\'input (numeric)\'>'.__('Input (numeric)', 'wpsc-support-tickets').'</option><option value=\'textarea\'>'.__('Input textarea', 'wpsc-support-tickets').'</option><option value=\'dropdown\'>'.__('Input Dropdown list', 'wpsc-support-tickets').'</option><option value=\'checkbox\'>'.__('Input Checkbox', 'wpsc-support-tickets').'</option><option value=\'radio\'>'.__('Input Radio button', 'wpsc-support-tickets').'</option><option value=\'separator\'>--- '.__('Separator', 'wpsc-support-tickets').' ---</option><option value=\'header\'>'.__('Header', 'wpsc-support-tickets').' &lt;h2&gt;&lt;/h2&gt;</option><option value=\'text\'>'.__('Text', 'wpsc-support-tickets').' &lt;p&gt;&lt;/p&gt;</option></select><label for=\'required_info_required_"+txt+"\'><input type=\'radio\' id=\'required_info_required_"+txt+"_yes\' name=\'required_info_required_"+txt+"\' value=\'required\' /> '.__('Required', 'wpsc-support-tickets').'</label>&nbsp;&nbsp;&nbsp;&nbsp;<label for=\'required_info_required_"+txt+"_no\'><input type=\'radio\' id=\'required_info_required_"+txt+"_no\' name=\'required_info_required_"+txt+"\' value=\'optional\' /> '.__('Optional', 'wpsc-support-tickets').'</label></li>");
+                            jQuery("#requiredul").prepend("<li style=\'font-size:90%;cursor:move;background: url('.plugins_url().'/wpsc-support-tickets/images/sort.png) top left no-repeat;width:823px;min-width:823px;height:55px;min-height:55px;padding:4px 0 0 30px;margin-bottom:-8px;\' id=\'requiredinfo_"+txt+"\'><img onclick=\'delwpscfield("+txt+");\' style=\'cursor:pointer;position:relative;top:4px;\' src=\''.plugins_url().'/wpsc-support-tickets/images/delete.png\' /><input type=\'text\' value=\'"+jQuery("#createnewfieldname").val()+"\' name=\'required_info_name[]\' /><input type=\'hidden\' name=\'required_info_key[]\' value=\'"+txt+"\' /><select name=\'required_info_type[]\' id=\'ri_"+txt+"\'><option value=\'firstname\'>'.__('First name', 'wpsc-support-tickets').'</option><option value=\'lastname\'>'.__('Last name', 'wpsc-support-tickets').'</option><option value=\'shippingaddress\'>'.__('Address', 'wpsc-support-tickets').'</option><option value=\'shippingcity\'>'.__('City', 'wpsc-support-tickets').'</option><option value=\'taxstates\'>'.__('US States', 'wpsc-support-tickets').'</option><option value=\'taxcountries\'>'.__('Countries', 'wpsc-support-tickets').'</option><option value=\'zipcode\'>'.__('Zipcode', 'wpsc-support-tickets').'</option><option value=\'email\'>'.__('Email Address', 'wpsc-support-tickets').'</option><option value=\'input (text)\'>'.__('Input (text)', 'wpsc-support-tickets').'</option><option value=\'input (numeric)\'>'.__('Input (numeric)', 'wpsc-support-tickets').'</option><option value=\'textarea\'>'.__('Input textarea', 'wpsc-support-tickets').'</option><option value=\'separator\'>--- '.__('Separator', 'wpsc-support-tickets').' ---</option><option value=\'header\'>'.__('Header', 'wpsc-support-tickets').' &lt;h2&gt;&lt;/h2&gt;</option><option value=\'text\'>'.__('Text', 'wpsc-support-tickets').' &lt;p&gt;&lt;/p&gt;</option></select><label for=\'required_info_required_"+txt+"\'><input type=\'radio\' id=\'required_info_required_"+txt+"_yes\' name=\'required_info_required_"+txt+"\' value=\'required\' /> '.__('Required', 'wpsc-support-tickets').'</label>&nbsp;&nbsp;&nbsp;&nbsp;<label for=\'required_info_required_"+txt+"_no\'><input type=\'radio\' id=\'required_info_required_"+txt+"_no\' name=\'required_info_required_"+txt+"\' value=\'optional\' /> '.__('Optional', 'wpsc-support-tickets').'</label></li>");
                         jQuery("#ri_"+txt).val(jQuery("#createnewfieldtype").val());
                         if(jQuery("input:radio[name=createnewfieldrequired]:checked").val()=="required") {
                             jQuery(\'input[name="required_info_required_\'+txt+\'"][value="required"]\').attr("checked", true);
@@ -852,6 +863,22 @@ if (!class_exists("wpscSupportTickets")) {
                         jQuery("#requiredinfo_"+keytodel).remove();
                     }});
                 }
+                
+                function wpstCheckFieldType() {
+                    //if ( jQuery("#createnewfieldtype").val()=="dropdown" ||  jQuery("#createnewfieldtype").val()=="checkbox" ||  jQuery("#createnewfieldtype").val()=="radio" ) {
+                    //    jQuery(".wpstAddNewAdditionalOptionButton").show();
+                    //    jQuery("#wpsc-support-tickets-custom-field").show();
+                    //} else {
+                        jQuery(".wpstAddNewAdditionalOptionButton").hide();
+                        jQuery("#wpsc-support-tickets-custom-field").hide();
+                    //}
+                    return false;
+                }
+
+                //function wpstCreateNewOption() {
+                //jQuery("#wpsc-support-tickets-custom-field").
+                //    |_ <input name="" id="wpst_new_1" /> <!--<img onclick="delwpsccustomfield(1);" style="cursor:pointer;position:relative;top:4px;" src="'.plugins_url().'/wpsc-support-tickets/images/delete.png" />-->
+                //}
 
                 jQuery(document).ready(function(){
 
@@ -864,6 +891,8 @@ if (!class_exists("wpscSupportTickets")) {
                                         });
                                 }
                                 });
+
+                        wpstCheckFieldType();
 
                         });
 
@@ -888,18 +917,20 @@ if (!class_exists("wpscSupportTickets")) {
             $theOptionszz[8] = 'input (text)';$theOptionszzName[8] = __('Input (text)', 'wpsc-support-tickets');
             $theOptionszz[9] = 'input (numeric)';$theOptionszzName[9] = __('Input (numeric)', 'wpsc-support-tickets');
             $theOptionszz[10] = 'textarea';$theOptionszzName[10] = __('Input Textarea', 'wpsc-support-tickets');
-            //$theOptionszz[11] = 'states';$theOptionszzName[11] = __('US States', 'wpsc-support-tickets');
-            //$theOptionszz[12] = 'countries';$theOptionszzName[12] = __('Countries', 'wpsc-support-tickets');             
-            $theOptionszz[13] = 'separator';$theOptionszzName[11] = __('--- Separator ---', 'wpsc-support-tickets');
-            $theOptionszz[14] = 'header';$theOptionszzName[12] = __('Header &lt;h2&gt;&lt;/h2&gt;', 'wpsc-support-tickets');
-            $theOptionszz[15] = 'text';$theOptionszzName[13] = __('Text &lt;p&gt;&lt;/p&gt;', 'wpsc-support-tickets');
-            //$theOptionszz[11] = 'dropdown';$theOptionszzName[11] = __('Drop down list', 'wpsc-support-tickets');
-            //$theOptionszz[12] = 'checkbox';$theOptionszzName[12] = __('Input Checkbox', 'wpsc-support-tickets');
+            
+            //$theOptionszz[11] = 'dropdown';$theOptionszzName[11] = __('Input Dropdown list', 'wpsc-support-tickets');
+            //$theOptionszz[12] = 'checkbox';$theOptionszzName[12] = __('Input Checkbox', 'wpsc-support-tickets');            
+            //$theOptionszz[13] = 'radio';$theOptionszzName[13] = __('Input Radio button', 'wpsc-support-tickets');            
+            
+            $theOptionszz[11] = 'separator';$theOptionszzName[11] = __('--- Separator ---', 'wpsc-support-tickets');
+            $theOptionszz[12] = 'header';$theOptionszzName[12] = __('Header &lt;h2&gt;&lt;/h2&gt;', 'wpsc-support-tickets');
+            $theOptionszz[13] = 'text';$theOptionszzName[13] = __('Text &lt;p&gt;&lt;/p&gt;', 'wpsc-support-tickets');
+
 
             echo'
                 <form action="#" method="post">
             <table class="widefat">
-            <thead><tr><th>'.__('Add New Field', 'wpsc-support-tickets').': <strong>'.__('Name', 'wpsc-support-tickets').': </strong><input type="text" name="createnewfieldname" id="createnewfieldname" value="" /> <strong>'.__('Type', 'wpsc-support-tickets').': </strong><select name="createnewfieldtype" id="createnewfieldtype">';
+            <thead><tr><th><h2>'.__('Add New Field', 'wpsc-support-tickets').'</h2><br /><strong>'.__('Name', 'wpsc-support-tickets').': </strong><input type="text" name="createnewfieldname" id="createnewfieldname" value="" /> <br /><strong>'.__('Type', 'wpsc-support-tickets').': </strong><select name="createnewfieldtype" id="createnewfieldtype" onchange="wpstCheckFieldType();">';
 
             $icounter = 0;
             foreach ($theOptionszz as $theOption) {
@@ -912,7 +943,15 @@ if (!class_exists("wpscSupportTickets")) {
                     $icounter++;
             }
 
-            echo '</select><label for="createnewfieldrequired_yes"><input type="radio" id="createnewfieldrequired_yes" name="createnewfieldrequired" value="required" checked="checked" /> '.__('Required', 'wpsc-support-tickets').'</label>&nbsp;&nbsp;&nbsp;&nbsp;<label for="createnewfieldrequired_no"><input type="radio" id="createnewfieldrequired_no" name="createnewfieldrequired" value="optional" /> '.__('Optional', 'wpsc-support-tickets').'</label> <a href="#" onclick="addwpscfield();return false;"> &nbsp;  &nbsp; <button class="button-primary"><img style="cursor:pointer;" src="'.plugins_url().'/wpsc-support-tickets/images/Add.png" /> '.__('Save New Field', 'wpsc-support-tickets').'</button></a></th></tr></thead>
+            echo '</select>  <button style="display:none;" id="wpstAddNewAdditionalOptionButton" class="button-secondary wpstAddNewAdditionalOptionButton" onclick="wpstCreateNewOption();return false;">'.__('Add additional option', 'wpsc-support-tickets').'</button>
+            
+            <div id="wpsc-support-tickets-custom-field" style="margin-left:40px;display:none;">
+                |_ <input name="" id="wpst_new_1" /> <!--<img onclick="delwpsccustomfield(1);" style="cursor:pointer;position:relative;top:4px;" src="'.plugins_url().'/wpsc-support-tickets/images/delete.png" />-->
+            </div>
+            
+
+            <br /><label for="createnewfieldrequired_yes"><input type="radio" id="createnewfieldrequired_yes" name="createnewfieldrequired" value="required" checked="checked" /> '.__('Required', 'wpsc-support-tickets').'</label>&nbsp;&nbsp;&nbsp;&nbsp;<label for="createnewfieldrequired_no"><input type="radio" id="createnewfieldrequired_no" name="createnewfieldrequired" value="optional" /> '.__('Optional', 'wpsc-support-tickets').'</label> <br /> <a href="#" style="margin-left:35%;" onclick="addwpscfield();return false;"> &nbsp;  &nbsp; <button class="button-primary"><img style="cursor:pointer;" src="'.plugins_url().'/wpsc-support-tickets/images/Add.png" /> '.__('Save New Field', 'wpsc-support-tickets').'</button></a></th></tr></thead>
+                
             <tbody><tr><td>
             <div id="requiredsort" style="margin:0 auto 0 auto;">
                 <ul id="requiredul" style="margin:0 auto 0 auto;list-style:none;">
