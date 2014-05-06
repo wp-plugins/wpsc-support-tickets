@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.5.0
+  Version: 4.5.1
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -277,7 +277,7 @@ if (!class_exists("wpscSupportTickets")) {
                 'email_new_reply_subject' => __('Your support ticket reply was received.', 'wpsc-support-tickets'),
                 'email_new_reply_body' => __('A reply was posted to one of your support tickets.', 'wpsc-support-tickets'),
                 'disable_inline_styles' => 'false',
-                'allowguests' => 'false',
+                'allow_guests' => 'false',
                 'allow_all_tickets_to_be_replied' => 'false',
                 'allow_all_tickets_to_be_viewed' => 'false',
                 'allow_html' => 'false',
@@ -360,13 +360,13 @@ if (!class_exists("wpscSupportTickets")) {
                     $devOptions['email_new_ticket_subject'] = esc_sql($_POST['email_new_ticket_subject']);
                 }
                 if (isset($_POST['email_new_ticket_body'])) {
-                    $devOptions['email_new_ticket_body'] = stripslashes($_POST['email_new_ticket_body']);
+                    $devOptions['email_new_ticket_body'] = esc_sql($_POST['email_new_ticket_body']);
                 }
                 if (isset($_POST['email_new_reply_subject'])) {
                     $devOptions['email_new_reply_subject'] = esc_sql($_POST['email_new_reply_subject']);
                 }
                 if (isset($_POST['email_new_reply_body'])) {
-                    $devOptions['email_new_reply_body'] = stripslashes($_POST['email_new_reply_body']);
+                    $devOptions['email_new_reply_body'] = esc_sql($_POST['email_new_reply_body']);
                 }
                 if (isset($_POST['disable_inline_styles'])) {
                     $devOptions['disable_inline_styles'] = esc_sql($_POST['disable_inline_styles']);
