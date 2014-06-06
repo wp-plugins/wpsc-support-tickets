@@ -18,9 +18,10 @@ if ( current_user_can('manage_wpsct_support_tickets')) { // admin edits such as 
     if(@isset($_POST['wpscst_status']) && @isset($_POST['wpscst_department']) && is_numeric($_POST['wpscst_edit_primkey'])) {
         $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));
         $wpscst_status = $wpdb->escape($_POST['wpscst_status']);
+        $wpscst_severity = $wpdb->escape($_POST['wpscst_severity']);
         $primkey = intval($_POST['wpscst_edit_primkey']);
         // Update the Last Updated time stamp
-        $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."', `type`='{$wpscst_department}', `resolution`='{$wpscst_status}' WHERE `primkey` ='{$primkey}';";
+        $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."', `type`='{$wpscst_department}', `resolution`='{$wpscst_status}', `severity`='{$wpscst_severity}' WHERE `primkey` ='{$primkey}';";
         $wpdb->query($updateSQL);
     }
 }

@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.5.1
+  Version: 4.6.0
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -33,8 +33,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting;
-$wpscSupportTickets_version = 4.5;
-$wpscSupportTickets_db_version = 4.5;
+$wpscSupportTickets_version = 4.6;
+$wpscSupportTickets_db_version = 4.6;
 $APjavascriptQueue = NULL;
 $wpsct_error_reporting = false;
 
@@ -1232,6 +1232,40 @@ if (!class_exists("wpscSupportTickets")) {
                 }
             }
             $output .= '</select></div>
+                <div style="float:left;margin-left:20px;"><h3>' . __('Severity', 'wpsc-support-tickets') . '</h3>
+                    <select name="wpscst_severity">
+                        <option value="Low"';
+                            if ($results[0]['severity'] == 'Low') {
+                                $output.= ' selected="selected" ';
+                            } $output.='>            
+                            ' . __('Low', 'wpsc-support-tickets') . '
+                        </option>                    
+                        <option value="Normal"';
+                            if ($results[0]['severity'] == 'Normal') {
+                                $output.= ' selected="selected" ';
+                            } $output.='>            
+                            ' . __('Normal', 'wpsc-support-tickets') . '
+                        </option>
+                        <option value="High"';
+                            if ($results[0]['severity'] == 'High') {
+                                $output.= ' selected="selected" ';
+                            } $output.='>            
+                            ' . __('High', 'wpsc-support-tickets') . '
+                        </option>       
+                        <option value="Urgent"';
+                            if ($results[0]['severity'] == 'Urgent') {
+                                $output.= ' selected="selected" ';
+                            } $output.='>            
+                            ' . __('Urgent', 'wpsc-support-tickets') . '
+                        </option> 
+                        <option value="Critical"';
+                            if ($results[0]['severity'] == 'Critical') {
+                                $output.= ' selected="selected" ';
+                            } $output.='>            
+                            ' . __('Critical', 'wpsc-support-tickets') . '
+                        </option>                        
+                    </select>
+                </div>
                         <div style="float:left;margin-left:20px;"><h3>' . __('Status', 'wpsc-support-tickets') . '</h3><select name="wpscst_status">
                                 <option value="Open"';
             if ($results[0]['resolution'] == 'Open') {
@@ -1504,7 +1538,22 @@ if (!class_exists("wpscSupportTickets")) {
                                     $output .= '<option value="' . $exploded . '">' . $exploded . '</option>';
                                 }
                             }
-                            $output .= '</select><button class="wpscst-button" id="wpscst_cancel" onclick="cancelAdd();return false;"  ';
+                            $output .= '</select> 
+                            <h3>' . __('Severity', 'wpsc-support-tickets') . '</h3><select name="wpscst_severity" id="wpscst_severity">';
+                            $output .= '<option value="Low">'. __('Low', 'wpsc-support-tickets') . '</option>                    
+                            <option value="Normal">' . __('Normal', 'wpsc-support-tickets') . '
+                            </option>
+                            <option value="High">' . __('High', 'wpsc-support-tickets') . '
+                            </option>       
+                            <option value="Urgent">' . __('Urgent', 'wpsc-support-tickets') . '
+                            </option> 
+                            <option value="Critical">' . __('Critical', 'wpsc-support-tickets') . '
+                            </option>';  
+                            $output .= '</select>                                 
+
+                                    <button class="wpscst-button" id="wpscst_cancel" onclick="cancelAdd();return false;"  ';
+                            
+                            
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="float:right;"';
                             } $output.=' ><img ';

@@ -204,7 +204,7 @@ if(is_user_logged_in() || @isset($_SESSION['wpsct_email'])) {
     $wpscst_title = base64_encode(strip_tags($_POST['wpscst_title']));
     $wpscst_initial_message = base64_encode($_POST['wpscst_initial_message'] . $wpscst_initial_message);
     $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));    
-    
+    $wpscst_severity = $wpdb->escape($_POST['wpscst_severity']);
     
     $sql = "
     INSERT INTO `{$wpdb->prefix}wpscst_tickets` (
@@ -215,7 +215,7 @@ if(is_user_logged_in() || @isset($_SESSION['wpsct_email'])) {
             '{$wpscst_userid}',
             '{$wpscst_email}',
             '0',
-            'Normal',
+            '{$wpscst_severity}',
             'Open',
             '".current_time( 'timestamp' )."',
             '".current_time( 'timestamp' )."',
