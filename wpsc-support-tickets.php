@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.6.0
+  Version: 4.6.1
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -1670,12 +1670,19 @@ if (!class_exists("wpscSupportTickets")) {
                                         $canReopen = $result['resolution'];
                                     }
                                     $output .= '<tr><td><a href="" onclick="loadTicket(' . $result['primkey'] . ',\'' . $canReopen . '\');return false;" ';
+                                    if ($result['resolution'] == strtolower('open') ) {
+                                        $resresolution = __('Open', 'wpsc-support-tickets');
+                                    } elseif ($result['resolution'] == strtolower('closed') ) {
+                                        $resresolution = __('Closed', 'wpsc-support-tickets');
+                                    } else {
+                                        $resresolution = $result['resolution'];
+                                    }
                                     if ($devOptions['disable_inline_styles'] == 'false') {
                                         $output.='style="border:none;text-decoration:none;"';
                                     }$output.='><img';
                                     if ($devOptions['disable_inline_styles'] == 'false') {
                                         $output.=' style="float:left;border:none;margin-right:5px;"';
-                                    }$output.=' src="' . plugins_url('/images/page_edit.png', __FILE__) . '" alt="' . __('View', 'wpsc-support-tickets') . '"  /> ' . base64_decode($result['title']) . '</a></td><td>' . $result['resolution'] . '</td><td>' . date('Y-m-d g:i A', $result['last_updated']) . ' ' . __('by', 'wpsc-support-tickets') . ' ' . $last_staff_reply . '</td></tr>';
+                                    }$output.=' src="' . plugins_url('/images/page_edit.png', __FILE__) . '" alt="' . __('View', 'wpsc-support-tickets') . '"  /> ' . base64_decode($result['title']) . '</a></td><td>' . $resresolution . '</td><td>' . date('Y-m-d g:i A', $result['last_updated']) . ' ' . __('by', 'wpsc-support-tickets') . ' ' . $last_staff_reply . '</td></tr>';
                                 }
                                 $output .= '</table>';
                             }

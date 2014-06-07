@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,Czech
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.6.0
+Stable tag: 4.6.1
 
 == Description ==
 
@@ -88,6 +88,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 4.6.1 =
+* Fixed: Patched an issue where Open and Closed statuses were not being translated
 
 = 4.6.0 =
 * Added: Severity can be set when ticket submitted

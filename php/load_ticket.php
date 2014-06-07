@@ -70,7 +70,15 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
             wpsctDisplayCustomFieldsToFrontend($primkey);
         }
         
-        echo '<strong>'.base64_decode($results[0]['title']).'</strong> ('.$results[0]['resolution'].' - '.base64_decode($results[0]['type']).')</div>';
+        if ($results[0]['resolution'] == strtolower('open') ) {
+            $resresolution = __('Open', 'wpsc-support-tickets');
+        } elseif ($results[0]['resolution'] == strtolower('closed') ) {
+            $resresolution = __('Closed', 'wpsc-support-tickets');
+        } else {
+            $resresolution = $results[0]['resolution'];
+        }       
+        
+        echo '<strong>'.base64_decode($results[0]['title']).'</strong> ('.$resresolution.' - '.base64_decode($results[0]['type']).')</div>';
         
         if($devOptions['custom_field_frontend_position']=='before message') {
             wpsctDisplayCustomFieldsToFrontend($primkey);
