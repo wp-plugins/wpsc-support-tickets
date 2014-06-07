@@ -90,7 +90,7 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 == Changelog ==
 
 = 4.6.1 =
-* Fixed: Patched an issue where Open and Closed statuses were not being translated
+* Fixed: Patched an issue where Open and Closed statuses were not being translated.
 
 = 4.6.0 =
 * Added: Severity can be set when ticket submitted
