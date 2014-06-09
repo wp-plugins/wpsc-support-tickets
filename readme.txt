@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart,Svenska,Norsk,Français,português,brasileiro,Deutsch,Nederlands,Suomi,Russian,ру́сский,язы́к,russkiy,yazyk,Italiano,Italian,Spanish,Español,Hebrew,עִבְרִית,српски,Serbian,Arabic,Română,Czech
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.6.3
+Stable tag: 4.6.4
 
 == Description ==
 
@@ -44,7 +44,7 @@ This can optionally allow you to keep your support ticket system accessible only
  * Dutch (Nederlands) by Jos Wolbers
  * Finnish (Suomi) by Mikko Ohtonen 
  * Russian (ру́сский язы́к, russkiy yazyk) by Login Roman
- * Romanian (limba Română) by Nutu Valea
+ * Romanian (limba Română) by Nutu Valea, updated by Richard Vencu at http://www.dentfix.ro/
  * Italian (Italiano) by Pino Cinelli
  * Spanish (Español) translation provided by Víctor Belgrano
  * Hebrew (עִבְרִית) translation provided by http://atar4u.com/
@@ -88,6 +88,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 4.6.4 =
+* Updated: Romanian (limba Română) translation updated by Richard Vencu at http://www.dentfix.ro/
 
 = 4.6.3 =
 * Updated: Updated the pot file
