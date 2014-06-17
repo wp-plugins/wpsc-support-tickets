@@ -38,7 +38,21 @@ if ( 0 == $current_user->ID ) {
     $lastID = $wpdb->insert_id;
     echo $lastID;
 
+    $customfieldmc = $wpdb->escape($_POST['customfieldmc']);
+    if (@isset($customfieldmc) && trim($customfieldmc)!='') {
+        $insert = "
+        INSERT INTO `{$table_name}` (
+        `primkey`, `value`, `type`, `foreignkey`)
+        VALUES (
+                NULL,
+                '{$customfieldmc}',
+                'wpst-custom-fields-mc',
+                '{$lastID}'
+        );
+        ";
 
+        $results = $wpdb->query($insert);    
+    }
 }
 
 ?>

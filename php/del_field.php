@@ -21,9 +21,11 @@ if ( 0 == $current_user->ID ) {
     $delete = $wpdb->escape($_POST['delete']);
 
     $table_name = $wpdb->prefix . "wpstorecart_meta";
-    $insert = "DELETE FROM `{$table_name}` WHERE `primkey`={$delete};";
 
-    $results = $wpdb->query($insert);
+    $results = $wpdb->query("DELETE FROM `{$table_name}` WHERE `primkey`={$delete};");
 
+    $results = $wpdb->query("DELETE FROM `{$table_name}` WHERE `type`='wpst-custom-fields-mc' AND `foreignkey`='{$delete}';");
+    
+    
 }
 ?>

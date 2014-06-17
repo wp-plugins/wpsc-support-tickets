@@ -89,7 +89,7 @@ if(is_user_logged_in() || @isset($_SESSION['wpsct_email'])) {
     if(isset($resultscf)) {
             foreach ($resultscf as $field) {
                 $specific_items = explode("||", $field['value']);
-                if($specific_items[1]=='required') { // Required field, let's verify it has a value:
+                if($specific_items[1]=='required' && $specific_items[2]!='checkbox') { // Required field, let's verify it has a value:
                     if( @isset($_POST['wpsct_custom_'.$field['primkey']]) && @trim($_POST['wpsct_custom_'.$field['primkey']]) != '' ) {
                         $_SESSION['wpsct_custom_'.$field['primkey']] = $_POST['wpsct_custom_'.$field['primkey']];
                     } else {
@@ -97,7 +97,7 @@ if(is_user_logged_in() || @isset($_SESSION['wpsct_email'])) {
                         $custom_field_problem = true;
                         $custom_field_problem_text .= ' '. $specific_items[0];
                     }
-                }
+                } 
             }
     }
     
