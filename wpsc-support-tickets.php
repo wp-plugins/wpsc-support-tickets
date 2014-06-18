@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.1
+  Version: 4.7.2
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -685,17 +685,17 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '<table class="widefat" style="width:98%;"><tr><td>';
                 echo '
                                 
-                                <h2>Upgrade now to wpsc Support Tickets PRO and unlock in depth statistics for the following and more:</h2> 
+                                <h2>'.__('Upgrade now to wpsc Support Tickets PRO and unlock in depth statistics for the following and more:', 'wpsc-support-tickets').'</h2> 
                                     <ul>
-                                        <li>Average ticket resolution time</li>
-                                        <li>Number of tickets created in each category</li>
-                                        <li>Number of tickets in each severity level</li>
-                                        <li>Top 10 users who create the most tickets</li>
-                                        <li>The number of completed tickets</li>
-                                        <li>Display how long a ticket has been open</li>
-                                        <li>Display how long it took to resolve a closed ticket</li>
-                                        <li>Bar chart showing the amount of time it took to close the last 30 tickets</li>
-                                        <li>And much more, upgrade to PRO today:</li>
+                                        <li>'.__('Average ticket resolution time', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Number of tickets created in each category', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Number of tickets in each severity level', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Top 10 users who create the most tickets', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('The number of completed tickets', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Display how long a ticket has been open', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Display how long it took to resolve a closed ticket', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Bar chart showing the amount of time it took to close the last 30 tickets', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('And much more, upgrade to PRO today:', 'wpsc-support-tickets').'</li>
                                     </ul>
                                     <div id="buyprostats"><strong>$19.99 USD</strong><br /></div>
                                 

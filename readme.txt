@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.7.1
+Stable tag: 4.7.2
 
 == Description ==
 
@@ -88,6 +88,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 4.7.2 =
+* Updated: Updated the pot file
+* Updated: More translatable strings converted for i18n
 
 = 4.7.1 =
 * Updated: Changed the readme.txt to remove excess tags
