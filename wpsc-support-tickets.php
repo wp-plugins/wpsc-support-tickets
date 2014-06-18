@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.2
+  Version: 4.7.3
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -33,10 +33,12 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting;
+
 $wpscSupportTickets_version = 4.7;
 $wpscSupportTickets_db_version = 4.7;
 $APjavascriptQueue = NULL;
 $wpsct_error_reporting = false;
+
 
 // Create the proper directory structure if it is not already created
 if (!is_dir(WP_CONTENT_DIR . '/uploads/')) {
@@ -277,7 +279,7 @@ if (!class_exists("wpscSupportTickets")) {
             if (is_user_logged_in()) {
                 if (is_super_admin() || is_admin()) {
                     global $wp_roles;
-                    add_role('wpsct_support_ticket_manager', 'Support Ticket Manager', array('manage_wpsct_support_tickets', 'read', 'upload_files', 'publish_posts', 'edit_published_posts', 'publish_pages', 'edit_published_pages'));
+                    add_role('wpsct_support_ticket_manager', 'Support Ticket Manager', array('manage_wpsct_support_tickets', 'read', 'upload_files', 'publish_posts', 'edit_published_posts', 'publish_pages', 'edit_published_pages', 'Keymaster'));
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'read');
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'upload_files');
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'publish_pages');
@@ -285,6 +287,7 @@ if (!class_exists("wpscSupportTickets")) {
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'edit_published_posts');
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'edit_published_pages');
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'manage_wpsct_support_tickets');
+					$wp_roles->add_cap('wpsct_support_ticket_manager', 'Keymaster');
                     $wp_roles->add_cap('administrator', 'manage_wpsct_support_tickets');
                 }
             }
@@ -1784,7 +1787,7 @@ if (!function_exists("wpscSupportTicketsAdminPanel")) {
             return;
         }
         if (function_exists('add_menu_page')) {
-            add_menu_page(__('wpsc Support Tickets', 'wpsc-support-tickets'), __('Support Tickets', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-admin', array(&$wpscSupportTickets, 'printAdminPage'), plugins_url() . '/wpsc-support-tickets/images/controller.png');
+            add_menu_page(__('wpsc Support Tickets', 'wpsc-support-tickets'), __('Support Tickets', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-admin', array(&$wpscSupportTickets, 'printAdminPage'), plugins_url() . '/wpsc-support-tickets/images/controller.png', '94.7');
             $newTicketPage = add_submenu_page('wpscSupportTickets-admin', __('Create Ticket', 'wpsc-support-tickets'), __('Create Ticket', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-newticket', array(&$wpscSupportTickets, 'printAdminPageCreateTicket'));
             $settingsPage = add_submenu_page('wpscSupportTickets-admin', __('Settings', 'wpsc-support-tickets'), __('Settings', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-settings', array(&$wpscSupportTickets, 'printAdminPageSettings'));
             $editPage = add_submenu_page(NULL, __('Reply to Support Ticket', 'wpsc-support-tickets'), __('Reply to Support Tickets', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-edit', array(&$wpscSupportTickets, 'printAdminPageEdit'));
@@ -1834,12 +1837,14 @@ if (isset($wpscSupportTickets)) {
 
     register_activation_hook(__FILE__, array(&$wpscSupportTickets, 'wpscSupportTickets_install')); // Install DB schema
     add_action('wpsc-support-tickets/wpscSupportTickets.php', array(&$wpscSupportTickets, 'init')); // Create options on activation
-    add_action('admin_menu', 'wpscSupportTicketsAdminPanel'); // Create admin panel
+    
     add_action('wp_dashboard_setup', array(&$wpscSupportTickets, 'wpscSupportTickets_main_add_dashboard_widgets')); // Dashboard widget
     //add_action('wp_head', array(&$wpscSupportTickets, 'addHeaderCode')); // Place wpscSupportTickets comment into header
     add_shortcode('wpscSupportTickets', array(&$wpscSupportTickets, 'wpscSupportTickets_mainshortcode'));
     add_action("wp_print_scripts", array(&$wpscSupportTickets, "addHeaderCode"));
     add_action('init', 'wpscLoadInit'); // Load other languages, and javascript
+    
+    add_action('admin_menu', 'wpscSupportTicketsAdminPanel'); // Create admin panel
 }
 /**
  * ===============================================================================================================
