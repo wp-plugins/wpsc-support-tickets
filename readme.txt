@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.7.3
+Stable tag: 4.7.4
 
 == Description ==
 
@@ -88,6 +88,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 4.7.4 =
+* Updated: Made progress on allowing edit custom fields, also slightly redesigned part of the admin page for custom fields
 
 = 4.7.3 =
 * Fixed: Patched an issue that prevent BBPress from showing up in the admin panel 
