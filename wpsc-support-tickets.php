@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.5
+  Version: 4.7.6
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -32,13 +32,16 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 
 //Global variables:
-global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting;
+global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting, $wpscJetPack;
 
 $wpscSupportTickets_version = 4.7;
 $wpscSupportTickets_db_version = 4.7;
 $APjavascriptQueue = NULL;
 $wpsct_error_reporting = false;
-
+$wpscJetPack = false; // There's some issues with Jetpack & this plugin.  This bool lets us know if jetpack is installed
+if (@file_exists(WP_PLUGIN_DIR . '/jetpack/jetpack.php')) {
+    $wpscJetPack = true;
+}
 
 // Create the proper directory structure if it is not already created
 if (!is_dir(WP_CONTENT_DIR . '/uploads/')) {
@@ -1745,7 +1748,8 @@ if (!class_exists("wpscSupportTickets")) {
             }
 
             // Jetpack incompatibilities hack
-            if (@!file_exists(WP_PLUGIN_DIR . '/jetpack/jetpack.php')) {
+            global $wpscJetPack;
+            if (@!$wpscJetPack) {
                 $this->hasDisplayed = true;
             } else {
                 @include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
