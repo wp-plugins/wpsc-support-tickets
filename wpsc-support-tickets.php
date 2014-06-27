@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.8
+  Version: 4.7.9
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -1509,7 +1509,7 @@ if (!class_exists("wpscSupportTickets")) {
             switch ($display) {
                 case 'tickets': // =========================================================
                     if ($devOptions['allow_guests'] == 'true' && !is_user_logged_in() && !$this->hasDisplayed) {
-                        if (@!isset($_SESSION['wpsct_email']) && $devOptions['allow_all_tickets_to_be_viewed'] == 'true') {
+                        if ( (@!isset($_SESSION['wpsct_email']) || trim($_SESSION['wpsct_email'])!='' || trim($_SESSION['wpsct_email'])!=__('youremail@example.com', 'wpsc-support-tickets') ) && $devOptions['allow_all_tickets_to_be_viewed'] == 'true') {
                             $_SESSION['wpsct_email'] = __('youremail@example.com', 'wpsc-support-tickets');
                         }
                         if (@isset($_POST['guest_email'])) {
@@ -1529,7 +1529,7 @@ if (!class_exists("wpscSupportTickets")) {
                                                 </form>
                                                 <br />
                                                 ';
-                        if (@!isset($_SESSION['wpsct_email']) && $devOptions['allow_all_tickets_to_be_viewed'] == 'true') {
+                        if ( (@!isset($_SESSION['wpsct_email']) || trim($_SESSION['wpsct_email'])!='' || trim($_SESSION['wpsct_email'])!=__('youremail@example.com', 'wpsc-support-tickets') ) && $devOptions['allow_all_tickets_to_be_viewed'] == 'true') {
                             $_SESSION['wpsct_email'] = __('youremail@example.com', 'wpsc-support-tickets');
                         }                        
                     }

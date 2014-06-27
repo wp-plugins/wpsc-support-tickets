@@ -34,10 +34,11 @@ function wpsctDisplayCustomFieldsToFrontend($primkey) {
 }
 
 if (session_id() == "") {@session_start();};
+$devOptions = get_option('wpscSupportTicketsAdminOptions');
 
-if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POST['primkey'])) {
+if((is_user_logged_in() || @isset($_SESSION['wpsct_email']) || $devOptions['allow_all_tickets_to_be_viewed'] == 'true') && is_numeric($_POST['primkey'])) {
     
-    $devOptions = get_option('wpscSupportTicketsAdminOptions');
+    
     
     // Guest additions here
     if(is_user_logged_in()) {
