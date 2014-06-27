@@ -89,6 +89,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 
 == Changelog ==
 
+= 4.7.11 =
+* Fixed: Had to revert back to 4.7.7 due to numerous bugs introduced in 4.7.8.
+
 = 4.7.10 =
 * Fixed: Patched another issue introduced in 4.7.8 which prevented new ticket creation :(
 

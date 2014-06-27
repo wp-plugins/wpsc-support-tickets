@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.10
+  Version: 4.7.11
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -1509,29 +1509,19 @@ if (!class_exists("wpscSupportTickets")) {
             switch ($display) {
                 case 'tickets': // =========================================================
                     if ($devOptions['allow_guests'] == 'true' && !is_user_logged_in() && !$this->hasDisplayed) {
-                        if ( (@!isset($_SESSION['wpsct_email']) || trim($_SESSION['wpsct_email'])=='' || trim($_SESSION['wpsct_email'])=='youremail@example.com' ) && $devOptions['allow_all_tickets_to_be_viewed'] == 'true') {
-                            $_SESSION['wpsct_email'] = 'youremail@example.com';
-                        }
                         if (@isset($_POST['guest_email'])) {
                             $_SESSION['wpsct_email'] = esc_sql($_POST['guest_email']);
                         }
-                        if ($_SESSION['wpsct_email'] != 'youremail@example.com') {
-                            $displayemailadd = $_SESSION['wpsct_email'];
-                        } else {
-                            $displayemailadd = '';
-                        }
+
                         $output .= '<br />
                                                 <form name="wpscst-guestform" id="wpscst-guestcheckoutform" action="#" method="post">
                                                     <table>
-                                                    <tr><td>' . __('Enter your email address', 'wpsc-support-tickets') . ': </td><td><input type="text" name="guest_email" value="' . $displayemailadd . '" /></td></tr>
+                                                    <tr><td>' . __('Enter your email address', 'wpsc-support-tickets') . ': </td><td><input type="text" name="guest_email" value="' . $_SESSION['wpsct_email'] . '" /></td></tr>
                                                     <tr><td></td><td><input type="submit" value="' . __('Submit', 'wpsc-support-tickets') . '" class="wpsc-button wpsc-checkout" /></td></tr>
                                                     </table>
                                                 </form>
                                                 <br />
                                                 ';
-                        if ( (@!isset($_SESSION['wpsct_email']) || trim($_SESSION['wpsct_email'])=='' || trim($_SESSION['wpsct_email'])=='youremail@example.com' ) && $devOptions['allow_all_tickets_to_be_viewed'] == 'true') {
-                            $_SESSION['wpsct_email'] = 'youremail@example.com';
-                        }                        
                     }
                     if (is_user_logged_in() || @isset($_SESSION['wpsct_email']) || @isset($_POST['guest_email'])) {
                         if (!$this->hasDisplayed) {
@@ -1540,16 +1530,10 @@ if (!class_exists("wpscSupportTickets")) {
                             $output .= '<div id="wpscst_top_page" ';
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="display:inline;"';
-                            } $output.='></div>' ;
-
-                            if ( @isset($_SESSION['wpsct_email']) && trim($_SESSION['wpsct_email'])!='' && trim($_SESSION['wpsct_email'])!='youremail@example.com') {
-                                $output .='<button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);return false;"><img ';
-                                if ($devOptions['disable_inline_styles'] == 'false') {
-                                    $output.='style="float:left;border:none;margin-right:5px;"';
-                                } $output.=' src="' . plugins_url('/images/Add.png', __FILE__) . '" alt="' . __('Create a New Ticket', 'wpsc-support-tickets') . '" /> ' . __('Create a New Ticket', 'wpsc-support-tickets') . '</button><br /><br />';
-                            }
-                            
-                            
+                            } $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);return false;"><img ';
+                            if ($devOptions['disable_inline_styles'] == 'false') {
+                                $output.='style="float:left;border:none;margin-right:5px;"';
+                            } $output.=' src="' . plugins_url('/images/Add.png', __FILE__) . '" alt="' . __('Create a New Ticket', 'wpsc-support-tickets') . '" /> ' . __('Create a New Ticket', 'wpsc-support-tickets') . '</button><br /><br />';
                             $output .= '<form action="' . plugins_url('/php/submit_ticket.php', __FILE__) . '" method="post" enctype="multipart/form-data">';
                             if (@isset($_POST['guest_email'])) {
                                 $output .= '<input type="hidden" name="guest_email" value="' . esc_sql($_POST['guest_email']) . '" />';
@@ -1632,7 +1616,6 @@ if (!class_exists("wpscSupportTickets")) {
 
                             $output .= '</table></form>';
 
-                            
                             $output .= '<form action="' . plugins_url('/php/reply_ticket.php', __FILE__) . '" method="post" enctype="multipart/form-data"><input type="hidden" value="0" id="wpscst_edit_primkey" name="wpscst_edit_primkey" />';
                             if (@isset($_POST['guest_email'])) {
                                 $output .= '<input type="hidden" name="guest_email" value="' . esc_sql($_POST['guest_email']) . '" />';
@@ -1643,28 +1626,20 @@ if (!class_exists("wpscSupportTickets")) {
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="width:100%"';
                             } $output.=' id="wpscst_reply_editor_table"><tbody>
-                                                    <tr id="wpscst_reply_editor_table_tr1"><td>';
-                            if (trim($_SESSION['wpsct_email'])!='' && trim($_SESSION['wpsct_email'])!='youremail@example.com' ) {
-                                $output .= '<h3>' . __('Your reply', 'wpsc-support-tickets') . '</h3><div id="wpscst_nic_panel2" ';
-                                if ($devOptions['disable_inline_styles'] == 'false') {
-                                    $output.='style="display:block;width:100%;"';
-                                }$output.='></div>'; 
-                            }
-                            if (trim($_SESSION['wpsct_email'])!='' && trim($_SESSION['wpsct_email'])!='youremail@example.com' ) {
-                                $output .=' <textarea name="wpscst_reply" id="wpscst_reply" ';
-                                if ($devOptions['disable_inline_styles'] == 'false') {
-                                    $output.='style="display:inline;width:100%;margin:0 auto 0 auto;" rows="5"';
-                                } $output .='></textarea>';
-                            }
-                            
-                            $output .=' </td></tr>
+                                                    <tr id="wpscst_reply_editor_table_tr1"><td><h3>' . __('Your reply', 'wpsc-support-tickets') . '</h3><div id="wpscst_nic_panel2" ';
+                            if ($devOptions['disable_inline_styles'] == 'false') {
+                                $output.='style="display:block;width:100%;"';
+                            }$output.='></div> <textarea name="wpscst_reply" id="wpscst_reply" ';
+                            if ($devOptions['disable_inline_styles'] == 'false') {
+                                $output.='style="display:inline;width:100%;margin:0 auto 0 auto;" rows="5"';
+                            } $output .='></textarea></td></tr>
                                                     <tr id="wpscst_reply_editor_table_tr2"><td>';
 
-                            if ($devOptions['allow_uploads'] == 'true' && trim($_SESSION['wpsct_email'])!='' && trim($_SESSION['wpsct_email'])!='youremail@example.com'  ) {
+                            if ($devOptions['allow_uploads'] == 'true') {
                                 $output .= '<h3>' . __('Attach a file', 'wpsc-support-tickets') . '</h3> <input type="file" name="wpscst_file" id="wpscst_file">';
                             }
 
-                            if ($devOptions['allow_closing_ticket'] == 'true' && trim($_SESSION['wpsct_email'])!='' && trim($_SESSION['wpsct_email'])!='youremail@example.com' ) {
+                            if ($devOptions['allow_closing_ticket'] == 'true') {
                                 $output .= '
                                                         <select name="wpscst_set_status" id="wpscst_set_status">
                                                                             <option value="Open">' . __('Open', 'wpsc-support-tickets') . '</option>
@@ -1679,18 +1654,13 @@ if (!class_exists("wpscSupportTickets")) {
                             } $output.=' onclick="cancelEdit();return false;"><img src="' . plugins_url('/images/stop.png', __FILE__) . '" alt="' . __('Cancel', 'wpsc-support-tickets') . '" ';
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="float:left;border:none;margin-right:5px;"';
-                            } $output.=' /> ' . __('Cancel', 'wpsc-support-tickets') . '</button>';
-                            
-                            if (trim($_SESSION['wpsct_email'])!='' && trim($_SESSION['wpsct_email'])!='youremail@example.com' ) {
-                                $output .= '<button class="wpscst-button" type="submit" name="wpscst_submit2" id="wpscst_submit2" ';
-                                if ($devOptions['disable_inline_styles'] == 'false') {
-                                    $output.='style="float:right;"';
-                                } $output.='><img ';
-                                if ($devOptions['disable_inline_styles'] == 'false') {
-                                    $output.='style="float:left;border:none;margin-right:5px;"';
-                                } $output.=' src="' . plugins_url('/images/page_white_text.png', __FILE__) . '" alt="' . __('Submit Reply', 'wpsc-support-tickets') . '" /> ' . __('Submit Reply', 'wpsc-support-tickets') . '</button>';
-                            }
-                            $output .= '</td></tr>
+                            } $output.=' /> ' . __('Cancel', 'wpsc-support-tickets') . '</button><button class="wpscst-button" type="submit" name="wpscst_submit2" id="wpscst_submit2" ';
+                            if ($devOptions['disable_inline_styles'] == 'false') {
+                                $output.='style="float:right;"';
+                            } $output.='><img ';
+                            if ($devOptions['disable_inline_styles'] == 'false') {
+                                $output.='style="float:left;border:none;margin-right:5px;"';
+                            } $output.=' src="' . plugins_url('/images/page_white_text.png', __FILE__) . '" alt="' . __('Submit Reply', 'wpsc-support-tickets') . '" /> ' . __('Submit Reply', 'wpsc-support-tickets') . '</button></td></tr>
                                                     </tbody></table>
                                                 </div>';
                             $output .= '</form>';
