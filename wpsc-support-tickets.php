@@ -1542,7 +1542,7 @@ if (!class_exists("wpscSupportTickets")) {
                                 $output.='style="display:inline;"';
                             } $output.='></div>' ;
 
-                            if ( @isset($_SESSION['wpsct_email']) && trim($_SESSION['wpsct_email'])!='' && trim($_SESSION['wpsct_email'])!='youremail@example.com' && $devOptions['allow_all_tickets_to_be_viewed'] == 'true') {
+                            if ( @isset($_SESSION['wpsct_email']) && trim($_SESSION['wpsct_email'])!='' && trim($_SESSION['wpsct_email'])!='youremail@example.com') {
                                 $output .='<button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);return false;"><img ';
                                 if ($devOptions['disable_inline_styles'] == 'false') {
                                     $output.='style="float:left;border:none;margin-right:5px;"';
