@@ -32,16 +32,13 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 
 
 //Global variables:
-global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting, $wpscJetPack;
+global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting;
 
 $wpscSupportTickets_version = 4.7;
 $wpscSupportTickets_db_version = 4.7;
 $APjavascriptQueue = NULL;
 $wpsct_error_reporting = false;
-$wpscJetPack = false; // There's some issues with Jetpack & this plugin.  This bool lets us know if jetpack is installed
-if (@file_exists(WP_PLUGIN_DIR . '/jetpack/jetpack.php')) {
-    $wpscJetPack = true;
-}
+
 
 // Create the proper directory structure if it is not already created
 if (!is_dir(WP_CONTENT_DIR . '/uploads/')) {
@@ -717,7 +714,11 @@ if (!class_exists("wpscSupportTickets")) {
                 if(@function_exists('wstPROStats')) {
                     @set_time_limit(0);
                     echo wstPROStats();
-                } 
+                } else {
+                    echo '<table class="widefat" style="width:98%;"><tr><td>';
+                    _e('Your version of wpsc Support Tickets is out of date.  Please email admin@wpstorecart.com with your PayPal transaction ID to recieve the latest version.', 'wpsc-support-tickets');
+                    echo '</td></tr></table>';
+                }
 
             }
                 
@@ -1744,8 +1745,7 @@ if (!class_exists("wpscSupportTickets")) {
             }
 
             // Jetpack incompatibilities hack
-            global $wpscJetPack;
-            if (@!$wpscJetPack) {
+            if (@!file_exists(WP_PLUGIN_DIR . '/jetpack/jetpack.php')) {
                 $this->hasDisplayed = true;
             } else {
                 @include_once( ABSPATH . 'wp-admin/includes/plugin.php' );

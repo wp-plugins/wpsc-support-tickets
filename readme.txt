@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.7.10
+Stable tag: 4.7.11
 
 == Description ==
 
@@ -90,7 +90,7 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 == Changelog ==
 
 = 4.7.11 =
-* Fixed: Had to revert back to 4.7.7 due to numerous bugs introduced in 4.7.8.
+* Updated: Reverted to 4.7.5 
 
 = 4.7.10 =
 * Fixed: Patched another issue introduced in 4.7.8 which prevented new ticket creation :(
