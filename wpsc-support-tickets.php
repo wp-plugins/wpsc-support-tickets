@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.11
+  Version: 4.7.12
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -108,19 +108,19 @@ if(!function_exists('wpsctPromptForCustomFields')) {
         );
         $wpsct_states = array(
             "not applicable" => 'Other (Non-US)',
-            "AL" => 'Alabama',      "AK" => 'Alaska',       "AZ" => 'Arizona',      "CA" => 'California',
-            "CO" => 'Colorado',     "CT" => 'Connecticut',  "DE" => 'Delaware',     "DC" => 'District Of Columbia',
-            "FL" => 'Florida',      "GA" => 'Georgia',      "HI" => 'Hawaii',       "ID" => 'Idaho', 
-            "IL" => 'Illinois',     "IN" => 'Indiana',      "IA" => 'Iowa',         "KS" => 'Kansas',       
-            "KY" => 'Kentucky',     "LA" => 'Louisiana',    "ME" => 'Maine',        "MD" => 'Maryland',
-            "MA" => 'Massachusetts',"MI" => 'Michigan',     "MN" => 'Minnesota',    "MS" => 'Mississippi',  
-            "MO" => 'Missouri',     "MT" => 'Montana',      "NE" => 'Nebraska',     "NV" => 'Nevada',       
-            "NH" => 'New Hampshire',"NJ" => 'New Jersey',   "NM" => 'New Mexico',   "NY" => 'New York',
-            "NC" => 'North Carolina',"ND" => 'North Dakota',"OH" => 'Ohio',         "OK" => 'Oklahoma',
-            "OR" => 'Oregon',       "PA" => 'Pennsylvania', "RI" => 'Rhode Island', "SC" => 'South Carolina',
-            "SD" => 'South Dakota', "TN" => 'Tennessee',    "TX" => 'Texas',        "UT" => 'Utah',
-            "VT" => 'Vermont',      "VA" => 'Virginia',     "WA" => 'Washington',   "WV" => 'West Virginia',
-            "WI" => 'Wisconsin',    "WY" => 'Wyoming',
+            "AL" => __('Alabama', 'wpsc-support-tickets'),      "AK" => __('Alaska', 'wpsc-support-tickets'),       "AZ" => __('Arizona', 'wpsc-support-tickets'),      "CA" => __('California', 'wpsc-support-tickets'),
+            "CO" => __('Colorado', 'wpsc-support-tickets'),     "CT" => __('Connecticut', 'wpsc-support-tickets'),  "DE" => __('Delaware', 'wpsc-support-tickets'),     "DC" => __('District Of Columbia', 'wpsc-support-tickets'),
+            "FL" => __('Florida', 'wpsc-support-tickets'),      "GA" => __('Georgia', 'wpsc-support-tickets'),      "HI" => __('Hawaii', 'wpsc-support-tickets'),       "ID" => __('Idaho', 'wpsc-support-tickets'), 
+            "IL" => __('Illinois', 'wpsc-support-tickets'),     "IN" => __('Indiana', 'wpsc-support-tickets'),      "IA" => __('Iowa', 'wpsc-support-tickets'),         "KS" => __('Kansas', 'wpsc-support-tickets'),       
+            "KY" => __('Kentucky', 'wpsc-support-tickets'),     "LA" => __('Louisiana', 'wpsc-support-tickets'),    "ME" => __('Maine', 'wpsc-support-tickets'),        "MD" => __('Maryland', 'wpsc-support-tickets'),
+            "MA" => __('Massachusetts', 'wpsc-support-tickets'),"MI" => __('Michigan', 'wpsc-support-tickets'),     "MN" => __('Minnesota', 'wpsc-support-tickets'),    "MS" => __('Mississippi', 'wpsc-support-tickets'),  
+            "MO" => __('Missouri', 'wpsc-support-tickets'),     "MT" => __('Montana', 'wpsc-support-tickets'),      "NE" => __('Nebraska', 'wpsc-support-tickets'),     "NV" => __('Nevada', 'wpsc-support-tickets'),       
+            "NH" => __('New Hampshire', 'wpsc-support-tickets'),"NJ" => __('New Jersey', 'wpsc-support-tickets'),   "NM" => __('New Mexico', 'wpsc-support-tickets'),   "NY" => __('New York', 'wpsc-support-tickets'),
+            "NC" => __('North Carolina', 'wpsc-support-tickets'),"ND" => __('North Dakota', 'wpsc-support-tickets'),"OH" => __('Ohio', 'wpsc-support-tickets'),         "OK" => __('Oklahoma', 'wpsc-support-tickets'),
+            "OR" => __('Oregon', 'wpsc-support-tickets'),       "PA" => __('Pennsylvania', 'wpsc-support-tickets'), "RI" => __('Rhode Island', 'wpsc-support-tickets'), "SC" => __('South Carolina', 'wpsc-support-tickets'),
+            "SD" => __('South Dakota', 'wpsc-support-tickets'), "TN" => __('Tennessee', 'wpsc-support-tickets'),    "TX" => __('Texas', 'wpsc-support-tickets'),        "UT" => __('Utah', 'wpsc-support-tickets'),
+            "VT" => __('Vermont', 'wpsc-support-tickets'),      "VA" => __('Virginia', 'wpsc-support-tickets'),     "WA" => __('Washington', 'wpsc-support-tickets'),   "WV" => __('West Virginia', 'wpsc-support-tickets'),
+            "WI" => __('Wisconsin', 'wpsc-support-tickets'),    "WY" => __('Wyoming', 'wpsc-support-tickets'),
         );    
         $wpsct_countries = array(
             "United States", "Canada","United Kingdom","Ireland","Australia","New Zealand","Afghanistan","Albania","Algeria","American Samoa",
