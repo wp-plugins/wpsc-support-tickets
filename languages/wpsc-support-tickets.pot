@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the wpsc Support Tickets package.
 msgid ""
 msgstr ""
-"Project-Id-Version: wpsc Support Tickets 4.7.4\n"
+"Project-Id-Version: wpsc Support Tickets 4.7.13\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wpsc-support-tickets\n"
-"POT-Creation-Date: 2014-06-24 08:37:38+00:00\n"
+"POT-Creation-Date: 2014-07-03 21:42:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -133,6 +133,1154 @@ msgstr ""
 
 #: php/submit_ticket.php:279
 msgid "There is a new support ticket: "
+msgstr ""
+
+#: wpsc-support-tickets.php:111
+msgid "Alabama"
+msgstr ""
+
+#: wpsc-support-tickets.php:111
+msgid "Alaska"
+msgstr ""
+
+#: wpsc-support-tickets.php:111
+msgid "Arizona"
+msgstr ""
+
+#: wpsc-support-tickets.php:111
+msgid "California"
+msgstr ""
+
+#: wpsc-support-tickets.php:112
+msgid "Colorado"
+msgstr ""
+
+#: wpsc-support-tickets.php:112
+msgid "Connecticut"
+msgstr ""
+
+#: wpsc-support-tickets.php:112
+msgid "Delaware"
+msgstr ""
+
+#: wpsc-support-tickets.php:112
+msgid "District Of Columbia"
+msgstr ""
+
+#: wpsc-support-tickets.php:113
+msgid "Florida"
+msgstr ""
+
+#: wpsc-support-tickets.php:113 wpsc-support-tickets.php:134
+msgid "Georgia"
+msgstr ""
+
+#: wpsc-support-tickets.php:113
+msgid "Hawaii"
+msgstr ""
+
+#: wpsc-support-tickets.php:113
+msgid "Idaho"
+msgstr ""
+
+#: wpsc-support-tickets.php:114
+msgid "Illinois"
+msgstr ""
+
+#: wpsc-support-tickets.php:114
+msgid "Indiana"
+msgstr ""
+
+#: wpsc-support-tickets.php:114
+msgid "Iowa"
+msgstr ""
+
+#: wpsc-support-tickets.php:114
+msgid "Kansas"
+msgstr ""
+
+#: wpsc-support-tickets.php:115
+msgid "Kentucky"
+msgstr ""
+
+#: wpsc-support-tickets.php:115
+msgid "Louisiana"
+msgstr ""
+
+#: wpsc-support-tickets.php:115
+msgid "Maine"
+msgstr ""
+
+#: wpsc-support-tickets.php:115
+msgid "Maryland"
+msgstr ""
+
+#: wpsc-support-tickets.php:116
+msgid "Massachusetts"
+msgstr ""
+
+#: wpsc-support-tickets.php:116
+msgid "Michigan"
+msgstr ""
+
+#: wpsc-support-tickets.php:116
+msgid "Minnesota"
+msgstr ""
+
+#: wpsc-support-tickets.php:116
+msgid "Mississippi"
+msgstr ""
+
+#: wpsc-support-tickets.php:117
+msgid "Missouri"
+msgstr ""
+
+#: wpsc-support-tickets.php:117
+msgid "Montana"
+msgstr ""
+
+#: wpsc-support-tickets.php:117
+msgid "Nebraska"
+msgstr ""
+
+#: wpsc-support-tickets.php:117
+msgid "Nevada"
+msgstr ""
+
+#: wpsc-support-tickets.php:118
+msgid "New Hampshire"
+msgstr ""
+
+#: wpsc-support-tickets.php:118
+msgid "New Jersey"
+msgstr ""
+
+#: wpsc-support-tickets.php:118
+msgid "New Mexico"
+msgstr ""
+
+#: wpsc-support-tickets.php:118
+msgid "New York"
+msgstr ""
+
+#: wpsc-support-tickets.php:119
+msgid "North Carolina"
+msgstr ""
+
+#: wpsc-support-tickets.php:119
+msgid "North Dakota"
+msgstr ""
+
+#: wpsc-support-tickets.php:119
+msgid "Ohio"
+msgstr ""
+
+#: wpsc-support-tickets.php:119
+msgid "Oklahoma"
+msgstr ""
+
+#: wpsc-support-tickets.php:120
+msgid "Oregon"
+msgstr ""
+
+#: wpsc-support-tickets.php:120
+msgid "Pennsylvania"
+msgstr ""
+
+#: wpsc-support-tickets.php:120
+msgid "Rhode Island"
+msgstr ""
+
+#: wpsc-support-tickets.php:120
+msgid "South Carolina"
+msgstr ""
+
+#: wpsc-support-tickets.php:121
+msgid "South Dakota"
+msgstr ""
+
+#: wpsc-support-tickets.php:121
+msgid "Tennessee"
+msgstr ""
+
+#: wpsc-support-tickets.php:121
+msgid "Texas"
+msgstr ""
+
+#: wpsc-support-tickets.php:121
+msgid "Utah"
+msgstr ""
+
+#: wpsc-support-tickets.php:122
+msgid "Vermont"
+msgstr ""
+
+#: wpsc-support-tickets.php:122
+msgid "Virginia"
+msgstr ""
+
+#: wpsc-support-tickets.php:122
+msgid "Washington"
+msgstr ""
+
+#: wpsc-support-tickets.php:122
+msgid "West Virginia"
+msgstr ""
+
+#: wpsc-support-tickets.php:123
+msgid "Wisconsin"
+msgstr ""
+
+#: wpsc-support-tickets.php:123
+msgid "Wyoming"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "United States"
+msgstr ""
+
+#: wpsc-support-tickets.php:126 wpsc-support-tickets.php:130
+msgid "Canada"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "United Kingdom"
+msgstr ""
+
+#: wpsc-support-tickets.php:126 wpsc-support-tickets.php:136
+msgid "Ireland"
+msgstr ""
+
+#: wpsc-support-tickets.php:126 wpsc-support-tickets.php:127
+msgid "Australia"
+msgstr ""
+
+#: wpsc-support-tickets.php:126 wpsc-support-tickets.php:141
+msgid "New Zealand"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "Afghanistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "Albania"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "Algeria"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "American Samoa"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Andorra"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Angola"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Anguilla"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Antarctica"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Antigua and Barbuda"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Argentina"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Armenia"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Aruba"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Austria"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Azerbaijan"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bahamas"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bahrain"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bangladesh"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Barbados"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Belarus"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Belgium"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Belize"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Benin"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bermuda"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bhutan"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bolivia"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bosnia and Herzegovina"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Botswana"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Bouvet Island"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Brazil"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "British Indian Ocean Territory"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Brunei Darussalam"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Bulgaria"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Burkina Faso"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Burundi"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Cambodia"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Cameroon"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Cape Verde"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Cayman Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Central African Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Chad"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Chile"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "China"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Christmas Island"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Cocos (Keeling) Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Colombia"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Comoros"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Congo"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Congo, The Democratic Republic of The"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Costa Rica"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Cote D\\'ivoire"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Croatia"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Cuba"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Cyprus"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Czech Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Denmark"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Djibouti"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Dominica"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Dominican Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Ecuador"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Egypt"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "El Salvador"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Equatorial Guinea"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Eritrea"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Estonia"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Ethiopia"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Faroe Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Fiji"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Finland"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "France"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "French Guiana"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "French Polynesia"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "French Southern Territories"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Gabon"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Gambia"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Germany"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Ghana"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Gibraltar"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Greece"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Greenland"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Grenada"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guadeloupe"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guam"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guatemala"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guinea"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guinea-bissau"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Guyana"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Haiti"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Heard Island and Mcdonald Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Holy See (Vatican City State)"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Honduras"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Hong Kong"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Hungary"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Iceland"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "India"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Indonesia"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Iran, Islamic Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Iraq"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Israel"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Italy"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Jamaica"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Japan"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Jordan"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Kazakhstan"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Kenya"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Kiribati"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Korea, Democratic People\\'s Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Korea, Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Kuwait"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Kyrgyzstan"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Lao People\\'s Democratic Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Latvia"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Lebanon"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Lesotho"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Liberia"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Libyan Arab Jamahiriya"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Liechtenstein"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Lithuania"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Luxembourg"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Macao"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Macedonia, The Former Yugoslav Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Madagascar"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Malawi"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Malaysia"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Maldives"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Mali"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Malta"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Marshall Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Martinique"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Mauritania"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Mauritius"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Mayotte"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Mexico"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Micronesia, Federated States of"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Moldova, Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Monaco"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Mongolia"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Montserrat"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Morocco"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Mozambique"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Myanmar"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Namibia"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Nauru"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Nepal"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Netherlands"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Netherlands Antilles"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "New Caledonia"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Nicaragua"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Niger"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Nigeria"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Niue"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Norfolk Island"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Northern Mariana Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Norway"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Oman"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Pakistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Palau"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Palestinian Territory, Occupied"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Panama"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Papua New Guinea"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Paraguay"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Peru"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Philippines"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Pitcairn"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Poland"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Portugal"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Puerto Rico"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Qatar"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Reunion"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Romania"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Russian Federation"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Rwanda"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Saint Helena"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Saint Lucia"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Saint Pierre and Miquelon"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Saint Vincent and The Grenadines"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Samoa"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "San Marino"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Sao Tome and Principe"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Saudi Arabia"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Senegal"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Serbia and Montenegro"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Seychelles"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Sierra Leone"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Singapore"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Slovakia"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Slovenia"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Solomon Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Somalia"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "South Africa"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "South Georgia and The South Sandwich Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Spain"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Sri Lanka"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Sudan"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Suriname"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Swaziland"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Sweden"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Switzerland"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Syrian Arab Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Taiwan, Province of China"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tajikistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tanzania, United Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Thailand"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Timor-leste"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Togo"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tokelau"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tonga"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Trinidad and Tobago"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tunisia"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Turkey"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Turkmenistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Turks and Caicos Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Tuvalu"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Uganda"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Ukraine"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "United Arab Emirates"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "United States Minor Outlying Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Uruguay"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Uzbekistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Vanuatu"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Venezuela"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Viet Nam"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Virgin Islands, British"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Virgin Islands, U.S."
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Wallis and Futuna"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Western Sahara"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Yemen"
+msgstr ""
+
+#: wpsc-support-tickets.php:150
+msgid "Zambia"
+msgstr ""
+
+#: wpsc-support-tickets.php:150
+msgid "Zimbabwe"
 msgstr ""
 
 #: wpsc-support-tickets.php:186
@@ -696,7 +1844,7 @@ msgstr ""
 msgid "register"
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (wpsc Support Tickets 4.7.4)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (wpsc Support Tickets 4.7.13)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: wpsc-support-tickets.php:1801
 msgid "wpsc Support Tickets"
