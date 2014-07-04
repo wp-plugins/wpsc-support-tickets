@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.7.14
+Stable tag: 4.7.15
 
 == Description ==
 
@@ -88,6 +88,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 6. The full options
 
 == Changelog ==
+
+= 4.7.15 =
+* Added: New option allows admin to hide or show severity field during ticket creation
 
 = 4.7.14 =
 * Updated: Updated the POT file so as to include the changes in 4.7.12 and 4.7.13

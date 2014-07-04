@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.14
+  Version: 4.7.15
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -415,7 +415,10 @@ if (!class_exists("wpscSupportTickets")) {
                 } 
                 if (isset($_POST['use_reply_in_email'])) {
                     $devOptions['use_reply_in_email'] = esc_sql($_POST['use_reply_in_email']);
-                }                   
+                }          
+                if (isset($_POST['display_severity_on_create'])) {
+                    $devOptions['display_severity_on_create'] = esc_sql($_POST['display_severity_on_create']);
+                }
 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -472,6 +475,29 @@ if (!class_exists("wpscSupportTickets")) {
                 </p>
 
                 <strong>' . __('Departments', 'wpsc-support-tickets') . ':</strong> ' . __('Separate these values with a double pipe, like this ||', 'wpsc-support-tickets') . ' <br /><input name="departments" value="' . $devOptions['departments'] . '" style="width:95%;" /><br /><br />
+
+';
+                
+                echo '<p><strong>' . __('Allow user to select Severity on ticket creation?', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want the user to select the severity of their ticket when creating it.', 'wpsc-support-tickets') . '  <br />
+                <select name="display_severity_on_create">
+                 ';
+
+                $pagesYXX[0] = 'true';
+                $pagesYXX[1] = 'false';
+                foreach ($pagesYXX as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['display_severity_on_create']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                </p> 
 
             </td></tr></table>
             <br /><br /><br />
@@ -632,7 +658,7 @@ if (!class_exists("wpscSupportTickets")) {
 
                 echo '
                 </select>
-                </p>
+                </p>               
                 <br /><br /><br /><br />
             </td></tr></table>
 
@@ -1586,7 +1612,15 @@ if (!class_exists("wpscSupportTickets")) {
                                 }
                             }
                             $output .= '</select> 
-                            <h3>' . __('Severity', 'wpsc-support-tickets') . '</h3><select name="wpscst_severity" id="wpscst_severity">';
+                            <h3';
+                            if ($devOptions['display_severity_on_create'] == 'false') {
+                               $output .=' style="display:none;" '; 
+                            }                            
+                            $output .='>' . __('Severity', 'wpsc-support-tickets') . '</h3><select name="wpscst_severity" id="wpscst_severity"';
+                            if ($devOptions['display_severity_on_create'] == 'false') {
+                               $output .=' style="display:none;" '; 
+                            }
+                            $output .='>';
                             $output .= '<option value="Low">'. __('Low', 'wpsc-support-tickets') . '</option>                    
                             <option value="Normal">' . __('Normal', 'wpsc-support-tickets') . '
                             </option>
