@@ -1,0 +1,1907 @@
+# Copyright (C) 2014 wpsc Support Tickets
+# This file is distributed under the same license as the wpsc Support Tickets package.
+msgid ""
+msgstr ""
+"Project-Id-Version: wpsc Support Tickets 4.7.15\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wpsc-support-tickets\n"
+"POT-Creation-Date: 2014-07-06 19:27:37+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: php/add_field.php:18 php/del_field.php:18 php/sort_fields.php:18
+#: wpsc-support-tickets.php:344 wpsc-support-tickets.php:704
+#: wpsc-support-tickets.php:764 wpsc-support-tickets.php:877
+#: wpsc-support-tickets.php:1086 wpsc-support-tickets.php:1189
+msgid "Unable to Authenticate"
+msgstr ""
+
+#: php/delete_ticket.php:15
+msgid "Cheatin&#8217; uh?"
+msgstr ""
+
+#: php/load_ticket.php:50 php/load_ticket.php:118 wpsc-support-tickets.php:809
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:1212
+#: wpsc-support-tickets.php:1264 wpsc-support-tickets.php:1386
+#: wpsc-support-tickets.php:1711
+msgid "Guest"
+msgstr ""
+
+#: php/load_ticket.php:74 wpsc-support-tickets.php:782
+#: wpsc-support-tickets.php:1346 wpsc-support-tickets.php:1680
+#: wpsc-support-tickets.php:1755
+msgid "Open"
+msgstr ""
+
+#: php/load_ticket.php:76 wpsc-support-tickets.php:783
+#: wpsc-support-tickets.php:1350 wpsc-support-tickets.php:1681
+#: wpsc-support-tickets.php:1757
+msgid "Closed"
+msgstr ""
+
+#: php/load_ticket.php:88 php/load_ticket.php:122
+#: wpsc-support-tickets.php:1216 wpsc-support-tickets.php:1268
+msgid "Posted by"
+msgstr ""
+
+#: php/reply_ticket.php:110 php/submit_ticket.php:134
+msgid "POST exceeded maximum allowed size."
+msgstr ""
+
+#: php/reply_ticket.php:128 php/submit_ticket.php:152
+msgid "There is no error, the file uploaded with success"
+msgstr ""
+
+#: php/reply_ticket.php:129 php/submit_ticket.php:153
+msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini"
+msgstr ""
+
+#: php/reply_ticket.php:130 php/submit_ticket.php:154
+msgid ""
+"The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
+"the HTML form"
+msgstr ""
+
+#: php/reply_ticket.php:131 php/submit_ticket.php:155
+msgid "The uploaded file was only partially uploaded"
+msgstr ""
+
+#: php/reply_ticket.php:132 php/submit_ticket.php:156
+msgid "No file was uploaded"
+msgstr ""
+
+#: php/reply_ticket.php:133 php/submit_ticket.php:157
+msgid "Missing a temporary folder"
+msgstr ""
+
+#: php/reply_ticket.php:143 php/submit_ticket.php:167
+msgid "Upload failed is_uploaded_file test."
+msgstr ""
+
+#: php/reply_ticket.php:145 php/submit_ticket.php:169
+msgid "File has no name."
+msgstr ""
+
+#: php/reply_ticket.php:151 php/submit_ticket.php:175
+msgid "File exceeds the maximum allowed size"
+msgstr ""
+
+#: php/reply_ticket.php:155 php/submit_ticket.php:179
+msgid "File size outside allowed lower bound"
+msgstr ""
+
+#: php/reply_ticket.php:162 php/submit_ticket.php:186
+msgid "Invalid file name"
+msgstr ""
+
+#: php/reply_ticket.php:167 php/submit_ticket.php:191
+msgid "File could not be saved."
+msgstr ""
+
+#: php/reply_ticket.php:175 php/submit_ticket.php:199
+msgid "ATTACHMENT"
+msgstr ""
+
+#: php/reply_ticket.php:215 php/reply_ticket.php:235
+msgid "The content of the reply is: "
+msgstr ""
+
+#: php/reply_ticket.php:230
+msgid "Reply to a support ticket was received."
+msgstr ""
+
+#: php/reply_ticket.php:231
+msgid "There is a new reply on support ticket: "
+msgstr ""
+
+#: php/submit_ticket.php:83
+msgid ""
+"There was a problem with your form.  Please resubmit after you add the "
+"required information for the following:"
+msgstr ""
+
+#: php/submit_ticket.php:263 php/submit_ticket.php:283
+msgid "The content of the ticket is: "
+msgstr ""
+
+#: php/submit_ticket.php:278
+msgid "A new support ticket was received."
+msgstr ""
+
+#: php/submit_ticket.php:279
+msgid "There is a new support ticket: "
+msgstr ""
+
+#: wpsc-support-tickets.php:111
+msgid "Alabama"
+msgstr ""
+
+#: wpsc-support-tickets.php:111
+msgid "Alaska"
+msgstr ""
+
+#: wpsc-support-tickets.php:111
+msgid "Arizona"
+msgstr ""
+
+#: wpsc-support-tickets.php:111
+msgid "California"
+msgstr ""
+
+#: wpsc-support-tickets.php:112
+msgid "Colorado"
+msgstr ""
+
+#: wpsc-support-tickets.php:112
+msgid "Connecticut"
+msgstr ""
+
+#: wpsc-support-tickets.php:112
+msgid "Delaware"
+msgstr ""
+
+#: wpsc-support-tickets.php:112
+msgid "District Of Columbia"
+msgstr ""
+
+#: wpsc-support-tickets.php:113
+msgid "Florida"
+msgstr ""
+
+#: wpsc-support-tickets.php:113 wpsc-support-tickets.php:134
+msgid "Georgia"
+msgstr ""
+
+#: wpsc-support-tickets.php:113
+msgid "Hawaii"
+msgstr ""
+
+#: wpsc-support-tickets.php:113
+msgid "Idaho"
+msgstr ""
+
+#: wpsc-support-tickets.php:114
+msgid "Illinois"
+msgstr ""
+
+#: wpsc-support-tickets.php:114
+msgid "Indiana"
+msgstr ""
+
+#: wpsc-support-tickets.php:114
+msgid "Iowa"
+msgstr ""
+
+#: wpsc-support-tickets.php:114
+msgid "Kansas"
+msgstr ""
+
+#: wpsc-support-tickets.php:115
+msgid "Kentucky"
+msgstr ""
+
+#: wpsc-support-tickets.php:115
+msgid "Louisiana"
+msgstr ""
+
+#: wpsc-support-tickets.php:115
+msgid "Maine"
+msgstr ""
+
+#: wpsc-support-tickets.php:115
+msgid "Maryland"
+msgstr ""
+
+#: wpsc-support-tickets.php:116
+msgid "Massachusetts"
+msgstr ""
+
+#: wpsc-support-tickets.php:116
+msgid "Michigan"
+msgstr ""
+
+#: wpsc-support-tickets.php:116
+msgid "Minnesota"
+msgstr ""
+
+#: wpsc-support-tickets.php:116
+msgid "Mississippi"
+msgstr ""
+
+#: wpsc-support-tickets.php:117
+msgid "Missouri"
+msgstr ""
+
+#: wpsc-support-tickets.php:117
+msgid "Montana"
+msgstr ""
+
+#: wpsc-support-tickets.php:117
+msgid "Nebraska"
+msgstr ""
+
+#: wpsc-support-tickets.php:117
+msgid "Nevada"
+msgstr ""
+
+#: wpsc-support-tickets.php:118
+msgid "New Hampshire"
+msgstr ""
+
+#: wpsc-support-tickets.php:118
+msgid "New Jersey"
+msgstr ""
+
+#: wpsc-support-tickets.php:118
+msgid "New Mexico"
+msgstr ""
+
+#: wpsc-support-tickets.php:118
+msgid "New York"
+msgstr ""
+
+#: wpsc-support-tickets.php:119
+msgid "North Carolina"
+msgstr ""
+
+#: wpsc-support-tickets.php:119
+msgid "North Dakota"
+msgstr ""
+
+#: wpsc-support-tickets.php:119
+msgid "Ohio"
+msgstr ""
+
+#: wpsc-support-tickets.php:119
+msgid "Oklahoma"
+msgstr ""
+
+#: wpsc-support-tickets.php:120
+msgid "Oregon"
+msgstr ""
+
+#: wpsc-support-tickets.php:120
+msgid "Pennsylvania"
+msgstr ""
+
+#: wpsc-support-tickets.php:120
+msgid "Rhode Island"
+msgstr ""
+
+#: wpsc-support-tickets.php:120
+msgid "South Carolina"
+msgstr ""
+
+#: wpsc-support-tickets.php:121
+msgid "South Dakota"
+msgstr ""
+
+#: wpsc-support-tickets.php:121
+msgid "Tennessee"
+msgstr ""
+
+#: wpsc-support-tickets.php:121
+msgid "Texas"
+msgstr ""
+
+#: wpsc-support-tickets.php:121
+msgid "Utah"
+msgstr ""
+
+#: wpsc-support-tickets.php:122
+msgid "Vermont"
+msgstr ""
+
+#: wpsc-support-tickets.php:122
+msgid "Virginia"
+msgstr ""
+
+#: wpsc-support-tickets.php:122
+msgid "Washington"
+msgstr ""
+
+#: wpsc-support-tickets.php:122
+msgid "West Virginia"
+msgstr ""
+
+#: wpsc-support-tickets.php:123
+msgid "Wisconsin"
+msgstr ""
+
+#: wpsc-support-tickets.php:123
+msgid "Wyoming"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "United States"
+msgstr ""
+
+#: wpsc-support-tickets.php:126 wpsc-support-tickets.php:130
+msgid "Canada"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "United Kingdom"
+msgstr ""
+
+#: wpsc-support-tickets.php:126 wpsc-support-tickets.php:136
+msgid "Ireland"
+msgstr ""
+
+#: wpsc-support-tickets.php:126 wpsc-support-tickets.php:127
+msgid "Australia"
+msgstr ""
+
+#: wpsc-support-tickets.php:126 wpsc-support-tickets.php:141
+msgid "New Zealand"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "Afghanistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "Albania"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "Algeria"
+msgstr ""
+
+#: wpsc-support-tickets.php:126
+msgid "American Samoa"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Andorra"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Angola"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Anguilla"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Antarctica"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Antigua and Barbuda"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Argentina"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Armenia"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Aruba"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Austria"
+msgstr ""
+
+#: wpsc-support-tickets.php:127
+msgid "Azerbaijan"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bahamas"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bahrain"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bangladesh"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Barbados"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Belarus"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Belgium"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Belize"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Benin"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bermuda"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bhutan"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bolivia"
+msgstr ""
+
+#: wpsc-support-tickets.php:128
+msgid "Bosnia and Herzegovina"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Botswana"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Bouvet Island"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Brazil"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "British Indian Ocean Territory"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Brunei Darussalam"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Bulgaria"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Burkina Faso"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Burundi"
+msgstr ""
+
+#: wpsc-support-tickets.php:129
+msgid "Cambodia"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Cameroon"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Cape Verde"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Cayman Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Central African Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Chad"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Chile"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "China"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Christmas Island"
+msgstr ""
+
+#: wpsc-support-tickets.php:130
+msgid "Cocos (Keeling) Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Colombia"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Comoros"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Congo"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Congo, The Democratic Republic of The"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Costa Rica"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Cote D\\'ivoire"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Croatia"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Cuba"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Cyprus"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Czech Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Denmark"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Djibouti"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Dominica"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Dominican Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Ecuador"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Egypt"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "El Salvador"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Equatorial Guinea"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Eritrea"
+msgstr ""
+
+#: wpsc-support-tickets.php:132
+msgid "Estonia"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Ethiopia"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Faroe Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Fiji"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "Finland"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "France"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "French Guiana"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "French Polynesia"
+msgstr ""
+
+#: wpsc-support-tickets.php:133
+msgid "French Southern Territories"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Gabon"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Gambia"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Germany"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Ghana"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Gibraltar"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Greece"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Greenland"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Grenada"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guadeloupe"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guam"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guatemala"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guinea"
+msgstr ""
+
+#: wpsc-support-tickets.php:134
+msgid "Guinea-bissau"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Guyana"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Haiti"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Heard Island and Mcdonald Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Holy See (Vatican City State)"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Honduras"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Hong Kong"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Hungary"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Iceland"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "India"
+msgstr ""
+
+#: wpsc-support-tickets.php:135
+msgid "Indonesia"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Iran, Islamic Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Iraq"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Israel"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Italy"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Jamaica"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Japan"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Jordan"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Kazakhstan"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Kenya"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Kiribati"
+msgstr ""
+
+#: wpsc-support-tickets.php:136
+msgid "Korea, Democratic People\\'s Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Korea, Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Kuwait"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Kyrgyzstan"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Lao People\\'s Democratic Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Latvia"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Lebanon"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Lesotho"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Liberia"
+msgstr ""
+
+#: wpsc-support-tickets.php:137
+msgid "Libyan Arab Jamahiriya"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Liechtenstein"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Lithuania"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Luxembourg"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Macao"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Macedonia, The Former Yugoslav Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Madagascar"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Malawi"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Malaysia"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Maldives"
+msgstr ""
+
+#: wpsc-support-tickets.php:138
+msgid "Mali"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Malta"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Marshall Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Martinique"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Mauritania"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Mauritius"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Mayotte"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Mexico"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Micronesia, Federated States of"
+msgstr ""
+
+#: wpsc-support-tickets.php:139
+msgid "Moldova, Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Monaco"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Mongolia"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Montserrat"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Morocco"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Mozambique"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Myanmar"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Namibia"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Nauru"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Nepal"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Netherlands"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "Netherlands Antilles"
+msgstr ""
+
+#: wpsc-support-tickets.php:140
+msgid "New Caledonia"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Nicaragua"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Niger"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Nigeria"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Niue"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Norfolk Island"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Northern Mariana Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Norway"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Oman"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Pakistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:141
+msgid "Palau"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Palestinian Territory, Occupied"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Panama"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Papua New Guinea"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Paraguay"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Peru"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Philippines"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Pitcairn"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Poland"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Portugal"
+msgstr ""
+
+#: wpsc-support-tickets.php:142
+msgid "Puerto Rico"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Qatar"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Reunion"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Romania"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Russian Federation"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Rwanda"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Saint Helena"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Saint Lucia"
+msgstr ""
+
+#: wpsc-support-tickets.php:143
+msgid "Saint Pierre and Miquelon"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Saint Vincent and The Grenadines"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Samoa"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "San Marino"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Sao Tome and Principe"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Saudi Arabia"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Senegal"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Serbia and Montenegro"
+msgstr ""
+
+#: wpsc-support-tickets.php:144
+msgid "Seychelles"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Sierra Leone"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Singapore"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Slovakia"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Slovenia"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Solomon Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Somalia"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "South Africa"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "South Georgia and The South Sandwich Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:145
+msgid "Spain"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Sri Lanka"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Sudan"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Suriname"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Swaziland"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Sweden"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Switzerland"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Syrian Arab Republic"
+msgstr ""
+
+#: wpsc-support-tickets.php:146
+msgid "Taiwan, Province of China"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tajikistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tanzania, United Republic of"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Thailand"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Timor-leste"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Togo"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tokelau"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tonga"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Trinidad and Tobago"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Tunisia"
+msgstr ""
+
+#: wpsc-support-tickets.php:147
+msgid "Turkey"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Turkmenistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Turks and Caicos Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Tuvalu"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Uganda"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Ukraine"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "United Arab Emirates"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "United States Minor Outlying Islands"
+msgstr ""
+
+#: wpsc-support-tickets.php:148
+msgid "Uruguay"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Uzbekistan"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Vanuatu"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Venezuela"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Viet Nam"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Virgin Islands, British"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Virgin Islands, U.S."
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Wallis and Futuna"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Western Sahara"
+msgstr ""
+
+#: wpsc-support-tickets.php:149
+msgid "Yemen"
+msgstr ""
+
+#: wpsc-support-tickets.php:150
+msgid "Zambia"
+msgstr ""
+
+#: wpsc-support-tickets.php:150
+msgid "Zimbabwe"
+msgstr ""
+
+#: wpsc-support-tickets.php:186
+msgid "Other (Non-US)"
+msgstr ""
+
+#: wpsc-support-tickets.php:305
+msgid "Support"
+msgstr ""
+
+#: wpsc-support-tickets.php:305
+msgid "Billing"
+msgstr ""
+
+#: wpsc-support-tickets.php:307
+msgid "Your support ticket was received."
+msgstr ""
+
+#: wpsc-support-tickets.php:308
+msgid ""
+"Thank you for opening a new support ticket.  We will look into your issue "
+"and respond as soon as possible."
+msgstr ""
+
+#: wpsc-support-tickets.php:309
+msgid "Your support ticket reply was received."
+msgstr ""
+
+#: wpsc-support-tickets.php:310
+msgid "A reply was posted to one of your support tickets."
+msgstr ""
+
+#: wpsc-support-tickets.php:426
+msgid "Settings Updated."
+msgstr ""
+
+#: wpsc-support-tickets.php:444 wpsc-support-tickets.php:1837
+msgid "Settings"
+msgstr ""
+
+#: wpsc-support-tickets.php:445
+msgid "PRO"
+msgstr ""
+
+#: wpsc-support-tickets.php:452
+msgid "General"
+msgstr ""
+
+#: wpsc-support-tickets.php:455
+msgid "Main Page"
+msgstr ""
+
+#: wpsc-support-tickets.php:455
+msgid "You need to use a Page as the base for wpsc Support Tickets."
+msgstr ""
+
+#: wpsc-support-tickets.php:458
+msgid "Select page"
+msgstr ""
+
+#: wpsc-support-tickets.php:477
+msgid "Departments"
+msgstr ""
+
+#: wpsc-support-tickets.php:477
+msgid "Separate these values with a double pipe, like this ||"
+msgstr ""
+
+#: wpsc-support-tickets.php:481
+msgid "Allow user to select Severity on ticket creation?"
+msgstr ""
+
+#: wpsc-support-tickets.php:481
+msgid ""
+"Set this to true if you want the user to select the severity of their ticket "
+"when creating it."
+msgstr ""
+
+#: wpsc-support-tickets.php:504 wpsc-support-tickets.php:507
+msgid "Email"
+msgstr ""
+
+#: wpsc-support-tickets.php:507
+msgid ""
+"The admin email where all new ticket &amp; reply notification emails will be "
+"sent"
+msgstr ""
+
+#: wpsc-support-tickets.php:509
+msgid "New Ticket Email"
+msgstr ""
+
+#: wpsc-support-tickets.php:509
+msgid ""
+"The subject &amp; body of the email sent to the customer when creating a new "
+"ticket."
+msgstr ""
+
+#: wpsc-support-tickets.php:513
+msgid "Include the ticket in New Ticket Email"
+msgstr ""
+
+#: wpsc-support-tickets.php:513
+msgid ""
+"Set this to true if you want the content of the ticket included in the new "
+"ticket email."
+msgstr ""
+
+#: wpsc-support-tickets.php:534
+msgid "New Reply Email"
+msgstr ""
+
+#: wpsc-support-tickets.php:534
+msgid ""
+"The subject &amp; body of the email sent to the customer when there is a new "
+"reply."
+msgstr ""
+
+#: wpsc-support-tickets.php:538
+msgid "Include the reply in New Reply Email"
+msgstr ""
+
+#: wpsc-support-tickets.php:538
+msgid ""
+"Set this to true if you want the content of the reply included in the new "
+"reply email."
+msgstr ""
+
+#: wpsc-support-tickets.php:561
+msgid "Styling"
+msgstr ""
+
+#: wpsc-support-tickets.php:564
+msgid "Disable inline styles"
+msgstr ""
+
+#: wpsc-support-tickets.php:564
+msgid "Set this to true if you want to disable the inline CSS styles."
+msgstr ""
+
+#: wpsc-support-tickets.php:587
+msgid "Guests"
+msgstr ""
+
+#: wpsc-support-tickets.php:590
+msgid "Allow Guests"
+msgstr ""
+
+#: wpsc-support-tickets.php:590
+msgid ""
+"Set this to true if you want Guests to be able to use the support ticket "
+"system."
+msgstr ""
+
+#: wpsc-support-tickets.php:613
+msgid "Custom Fields"
+msgstr ""
+
+#: wpsc-support-tickets.php:616
+msgid "Place custom form fields"
+msgstr ""
+
+#: wpsc-support-tickets.php:616
+msgid ""
+"When creating a ticket, this determines where your custom fields are placed "
+"on the ticket submission form."
+msgstr ""
+
+#: wpsc-support-tickets.php:620 wpsc-support-tickets.php:644
+msgid "before everything"
+msgstr ""
+
+#: wpsc-support-tickets.php:621 wpsc-support-tickets.php:645
+msgid "before message"
+msgstr ""
+
+#: wpsc-support-tickets.php:622
+msgid "after message"
+msgstr ""
+
+#: wpsc-support-tickets.php:623
+msgid "after everything"
+msgstr ""
+
+#: wpsc-support-tickets.php:640
+msgid "Display custom fields"
+msgstr ""
+
+#: wpsc-support-tickets.php:640
+msgid ""
+"When a ticket creator views a ticket they created, this setting determines "
+"where the custom fields are placed on the page."
+msgstr ""
+
+#: wpsc-support-tickets.php:646
+msgid "after message &amp; replies"
+msgstr ""
+
+#: wpsc-support-tickets.php:677
+msgid "Update Settings"
+msgstr ""
+
+#: wpsc-support-tickets.php:717
+msgid ""
+"Upgrade now to wpsc Support Tickets PRO and unlock in depth statistics for "
+"the following and more:"
+msgstr ""
+
+#: wpsc-support-tickets.php:719
+msgid "Average ticket resolution time"
+msgstr ""
+
+#: wpsc-support-tickets.php:720
+msgid "Number of tickets created in each category"
+msgstr ""
+
+#: wpsc-support-tickets.php:721
+msgid "Number of tickets in each severity level"
+msgstr ""
+
+#: wpsc-support-tickets.php:722
+msgid "Top 10 users who create the most tickets"
+msgstr ""
+
+#: wpsc-support-tickets.php:723
+msgid "The number of completed tickets"
+msgstr ""
+
+#: wpsc-support-tickets.php:724
+msgid "Display how long a ticket has been open"
+msgstr ""
+
+#: wpsc-support-tickets.php:725
+msgid "Display how long it took to resolve a closed ticket"
+msgstr ""
+
+#: wpsc-support-tickets.php:726
+msgid ""
+"Bar chart showing the amount of time it took to close the last 30 tickets"
+msgstr ""
+
+#: wpsc-support-tickets.php:727
+msgid "And much more, upgrade to PRO today:"
+msgstr ""
+
+#: wpsc-support-tickets.php:745
+msgid ""
+"Your version of wpsc Support Tickets is out of date.  Please email "
+"admin@wpstorecart.com with your PayPal transaction ID to recieve the latest "
+"version."
+msgstr ""
+
+#: wpsc-support-tickets.php:798 wpsc-support-tickets.php:834
+msgid "View Open Tickets:"
+msgstr ""
+
+#: wpsc-support-tickets.php:800 wpsc-support-tickets.php:836
+msgid "View Closed Tickets:"
+msgstr ""
+
+#: wpsc-support-tickets.php:802 wpsc-support-tickets.php:838
+#: wpsc-support-tickets.php:1379 wpsc-support-tickets.php:1729
+msgid "Ticket"
+msgstr ""
+
+#: wpsc-support-tickets.php:802 wpsc-support-tickets.php:838
+#: wpsc-support-tickets.php:1342 wpsc-support-tickets.php:1379
+#: wpsc-support-tickets.php:1729
+msgid "Status"
+msgstr ""
+
+#: wpsc-support-tickets.php:802 wpsc-support-tickets.php:838
+msgid "User"
+msgstr ""
+
+#: wpsc-support-tickets.php:802 wpsc-support-tickets.php:838
+#: wpsc-support-tickets.php:1379 wpsc-support-tickets.php:1729
+msgid "Last Reply"
+msgstr ""
+
+#: wpsc-support-tickets.php:812 wpsc-support-tickets.php:815
+#: wpsc-support-tickets.php:848 wpsc-support-tickets.php:851
+#: wpsc-support-tickets.php:1389 wpsc-support-tickets.php:1392
+msgid "ticket creator"
+msgstr ""
+
+#: wpsc-support-tickets.php:817 wpsc-support-tickets.php:853
+#: wpsc-support-tickets.php:1394 wpsc-support-tickets.php:1741
+msgid "Staff Member"
+msgstr ""
+
+#: wpsc-support-tickets.php:820 wpsc-support-tickets.php:856
+#: wpsc-support-tickets.php:1398 wpsc-support-tickets.php:1766
+msgid "View"
+msgstr ""
+
+#: wpsc-support-tickets.php:820 wpsc-support-tickets.php:856
+#: wpsc-support-tickets.php:1766
+msgid "by"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:971
+msgid "First name"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:972
+msgid "Last name"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:973
+msgid "Address"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:974
+msgid "City"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:975
+msgid "US States"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:976
+msgid "Countries"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:977
+msgid "Zipcode"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:978
+msgid "Email Address"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:979
+msgid "Input (text)"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:980
+msgid "Input (numeric)"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+msgid "Input textarea"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:983
+msgid "Input Dropdown list"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+msgid "Input Checkbox"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:985
+msgid "Input Radio button"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+msgid "Separator"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+msgid "Header"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+msgid "Text"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:1015 wpsc-support-tickets.php:1048
+msgid "Required"
+msgstr ""
+
+#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:1015 wpsc-support-tickets.php:1048
+msgid "Optional"
+msgstr ""
+
+#: wpsc-support-tickets.php:981
+msgid "Input Textarea"
+msgstr ""
+
+#: wpsc-support-tickets.php:987
+msgid "--- Separator ---"
+msgstr ""
+
+#: wpsc-support-tickets.php:988
+msgid "Header &lt;h2&gt;&lt;/h2&gt;"
+msgstr ""
+
+#: wpsc-support-tickets.php:989
+msgid "Text &lt;p&gt;&lt;/p&gt;"
+msgstr ""
+
+#: wpsc-support-tickets.php:995
+msgid "Add New Field"
+msgstr ""
+
+#: wpsc-support-tickets.php:995
+msgid "Name"
+msgstr ""
+
+#: wpsc-support-tickets.php:995
+msgid "Type"
+msgstr ""
+
+#: wpsc-support-tickets.php:1008
+msgid "Add additional option"
+msgstr ""
+
+#: wpsc-support-tickets.php:1015
+msgid "Save New Field"
+msgstr ""
+
+#: wpsc-support-tickets.php:1066
+msgid "Save All Edits"
+msgstr ""
+
+#: wpsc-support-tickets.php:1108 wpsc-support-tickets.php:1563
+#: wpsc-support-tickets.php:1572
+msgid "Create a New Ticket"
+msgstr ""
+
+#: wpsc-support-tickets.php:1110
+msgid "Create ticket on behalf of user"
+msgstr ""
+
+#: wpsc-support-tickets.php:1126 wpsc-support-tickets.php:1578
+msgid "Title"
+msgstr ""
+
+#: wpsc-support-tickets.php:1135 wpsc-support-tickets.php:1294
+#: wpsc-support-tickets.php:1587
+msgid "Your message"
+msgstr ""
+
+#: wpsc-support-tickets.php:1148 wpsc-support-tickets.php:1356
+#: wpsc-support-tickets.php:1600 wpsc-support-tickets.php:1674
+msgid "Attach a file"
+msgstr ""
+
+#: wpsc-support-tickets.php:1156 wpsc-support-tickets.php:1298
+#: wpsc-support-tickets.php:1608
+msgid "Department"
+msgstr ""
+
+#: wpsc-support-tickets.php:1168 wpsc-support-tickets.php:1359
+#: wpsc-support-tickets.php:1643 wpsc-support-tickets.php:1689
+#: wpsc-support-tickets.php:1692
+msgid "Cancel"
+msgstr ""
+
+#: wpsc-support-tickets.php:1174 wpsc-support-tickets.php:1649
+msgid "Submit Ticket"
+msgstr ""
+
+#: wpsc-support-tickets.php:1268
+msgid "Are you sure you want to delete this reply?"
+msgstr ""
+
+#: wpsc-support-tickets.php:1268
+msgid "Delete Reply"
+msgstr ""
+
+#: wpsc-support-tickets.php:1308 wpsc-support-tickets.php:1619
+msgid "Severity"
+msgstr ""
+
+#: wpsc-support-tickets.php:1314 wpsc-support-tickets.php:1624
+msgid "Low"
+msgstr ""
+
+#: wpsc-support-tickets.php:1320 wpsc-support-tickets.php:1625
+msgid "Normal"
+msgstr ""
+
+#: wpsc-support-tickets.php:1326 wpsc-support-tickets.php:1627
+msgid "High"
+msgstr ""
+
+#: wpsc-support-tickets.php:1332 wpsc-support-tickets.php:1629
+msgid "Urgent"
+msgstr ""
+
+#: wpsc-support-tickets.php:1338 wpsc-support-tickets.php:1631
+msgid "Critical"
+msgstr ""
+
+#: wpsc-support-tickets.php:1352
+msgid "Actions"
+msgstr ""
+
+#: wpsc-support-tickets.php:1353
+msgid "Are you sure you want to delete this ticket?"
+msgstr ""
+
+#: wpsc-support-tickets.php:1353
+msgid "Delete Ticket"
+msgstr ""
+
+#: wpsc-support-tickets.php:1359
+msgid "Are you sure you want to cancel?"
+msgstr ""
+
+#: wpsc-support-tickets.php:1359
+msgid "Update Ticket"
+msgstr ""
+
+#: wpsc-support-tickets.php:1402
+msgid "No open tickets!"
+msgstr ""
+
+#: wpsc-support-tickets.php:1410
+msgid "wpscSupportTickets Overview"
+msgstr ""
+
+#: wpsc-support-tickets.php:1546
+msgid "Enter your email address"
+msgstr ""
+
+#: wpsc-support-tickets.php:1547
+msgid "Submit"
+msgstr ""
+
+#: wpsc-support-tickets.php:1659
+msgid "Loading"
+msgstr ""
+
+#: wpsc-support-tickets.php:1664
+msgid "Your reply"
+msgstr ""
+
+#: wpsc-support-tickets.php:1698
+msgid "Submit Reply"
+msgstr ""
+
+#: wpsc-support-tickets.php:1725
+msgid "View Previous Tickets:"
+msgstr ""
+
+#: wpsc-support-tickets.php:1733 wpsc-support-tickets.php:1739
+msgid "you"
+msgstr ""
+
+#: wpsc-support-tickets.php:1773
+msgid "Please"
+msgstr ""
+
+#: wpsc-support-tickets.php:1773
+msgid "log in"
+msgstr ""
+
+#: wpsc-support-tickets.php:1773
+msgid "or"
+msgstr ""
+
+#: wpsc-support-tickets.php:1773
+msgid "register"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (wpsc Support Tickets 4.7.15)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: wpsc-support-tickets.php:1835
+msgid "wpsc Support Tickets"
+msgstr ""
+
+#: wpsc-support-tickets.php:1835
+msgid "Support Tickets"
+msgstr ""
+
+#: wpsc-support-tickets.php:1836
+msgid "Create Ticket"
+msgstr ""
+
+#: wpsc-support-tickets.php:1838
+msgid "Reply to Support Ticket"
+msgstr ""
+
+#: wpsc-support-tickets.php:1838
+msgid "Reply to Support Tickets"
+msgstr ""
+
+#: wpsc-support-tickets.php:1839
+msgid "Statistics"
+msgstr ""
+
+#: wpsc-support-tickets.php:1845
+msgid "Edit User Fields Collected"
+msgstr ""
+
+#: wpsc-support-tickets.php:1845
+msgid "User Fields"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wpscsupporttickets.com/wordpress-support-ticket-plugin/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"An open source help desk and support ticket system for Wordpress using "
+"jQuery. Easy to use for both users & admins."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "wpStoreCart, LLC"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "URI: http://wpstorecart.com/"
+msgstr ""
