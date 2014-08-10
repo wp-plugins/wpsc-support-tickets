@@ -80,7 +80,7 @@ if(is_user_logged_in() || @isset($_SESSION['wpsct_email'])) {
     
     // Custom form fields first checked here (Added in 4.0)
     $custom_field_problem = false;
-    $custom_field_problem_text = __('There was a problem with your form.  Please resubmit after you add the required information for the following:', 'wpsc-support-ticket');
+    $custom_field_problem_text = __('There was a problem with your form.  Please resubmit after you add the required information for the following:', 'wpsc-support-tickets');
     
     $table_name33 = $wpdb->prefix . "wpstorecart_meta";
     $grabrecord = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-requiredinfo' ORDER BY `foreignkey` ASC;";

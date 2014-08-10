@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.18
+  Version: 4.7.20
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -128,7 +128,7 @@ if(!function_exists('wpsctPromptForCustomFields')) {
             __("Bahamas", 'wpsc-support-tickets'),__("Bahrain", 'wpsc-support-tickets'),__("Bangladesh", 'wpsc-support-tickets'),__("Barbados", 'wpsc-support-tickets'),__("Belarus", 'wpsc-support-tickets'),__("Belgium", 'wpsc-support-tickets'),__("Belize", 'wpsc-support-tickets'),__("Benin", 'wpsc-support-tickets'),__("Bermuda", 'wpsc-support-tickets'),__("Bhutan", 'wpsc-support-tickets'),__("Bolivia", 'wpsc-support-tickets'),__("Bosnia and Herzegovina", 'wpsc-support-tickets'),
             __("Botswana", 'wpsc-support-tickets'),__("Bouvet Island", 'wpsc-support-tickets'),__("Brazil", 'wpsc-support-tickets'),__("British Indian Ocean Territory", 'wpsc-support-tickets'),__("Brunei Darussalam", 'wpsc-support-tickets'),__("Bulgaria", 'wpsc-support-tickets'),__("Burkina Faso", 'wpsc-support-tickets'),__("Burundi", 'wpsc-support-tickets'),__("Cambodia", 'wpsc-support-tickets'),
             __("Cameroon", 'wpsc-support-tickets'),__("Canada", 'wpsc-support-tickets'),__("Cape Verde", 'wpsc-support-tickets'),__("Cayman Islands", 'wpsc-support-tickets'),__("Central African Republic", 'wpsc-support-tickets'),__("Chad", 'wpsc-support-tickets'),__("Chile", 'wpsc-support-tickets'),__("China", 'wpsc-support-tickets'),__("Christmas Island", 'wpsc-support-tickets'),__("Cocos (Keeling) Islands", 'wpsc-support-tickets'),
-            __("Colombia", 'wpsc-support-tickets'),__("Comoros", 'wpsc-support-tickets'),__("Congo", 'wpsc-support-tickets'),__("Congo, The Democratic Republic of The","Cook Islands", 'wpsc-support-tickets'),__("Costa Rica", 'wpsc-support-tickets'),__("Cote D\'ivoire", 'wpsc-support-tickets'),__("Croatia", 'wpsc-support-tickets'),__("Cuba", 'wpsc-support-tickets'),__("Cyprus", 'wpsc-support-tickets'),
+            __("Colombia", 'wpsc-support-tickets'),__("Comoros", 'wpsc-support-tickets'),__("Congo", 'wpsc-support-tickets'),__("Congo, The Democratic Republic of The", 'wpsc-support-tickets'), __("Cook Islands", 'wpsc-support-tickets'),__("Costa Rica", 'wpsc-support-tickets'),__("Cote D\'ivoire", 'wpsc-support-tickets'),__("Croatia", 'wpsc-support-tickets'),__("Cuba", 'wpsc-support-tickets'),__("Cyprus", 'wpsc-support-tickets'),
             __("Czech Republic", 'wpsc-support-tickets'),__("Denmark", 'wpsc-support-tickets'),__("Djibouti", 'wpsc-support-tickets'),__("Dominica", 'wpsc-support-tickets'),__("Dominican Republic", 'wpsc-support-tickets'),__("Ecuador", 'wpsc-support-tickets'),__("Egypt", 'wpsc-support-tickets'),__("El Salvador", 'wpsc-support-tickets'),__("Equatorial Guinea", 'wpsc-support-tickets'),__("Eritrea", 'wpsc-support-tickets'),__("Estonia", 'wpsc-support-tickets'),
             __("Ethiopia", 'wpsc-support-tickets'),__("Falkland Islands (Malvinas)", 'wpsc-support-tickets'),__("Faroe Islands", 'wpsc-support-tickets'),__("Fiji", 'wpsc-support-tickets'),__("Finland", 'wpsc-support-tickets'),__("France", 'wpsc-support-tickets'),__("French Guiana", 'wpsc-support-tickets'),__("French Polynesia", 'wpsc-support-tickets'),__("French Southern Territories", 'wpsc-support-tickets'),
             __("Gabon", 'wpsc-support-tickets'),__("Gambia", 'wpsc-support-tickets'),__("Georgia", 'wpsc-support-tickets'),__("Germany", 'wpsc-support-tickets'),__("Ghana", 'wpsc-support-tickets'),__("Gibraltar", 'wpsc-support-tickets'),__("Greece", 'wpsc-support-tickets'),__("Greenland", 'wpsc-support-tickets'),__("Grenada", 'wpsc-support-tickets'),__("Guadeloupe", 'wpsc-support-tickets'),__("Guam", 'wpsc-support-tickets'),__("Guatemala", 'wpsc-support-tickets'),__("Guinea", 'wpsc-support-tickets'),__("Guinea-bissau", 'wpsc-support-tickets'),
@@ -318,7 +318,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'custom_field_position' => 'after message',
                 'custom_field_frontend_position' => 'after message',
                 'use_ticket_in_email' => 'true',
-                'use_reply_in_email' => 'true'
+                'use_reply_in_email' => 'true',
+                'department_admins' => 'default'
             );
 
             if ($this->wpscstSettings != NULL) {
