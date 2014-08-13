@@ -85,7 +85,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
         }        
         
         echo '<table style="width:100%;">';
-        echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' '.$wpscst_username.' (<span id="wpscst_results_time_posted">'.date('Y-m-d g:i A',$results[0]['time_posted']).'</span>)</th></tr></thead>';
+        echo '<thead><tr><th id="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' '.$wpscst_username.' (<span id="wpscst_results_time_posted">'.date_i18n( get_option( 'date_format' ),$results[0]['time_posted']).'</span>)</th></tr></thead>';
 
         $messageData = strip_tags(base64_decode($results[0]['initial_message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
         $messageData = explode ( '\\', $messageData);
@@ -119,7 +119,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
                 }
 
                 echo '<br /><table style="width:100%;" '.$classModifier1.'>';
-                echo '<thead '.$classModifier2.'><tr><th class="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' '.$theusersname.' (<span class="wpscst_results_timestamp">'.date('Y-m-d g:i A',$results['timestamp']).'</span>)</th></tr></thead>';
+                echo '<thead '.$classModifier2.'><tr><th class="wpscst_results_posted_by">'.__('Posted by', 'wpsc-support-tickets').' '.$theusersname.' (<span class="wpscst_results_timestamp">'.date_i18n( get_option( 'date_format' ),$results['timestamp']).'</span>)</th></tr></thead>';
                 $messageData = strip_tags(base64_decode($results['message']),'<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
                 $messageData = explode ( '\\', $messageData);
                 $messageWhole = '';
