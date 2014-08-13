@@ -202,7 +202,7 @@ if(is_user_logged_in() || @isset($_SESSION['wpsct_email'])) {
 
 
     $wpscst_title = base64_encode(strip_tags($_POST['wpscst_title']));
-    $wpscst_initial_message = base64_encode($_POST['wpscst_initial_message'] . $wpscst_initial_message);
+    $wpscst_initial_message = base64_encode(nl2br($_POST['wpscst_initial_message'] . $wpscst_initial_message));
     $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));    
     $wpscst_severity = $wpdb->escape($_POST['wpscst_severity']);
     

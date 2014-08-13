@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.7.20
+Stable tag: 4.7.21
 
 == Description ==
 
@@ -94,6 +94,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: Assign specific support staff to a single or multiple departments
 * Added: Option for the ticket creator to choose a specific person from the department admins while creating the ticket (admin must enable this feature, as it's disabled by default)
 * Added: Ability to edit radio, checkboxes, and drop downs
+
+= 4.7.21 =
+* Fixed: Line breaks should now properly work on all platforms when creating or replying to a ticket.
 
 = 4.7.20 =
 * Fixed: Patched a couple of localization problems

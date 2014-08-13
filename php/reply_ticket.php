@@ -178,7 +178,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
         
         
         
-            $wpscst_message = base64_encode($_POST['wpscst_reply'] . $wpscst_message);
+            $wpscst_message = base64_encode(nl2br($_POST['wpscst_reply'] . $wpscst_message));
 
             $sql = "
             INSERT INTO `{$wpdb->prefix}wpscst_replies` (
