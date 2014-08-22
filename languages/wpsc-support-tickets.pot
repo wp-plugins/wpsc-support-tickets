@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the wpsc Support Tickets package.
 msgid ""
 msgstr ""
-"Project-Id-Version: wpsc Support Tickets 4.7.17\n"
+"Project-Id-Version: wpsc Support Tickets 4.7.22\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wpsc-support-tickets\n"
-"POT-Creation-Date: 2014-07-10 18:49:29+00:00\n"
+"POT-Creation-Date: 2014-08-22 04:08:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
 #: php/add_field.php:18 php/del_field.php:18 php/sort_fields.php:18
-#: wpsc-support-tickets.php:344 wpsc-support-tickets.php:704
-#: wpsc-support-tickets.php:764 wpsc-support-tickets.php:877
-#: wpsc-support-tickets.php:1086 wpsc-support-tickets.php:1189
+#: wpsc-support-tickets.php:345 wpsc-support-tickets.php:705
+#: wpsc-support-tickets.php:765 wpsc-support-tickets.php:878
+#: wpsc-support-tickets.php:1087 wpsc-support-tickets.php:1190
 msgid "Unable to Authenticate"
 msgstr ""
 
@@ -23,27 +23,27 @@ msgstr ""
 msgid "Cheatin&#8217; uh?"
 msgstr ""
 
-#: php/load_ticket.php:50 php/load_ticket.php:118 wpsc-support-tickets.php:809
-#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:1212
-#: wpsc-support-tickets.php:1264 wpsc-support-tickets.php:1387
-#: wpsc-support-tickets.php:1712
+#: php/load_ticket.php:50 php/load_ticket.php:118 wpsc-support-tickets.php:810
+#: wpsc-support-tickets.php:846 wpsc-support-tickets.php:1213
+#: wpsc-support-tickets.php:1265 wpsc-support-tickets.php:1388
+#: wpsc-support-tickets.php:1713
 msgid "Guest"
 msgstr ""
 
-#: php/load_ticket.php:74 wpsc-support-tickets.php:782
-#: wpsc-support-tickets.php:1346 wpsc-support-tickets.php:1681
-#: wpsc-support-tickets.php:1756
+#: php/load_ticket.php:74 wpsc-support-tickets.php:783
+#: wpsc-support-tickets.php:1347 wpsc-support-tickets.php:1682
+#: wpsc-support-tickets.php:1757
 msgid "Open"
 msgstr ""
 
-#: php/load_ticket.php:76 wpsc-support-tickets.php:783
-#: wpsc-support-tickets.php:1350 wpsc-support-tickets.php:1682
-#: wpsc-support-tickets.php:1758
+#: php/load_ticket.php:76 wpsc-support-tickets.php:784
+#: wpsc-support-tickets.php:1351 wpsc-support-tickets.php:1683
+#: wpsc-support-tickets.php:1759
 msgid "Closed"
 msgstr ""
 
 #: php/load_ticket.php:88 php/load_ticket.php:122
-#: wpsc-support-tickets.php:1216 wpsc-support-tickets.php:1268
+#: wpsc-support-tickets.php:1217 wpsc-support-tickets.php:1269
 msgid "Posted by"
 msgstr ""
 
@@ -549,6 +549,10 @@ msgstr ""
 
 #: wpsc-support-tickets.php:131
 msgid "Congo, The Democratic Republic of The"
+msgstr ""
+
+#: wpsc-support-tickets.php:131
+msgid "Cook Islands"
 msgstr ""
 
 #: wpsc-support-tickets.php:131
@@ -1313,582 +1317,582 @@ msgstr ""
 msgid "A reply was posted to one of your support tickets."
 msgstr ""
 
-#: wpsc-support-tickets.php:426
+#: wpsc-support-tickets.php:427
 msgid "Settings Updated."
 msgstr ""
 
-#: wpsc-support-tickets.php:444 wpsc-support-tickets.php:1838
+#: wpsc-support-tickets.php:445 wpsc-support-tickets.php:1839
 msgid "Settings"
 msgstr ""
 
-#: wpsc-support-tickets.php:445
+#: wpsc-support-tickets.php:446
 msgid "PRO"
 msgstr ""
 
-#: wpsc-support-tickets.php:452
+#: wpsc-support-tickets.php:453
 msgid "General"
 msgstr ""
 
-#: wpsc-support-tickets.php:455
+#: wpsc-support-tickets.php:456
 msgid "Main Page"
 msgstr ""
 
-#: wpsc-support-tickets.php:455
+#: wpsc-support-tickets.php:456
 msgid "You need to use a Page as the base for wpsc Support Tickets."
 msgstr ""
 
-#: wpsc-support-tickets.php:458
+#: wpsc-support-tickets.php:459
 msgid "Select page"
 msgstr ""
 
-#: wpsc-support-tickets.php:477
+#: wpsc-support-tickets.php:478
 msgid "Departments"
 msgstr ""
 
-#: wpsc-support-tickets.php:477
+#: wpsc-support-tickets.php:478
 msgid "Separate these values with a double pipe, like this ||"
 msgstr ""
 
-#: wpsc-support-tickets.php:481
+#: wpsc-support-tickets.php:482
 msgid "Allow user to select Severity on ticket creation?"
 msgstr ""
 
-#: wpsc-support-tickets.php:481
+#: wpsc-support-tickets.php:482
 msgid ""
 "Set this to true if you want the user to select the severity of their ticket "
 "when creating it."
 msgstr ""
 
-#: wpsc-support-tickets.php:504 wpsc-support-tickets.php:507
+#: wpsc-support-tickets.php:505 wpsc-support-tickets.php:508
 msgid "Email"
 msgstr ""
 
-#: wpsc-support-tickets.php:507
+#: wpsc-support-tickets.php:508
 msgid ""
 "The admin email where all new ticket &amp; reply notification emails will be "
 "sent"
 msgstr ""
 
-#: wpsc-support-tickets.php:509
+#: wpsc-support-tickets.php:510
 msgid "New Ticket Email"
 msgstr ""
 
-#: wpsc-support-tickets.php:509
+#: wpsc-support-tickets.php:510
 msgid ""
 "The subject &amp; body of the email sent to the customer when creating a new "
 "ticket."
 msgstr ""
 
-#: wpsc-support-tickets.php:513
+#: wpsc-support-tickets.php:514
 msgid "Include the ticket in New Ticket Email"
 msgstr ""
 
-#: wpsc-support-tickets.php:513
+#: wpsc-support-tickets.php:514
 msgid ""
 "Set this to true if you want the content of the ticket included in the new "
 "ticket email."
 msgstr ""
 
-#: wpsc-support-tickets.php:534
+#: wpsc-support-tickets.php:535
 msgid "New Reply Email"
 msgstr ""
 
-#: wpsc-support-tickets.php:534
+#: wpsc-support-tickets.php:535
 msgid ""
 "The subject &amp; body of the email sent to the customer when there is a new "
 "reply."
 msgstr ""
 
-#: wpsc-support-tickets.php:538
+#: wpsc-support-tickets.php:539
 msgid "Include the reply in New Reply Email"
 msgstr ""
 
-#: wpsc-support-tickets.php:538
+#: wpsc-support-tickets.php:539
 msgid ""
 "Set this to true if you want the content of the reply included in the new "
 "reply email."
 msgstr ""
 
-#: wpsc-support-tickets.php:561
+#: wpsc-support-tickets.php:562
 msgid "Styling"
 msgstr ""
 
-#: wpsc-support-tickets.php:564
+#: wpsc-support-tickets.php:565
 msgid "Disable inline styles"
 msgstr ""
 
-#: wpsc-support-tickets.php:564
+#: wpsc-support-tickets.php:565
 msgid "Set this to true if you want to disable the inline CSS styles."
 msgstr ""
 
-#: wpsc-support-tickets.php:587
+#: wpsc-support-tickets.php:588
 msgid "Guests"
 msgstr ""
 
-#: wpsc-support-tickets.php:590
+#: wpsc-support-tickets.php:591
 msgid "Allow Guests"
 msgstr ""
 
-#: wpsc-support-tickets.php:590
+#: wpsc-support-tickets.php:591
 msgid ""
 "Set this to true if you want Guests to be able to use the support ticket "
 "system."
 msgstr ""
 
-#: wpsc-support-tickets.php:613
+#: wpsc-support-tickets.php:614
 msgid "Custom Fields"
 msgstr ""
 
-#: wpsc-support-tickets.php:616
+#: wpsc-support-tickets.php:617
 msgid "Place custom form fields"
 msgstr ""
 
-#: wpsc-support-tickets.php:616
+#: wpsc-support-tickets.php:617
 msgid ""
 "When creating a ticket, this determines where your custom fields are placed "
 "on the ticket submission form."
 msgstr ""
 
-#: wpsc-support-tickets.php:620 wpsc-support-tickets.php:644
+#: wpsc-support-tickets.php:621 wpsc-support-tickets.php:645
 msgid "before everything"
 msgstr ""
 
-#: wpsc-support-tickets.php:621 wpsc-support-tickets.php:645
+#: wpsc-support-tickets.php:622 wpsc-support-tickets.php:646
 msgid "before message"
 msgstr ""
 
-#: wpsc-support-tickets.php:622
+#: wpsc-support-tickets.php:623
 msgid "after message"
 msgstr ""
 
-#: wpsc-support-tickets.php:623
+#: wpsc-support-tickets.php:624
 msgid "after everything"
 msgstr ""
 
-#: wpsc-support-tickets.php:640
+#: wpsc-support-tickets.php:641
 msgid "Display custom fields"
 msgstr ""
 
-#: wpsc-support-tickets.php:640
+#: wpsc-support-tickets.php:641
 msgid ""
 "When a ticket creator views a ticket they created, this setting determines "
 "where the custom fields are placed on the page."
 msgstr ""
 
-#: wpsc-support-tickets.php:646
+#: wpsc-support-tickets.php:647
 msgid "after message &amp; replies"
 msgstr ""
 
-#: wpsc-support-tickets.php:677
+#: wpsc-support-tickets.php:678
 msgid "Update Settings"
 msgstr ""
 
-#: wpsc-support-tickets.php:717
+#: wpsc-support-tickets.php:718
 msgid ""
 "Upgrade now to wpsc Support Tickets PRO and unlock in depth statistics for "
 "the following and more:"
 msgstr ""
 
-#: wpsc-support-tickets.php:719
+#: wpsc-support-tickets.php:720
 msgid "Average ticket resolution time"
 msgstr ""
 
-#: wpsc-support-tickets.php:720
+#: wpsc-support-tickets.php:721
 msgid "Number of tickets created in each category"
 msgstr ""
 
-#: wpsc-support-tickets.php:721
+#: wpsc-support-tickets.php:722
 msgid "Number of tickets in each severity level"
 msgstr ""
 
-#: wpsc-support-tickets.php:722
+#: wpsc-support-tickets.php:723
 msgid "Top 10 users who create the most tickets"
 msgstr ""
 
-#: wpsc-support-tickets.php:723
+#: wpsc-support-tickets.php:724
 msgid "The number of completed tickets"
 msgstr ""
 
-#: wpsc-support-tickets.php:724
+#: wpsc-support-tickets.php:725
 msgid "Display how long a ticket has been open"
 msgstr ""
 
-#: wpsc-support-tickets.php:725
+#: wpsc-support-tickets.php:726
 msgid "Display how long it took to resolve a closed ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:726
+#: wpsc-support-tickets.php:727
 msgid ""
 "Bar chart showing the amount of time it took to close the last 30 tickets"
 msgstr ""
 
-#: wpsc-support-tickets.php:727
+#: wpsc-support-tickets.php:728
 msgid "And much more, upgrade to PRO today:"
 msgstr ""
 
-#: wpsc-support-tickets.php:745
+#: wpsc-support-tickets.php:746
 msgid ""
 "Your version of wpsc Support Tickets is out of date.  Please email "
 "admin@wpstorecart.com with your PayPal transaction ID to recieve the latest "
 "version."
 msgstr ""
 
-#: wpsc-support-tickets.php:798 wpsc-support-tickets.php:834
+#: wpsc-support-tickets.php:799 wpsc-support-tickets.php:835
 msgid "View Open Tickets:"
 msgstr ""
 
-#: wpsc-support-tickets.php:800 wpsc-support-tickets.php:836
+#: wpsc-support-tickets.php:801 wpsc-support-tickets.php:837
 msgid "View Closed Tickets:"
 msgstr ""
 
-#: wpsc-support-tickets.php:802 wpsc-support-tickets.php:838
-#: wpsc-support-tickets.php:1380 wpsc-support-tickets.php:1730
+#: wpsc-support-tickets.php:803 wpsc-support-tickets.php:839
+#: wpsc-support-tickets.php:1381 wpsc-support-tickets.php:1731
 msgid "Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:802 wpsc-support-tickets.php:838
-#: wpsc-support-tickets.php:1342 wpsc-support-tickets.php:1380
-#: wpsc-support-tickets.php:1730
+#: wpsc-support-tickets.php:803 wpsc-support-tickets.php:839
+#: wpsc-support-tickets.php:1343 wpsc-support-tickets.php:1381
+#: wpsc-support-tickets.php:1731
 msgid "Status"
 msgstr ""
 
-#: wpsc-support-tickets.php:802 wpsc-support-tickets.php:838
+#: wpsc-support-tickets.php:803 wpsc-support-tickets.php:839
 msgid "User"
 msgstr ""
 
-#: wpsc-support-tickets.php:802 wpsc-support-tickets.php:838
-#: wpsc-support-tickets.php:1380 wpsc-support-tickets.php:1730
+#: wpsc-support-tickets.php:803 wpsc-support-tickets.php:839
+#: wpsc-support-tickets.php:1381 wpsc-support-tickets.php:1731
 msgid "Last Reply"
 msgstr ""
 
-#: wpsc-support-tickets.php:812 wpsc-support-tickets.php:815
-#: wpsc-support-tickets.php:848 wpsc-support-tickets.php:851
-#: wpsc-support-tickets.php:1390 wpsc-support-tickets.php:1393
+#: wpsc-support-tickets.php:813 wpsc-support-tickets.php:816
+#: wpsc-support-tickets.php:849 wpsc-support-tickets.php:852
+#: wpsc-support-tickets.php:1391 wpsc-support-tickets.php:1394
 msgid "ticket creator"
 msgstr ""
 
-#: wpsc-support-tickets.php:817 wpsc-support-tickets.php:853
-#: wpsc-support-tickets.php:1395 wpsc-support-tickets.php:1742
+#: wpsc-support-tickets.php:818 wpsc-support-tickets.php:854
+#: wpsc-support-tickets.php:1396 wpsc-support-tickets.php:1743
 msgid "Staff Member"
 msgstr ""
 
-#: wpsc-support-tickets.php:820 wpsc-support-tickets.php:856
-#: wpsc-support-tickets.php:1399 wpsc-support-tickets.php:1767
+#: wpsc-support-tickets.php:821 wpsc-support-tickets.php:857
+#: wpsc-support-tickets.php:1400 wpsc-support-tickets.php:1768
 msgid "View"
 msgstr ""
 
-#: wpsc-support-tickets.php:820 wpsc-support-tickets.php:856
-#: wpsc-support-tickets.php:1767
+#: wpsc-support-tickets.php:821 wpsc-support-tickets.php:857
+#: wpsc-support-tickets.php:1768
 msgid "by"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:971
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:972
 msgid "First name"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:972
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:973
 msgid "Last name"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:973
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:974
 msgid "Address"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:974
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:975
 msgid "City"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:975
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:976
 msgid "US States"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:976
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:977
 msgid "Countries"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:977
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:978
 msgid "Zipcode"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:978
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:979
 msgid "Email Address"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:979
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:980
 msgid "Input (text)"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:980
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:981
 msgid "Input (numeric)"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
 msgid "Input textarea"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:983
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:984
 msgid "Input Dropdown list"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
 msgid "Input Checkbox"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:985
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:986
 msgid "Input Radio button"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
 msgid "Separator"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
 msgid "Header"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
 msgid "Text"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:1015 wpsc-support-tickets.php:1048
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:1016 wpsc-support-tickets.php:1049
 msgid "Required"
 msgstr ""
 
-#: wpsc-support-tickets.php:910 wpsc-support-tickets.php:911
-#: wpsc-support-tickets.php:1015 wpsc-support-tickets.php:1048
+#: wpsc-support-tickets.php:911 wpsc-support-tickets.php:912
+#: wpsc-support-tickets.php:1016 wpsc-support-tickets.php:1049
 msgid "Optional"
 msgstr ""
 
-#: wpsc-support-tickets.php:981
+#: wpsc-support-tickets.php:982
 msgid "Input Textarea"
 msgstr ""
 
-#: wpsc-support-tickets.php:987
+#: wpsc-support-tickets.php:988
 msgid "--- Separator ---"
 msgstr ""
 
-#: wpsc-support-tickets.php:988
+#: wpsc-support-tickets.php:989
 msgid "Header &lt;h2&gt;&lt;/h2&gt;"
 msgstr ""
 
-#: wpsc-support-tickets.php:989
+#: wpsc-support-tickets.php:990
 msgid "Text &lt;p&gt;&lt;/p&gt;"
 msgstr ""
 
-#: wpsc-support-tickets.php:995
+#: wpsc-support-tickets.php:996
 msgid "Add New Field"
 msgstr ""
 
-#: wpsc-support-tickets.php:995
+#: wpsc-support-tickets.php:996
 msgid "Name"
 msgstr ""
 
-#: wpsc-support-tickets.php:995
+#: wpsc-support-tickets.php:996
 msgid "Type"
 msgstr ""
 
-#: wpsc-support-tickets.php:1008
+#: wpsc-support-tickets.php:1009
 msgid "Add additional option"
 msgstr ""
 
-#: wpsc-support-tickets.php:1015
+#: wpsc-support-tickets.php:1016
 msgid "Save New Field"
 msgstr ""
 
-#: wpsc-support-tickets.php:1066
+#: wpsc-support-tickets.php:1067
 msgid "Save All Edits"
 msgstr ""
 
-#: wpsc-support-tickets.php:1108 wpsc-support-tickets.php:1564
-#: wpsc-support-tickets.php:1573
+#: wpsc-support-tickets.php:1109 wpsc-support-tickets.php:1565
+#: wpsc-support-tickets.php:1574
 msgid "Create a New Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:1110
+#: wpsc-support-tickets.php:1111
 msgid "Create ticket on behalf of user"
 msgstr ""
 
-#: wpsc-support-tickets.php:1126 wpsc-support-tickets.php:1579
+#: wpsc-support-tickets.php:1127 wpsc-support-tickets.php:1580
 msgid "Title"
 msgstr ""
 
-#: wpsc-support-tickets.php:1135 wpsc-support-tickets.php:1294
-#: wpsc-support-tickets.php:1588
+#: wpsc-support-tickets.php:1136 wpsc-support-tickets.php:1295
+#: wpsc-support-tickets.php:1589
 msgid "Your message"
 msgstr ""
 
-#: wpsc-support-tickets.php:1148 wpsc-support-tickets.php:1357
-#: wpsc-support-tickets.php:1601 wpsc-support-tickets.php:1675
+#: wpsc-support-tickets.php:1149 wpsc-support-tickets.php:1358
+#: wpsc-support-tickets.php:1602 wpsc-support-tickets.php:1676
 msgid "Attach a file"
 msgstr ""
 
-#: wpsc-support-tickets.php:1156 wpsc-support-tickets.php:1298
-#: wpsc-support-tickets.php:1609
+#: wpsc-support-tickets.php:1157 wpsc-support-tickets.php:1299
+#: wpsc-support-tickets.php:1610
 msgid "Department"
 msgstr ""
 
-#: wpsc-support-tickets.php:1168 wpsc-support-tickets.php:1360
-#: wpsc-support-tickets.php:1644 wpsc-support-tickets.php:1690
-#: wpsc-support-tickets.php:1693
+#: wpsc-support-tickets.php:1169 wpsc-support-tickets.php:1361
+#: wpsc-support-tickets.php:1645 wpsc-support-tickets.php:1691
+#: wpsc-support-tickets.php:1694
 msgid "Cancel"
 msgstr ""
 
-#: wpsc-support-tickets.php:1174 wpsc-support-tickets.php:1650
+#: wpsc-support-tickets.php:1175 wpsc-support-tickets.php:1651
 msgid "Submit Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:1268
+#: wpsc-support-tickets.php:1269
 msgid "Are you sure you want to delete this reply?"
 msgstr ""
 
-#: wpsc-support-tickets.php:1268
+#: wpsc-support-tickets.php:1269
 msgid "Delete Reply"
 msgstr ""
 
-#: wpsc-support-tickets.php:1308 wpsc-support-tickets.php:1620
+#: wpsc-support-tickets.php:1309 wpsc-support-tickets.php:1621
 msgid "Severity"
 msgstr ""
 
-#: wpsc-support-tickets.php:1314 wpsc-support-tickets.php:1625
+#: wpsc-support-tickets.php:1315 wpsc-support-tickets.php:1626
 msgid "Low"
 msgstr ""
 
-#: wpsc-support-tickets.php:1320 wpsc-support-tickets.php:1626
+#: wpsc-support-tickets.php:1321 wpsc-support-tickets.php:1627
 msgid "Normal"
 msgstr ""
 
-#: wpsc-support-tickets.php:1326 wpsc-support-tickets.php:1628
+#: wpsc-support-tickets.php:1327 wpsc-support-tickets.php:1629
 msgid "High"
 msgstr ""
 
-#: wpsc-support-tickets.php:1332 wpsc-support-tickets.php:1630
+#: wpsc-support-tickets.php:1333 wpsc-support-tickets.php:1631
 msgid "Urgent"
 msgstr ""
 
-#: wpsc-support-tickets.php:1338 wpsc-support-tickets.php:1632
+#: wpsc-support-tickets.php:1339 wpsc-support-tickets.php:1633
 msgid "Critical"
 msgstr ""
 
-#: wpsc-support-tickets.php:1352
+#: wpsc-support-tickets.php:1353
 msgid "Actions"
 msgstr ""
 
-#: wpsc-support-tickets.php:1353
+#: wpsc-support-tickets.php:1354
 msgid "Are you sure you want to delete this ticket?"
 msgstr ""
 
-#: wpsc-support-tickets.php:1353
+#: wpsc-support-tickets.php:1354
 msgid "Delete Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:1354
+#: wpsc-support-tickets.php:1355
 msgid "Send email to ticket creator on reply."
 msgstr ""
 
-#: wpsc-support-tickets.php:1360
+#: wpsc-support-tickets.php:1361
 msgid "Are you sure you want to cancel?"
 msgstr ""
 
-#: wpsc-support-tickets.php:1360
+#: wpsc-support-tickets.php:1361
 msgid "Update Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:1403
+#: wpsc-support-tickets.php:1404
 msgid "No open tickets!"
 msgstr ""
 
-#: wpsc-support-tickets.php:1411
+#: wpsc-support-tickets.php:1412
 msgid "wpscSupportTickets Overview"
 msgstr ""
 
-#: wpsc-support-tickets.php:1547
+#: wpsc-support-tickets.php:1548
 msgid "Enter your email address"
 msgstr ""
 
-#: wpsc-support-tickets.php:1548
+#: wpsc-support-tickets.php:1549
 msgid "Submit"
 msgstr ""
 
-#: wpsc-support-tickets.php:1660
+#: wpsc-support-tickets.php:1661
 msgid "Loading"
 msgstr ""
 
-#: wpsc-support-tickets.php:1665
+#: wpsc-support-tickets.php:1666
 msgid "Your reply"
 msgstr ""
 
-#: wpsc-support-tickets.php:1699
+#: wpsc-support-tickets.php:1700
 msgid "Submit Reply"
 msgstr ""
 
-#: wpsc-support-tickets.php:1726
+#: wpsc-support-tickets.php:1727
 msgid "View Previous Tickets:"
 msgstr ""
 
-#: wpsc-support-tickets.php:1734 wpsc-support-tickets.php:1740
+#: wpsc-support-tickets.php:1735 wpsc-support-tickets.php:1741
 msgid "you"
 msgstr ""
 
-#: wpsc-support-tickets.php:1774
+#: wpsc-support-tickets.php:1775
 msgid "Please"
 msgstr ""
 
-#: wpsc-support-tickets.php:1774
+#: wpsc-support-tickets.php:1775
 msgid "log in"
 msgstr ""
 
-#: wpsc-support-tickets.php:1774
+#: wpsc-support-tickets.php:1775
 msgid "or"
 msgstr ""
 
-#: wpsc-support-tickets.php:1774
+#: wpsc-support-tickets.php:1775
 msgid "register"
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (wpsc Support Tickets 4.7.17)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (wpsc Support Tickets 4.7.22)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: wpsc-support-tickets.php:1836
+#: wpsc-support-tickets.php:1837
 msgid "wpsc Support Tickets"
 msgstr ""
 
-#: wpsc-support-tickets.php:1836
+#: wpsc-support-tickets.php:1837
 msgid "Support Tickets"
 msgstr ""
 
-#: wpsc-support-tickets.php:1837
+#: wpsc-support-tickets.php:1838
 msgid "Create Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:1839
+#: wpsc-support-tickets.php:1840
 msgid "Reply to Support Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:1839
+#: wpsc-support-tickets.php:1840
 msgid "Reply to Support Tickets"
 msgstr ""
 
-#: wpsc-support-tickets.php:1840
+#: wpsc-support-tickets.php:1841
 msgid "Statistics"
 msgstr ""
 
-#: wpsc-support-tickets.php:1846
+#: wpsc-support-tickets.php:1847
 msgid "Edit User Fields Collected"
 msgstr ""
 
-#: wpsc-support-tickets.php:1846
+#: wpsc-support-tickets.php:1847
 msgid "User Fields"
 msgstr ""
 
