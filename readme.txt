@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.7.24
+Stable tag: 4.7.25
 
 == Description ==
 
@@ -89,12 +89,18 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 
 == Changelog ==
 
-= 4.8.0 =
+= 5.0.0 =
 * COMING SOON:
 * Added: Assign specific support staff to a single or multiple departments
 * Added: Option for the ticket creator to choose a specific person from the department admins while creating the ticket (admin must enable this feature, as it's disabled by default)
 * Added: Ability to edit radio, checkboxes, and drop downs
+* Added: Ability to define custom states such as Pending, Need More Info, or any other phrase to describe a ticket state
+* Added: Tons of additional information is sent with each email, such as the user who opened the ticket
+* Fixed: You no longer receive an email when you reply to your own ticket
 * Updated: Get rid of delete_ticket.php, reply_ticket.php, and submit_ticket.php and move functionality into /php/publicajax.php
+
+= 4.7.25 =
+* Updated: Added the CSS ID #wpscSupportTicketsRegisterMessage so that registration message can be hidden or changed via CSS or Javascript
 
 = 4.7.24 =
 * Fixed: Sigh.  bbPress stopped working again, so I had to make all wpsc Support Ticket admins full bbPress admins to fix it
