@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.7.23
+Stable tag: 4.7.24
 
 == Description ==
 
@@ -94,6 +94,11 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: Assign specific support staff to a single or multiple departments
 * Added: Option for the ticket creator to choose a specific person from the department admins while creating the ticket (admin must enable this feature, as it's disabled by default)
 * Added: Ability to edit radio, checkboxes, and drop downs
+* Updated: Get rid of delete_ticket.php, reply_ticket.php, and submit_ticket.php and move functionality into /php/publicajax.php
+
+= 4.7.24 =
+* Fixed: Sigh.  bbPress stopped working again, so I had to make all wpsc Support Ticket admins full bbPress admins to fix it
+* Updated: Moved most admin ajax to /php/adminajax.php and some public ajax moved to /php/publicajax.php
 
 = 4.7.23 =
 * Updated: The .POT file has been updated to the latest version

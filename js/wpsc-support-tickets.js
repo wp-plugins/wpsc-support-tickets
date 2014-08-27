@@ -26,7 +26,7 @@
             jQuery("#wpscst_edit_div").fadeOut("slow");
             jQuery("#wpscst-new").fadeOut("slow");
             jQuery("#wpscst_edit_ticket").fadeIn("slow");
-            jQuery("#wpscst_edit_ticket_inner").load(wpscstScriptParams.wpscstPluginsUrl + "/wpsc-support-tickets/php/load_ticket.php", {"primkey":primkey});
+            jQuery("#wpscst_edit_ticket_inner").load(wpscstScriptParams.wpscstAjaxUrl, {"primkey":primkey, "action": "wpsct_save_issue"});
             jQuery("#wpscst_edit_primkey").val(primkey);
             jQuery("html, body").animate({scrollTop: jQuery("#wpscst_top_page").offset().top}, 2000);
             if(resolution=="Closed") {

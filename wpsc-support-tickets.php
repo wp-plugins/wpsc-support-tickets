@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.23
+  Version: 4.7.24
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -82,6 +82,9 @@ if(!function_exists('wpsctSlug')) {
                 return $str;
         }
 }
+
+require_once(WP_PLUGIN_DIR . '/wpsc-support-tickets/php/adminajax.php'); 
+require_once(WP_PLUGIN_DIR . '/wpsc-support-tickets/php/publicajax.php'); 
 
 if(!function_exists('wpsctPromptForCustomFields')) {
     /**
@@ -279,7 +282,7 @@ if (!class_exists("wpscSupportTickets")) {
             if (is_user_logged_in()) {
                 if (is_super_admin() || is_admin()) {
                     global $wp_roles;
-                    add_role('wpsct_support_ticket_manager', 'Support Ticket Manager', array('manage_wpsct_support_tickets', 'read', 'upload_files', 'publish_posts', 'edit_published_posts', 'publish_pages', 'edit_published_pages', 'Keymaster'));
+                    add_role('wpsct_support_ticket_manager', 'Support Ticket Manager', array('manage_wpsct_support_tickets', 'read', 'upload_files', 'publish_posts', 'edit_published_posts', 'publish_pages', 'edit_published_pages', 'Keymaster', 'keymaster', 'keep_gate', 'bbp_forums_admin', 'bbp_topics_admin', 'bbp_replies_admin'));
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'read');
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'upload_files');
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'publish_pages');
@@ -288,6 +291,11 @@ if (!class_exists("wpscSupportTickets")) {
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'edit_published_pages');
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'manage_wpsct_support_tickets');
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'Keymaster');
+                    $wp_roles->add_cap('wpsct_support_ticket_manager', 'keymaster');
+                    $wp_roles->add_cap('wpsct_support_ticket_manager', 'keep_gate');
+                    $wp_roles->add_cap('wpsct_support_ticket_manager', 'bbp_forums_admin');
+                    $wp_roles->add_cap('wpsct_support_ticket_manager', 'bbp_topics_admin');
+                    $wp_roles->add_cap('wpsct_support_ticket_manager', 'bbp_replies_admin');
                     $wp_roles->add_cap('administrator', 'manage_wpsct_support_tickets');
                 }
             }
@@ -907,7 +915,7 @@ if (!class_exists("wpscSupportTickets")) {
                         temp_mc_var = temp_mc_var + jQuery(this).val() + ",";
                     });
                     
-                    jQuery.ajax({ url: "'.plugins_url().'/wpsc-support-tickets/php/add_field.php", type:"POST", data:"createnewfieldname="+jQuery("#createnewfieldname").val()+"&createnewfieldtype="+jQuery("#createnewfieldtype").val()+"&createnewfieldrequired="+jQuery("input:radio[name=createnewfieldrequired]:checked").val()+"&customfieldmc="+temp_mc_var.toString(), success: function(txt){
+                    jQuery.ajax({ url: ajaxurl, type:"POST", data:"action=wpsct_add_field&createnewfieldname="+jQuery("#createnewfieldname").val()+"&createnewfieldtype="+jQuery("#createnewfieldtype").val()+"&createnewfieldrequired="+jQuery("input:radio[name=createnewfieldrequired]:checked").val()+"&customfieldmc="+temp_mc_var.toString(), success: function(txt){
                         jQuery("#requiredul").prepend("<li style=\'font-size:90%;cursor:move;background-color: #EDEDED; border: 1px solid #DDDDDD;padding:4px 0 4px 30px;margin:8px;\' id=\'requiredinfo_"+txt+"\'><img onclick=\'delwpscfield("+txt+");\' style=\'cursor:pointer;position:relative;top:4px;\' src=\''.plugins_url().'/wpsc-support-tickets/images/delete.png\' /><input type=\'text\' value=\'"+jQuery("#createnewfieldname").val()+"\' name=\'required_info_name[]\' /><input type=\'hidden\' name=\'required_info_key[]\' value=\'"+txt+"\' /><select name=\'required_info_type[]\' id=\'ri_"+txt+"\'><option value=\'firstname\'>'.__('First name', 'wpsc-support-tickets').'</option><option value=\'lastname\'>'.__('Last name', 'wpsc-support-tickets').'</option><option value=\'shippingaddress\'>'.__('Address', 'wpsc-support-tickets').'</option><option value=\'shippingcity\'>'.__('City', 'wpsc-support-tickets').'</option><option value=\'taxstates\'>'.__('US States', 'wpsc-support-tickets').'</option><option value=\'taxcountries\'>'.__('Countries', 'wpsc-support-tickets').'</option><option value=\'zipcode\'>'.__('Zipcode', 'wpsc-support-tickets').'</option><option value=\'email\'>'.__('Email Address', 'wpsc-support-tickets').'</option><option value=\'input (text)\'>'.__('Input (text)', 'wpsc-support-tickets').'</option><option value=\'input (numeric)\'>'.__('Input (numeric)', 'wpsc-support-tickets').'</option><option value=\'textarea\'>'.__('Input textarea', 'wpsc-support-tickets').'</option><option value=\'dropdown\'>'.__('Input Dropdown list', 'wpsc-support-tickets').'</option><!--<option value=\'checkbox\'>'.__('Input Checkbox', 'wpsc-support-tickets').'</option>--><option value=\'radio\'>'.__('Input Radio button', 'wpsc-support-tickets').'</option><option value=\'separator\'>--- '.__('Separator', 'wpsc-support-tickets').' ---</option><option value=\'header\'>'.__('Header', 'wpsc-support-tickets').' &lt;h2&gt;&lt;/h2&gt;</option><option value=\'text\'>'.__('Text', 'wpsc-support-tickets').' &lt;p&gt;&lt;/p&gt;</option></select><label for=\'required_info_required_"+txt+"\'><input type=\'radio\' id=\'required_info_required_"+txt+"_yes\' name=\'required_info_required_"+txt+"\' value=\'required\' /> '.__('Required', 'wpsc-support-tickets').'</label>&nbsp;&nbsp;&nbsp;&nbsp;<label for=\'required_info_required_"+txt+"_no\'><input type=\'radio\' id=\'required_info_required_"+txt+"_no\' name=\'required_info_required_"+txt+"\' value=\'optional\' /> '.__('Optional', 'wpsc-support-tickets').'</label></li>");
                         //jQuery("#requiredul").prepend("<li style=\'font-size:90%;cursor:move;background-color: #EDEDED; border: 1px solid #DDDDDD;padding:4px 0 4px 30px;margin:8px;\' id=\'requiredinfo_"+txt+"\'><img onclick=\'delwpscfield("+txt+");\' style=\'cursor:pointer;position:relative;top:4px;\' src=\''.plugins_url().'/wpsc-support-tickets/images/delete.png\' /><input type=\'text\' value=\'"+jQuery("#createnewfieldname").val()+"\' name=\'required_info_name[]\' /><input type=\'hidden\' name=\'required_info_key[]\' value=\'"+txt+"\' /><select name=\'required_info_type[]\' id=\'ri_"+txt+"\'><option value=\'firstname\'>'.__('First name', 'wpsc-support-tickets').'</option><option value=\'lastname\'>'.__('Last name', 'wpsc-support-tickets').'</option><option value=\'shippingaddress\'>'.__('Address', 'wpsc-support-tickets').'</option><option value=\'shippingcity\'>'.__('City', 'wpsc-support-tickets').'</option><option value=\'taxstates\'>'.__('US States', 'wpsc-support-tickets').'</option><option value=\'taxcountries\'>'.__('Countries', 'wpsc-support-tickets').'</option><option value=\'zipcode\'>'.__('Zipcode', 'wpsc-support-tickets').'</option><option value=\'email\'>'.__('Email Address', 'wpsc-support-tickets').'</option><option value=\'input (text)\'>'.__('Input (text)', 'wpsc-support-tickets').'</option><option value=\'input (numeric)\'>'.__('Input (numeric)', 'wpsc-support-tickets').'</option><option value=\'textarea\'>'.__('Input textarea', 'wpsc-support-tickets').'</option><option value=\'dropdown\'>'.__('Input Dropdown list', 'wpsc-support-tickets').'</option><option value=\'checkbox\'>'.__('Input Checkbox', 'wpsc-support-tickets').'</option><option value=\'radio\'>'.__('Input Radio button', 'wpsc-support-tickets').'</option><option value=\'separator\'>--- '.__('Separator', 'wpsc-support-tickets').' ---</option><option value=\'header\'>'.__('Header', 'wpsc-support-tickets').' &lt;h2&gt;&lt;/h2&gt;</option><option value=\'text\'>'.__('Text', 'wpsc-support-tickets').' &lt;p&gt;&lt;/p&gt;</option></select><label for=\'required_info_required_"+txt+"\'><input type=\'radio\' id=\'required_info_required_"+txt+"_yes\' name=\'required_info_required_"+txt+"\' value=\'required\' /> '.__('Required', 'wpsc-support-tickets').'</label>&nbsp;&nbsp;&nbsp;&nbsp;<label for=\'required_info_required_"+txt+"_no\'><input type=\'radio\' id=\'required_info_required_"+txt+"_no\' name=\'required_info_required_"+txt+"\' value=\'optional\' /> '.__('Optional', 'wpsc-support-tickets').'</label></li>");
                         jQuery("#ri_"+txt).val(jQuery("#createnewfieldtype").val());
@@ -923,7 +931,7 @@ if (!class_exists("wpscSupportTickets")) {
                 }
 
                 function delwpscfield(keytodel) {
-                    jQuery.ajax({ url: "'.plugins_url().'/wpsc-support-tickets/php/del_field.php", type:"POST", data:"delete="+keytodel, success: function(){
+                    jQuery.ajax({ url: ajaxurl, type:"POST", data:"action=wpsct_del_field&delete="+keytodel, success: function(){
                         jQuery("#requiredinfo_"+keytodel).remove();
                     }});
                 }
@@ -948,8 +956,8 @@ if (!class_exists("wpscSupportTickets")) {
                         jQuery(function() {
 
                                 jQuery("#requiredsort ul").sortable({ opacity: 0.6, cursor: \'move\', update: function() {
-                                        var order = jQuery(this).sortable("serialize") + "&action=updateRecordsListings";
-                                        jQuery.post("'.plugins_url().'/wpsc-support-tickets/php/sort_fields.php", order, function(theResponse){
+                                        var order = jQuery(this).sortable("serialize") + "&action=wpsct_sort_fields";
+                                        jQuery.post(ajaxurl, order, function(theResponse){
                                                 jQuery("#requiredsort ul").sortable(\'refresh\');
                                         });
                                 }
@@ -1865,6 +1873,7 @@ function wpscLoadInit() {
     wp_enqueue_script('wpsc-support-tickets', plugins_url() . '/wpsc-support-tickets/js/wpsc-support-tickets.js', array('jquery'));
     $wpscst_params = array(
         'wpscstPluginsUrl' => plugins_url(),
+        'wpscstAjaxUrl' => admin_url('admin-ajax.php'),
     );
     wp_localize_script('wpsc-support-tickets', 'wpscstScriptParams', $wpscst_params);
 }
