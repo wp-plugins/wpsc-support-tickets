@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.7.26
+Stable tag: 4.7.28
 
 == Description ==
 
@@ -98,6 +98,14 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: Tons of additional information is sent with each email, such as the user who opened the ticket
 * Fixed: You no longer receive an email when you reply to your own ticket
 * Updated: Get rid of delete_ticket.php, reply_ticket.php, and submit_ticket.php and move functionality into /php/publicajax.php
+* Added: The ability to have different custom fields display depending on the selected department while creating a ticket.
+
+= 4.7.28 =
+* Updated: Switched the settings headers from H2 to H1 for better clarity
+* Updated: More work on 5.0 implemented
+
+= 4.7.27 =
+* Added: Lots of the ground work for the version 5.0.0 features listed above were implemented
 
 = 4.7.26 =
 * Updated: Small aesthetic improvement to admin page

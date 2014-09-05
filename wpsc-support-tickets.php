@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.26
+  Version: 4.7.28
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -65,6 +65,10 @@ function wpscSupportTickets_extraTabsIndex() {
 
 function wpscSupportTickets_extraTabsContents() {
     do_action('wpscSupportTickets_extraTabsContents');
+}
+
+function wpscSupportTickets_departmentsHook() {
+    do_action('wpscSupportTickets_departmentsHook');
 }
 
 if(!function_exists('wpsctSlug')) {
@@ -371,8 +375,36 @@ if (!class_exists("wpscSupportTickets")) {
             ';
         }
 
+
+        /*
+         * Admin page for departments
+         * Added in wpsc Support Tickets v5.0
+         */
+        function printAdminPageDepartments() {
+            
+            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) {
+                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
+            }            
+            
+            $devOptions = $this->getAdminOptions();
+
+            echo '<div class="wrap">';
+            $this->adminHeader();
+
+            wpscSupportTickets_departmentsHook(); // Action hook for departments
+
+            echo '</div>';
+        }        
+        
+        /*
+         * Admin page for Settings
+         */
         function printAdminPageSettings() {
 
+            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) {
+                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
+            }            
+            
             wpscSupportTickets_saveSettings(); // Action hook for saving
 
             $devOptions = $this->getAdminOptions();
@@ -458,7 +490,7 @@ if (!class_exists("wpscSupportTickets")) {
             <div id="wst_tabs-1">
 
             <br />
-            <h2>' . __('General', 'wpsc-support-tickets') . '</h2>
+            <h1>' . __('General', 'wpsc-support-tickets') . '</h1>
             <table class="widefat" style="background:transparent;"><tr><td>
 
                 <p><strong>' . __('Main Page', 'wpsc-support-tickets') . ':</strong> ' . __('You need to use a Page as the base for wpsc Support Tickets.', 'wpsc-support-tickets') . '  <br />
@@ -479,13 +511,18 @@ if (!class_exists("wpscSupportTickets")) {
                     echo $option;
                 }
 
-                echo '
-                </select>
-                </p>
+                
+                    echo '
+                    </select>
+                    </p>';
 
-                <strong>' . __('Departments', 'wpsc-support-tickets') . ':</strong> ' . __('Separate these values with a double pipe, like this ||', 'wpsc-support-tickets') . ' <br /><input name="departments" value="' . $devOptions['departments'] . '" style="width:95%;" /><br /><br />
+                    // Brand new Departments management coming in version 5
+                    if (!function_exists('wpscSupportTicketDepartments')) {
+                        echo ' 
+                        <strong>' . __('Departments', 'wpsc-support-tickets') . ':</strong> ' . __('Separate these values with a double pipe, like this ||', 'wpsc-support-tickets') . ' <br /><input name="departments" value="' . $devOptions['departments'] . '" style="width:95%;" /><br /><br />
 
-';
+        ';
+                    }
                 
                 echo '<p><strong>' . __('Allow user to select Severity on ticket creation?', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want the user to select the severity of their ticket when creating it.', 'wpsc-support-tickets') . '  <br />
                 <select name="display_severity_on_create">
@@ -510,7 +547,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             </td></tr></table>
             <br /><br /><br />
-            <h2>' . __('Email', 'wpsc-support-tickets') . '</h2>
+            <h1>' . __('Email', 'wpsc-support-tickets') . '</h1>
             <table class="widefat" style="background:transparent;"><tr><td>                
 
                 <strong>' . __('Email', 'wpsc-support-tickets') . ':</strong> ' . __('The admin email where all new ticket &amp; reply notification emails will be sent', 'wpsc-support-tickets') . '<br /><input name="email" value="' . $devOptions['email'] . '" style="width:95%;" /><br /><br />
@@ -567,7 +604,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             </td></tr></table>
             <br /><br /><br />
-            <h2>' . __('Styling', 'wpsc-support-tickets') . '</h2>
+            <h1>' . __('Styling', 'wpsc-support-tickets') . '</h1>
             <table class="widefat" style="background:transparent;"><tr><td> 
 
                 <p><strong>' . __('Disable inline styles', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want to disable the inline CSS styles.', 'wpsc-support-tickets') . '  <br />
@@ -593,7 +630,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             </td></tr></table>
             <br /><br /><br />
-            <h2>' . __('Guests', 'wpsc-support-tickets') . '</h2>
+            <h1>' . __('Guests', 'wpsc-support-tickets') . '</h1>
             <table class="widefat" style="background:transparent;"><tr><td> 
 
                 <p><strong>' . __('Allow Guests', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want Guests to be able to use the support ticket system.', 'wpsc-support-tickets') . '  <br />
@@ -619,7 +656,7 @@ if (!class_exists("wpscSupportTickets")) {
                 
             </td></tr></table>
             <br /><br /><br />
-            <h2>' . __('Custom Fields', 'wpsc-support-tickets') . '</h2>
+            <h1>' . __('Custom Fields', 'wpsc-support-tickets') . '</h1>
             <table class="widefat" style="background:transparent;"><tr><td> 
 
                 <p><strong>' . __('Place custom form fields', 'wpsc-support-tickets') . ':</strong> ' . __('When creating a ticket, this determines where your custom fields are placed on the ticket submission form.', 'wpsc-support-tickets') . '  <br />
@@ -1848,6 +1885,9 @@ if (!function_exists("wpscSupportTicketsAdminPanel")) {
             $newTicketPage = add_submenu_page('wpscSupportTickets-admin', __('Create Ticket', 'wpsc-support-tickets'), __('Create Ticket', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-newticket', array(&$wpscSupportTickets, 'printAdminPageCreateTicket'));
             $settingsPage = add_submenu_page('wpscSupportTickets-admin', __('Settings', 'wpsc-support-tickets'), __('Settings', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-settings', array(&$wpscSupportTickets, 'printAdminPageSettings'));
             $editPage = add_submenu_page(NULL, __('Reply to Support Ticket', 'wpsc-support-tickets'), __('Reply to Support Tickets', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-edit', array(&$wpscSupportTickets, 'printAdminPageEdit'));
+            if(@function_exists('wpscSupportTicketDepartments')) { // For wpsc Support Tickets v5.0+
+                $departmentsPage = add_submenu_page('wpscSupportTickets-admin', __('Departments', 'wpsc-support-tickets'), __('Departments', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-departments', array(&$wpscSupportTickets, 'printAdminPageDepartments'));
+            }
             $statsPage = add_submenu_page('wpscSupportTickets-admin', __('Statistics', 'wpsc-support-tickets'), __('Statistics', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-stats', array(&$wpscSupportTickets, 'printAdminPageStats'));
             if(@function_exists('wstPROStats')) {
                 $statsHeaderCode = 'addStatsHeaderCode';
@@ -1857,6 +1897,9 @@ if (!function_exists("wpscSupportTicketsAdminPanel")) {
             $fieldsPage = add_submenu_page('wpscSupportTickets-admin', __('Edit User Fields Collected', 'wpsc-support-tickets'), __('User Fields', 'wpsc-support-tickets'), 'manage_wpsct_support_tickets', 'wpscSupportTickets-fields', array(&$wpscSupportTickets, 'printAdminPageFields'));
             add_action("admin_print_scripts-$newTicketPage", array(&$wpscSupportTickets, 'addHeaderCode'));
             add_action("admin_print_scripts-$editPage", array(&$wpscSupportTickets, 'addHeaderCode'));
+            if(@function_exists('wpscSupportTicketDepartments')) { // For wpsc Support Tickets v5.0+
+                add_action("admin_print_scripts-$departmentsPage", array(&$wpscSupportTickets, 'addHeaderCode')); 
+            }
             add_action("admin_print_scripts-$statsPage", array(&$wpscSupportTickets, $statsHeaderCode));
             add_action("admin_print_scripts-$settingsPage", array(&$wpscSupportTickets, 'addHeaderCode'));            
             add_action("admin_print_scripts-$fieldsPage", array(&$wpscSupportTickets, 'addFieldsHeaderCode'));
