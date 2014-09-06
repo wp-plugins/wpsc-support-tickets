@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.28
+  Version: 4.7.29
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -110,9 +110,9 @@ if(!function_exists('wpsctPromptForCustomFields')) {
         $resultscf = $wpdb->get_results( $grabrecord , ARRAY_A );
 
         $wpsct_text_fields = array(
-            'input (text)','shippingcity','firstname','lastname',
-            'shippingaddress','input (numeric)','zipcode'
+            'input (text)','shippingcity','firstname','lastname','shippingaddress','input (numeric)','zipcode'
         );
+        
         $wpsct_states = array(
             "not applicable" => 'Other (Non-US)',
             "AL" => __('Alabama', 'wpsc-support-tickets'),      "AK" => __('Alaska', 'wpsc-support-tickets'),       "AZ" => __('Arizona', 'wpsc-support-tickets'),      "CA" => __('California', 'wpsc-support-tickets'),
@@ -129,6 +129,7 @@ if(!function_exists('wpsctPromptForCustomFields')) {
             "VT" => __('Vermont', 'wpsc-support-tickets'),      "VA" => __('Virginia', 'wpsc-support-tickets'),     "WA" => __('Washington', 'wpsc-support-tickets'),   "WV" => __('West Virginia', 'wpsc-support-tickets'),
             "WI" => __('Wisconsin', 'wpsc-support-tickets'),    "WY" => __('Wyoming', 'wpsc-support-tickets'),
         );    
+        
         $wpsct_countries = array(
             __("United States", 'wpsc-support-tickets'), __("Canada", 'wpsc-support-tickets'),__("United Kingdom", 'wpsc-support-tickets'),__("Ireland", 'wpsc-support-tickets'),__("Australia", 'wpsc-support-tickets'),__("New Zealand", 'wpsc-support-tickets'),__("Afghanistan", 'wpsc-support-tickets'),__("Albania", 'wpsc-support-tickets'),__("Algeria", 'wpsc-support-tickets'),__("American Samoa", 'wpsc-support-tickets'),
             __("Andorra", 'wpsc-support-tickets'),__("Angola", 'wpsc-support-tickets'),__("Anguilla", 'wpsc-support-tickets'),__("Antarctica", 'wpsc-support-tickets'),__("Antigua and Barbuda", 'wpsc-support-tickets'),__("Argentina", 'wpsc-support-tickets'),__("Armenia", 'wpsc-support-tickets'),__("Aruba", 'wpsc-support-tickets'),__("Australia", 'wpsc-support-tickets'),__("Austria", 'wpsc-support-tickets'),__("Azerbaijan", 'wpsc-support-tickets'),
@@ -309,6 +310,18 @@ if (!class_exists("wpscSupportTickets")) {
             $this->getAdminOptions();
         }
 
+        
+        function change_mail_from( $e ) {
+            $settings = $this->getAdminOptions();
+            return $settings['email'];
+        }
+        
+         
+        function change_mail_name( $n ) {
+            $settings = $this->getAdminOptions();
+            return $settings['email_name'];
+        }       
+        
         //Returns an array of admin options
         function getAdminOptions() {
 
@@ -331,7 +344,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'custom_field_frontend_position' => 'after message',
                 'use_ticket_in_email' => 'true',
                 'use_reply_in_email' => 'true',
-                'department_admins' => 'default'
+                'department_admins' => 'default',
+                'email_name' => __('Support', 'wpsc-support-tickets')                
             );
 
             if ($this->wpscstSettings != NULL) {
@@ -460,6 +474,9 @@ if (!class_exists("wpscSupportTickets")) {
                 if (isset($_POST['display_severity_on_create'])) {
                     $devOptions['display_severity_on_create'] = esc_sql($_POST['display_severity_on_create']);
                 }
+                if(isset($_POST['email_name'])) {
+                    $devOptions['email_name'] = esc_sql($_POST['email_name']);
+                }
 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -551,7 +568,7 @@ if (!class_exists("wpscSupportTickets")) {
             <table class="widefat" style="background:transparent;"><tr><td>                
 
                 <strong>' . __('Email', 'wpsc-support-tickets') . ':</strong> ' . __('The admin email where all new ticket &amp; reply notification emails will be sent', 'wpsc-support-tickets') . '<br /><input name="email" value="' . $devOptions['email'] . '" style="width:95%;" /><br /><br />
-
+                <strong>' . __('Name Sent From', 'wpsc-support-tickets') .'</strong> '. __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') .'<br /><input name="email_name" value="' . $devOptions['email_name'] . '" style="width:95%;" /><br /><br />
                 <strong>' . __('New Ticket Email', 'wpsc-support-tickets') . '</strong> ' . __('The subject &amp; body of the email sent to the customer when creating a new ticket.', 'wpsc-support-tickets') . '<br /><input name="email_new_ticket_subject" value="' . stripslashes(stripslashes($devOptions['email_new_ticket_subject'])) . '" style="width:95%;" />
                 <textarea style="width:95%;" name="email_new_ticket_body">' . stripslashes(stripslashes($devOptions['email_new_ticket_body'])) . '</textarea>
                 <br /><br />
@@ -1341,17 +1358,27 @@ if (!class_exists("wpscSupportTickets")) {
             $output .= '<table class="wpscst-table" style="width:100%;display:none;">';
             $output .= '<tr><td><h3>' . __('Your message', 'wpsc-support-tickets') . '</h3><div id="wpscst_nic_panel2" style="display:block;width:100%;"></div> <textarea name="wpscst_reply" id="wpscst_reply" style="display:block;width:100%;margin:0 auto 0 auto;background-color:#FFF;" rows="5" columns="6"></textarea>';
             $output .= '</td></tr>';
-            $exploder = explode('||', $devOptions['departments']);
+            
+            if (!function_exists('wpscSupportTicketDepartments')) {
+                $exploder = explode('||', $devOptions['departments']);
+            }
 
             $output .= '<tr><td><div style="float:left;"><h3>' . __('Department', 'wpsc-support-tickets') . '</h3><select name="wpscst_department" id="wpscst_department">';
-            if (isset($exploder[0])) {
-                foreach ($exploder as $exploded) {
-                    $output .= '<option value="' . $exploded . '"';
-                    if (base64_decode($results[0]['type']) == $exploded) {
-                        $output.= ' selected="selected" ';
-                    } $output.='>' . $exploded . '</option>';
+            
+            if (!function_exists('wpscSupportTicketDepartments')) {
+                // Old department system
+                if (isset($exploder[0])) {
+                    foreach ($exploder as $exploded) {
+                        $output .= '<option value="' . $exploded . '"';
+                        if (base64_decode($results[0]['type']) == $exploded) {
+                            $output.= ' selected="selected" ';
+                        } $output.='>' . $exploded . '</option>';
+                    }
                 }
+            } else {
+                $output.= wpscSupportTicketsPROListDepartments();
             }
+            
             $output .= '</select></div>
                 <div style="float:left;margin-left:20px;"><h3>' . __('Severity', 'wpsc-support-tickets') . '</h3>
                     <select name="wpscst_severity">
@@ -1942,10 +1969,13 @@ if (isset($wpscSupportTickets)) {
     add_action('wp_dashboard_setup', array(&$wpscSupportTickets, 'wpscSupportTickets_main_add_dashboard_widgets')); // Dashboard widget
     //add_action('wp_head', array(&$wpscSupportTickets, 'addHeaderCode')); // Place wpscSupportTickets comment into header
     add_shortcode('wpscSupportTickets', array(&$wpscSupportTickets, 'wpscSupportTickets_mainshortcode'));
+    
     add_action("wp_print_scripts", array(&$wpscSupportTickets, "addHeaderCode"));
     add_action('init', 'wpscLoadInit'); // Load other languages, and javascript
     
     add_action('admin_menu', 'wpscSupportTicketsAdminPanel'); // Create admin panel
+    add_filter( 'wp_mail_from', array(&$wpscSupportTickets, 'change_mail_from') );
+    add_filter( 'wp_mail_from_name', array(&$wpscSupportTickets, 'change_mail_name') );
 }
 /**
  * ===============================================================================================================
