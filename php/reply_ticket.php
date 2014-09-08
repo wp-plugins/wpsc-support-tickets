@@ -206,7 +206,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
             }
             $wpdb->query($updateSQL);
 
-            if (@isset($_POST['wpsctnoemail']) && $_POST['wpsctnoemail'] == 'on' ) {
+            if (@isset($_POST['wpsctnoemail']) && $_POST['wpsctnoemail'] == 'on' && $results[0]['email'] != $wpscst_email) {
                 $to      = $results[0]['email']; // Send this to the original ticket creator
                 $subject = $devOptions['email_new_reply_subject'] .' "'. strip_tags(base64_decode($results[0]['title'])).'"';
                 $message = $devOptions['email_new_reply_body'];
@@ -227,7 +227,7 @@ if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POS
                 wp_mail($to, $subject, $message, $headers);
             }
             
-            if($devOptions['email']!=$results[0]['email']) { 
+            if( $devOptions['email']!=$results[0]['email'] && $results[0]['email'] != $wpscst_email) { 
                 $to      = $devOptions['email']; // Send this to the admin
                 $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets').' "'. strip_tags(base64_decode($results[0]['title'])).'"';
                 $message = __('There is a new reply on support ticket: ','wpsc-support-tickets').get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$primkey.'';
