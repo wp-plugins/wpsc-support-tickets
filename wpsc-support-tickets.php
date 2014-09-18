@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.30
+  Version: 4.7.31
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -345,7 +345,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'use_ticket_in_email' => 'true',
                 'use_reply_in_email' => 'true',
                 'department_admins' => 'default',
-                'email_name' => __('Support', 'wpsc-support-tickets')                
+                'email_name' => __('Support', 'wpsc-support-tickets'),
+                'hide_email_on_frontend_list' => 'false'
             );
 
             if ($this->wpscstSettings != NULL) {
@@ -477,6 +478,10 @@ if (!class_exists("wpscSupportTickets")) {
                 if(isset($_POST['email_name'])) {
                     $devOptions['email_name'] = esc_sql($_POST['email_name']);
                 }
+                if(isset($_POST['hide_email_on_frontend_list'])) {
+                    $devOptions['hide_email_on_frontend_list'] = esc_sql($_POST['hide_email_on_frontend_list']);
+                }                
+                
 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -561,7 +566,7 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '
                 </select>
                 </p> 
-
+                
             </td></tr></table>
             <br /><br /><br />
             <h1>' . __('Email', 'wpsc-support-tickets') . '</h1>
@@ -645,6 +650,7 @@ if (!class_exists("wpscSupportTickets")) {
                 </select>
                 </p>
 
+
             </td></tr></table>
             <br /><br /><br />
             <h1>' . __('Guests', 'wpsc-support-tickets') . '</h1>
@@ -671,6 +677,27 @@ if (!class_exists("wpscSupportTickets")) {
                 </select>
                 </p>
                 
+                <p><strong>' . __('Show guest email address in front end list', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true and a guest\'s email address will be displayed in the ticket list.', 'wpsc-support-tickets') . '  <br />
+                <select name="hide_email_on_frontend_list">
+                 ';
+
+                $pagesXn[0] = 'true';
+                $pagesXn[1] = 'false';
+                foreach ($pagesXn as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['hide_email_on_frontend_list']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                </p>
+
             </td></tr></table>
             <br /><br /><br />
             <h1>' . __('Custom Fields', 'wpsc-support-tickets') . '</h1>
@@ -1784,7 +1811,11 @@ if (!class_exists("wpscSupportTickets")) {
                             } else {
                                 $wpscst_userid = 0;
                                 $wpscst_email = esc_sql($_SESSION['wpsct_email']);
-                                $wpscst_username = __('Guest', 'wpsc-support-tickets') . ' (' . $wpscst_email . ')';
+                                if ($devOptions['hide_email_on_frontend_list']=='true') {
+                                    $wpscst_username = __('Guest', 'wpsc-support-tickets') . ' (' . $wpscst_email . ')';
+                                } else {
+                                    $wpscst_username = __('Guest', 'wpsc-support-tickets');
+                                }
                             }
 
                             $output .= '<div id="wpscst_edit_div">';
