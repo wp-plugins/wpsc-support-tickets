@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.7.31
+Stable tag: 4.7.32
 
 == Description ==
 
@@ -23,7 +23,7 @@ This can optionally allow you to keep your support ticket system accessible only
 
  * Users can create support tickets and reply to their own tickets
  * Guests can use tickets as well, using just their email address.  Disabled by default.
- * Admins, and any user granted the manage_wpsct_support_tickets capability, can reply to, close, or delete any ticket
+ * Admins, Super Admins, and any user granted the manage_wpsct_support_tickets capability, can reply to, close, or delete any ticket
  * Front end support ticket interface is done in jQuery, and utilizes Ajax ticket loading
  * Customizable departments, email messages, and CSS for custom solutions
  * You can hide support ticket capabilities from a user who has not purchased a specific product (requires [wpStoreCart](http://wordpress.org/extend/plugins/wpstorecart/ "wpStoreCart") 2.4.9 or higher)
@@ -99,6 +99,11 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Fixed: You no longer receive an email when you reply to your own ticket (implemented in 4.7.30)
 * Updated: Get rid of delete_ticket.php, reply_ticket.php, and submit_ticket.php and move functionality into /php/publicajax.php
 * Added: The ability to have different custom fields display depending on the selected department while creating a ticket.
+* Updated: New easier to use and less buggy permission system allows you to easily fine tune who can administrate what tickets (started in 4.7.32)
+
+= 4.7.32 =
+* Fixed: Multisite Network Activation now works correctly
+* Updated: A couple of performance enhancements through slight refactoring, the start of a new permission system, and some updated comments in the code
 
 = 4.7.31 =
 * Added: New option which allows you to hide guest emails from the list of tickets

@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.31
+  Version: 4.7.32
   Author: wpStoreCart, LLC
   Author URI: URI: http://wpstorecart.com/
   License: LGPL
@@ -282,8 +282,34 @@ if (!class_exists("wpscSupportTickets")) {
         var $hasDisplayedCompat = false; // hack for Jetpack compatibility
         var $hasDisplayedCompat2 = false; // hack for Jetpack compatibility
 
+        /**
+         * 
+         * @deprecated since version 5.0
+         * @global object $wp_roles
+         */
         function wpscSupportTickets() { //constructor
             // Let's make sure the admin is always in charge
+            if (function_exists('is_multisite') && is_multisite()) {
+                
+            } else {
+                $this->addPermissions(); // 
+            }
+        }
+
+        function init() {
+            $this->getAdminOptions();
+        }
+
+        /**
+         * Beginnings of the new permission system for 5.0
+         */
+        function checkPermissions() {
+            if ( !is_super_admin() || (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) ) {
+                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
+            }            
+        }
+        
+        function addPermissions() {
             if (is_user_logged_in()) {
                 if (is_super_admin() || is_admin()) {
                     global $wp_roles;
@@ -303,28 +329,37 @@ if (!class_exists("wpscSupportTickets")) {
                     $wp_roles->add_cap('wpsct_support_ticket_manager', 'bbp_replies_admin');
                     $wp_roles->add_cap('administrator', 'manage_wpsct_support_tickets');
                 }
-            }
+            }            
         }
-
-        function init() {
-            $this->getAdminOptions();
-        }
-
         
+        /**
+         * 
+         * @param string $e
+         * @return string
+         */
         function change_mail_from( $e ) {
             $settings = $this->getAdminOptions();
             return $settings['email'];
         }
         
-         
+        /**
+         * 
+         * @param string $n
+         * @return string
+         */         
         function change_mail_name( $n ) {
             $settings = $this->getAdminOptions();
             return $settings['email_name'];
         }       
         
-        //Returns an array of admin options
+        
+        /**
+         * Returns an array of admin options
+         * @return array
+         */
         function getAdminOptions() {
 
+            // Default values.  
             $apAdminOptions = array('mainpage' => '',
                 'turnon_wpscSupportTickets' => 'true',
                 'departments' => __('Support', 'wpsc-support-tickets') . '||' . __('Billing', 'wpsc-support-tickets'),
@@ -347,14 +382,15 @@ if (!class_exists("wpscSupportTickets")) {
                 'department_admins' => 'default',
                 'email_name' => __('Support', 'wpsc-support-tickets'),
                 'hide_email_on_frontend_list' => 'false'
-            );
-
-            if ($this->wpscstSettings != NULL) {
-                $devOptions = $this->wpscstSettings;
+            );             
+            
+            if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
+                $devOptions = $this->wpscstSettings; // Caches the settings array so that we don't keep reinitializing it
             } else {
                 $devOptions = get_option($this->adminOptionsName);
             }
-            if (!empty($devOptions)) {
+            if (!empty($devOptions)) { // If the default values don't exist.
+                     
                 foreach ($devOptions as $key => $option) {
                     $apAdminOptions[$key] = $option;
                 }
@@ -368,10 +404,7 @@ if (!class_exists("wpscSupportTickets")) {
          */
         function adminHeader() {
 
-            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) {
-                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-            }
-
+            $this->checkPermissions();
 
             echo '
             
@@ -396,11 +429,7 @@ if (!class_exists("wpscSupportTickets")) {
          * Added in wpsc Support Tickets v5.0
          */
         function printAdminPageDepartments() {
-            
-            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) {
-                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-            }            
-            
+      
             $devOptions = $this->getAdminOptions();
 
             echo '<div class="wrap">';
@@ -415,10 +444,6 @@ if (!class_exists("wpscSupportTickets")) {
          * Admin page for Settings
          */
         function printAdminPageSettings() {
-
-            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) {
-                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-            }            
             
             wpscSupportTickets_saveSettings(); // Action hook for saving
 
@@ -481,7 +506,6 @@ if (!class_exists("wpscSupportTickets")) {
                 if(isset($_POST['hide_email_on_frontend_list'])) {
                     $devOptions['hide_email_on_frontend_list'] = esc_sql($_POST['hide_email_on_frontend_list']);
                 }                
-                
 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -788,12 +812,7 @@ if (!class_exists("wpscSupportTickets")) {
 
         //Prints out the admin page ================================================================================
         function printAdminPageStats() {
-            global $wpdb;
-            $devOptions = $this->getAdminOptions();
-            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) {
-                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-            }
-            
+
             echo '<div class="wrap">';
             
             $this->adminHeader();
@@ -849,12 +868,6 @@ if (!class_exists("wpscSupportTickets")) {
             global $wpdb;
 
             $output = '';
-            $devOptions = $this->getAdminOptions();
-            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) {
-                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-            }
-
-
 
             echo '
                         <script type="text/javascript">
@@ -962,10 +975,9 @@ if (!class_exists("wpscSupportTickets")) {
         function printAdminPageFields() {
             global $wpdb;
 
+            echo '<div class="wrap">';
 
-            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets') && is_numeric($_GET['primkey'])) {
-                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-            }
+            $this->adminHeader();
             
             if (@isset($_POST['required_info_key']) && @isset($_POST['required_info_name']) && @isset($_POST['required_info_type'])) {
                 $arrayCounter = 0;
@@ -977,9 +989,6 @@ if (!class_exists("wpscSupportTickets")) {
                 }
             }             
             
-            echo '<div class="wrap">';
-
-            $this->adminHeader();
 
             echo '<br style="clear:both;" /><br />
             
@@ -1167,14 +1176,10 @@ if (!class_exists("wpscSupportTickets")) {
         //END Prints out the admin page ================================================================================		
 
         function printAdminPageCreateTicket() {
-            global $wpdb;
 
             $devOptions = $this->getAdminOptions();
             $devOptions['disable_inline_styles'] = 'false';
             
-            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets') && is_numeric($_GET['primkey'])) {
-                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-            }
             echo '<div class="wrap">';
 
             $this->adminHeader();
@@ -1277,9 +1282,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             $output = '';
             $devOptions = $this->getAdminOptions();
-            if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets') && is_numeric($_GET['primkey'])) {
-                die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-            }
+
             echo '<div class="wrap">';
 
             $this->adminHeader();
@@ -1473,8 +1476,6 @@ if (!class_exists("wpscSupportTickets")) {
         function wpscSupportTickets_main_dashboard_widget_function() {
             global $wpdb;
 
-            $devOptions = $this->getAdminOptions();
-
             $table_name = $wpdb->prefix . "wpscst_tickets";
             $sql = "SELECT * FROM `{$table_name}` WHERE `resolution`='Open' ORDER BY `last_updated` DESC;";
             $results = $wpdb->get_results($sql, ARRAY_A);
@@ -1547,13 +1548,29 @@ if (!class_exists("wpscSupportTickets")) {
             wp_enqueue_style('tufte-admin-ui-css', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/tufte-graph.css', false, 2, false);
         }        
 
+        function wpscSupportTickets_install($network) {   
+            global $wpdb;
+            if (function_exists('is_multisite') && is_multisite()) {
+                if ($network) {
+                    $old_blog = $wpdb->blogid;
+                    $blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+                    foreach ($blogids as $blog_id) {
+                        switch_to_blog($blog_id);
+                        $this->addPermissions();
+                        $this->wpscSupportTickets_activate();
+                    }
+                    switch_to_blog($old_blog);
+                    return;
+                }  
+            }
+            $this->wpscSupportTickets_activate();   
+        }
+        
         // Installation ==============================================================================================		
-        function wpscSupportTickets_install() {
+        function wpscSupportTickets_activate() {
             global $wpdb;
             global $wpscSupportTickets_db_version;
 
-           
-            
             $table_name = $wpdb->prefix . "wpscst_tickets";
             if ($wpdb->get_var("show tables like '$table_name'") != $table_name) {
 
@@ -1573,7 +1590,6 @@ if (!class_exists("wpscSupportTickets")) {
 				);				
 			";
 
-
                 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
                 dbDelta($sql);
             }
@@ -1590,7 +1606,6 @@ if (!class_exists("wpscSupportTickets")) {
 				`message` TEXT NOT NULL
 				);				
 			";
-
 
                 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
                 dbDelta($sql);
@@ -1992,7 +2007,6 @@ if (class_exists("wpscSupportTickets")) {
 //Actions and Filters   
 if (isset($wpscSupportTickets)) {
     //Actions
-
 
     register_activation_hook(__FILE__, array(&$wpscSupportTickets, 'wpscSupportTickets_install')); // Install DB schema
     add_action('wpsc-support-tickets/wpscSupportTickets.php', array(&$wpscSupportTickets, 'init')); // Create options on activation
