@@ -9,9 +9,7 @@ function wpsctAjaxAddField() {
         // Not logged in.
     } else {
 
-        if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets') ) {
-            die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-        }
+        wpscSupportTickets::checkPermissions();
 
         $table_name = $wpdb->prefix . "wpstorecart_meta";
         $createnewfieldname = $wpdb->escape($_POST['createnewfieldname']);
@@ -65,9 +63,7 @@ function wpsctAjaxDelField() {
         // Not logged in.
     } else {
 
-        if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets') ) {
-            die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-        }
+        wpscSupportTickets::checkPermissions();
 
         $delete = $wpdb->escape($_POST['delete']);
 
@@ -92,10 +88,7 @@ function wpsctAjaxSortFields() {
         // Not logged in.
     } else {
 
-        if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets') ) {
-            die(__('Unable to Authenticate', 'wpsc-support-tickets'));
-        }
-
+        wpscSupportTickets::checkPermissions();
 
         $table_name = $wpdb->prefix . "wpstorecart_meta";
 

@@ -39,7 +39,11 @@ function wpsctLoadTicket() {
         } else {
             $wpscst_userid = 0;
             $wpscst_email = $wpdb->escape($_SESSION['wpsct_email']);   
-            $wpscst_username = __('Guest', 'wpsc-support-tickets').' ('.$wpscst_email.')';
+            if ($devOptions['hide_email_on_support_tickets']=='true') {
+                $wpscst_username = __('Guest', 'wpsc-support-tickets').' ('.$wpscst_email.')';
+            } else {
+                $wpscst_username = __('Guest', 'wpsc-support-tickets');
+            }
         }    
 
         $primkey = intval($_POST['primkey']);
@@ -53,7 +57,7 @@ function wpsctLoadTicket() {
 
         $results = $wpdb->get_results( $sql , ARRAY_A );
         if(isset($results[0])) {
-            if($devOptions['allow_all_tickets_to_be_viewed']=='true') {
+            if($devOptions['allow_all_tickets_to_be_viewed']=='true' && $devOptions['hide_email_on_support_tickets']=='true') {
                 $wpscst_username = $results[0]['email'];
             }        
             echo '<div id="wpscst_meta">';

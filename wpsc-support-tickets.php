@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.8.0
+  Version: 4.8.1
   Author: Jeff Quindlen
   Author URI: URI: http://indiedevbundle.com
   License: LGPL
@@ -401,7 +401,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'department_admins' => 'default',
                 'email_name' => __('Support', 'wpsc-support-tickets'),
                 'hide_email_on_frontend_list' => 'false',
-                'email_encoding' => 'iso-8859-1'
+                'email_encoding' => 'iso-8859-1',
+                'hide_email_on_support_tickets' => 'false'
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -529,7 +530,10 @@ if (!class_exists("wpscSupportTickets")) {
                 if(isset($_POST['email_encoding'])) {
                     $devOptions['email_encoding'] = esc_sql($_POST['email_encoding']);
                 }                 
-
+                if(isset($_POST['hide_email_on_support_tickets'])) {
+                    $devOptions['hide_email_on_support_tickets'] = esc_sql($_POST['hide_email_on_support_tickets']);
+                } 
+                
                 update_option($this->adminOptionsName, $devOptions);
 
                 echo '<div class="updated"><p><strong>';
@@ -773,6 +777,31 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '
                 </select>
                 </p>
+                
+
+                <p><strong>' . __('Show guest email address on support tickets', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true and a guest\'s email address will be displayed in support tickets.', 'wpsc-support-tickets') . '  <br />
+                <select name="hide_email_on_support_tickets">
+                 ';
+
+                $pagesXnr[0] = 'true';
+                $pagesXnr[1] = 'false';
+                foreach ($pagesXnr as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['hide_email_on_support_tickets']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                </p>
+
+
+
 
             </td></tr></table>
             <br /><br /><br />
