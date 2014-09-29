@@ -3,15 +3,15 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.7.34
-  Author: wpStoreCart, LLC
-  Author URI: URI: http://wpstorecart.com/
+  Version: 4.8.0
+  Author: Jeff Quindlen
+  Author URI: URI: http://indiedevbundle.com
   License: LGPL
   Text Domain: wpsc-support-tickets
  */
 
 /*
-  Copyright 2012, 2013, 2014 wpStoreCart, LLC  (email : admin@wpstorecart.com)
+  Copyright 2012, 2013, 2014 Jeff Quindlen
 
   This library is free software; you can redistribute it and/or modify it under the terms
   of the GNU Lesser General Public License as published by the Free Software Foundation;
@@ -34,8 +34,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting;
 
-$wpscSupportTickets_version = 4.7;
-$wpscSupportTickets_db_version = 4.7;
+$wpscSupportTickets_version = 4.8;
+$wpscSupportTickets_db_version = 4.8;
 $APjavascriptQueue = NULL;
 $wpsct_error_reporting = false;
 
@@ -85,6 +85,25 @@ if(!function_exists('wpsctSlug')) {
                 $str = preg_replace('/-+/', "_", $str);
                 return $str;
         }
+}
+
+if (!function_exists('wpscSupportTickets_mail')) {
+    function wpscSupportTickets_mail($to, $subject, $message, $headers) {
+        $devOptions = get_option('wpscSupportTicketsAdminOptions');
+        $headers .= 'MIME-Version: 1.0' . "\r\n";
+        
+        $email_content_type = 'text/plain';
+        if($devOptions['allow_html']=='true') {
+            $email_content_type = 'text/html';
+        }
+        
+        $headers .= "Content-type: {$email_content_type}; charset={$devOptions['email_encoding']} \r\n";                
+        
+        $headers .= 'From: ' . $devOptions['email'] . "\r\n" .
+        'Reply-To: ' . $devOptions['email'] .  "\r\n" .
+        'X-Mailer: PHP/' . phpversion();        
+        wp_mail($to, $subject, $message, $headers);
+    }
 }
 
 require_once(WP_PLUGIN_DIR . '/wpsc-support-tickets/php/adminajax.php'); 
@@ -381,7 +400,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'use_reply_in_email' => 'true',
                 'department_admins' => 'default',
                 'email_name' => __('Support', 'wpsc-support-tickets'),
-                'hide_email_on_frontend_list' => 'false'
+                'hide_email_on_frontend_list' => 'false',
+                'email_encoding' => 'iso-8859-1'
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -505,7 +525,10 @@ if (!class_exists("wpscSupportTickets")) {
                 }
                 if(isset($_POST['hide_email_on_frontend_list'])) {
                     $devOptions['hide_email_on_frontend_list'] = esc_sql($_POST['hide_email_on_frontend_list']);
-                }                
+                }    
+                if(isset($_POST['email_encoding'])) {
+                    $devOptions['email_encoding'] = esc_sql($_POST['email_encoding']);
+                }                 
 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -647,6 +670,35 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '
                 </select>
                 </p>
+                
+                <p><strong>' . __('Email Charset Encoding', 'wpsc-support-tickets') . ':</strong> ' . __('You may need to change this if email text is encoding incorrectly.  The default is utf-8.', 'wpsc-support-tickets') . '  <br />
+                <select name="email_encoding">
+                 ';
+
+                $pagesYxxx[0] = 'utf-8';
+                $pagesYxxx[1] = 'iso-8859-1';
+                $pagesYxxx[2] = 'koi8-r';
+                $pagesYxxx[3] = 'gb2312';
+                $pagesYxxx[4] = 'big5';
+                $pagesYxxx[5] = 'shift_jis';
+                $pagesYxxx[5] = 'euc-jp';
+                $pagesYxxx[6] = 'iso-8859-15';
+                foreach ($pagesYxxx as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['email_encoding']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                </p>
+
+
 
             </td></tr></table>
             <br /><br /><br />

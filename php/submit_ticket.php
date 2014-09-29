@@ -255,43 +255,47 @@ if(is_user_logged_in() || @isset($_SESSION['wpsct_email'])) {
     
     
     $to      = $wpscst_email; // Send this to the ticket creator
-    $subject = $devOptions['email_new_ticket_subject'] .' "'. strip_tags($_POST['wpscst_title']).'"';
+    if($devOptions['allow_html']=='true') {
+        $subject = $devOptions['email_new_ticket_subject'] .' "'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ).'"';
+    } else {
+        $subject = $devOptions['email_new_ticket_subject'] .' "'. strip_tags($_POST['wpscst_title']).'"';
+    }
     $message = $devOptions['email_new_ticket_body'];
     if($devOptions['use_ticket_in_email']=='true') {
         $message .= "\r\n";
         $message .= "\r\n";
-        $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_initial_message']) .'"';
+        if($devOptions['allow_html']=='true') {
+            $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_initial_message']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
+        } else {
+            $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_initial_message']) .'"';
+        }
         $message .= $cleaned_message;
     }    
     $headers = '';
-    if($devOptions['allow_html']=='true') {
-        $headers .= 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";                
-    }    
-    $headers .= 'From: ' . $devOptions['email'] . "\r\n" .
-        'Reply-To: ' . $devOptions['email'] .  "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
-    wp_mail($to, $subject, $message, $headers);
+
+    wpscSupportTickets_mail($to, $subject, $message, $headers);
     
 
     $to      = $devOptions['email']; // Send this to the admin
-    $subject = __("A new support ticket was received.", 'wpsc-support-tickets').' "'. strip_tags($_POST['wpscst_title']).'"';
+    if($devOptions['allow_html']=='true') {
+        $subject = __("A new support ticket was received.", 'wpsc-support-tickets').' "'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
+    } else {
+        $subject = __("A new support ticket was received.", 'wpsc-support-tickets').' "'. strip_tags($_POST['wpscst_title']).'"';
+    }
     $message = __('There is a new support ticket: ','wpsc-support-tickets').get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$lastID;
     if($devOptions['use_ticket_in_email']=='true') {
         $message .= "\r\n";
         $message .= "\r\n";
-        $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_initial_message']) .'"';
+        if($devOptions['allow_html']=='true') {
+            $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_initial_message']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES )  .'"';
+        } else {
+            $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_initial_message']) .'"';
+        }
         $message .= $cleaned_message;
     }    
     $headers = '';
-    if($devOptions['allow_html']=='true') {
-        $headers .= 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";                
-    }    
-    $headers .= 'From: ' . $devOptions['email'] . "\r\n" .
-    'Reply-To: ' . $devOptions['email'] .  "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
-    wp_mail($to, $subject, $message, $headers);
+
+    wpscSupportTickets_mail($to, $subject, $message, $headers);
 
 }
 
