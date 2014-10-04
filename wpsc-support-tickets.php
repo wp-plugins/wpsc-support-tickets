@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.8.3
+  Version: 4.8.4
   Author: Jeff Quindlen
   Author URI: URI: http://indiedevbundle.com
   License: LGPL
@@ -1447,7 +1447,14 @@ if (!class_exists("wpscSupportTickets")) {
                         }
 
                         echo '<br /><table class="widefat" style="width:100%;' . $styleModifier1 . '">';
-                        echo '<thead><tr><th class="wpscst_results_posted_by" style="' . $styleModifier2 . '">' . __('Posted by', 'wpsc-support-tickets') . ' <a href="' . get_admin_url() . 'user-edit.php?user_id=' . $resultsX['user_id'] . '&wp_http_referer=' . urlencode(get_admin_url() . 'admin.php?page=wpscSupportTickets-admin') . '">' . $theusersname . '</a> (<span class="wpscst_results_timestamp">' . date_i18n( get_option( 'date_format' ), $resultsX['timestamp']) . '</span>)<div style="float:right;"><a onclick="if(confirm(\'' . __('Are you sure you want to delete this reply?', 'wpsc-support-tickets') . '\')){return true;}return false;" href="' . plugins_url('/php/delete_ticket.php', __FILE__) . '?replyid=' . $resultsX['primkey'] . '&ticketid=' . $primkey . '"><img src="' . plugins_url('/images/delete.png', __FILE__) . '" alt="delete" /> ' . __('Delete Reply', 'wpsc-support-tickets') . '</a></div></th></tr></thead>';
+                        echo '<thead><tr><th class="wpscst_results_posted_by" style="' . $styleModifier2 . '">' . __('Posted by', 'wpsc-support-tickets') . ' <a href="' . get_admin_url() . 'user-edit.php?user_id=' . $resultsX['user_id'] . '&wp_http_referer=' . urlencode(get_admin_url() . 'admin.php?page=wpscSupportTickets-admin') . '">' . $theusersname . '</a> (<span class="wpscst_results_timestamp">' . date_i18n( get_option( 'date_format' ), $resultsX['timestamp']) . '</span>)<div style="float:right;">';
+
+                        echo '<form action="' . get_admin_url().'admin-post.php" method="post" enctype="multipart/form-data">';
+                        echo "<input type='hidden' name='action' value='delete-support-ticket' /><input type='hidden' name='replyid' value='{$resultsX['primkey']}' /><input type='hidden' name='ticketid' value='{$primkey}' />";  
+                        echo '<button type="submit" onclick="if(confirm(\'' . __('Are you sure you want to delete this reply?', 'wpsc-support-tickets') . '\')){return true;}return false;"><img src="' . plugins_url('/images/delete.png', __FILE__) . '" alt="delete" /> ' . __('Delete Reply', 'wpsc-support-tickets') . '</button>';
+                        echo '</form>';
+                        
+                        echo '</div></th></tr></thead>';
                         $messageData = strip_tags(base64_decode($resultsX['message']), '<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
                         $messageData = explode('\\', $messageData);
                         $messageWhole = '';
@@ -1544,9 +1551,14 @@ if (!class_exists("wpscSupportTickets")) {
                 $output.= ' selected="selected" ';
             } $output.='>' . __('Closed', 'wpsc-support-tickets') . '</option>
                         </select></div>
-                        <div style="float:left;margin-left:20px;"><h3>' . __('Actions', 'wpsc-support-tickets') . '</h3>
-                            <a onclick="if(confirm(\'' . __('Are you sure you want to delete this ticket?', 'wpsc-support-tickets') . '\')){return true;}return false;" href="' . plugins_url('/php/delete_ticket.php', __FILE__) . '?ticketid=' . $primkey . '"><img src="' . plugins_url('/images/delete.png', __FILE__) . '" alt="delete" /> ' . __('Delete Ticket', 'wpsc-support-tickets') . '</a><br />
-                            <input type="checkbox" name="wpsctnoemail" id="wpsctnoemail" checked="checked" value="on" /> ' . __('Send email to ticket creator on reply.', 'wpsc-support-tickets') . '
+                        <div style="float:left;margin-left:20px;"><h3>' . __('Actions', 'wpsc-support-tickets') . '</h3>';
+
+                        $output.= '<form action="' . get_admin_url().'admin-post.php" method="post" enctype="multipart/form-data">';
+                        $output.= "<input type='hidden' name='action' value='delete-support-ticket' /><input type='hidden' name='ticketid' value='{$primkey}' />";  
+                        $output.= '<button type="submit" onclick="if(confirm(\'' . __('Are you sure you want to delete this reply?', 'wpsc-support-tickets') . '\')){return true;}return false;"><img src="' . plugins_url('/images/delete.png', __FILE__) . '" alt="delete" /> ' . __('Delete Reply', 'wpsc-support-tickets') . '</button>';
+                        $output.= '</form>';
+            
+                            $output .= '<input type="checkbox" name="wpsctnoemail" id="wpsctnoemail" checked="checked" value="on" /> ' . __('Send email to ticket creator on reply.', 'wpsc-support-tickets') . '
                         </div>';
             if ($devOptions['allow_uploads'] == 'true' && @function_exists('wpscSupportTicketsPRO')) {
                 $output .= '<div style="float:left;margin-left:20px;"><h3>' . __('Attach a file', 'wpsc-support-tickets') . '</h3> <input type="file" name="wpscst_file" id="wpscst_file"></div>';
@@ -2773,8 +2785,8 @@ function  wpscstDeleteTicket() {
     if(is_user_logged_in()) {
         wpscSupportTickets::checkPermissions();
 
-        if(@isset($_GET['ticketid']) && @is_numeric($_GET['ticketid']) && @!isset($_GET['replyid'])) {
-            $primkey = intval($_GET['ticketid']);
+        if(@isset($_POST['ticketid']) && @is_numeric($_POST['ticketid']) && @!isset($_POST['replyid'])) {
+            $primkey = intval($_POST['ticketid']);
 
             $wpdb->query("DELETE FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}';");
             $wpdb->query("DELETE FROM `{$wpdb->prefix}wpscst_replies` WHERE `ticket_id`='{$primkey}';");
@@ -2782,9 +2794,9 @@ function  wpscstDeleteTicket() {
             header ('Location: '.get_admin_url().'admin.php?page=wpscSupportTickets-admin');
             exit();
         }
-         if(@isset($_GET['replyid']) && @is_numeric($_GET['replyid']) && @isset($_GET['ticketid']) && @is_numeric($_GET['ticketid'])) {
-            $primkey = intval($_GET['replyid']);
-            $ticketprimkey = intval($_GET['ticketid']);
+         if(@isset($_POST['replyid']) && @is_numeric($_POST['replyid']) && @isset($_POST['ticketid']) && @is_numeric($_POST['ticketid'])) {
+            $primkey = intval($_POST['replyid']);
+            $ticketprimkey = intval($_POST['ticketid']);
 
             $wpdb->query("DELETE FROM `{$wpdb->prefix}wpscst_replies` WHERE `primkey`='{$primkey}';");
             header("HTTP/1.1 301 Moved Permanently");
