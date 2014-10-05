@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.8.4
+  Version: 4.8.5
   Author: Jeff Quindlen
   Author URI: URI: http://indiedevbundle.com
   License: LGPL
@@ -1479,7 +1479,7 @@ if (!class_exists("wpscSupportTickets")) {
                             </script>
                             ';
             $output .= '<form action="' . get_admin_url().'admin-post.php" method="post" enctype="multipart/form-data">';
-            $output .= "<input type='hidden' name='action' value='reply-support-ticket' />";
+            $output .= "<input type='hidden' name='action' value='reply-support-ticket' id='wpscst_hidden_action_field' />";
             
             $output .='<input type="hidden" name="wpscst_is_staff_reply" value="yes" /><input type="hidden" name="wpscst_edit_primkey" value="' . $primkey . '" /><input type="hidden" name="wpscst_goback" value="yes" /> ';
             $output .= '<table class="wpscst-table" style="width:100%;display:none;">';
@@ -1553,17 +1553,17 @@ if (!class_exists("wpscSupportTickets")) {
                         </select></div>
                         <div style="float:left;margin-left:20px;"><h3>' . __('Actions', 'wpsc-support-tickets') . '</h3>';
 
-                        $output.= '<form action="' . get_admin_url().'admin-post.php" method="post" enctype="multipart/form-data">';
-                        $output.= "<input type='hidden' name='action' value='delete-support-ticket' /><input type='hidden' name='ticketid' value='{$primkey}' />";  
-                        $output.= '<button type="submit" onclick="if(confirm(\'' . __('Are you sure you want to delete this reply?', 'wpsc-support-tickets') . '\')){return true;}return false;"><img src="' . plugins_url('/images/delete.png', __FILE__) . '" alt="delete" /> ' . __('Delete Reply', 'wpsc-support-tickets') . '</button>';
-                        $output.= '</form>';
+
+                        $output.= '<button type="submit" onclick="if(confirm(\'' . __('Are you sure you want to delete this reply?', 'wpsc-support-tickets') . '\')){jQuery(\'#wpscst_hidden_action_field\').val(\'delete-support-ticket\');return true;}return false;"><img src="' . plugins_url('/images/delete.png', __FILE__) . '" alt="delete" /> ' . __('Delete Reply', 'wpsc-support-tickets') . '</button>';
+
             
                             $output .= '<input type="checkbox" name="wpsctnoemail" id="wpsctnoemail" checked="checked" value="on" /> ' . __('Send email to ticket creator on reply.', 'wpsc-support-tickets') . '
                         </div>';
             if ($devOptions['allow_uploads'] == 'true' && @function_exists('wpscSupportTicketsPRO')) {
                 $output .= '<div style="float:left;margin-left:20px;"><h3>' . __('Attach a file', 'wpsc-support-tickets') . '</h3> <input type="file" name="wpscst_file" id="wpscst_file"></div>';
             }
-            $output .='         
+            $output .='   
+                        <input type="hidden" name="ticketid" value="'.$primkey.'" />
                         <button class="button-secondary" onclick="if(confirm(\'' . __('Are you sure you want to cancel?', 'wpsc-support-tickets') . '\')){window.location = \'' . get_admin_url() . 'admin.php?page=wpscSupportTickets-admin\';}return false;"  style="float:right;" ><img style="float:left;border:none;margin-right:5px;" src="' . plugins_url('/images/stop.png', __FILE__) . '" alt="' . __('Cancel', 'wpsc-support-tickets') . '" /> ' . __('Cancel', 'wpsc-support-tickets') . '</button> <button class="button-primary" type="submit" name="wpscst_submit" id="wpscst_submit" style="float:right;margin:0 5px 0 5px;"><img style="float:left;border:none;margin-right:5px;" src="' . plugins_url('/images/page_white_text.png', __FILE__) . '" alt="' . __('Update Ticket', 'wpsc-support-tickets') . '" /> ' . __('Update Ticket', 'wpsc-support-tickets') . '</button></td></tr>';
 
 
