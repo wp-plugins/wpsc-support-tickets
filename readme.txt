@@ -1,10 +1,10 @@
 === wpsc Support Tickets  ===
 Contributors: jquindlen
-Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
+Donate link: http://indiedevbundle.com
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.8.5
+Stable tag: 4.8.6
 
 == Description ==
 
@@ -100,6 +100,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Updated: Get rid of delete_ticket.php, reply_ticket.php, and submit_ticket.php and move functionality into /php/publicajax.php (done as of 4.8.4)
 * Added: The ability to have different custom fields display depending on the selected department while creating a ticket.
 * Updated: New easier to use and less buggy permission system allows you to easily fine tune who can administrate what tickets (started in 4.7.32)
+
+= 4.8.6 =
+* Added: New beta testing option being added
 
 = 4.8.5 =
 * Fixed: Patched a bug related to the changes in 4.8.4 and deleting tickets.
