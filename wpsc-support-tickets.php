@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.8.7
+  Version: 4.8.8
   Author: Jeff Quindlen
   Author URI: URI: http://indiedevbundle.com
   License: LGPL
@@ -98,19 +98,21 @@ if (!function_exists('wpscSupportTickets_mail')) {
      */
     function wpscSupportTickets_mail($to, $subject, $message, $headers='') {
         $devOptions = get_option('wpscSupportTicketsAdminOptions');
-        $headers .= 'MIME-Version: 1.0' . "\r\n";
-        
-        $email_content_type = 'text/plain';
-        if($devOptions['allow_html']=='true') {
-            $email_content_type = 'text/html';
+        if($devOptions['disable_all_emails']=='false') {
+            $headers .= 'MIME-Version: 1.0' . "\r\n";
+
+            $email_content_type = 'text/plain';
+            if($devOptions['allow_html']=='true') {
+                $email_content_type = 'text/html';
+            }
+
+            $headers .= "Content-type: {$email_content_type}; charset={$devOptions['email_encoding']} \r\n";                
+
+            $headers .= 'From: ' . $devOptions['email'] . "\r\n" .
+            'Reply-To: ' . $devOptions['email'] .  "\r\n" .
+            'X-Mailer: PHP/' . phpversion();        
+            wp_mail($to, $subject, $message, $headers);
         }
-        
-        $headers .= "Content-type: {$email_content_type}; charset={$devOptions['email_encoding']} \r\n";                
-        
-        $headers .= 'From: ' . $devOptions['email'] . "\r\n" .
-        'Reply-To: ' . $devOptions['email'] .  "\r\n" .
-        'X-Mailer: PHP/' . phpversion();        
-        wp_mail($to, $subject, $message, $headers);
     }
 }
 
@@ -411,7 +413,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'hide_email_on_frontend_list' => 'false',
                 'email_encoding' => 'utf-8',
                 'hide_email_on_support_tickets' => 'false',
-                'enable_beta_testing' => 'false'
+                'enable_beta_testing' => 'false',
+                'disable_all_emails' => 'false'
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -544,7 +547,10 @@ if (!class_exists("wpscSupportTickets")) {
                 } 
                 if(isset($_POST['enable_beta_testing'])) {
                     $devOptions['enable_beta_testing'] = esc_sql($_POST['enable_beta_testing']);
-                }                
+                }      
+                if(isset($_POST['disable_all_emails'])) {
+                    $devOptions['disable_all_emails'] = esc_sql($_POST['disable_all_emails']);
+                }                      
                 
                 
                 update_option($this->adminOptionsName, $devOptions);
@@ -714,6 +720,26 @@ if (!class_exists("wpscSupportTickets")) {
                 </select>
                 </p>
 
+                <p><strong>' . __('Disable All Emails', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want to turn off all emails from wpsc Support Tickets.', 'wpsc-support-tickets') . '  <br />
+                <select name="disable_all_emails">
+                 ';
+
+                $pagesY[0] = 'true';
+                $pagesY[1] = 'false';
+                foreach ($pagesY as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['disable_all_emails']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                </p>
 
 
             </td></tr></table>
@@ -1622,36 +1648,42 @@ if (!class_exists("wpscSupportTickets")) {
         }
 
         function addHeaderCode() {
-            wp_enqueue_script('jquery-ui-core');
-            wp_enqueue_script('jquery-ui-tabs');
-            if (@!class_exists('AGCA')) {
-                wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
+                if(@$_GET['page']=='wpscSupportTickets-admin' || @$_GET['page']=='wpscSupportTickets-newticket' || @$_GET['page']=='wpscSupportTickets-settings' || @$_GET['page']=='wpscSupportTickets-edit' || @$_GET['page']=='wpscSupportTickets-departments' || @$_GET['page']=='wpscSupportTickets-stats') {
+                wp_enqueue_script('jquery-ui-core');
+                wp_enqueue_script('jquery-ui-tabs');
+                if (@!class_exists('AGCA')) {
+                    wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
+                }
+                wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
             }
-            wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
         }
         
         function addFieldsHeaderCode() {
-            wp_enqueue_script('jquery-ui-core');
-            wp_enqueue_script('jquery-ui-tabs');
-            wp_enqueue_script('jquery-ui-sortable');
-            if (@!class_exists('AGCA')) {
-                wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
+            if(@$_GET['page']=='wpscSupportTickets-fields') {
+                wp_enqueue_script('jquery-ui-core');
+                wp_enqueue_script('jquery-ui-tabs');
+                wp_enqueue_script('jquery-ui-sortable');
+                if (@!class_exists('AGCA')) {
+                    wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
+                }
+                wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
             }
-            wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
         }        
         
         function addStatsHeaderCode() {
-            wp_enqueue_script('jquery-ui-core');
-            wp_enqueue_script('jquery-ui-tabs');
-            if (@!class_exists('AGCA')) {
-                wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
+            if(@$_GET['page']=='wpscSupportTickets-stats') {
+                wp_enqueue_script('jquery-ui-core');
+                wp_enqueue_script('jquery-ui-tabs');
+                if (@!class_exists('AGCA')) {
+                    wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
+                }
+                wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
+
+                wp_enqueue_script('wpscstraphael', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/raphael.js', array('jquery'), '1.3.2');
+                wp_enqueue_script('wpscstenumerable', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/jquery.enumerable.js', array('jquery'), '1.3.2');
+                wp_enqueue_script('wpscsttufte', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/jquery.tufte-graph.js', array('jquery'), '1.3.2');
+                wp_enqueue_style('tufte-admin-ui-css', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/tufte-graph.css', false, 2, false);
             }
-            wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
-            
-            wp_enqueue_script('wpscstraphael', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/raphael.js', array('jquery'), '1.3.2');
-            wp_enqueue_script('wpscstenumerable', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/jquery.enumerable.js', array('jquery'), '1.3.2');
-            wp_enqueue_script('wpscsttufte', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/jquery.tufte-graph.js', array('jquery'), '1.3.2');
-            wp_enqueue_style('tufte-admin-ui-css', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/tufte-graph.css', false, 2, false);
         }        
 
         function wpscSupportTickets_install($network) {   
