@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.8.9
+  Version: 4.9.0
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -34,8 +34,8 @@ if (file_exists(ABSPATH . 'wp-includes/pluggable.php')) {
 //Global variables:
 global $wpscSupportTickets, $wpscSupportTickets_version, $wpscSupportTickets_db_version, $APjavascriptQueue, $wpsct_error_reporting;
 
-$wpscSupportTickets_version = 4.8;
-$wpscSupportTickets_db_version = 4.8;
+$wpscSupportTickets_version = 4.9;
+$wpscSupportTickets_db_version = 4.9;
 $APjavascriptQueue = NULL;
 $wpsct_error_reporting = false;
 
@@ -574,7 +574,11 @@ if (!class_exists("wpscSupportTickets")) {
 
         <div id="wst_tabs" style="padding:5px 5px 0px 5px;font-size:1.1em;border-color:#DDD;border-radius:6px;">
             <ul>
-                <li><a href="#wst_tabs-1">' . __('Settings', 'wpsc-support-tickets') . '</a></li>
+                <li><a href="#wst_tabs-1">' . __('General', 'wpsc-support-tickets') . '</a></li>
+                <li><a href="#wst_tabs-3">' . __('Email', 'wpsc-support-tickets') . '</a></li>
+                <li><a href="#wst_tabs-4">' . __('Styling', 'wpsc-support-tickets') . '</a></li>    
+                <li><a href="#wst_tabs-5">' . __('Guests', 'wpsc-support-tickets') . '</a></li>    
+                <li><a href="#wst_tabs-6">' . __('Custom Fields', 'wpsc-support-tickets') . '</a></li>    
                 <li><a href="#wst_tabs-2">' . __('PRO', 'wpsc-support-tickets') . '</a></li>
             </ul>        
             
@@ -639,6 +643,8 @@ if (!class_exists("wpscSupportTickets")) {
                 
             </td></tr></table>
             <br /><br /><br />
+            </div>
+            <div id="wst_tabs-3">            
             <h1>' . __('Email', 'wpsc-support-tickets') . '</h1>
             <table class="widefat" style="background:transparent;"><tr><td>                
 
@@ -744,6 +750,8 @@ if (!class_exists("wpscSupportTickets")) {
 
             </td></tr></table>
             <br /><br /><br />
+            </div>
+            <div id="wst_tabs-4">            
             <h1>' . __('Styling', 'wpsc-support-tickets') . '</h1>
             <table class="widefat" style="background:transparent;"><tr><td> 
 
@@ -771,6 +779,8 @@ if (!class_exists("wpscSupportTickets")) {
 
             </td></tr></table>
             <br /><br /><br />
+            </div>
+            <div id="wst_tabs-5">            
             <h1>' . __('Guests', 'wpsc-support-tickets') . '</h1>
             <table class="widefat" style="background:transparent;"><tr><td> 
 
@@ -843,6 +853,8 @@ if (!class_exists("wpscSupportTickets")) {
 
             </td></tr></table>
             <br /><br /><br />
+            </div>
+            <div id="wst_tabs-6">            
             <h1>' . __('Custom Fields', 'wpsc-support-tickets') . '</h1>
             <table class="widefat" style="background:transparent;"><tr><td> 
 
@@ -939,7 +951,18 @@ if (!class_exists("wpscSupportTickets")) {
             
             
             if (@!function_exists('wpscSupportTicketsPRO') ) {
-                echo '<table class="widefat" style="width:98%;"><tr><td>';
+                echo '           <div id="wst_tabs" style="padding:5px 5px 0px 5px;font-size:1.1em;border-color:#DDD;border-radius:6px;">
+            <ul>
+                <li><a href="#wstct_tabs-1">' . __('Statistics', 'wpsc-support-tickets') . '</a></li>
+            </ul>        
+            <script type="text/javascript">
+                jQuery(function() {
+                    jQuery( "#wst_tabs" ).tabs();
+                    setTimeout(function(){ jQuery(".updated").fadeOut(); },3000);
+                });
+            </script>
+
+            <div id="wstct_tabs-1">  <table class="widefat" style="width:98%;"><tr><td>';
                 echo '
                                 
                                 <h2>'.__('Upgrade now to wpsc Support Tickets PRO and unlock in depth statistics for the following and more:', 'wpsc-support-tickets').'</h2> 
@@ -958,7 +981,7 @@ if (!class_exists("wpscSupportTickets")) {
                                 
                               
                                 ';
-                echo '</td></tr></table>
+                echo '</td></tr></table></div></div>
                 <script type="text/javascript">
                 jQuery(document).ready(function() {
                     jQuery(\'#buyprostats\').append(\'<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="FE6DBZ44KJ8TS"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>\');
@@ -1097,6 +1120,19 @@ if (!class_exists("wpscSupportTickets")) {
             echo '<div class="wrap">';
 
             $this->adminHeader();
+            
+        echo '<div id="wst_tabs" style="padding:5px 5px 0px 5px;font-size:1.1em;border-color:#DDD;border-radius:6px;">
+            <ul>
+                <li><a href="#wstcf_tabs-1">' . __('User Fields', 'wpsc-support-tickets') . '</a></li>
+            </ul>        
+            <script type="text/javascript">
+                jQuery(function() {
+                    jQuery( "#wst_tabs" ).tabs();
+                    setTimeout(function(){ jQuery(".updated").fadeOut(); },3000);
+                });
+            </script>
+
+            <div id="wstcf_tabs-1">    ';         
             
             if (@isset($_POST['required_info_key']) && @isset($_POST['required_info_name']) && @isset($_POST['required_info_type'])) {
                 $arrayCounter = 0;
@@ -1285,7 +1321,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             </td></tr></tbody></table>
 
-            </form>
+            </form></div></div>
             <br style="clear:both;" /><br />';            
             
             
@@ -1299,9 +1335,25 @@ if (!class_exists("wpscSupportTickets")) {
             $devOptions = $this->getAdminOptions();
             $devOptions['disable_inline_styles'] = 'false';
             
-            echo '<div class="wrap">';
-
+            echo '<div class="wrap"> ';
             $this->adminHeader();
+            echo ' 
+                
+        <div id="wst_tabs" style="padding:5px 5px 0px 5px;font-size:1.1em;border-color:#DDD;border-radius:6px;">
+            <ul>
+                <li><a href="#wstct_tabs-1">' . __('Create Ticket', 'wpsc-support-tickets') . '</a></li>
+            </ul>        
+            <script type="text/javascript">
+                jQuery(function() {
+                    jQuery( "#wst_tabs" ).tabs();
+                    setTimeout(function(){ jQuery(".updated").fadeOut(); },3000);
+                });
+            </script>
+
+            <div id="wstct_tabs-1">                
+            ';
+
+            
 
             echo  '<br style="clear:both;" /><br />';
             
@@ -1387,7 +1439,7 @@ if (!class_exists("wpscSupportTickets")) {
 
 
             echo  '</table></form>';
-            echo '</div></div></div></div>';
+            echo '</div></div></div></div></div></div>';
             echo  '<div style="clear:both;min-height:45px;height:45px;display:block;width:100%;" />&nbsp;</div>'
             . '<style>#wpfooter {position:relative;top:-45px;}</style>';
 
@@ -1404,6 +1456,19 @@ if (!class_exists("wpscSupportTickets")) {
 
             $this->adminHeader();
 
+            echo '        <div id="wst_tabs" style="padding:5px 5px 0px 5px;font-size:1.1em;border-color:#DDD;border-radius:6px;">
+            <ul>
+                <li><a href="#wstct_tabs-1">' . __('Edit Ticket', 'wpsc-support-tickets') . '</a></li>
+            </ul>        
+            <script type="text/javascript">
+                jQuery(function() {
+                    jQuery( "#wst_tabs" ).tabs();
+                    setTimeout(function(){ jQuery(".updated").fadeOut(); },3000);
+                });
+            </script>
+
+            <div id="wstct_tabs-1">  ';
+            
             echo '<br style="clear:both;" /><br />';
 
 
@@ -1601,7 +1666,7 @@ if (!class_exists("wpscSupportTickets")) {
             echo $output;
 
             echo '
-			</div>';
+			</div></div></div>';
         }
 
         // Dashboard widget code=======================================================================
@@ -1648,13 +1713,13 @@ if (!class_exists("wpscSupportTickets")) {
         }
 
         function addHeaderCode() {
-                if(@$_GET['page']=='wpscSupportTickets-admin' || @$_GET['page']=='wpscSupportTickets-newticket' || @$_GET['page']=='wpscSupportTickets-settings' || @$_GET['page']=='wpscSupportTickets-edit' || @$_GET['page']=='wpscSupportTickets-departments' || @$_GET['page']=='wpscSupportTickets-stats') {
+            if(@$_GET['page']=='wpscSupportTickets-admin' || @$_GET['page']=='wpscSupportTickets-newticket' || @$_GET['page']=='wpscSupportTickets-settings' || @$_GET['page']=='wpscSupportTickets-edit' || @$_GET['page']=='wpscSupportTickets-departments' || @$_GET['page']=='wpscSupportTickets-stats') {
                 wp_enqueue_script('jquery-ui-core');
                 wp_enqueue_script('jquery-ui-tabs');
                 if (@!class_exists('AGCA')) {
                     wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
                 }
-                wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
+                wp_enqueue_style('wpsc-support-tickets-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
             }
         }
         
@@ -1666,7 +1731,7 @@ if (!class_exists("wpscSupportTickets")) {
                 if (@!class_exists('AGCA')) {
                     wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
                 }
-                wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
+                wp_enqueue_style('wpsc-support-tickets-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
             }
         }        
         
@@ -1677,7 +1742,7 @@ if (!class_exists("wpscSupportTickets")) {
                 if (@!class_exists('AGCA')) {
                     wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
                 }
-                wp_enqueue_style('plugin_name-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
+                wp_enqueue_style('wpsc-support-tickets-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
 
                 wp_enqueue_script('wpscstraphael', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/raphael.js', array('jquery'), '1.3.2');
                 wp_enqueue_script('wpscstenumerable', plugins_url().'/wpsc-support-tickets-pro/js/tufte-graph/jquery.enumerable.js', array('jquery'), '1.3.2');
@@ -2843,6 +2908,47 @@ function  wpscstDeleteTicket() {
     }    
 }
 add_action('admin_post_delete-support-ticket', 'wpscstDeleteTicket'); // If the user is logged in
+
+if (!function_exists('wstPROBulkTabIndex')) {
+    function wstInformPROBulkTabIndex() {
+        echo '<li><a href="#wst_tabs-all">'.__('Advanced (PRO Only)','wpsc-support-tickets').'</a></li>';
+    }
+
+    add_action( 'wpscSupportTickets_extraTabsIndex', 'wstInformPROBulkTabIndex' );
+    
+    function wstInformPROBulkTabContents() {
+                echo '<div id="wst_tabs-all"><table class="widefat" style="width:98%;"><tr><td>';
+                echo '
+                                
+                                <h2>'.__('Upgrade now to wpsc Support Tickets PRO and unlock more ticket management and more:', 'wpsc-support-tickets').'</h2> 
+                                    <ul>
+                                        <li>'.__('Average ticket resolution time', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Number of tickets created in each category', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Number of tickets in each severity level', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Top 10 users who create the most tickets', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('The number of completed tickets', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Display how long a ticket has been open', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Display how long it took to resolve a closed ticket', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('Bar chart showing the amount of time it took to close the last 30 tickets', 'wpsc-support-tickets').'</li>
+                                        <li>'.__('And much more, upgrade to PRO today:', 'wpsc-support-tickets').'</li>
+                                    </ul>
+                                    <div id="buyprostats"><strong>$9.99 USD</strong><br /></div>
+                                
+                              
+                                ';
+                echo '</td></tr></table></div>
+                <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    jQuery(\'#buyprostats\').append(\'<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="FE6DBZ44KJ8TS"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>\');
+                });
+                </script>  ';          
+        
+    }
+    add_action( 'wpscSupportTickets_extraTabsContents', 'wstInformPROBulkTabContents' );
+}
+
+
+
 
 
 ?>

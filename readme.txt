@@ -4,7 +4,7 @@ Donate link: http://indiedevbundle.com
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.8.9
+Stable tag: 4.9.0
 
 == Description ==
 
@@ -101,6 +101,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: The ability to have different custom fields display depending on the selected department while creating a ticket.
 * Updated: New easier to use and less buggy permission system allows you to easily fine tune who can administrate what tickets (started in 4.7.32)
 * Added: the ability for users to reply by email
+
+= 4.9.0 =
+* Updated: Admin UI overhaul.  It is now updated to match my other plugins, which will all soon share the same unified user interface.
 
 = 4.8.9 =
 * Minor form update
