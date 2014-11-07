@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.9.4
+Stable tag: 4.9.5
 
 == Description ==
 
@@ -101,6 +101,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: The ability to have different custom fields display depending on the selected department while creating a ticket.
 * Updated: New easier to use and less buggy permission system allows you to easily fine tune who can administrate what tickets (started in 4.7.32)
 * Added: the ability for users to reply by email
+* Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
+
+= 4.9.5 =
+* Updated: die() replaced with wp_die()
 
 = 4.9.4 =
 * Added: In the General Settings, you can now toggle on/off beta features.  New beta features will be coming out over the next several months.
