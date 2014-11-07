@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.5
+  Version: 4.9.6
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -1733,9 +1733,9 @@ if (!class_exists("wpscSupportTickets")) {
 
         // Create the function use in the action hook
         function wpscSupportTickets_main_add_dashboard_widgets() {
-            if (function_exists('current_user_can') && current_user_can('manage_wpsct_support_tickets')) {
-                wp_add_dashboard_widget('wpscSupportTickets_main_dashboard_widgets', __('wpscSupportTickets Overview', 'wpsc-support-tickets'), array(&$this, 'wpscSupportTickets_main_dashboard_widget_function'));
-            }
+            $this->checkPermissions();
+            wp_add_dashboard_widget('wpscSupportTickets_main_dashboard_widgets', __('wpscSupportTickets Overview', 'wpsc-support-tickets'), array(&$this, 'wpscSupportTickets_main_dashboard_widget_function'));
+            
         }
 
         function addHeaderCode() {
@@ -2801,7 +2801,7 @@ function wpscstReplyTicket() {
                                     $wpscst_message .=  ' style="border: 1px solid #DDD;padding:8px;" ';
                                 }
                                 $wpscst_message .= '>';
-                                $wpscst_message .= '<img src="'.plugins_url().'/wpsc-support-tickets-pro/images/attachment.png" alt="" /> <strong>'.__('ATTACHMENT','wpsc-support-tickets').'</strong>: <a href="'.$wpsc_wordpress_upload_dir['baseurl'].'/wpsc-support-tickets/'.$file_name.'" target="_blank">'.$wpsc_wordpress_upload_dir['baseurl'].'/wpsc-support-tickets/'.$file_name.'</a></p>';
+                                $wpscst_message .= '<img src="'.plugins_url().'/wpsc-support-tickets-pro/images/attachment.png" alt="'.__('ATTACHMENT','wpsc-support-tickets').'" /> <strong>'.__('ATTACHMENT','wpsc-support-tickets').'</strong>: <a href="'.$wpsc_wordpress_upload_dir['baseurl'].'/wpsc-support-tickets/'.$file_name.'" target="_blank">'.$wpsc_wordpress_upload_dir['baseurl'].'/wpsc-support-tickets/'.$file_name.'</a></p>';
                             }       
                 }        
 
