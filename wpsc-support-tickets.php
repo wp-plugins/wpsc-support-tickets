@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.6
+  Version: 4.9.7
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -174,11 +174,11 @@ if(!function_exists('wpsctPromptForCustomFields')) {
             __("Korea, Republic of", 'wpsc-support-tickets'),__("Kuwait", 'wpsc-support-tickets'),__("Kyrgyzstan", 'wpsc-support-tickets'),__("Lao People\'s Democratic Republic", 'wpsc-support-tickets'),__("Latvia", 'wpsc-support-tickets'),__("Lebanon", 'wpsc-support-tickets'),__("Lesotho", 'wpsc-support-tickets'),__("Liberia", 'wpsc-support-tickets'),__("Libyan Arab Jamahiriya", 'wpsc-support-tickets'),
             __("Liechtenstein", 'wpsc-support-tickets'),__("Lithuania", 'wpsc-support-tickets'),__("Luxembourg", 'wpsc-support-tickets'),__("Macao", 'wpsc-support-tickets'),__("Macedonia, The Former Yugoslav Republic of", 'wpsc-support-tickets'),__("Madagascar", 'wpsc-support-tickets'),__("Malawi", 'wpsc-support-tickets'),__("Malaysia", 'wpsc-support-tickets'),__("Maldives", 'wpsc-support-tickets'),__("Mali", 'wpsc-support-tickets'),
             __("Malta", 'wpsc-support-tickets'),__("Marshall Islands", 'wpsc-support-tickets'),__("Martinique", 'wpsc-support-tickets'),__("Mauritania", 'wpsc-support-tickets'),__("Mauritius", 'wpsc-support-tickets'),__("Mayotte", 'wpsc-support-tickets'),__("Mexico", 'wpsc-support-tickets'),__("Micronesia, Federated States of", 'wpsc-support-tickets'),__("Moldova, Republic of", 'wpsc-support-tickets'),
-            __("Monaco", 'wpsc-support-tickets'),__("Mongolia", 'wpsc-support-tickets'),__("Montserrat", 'wpsc-support-tickets'),__("Morocco", 'wpsc-support-tickets'),__("Mozambique", 'wpsc-support-tickets'),__("Myanmar", 'wpsc-support-tickets'),__("Namibia", 'wpsc-support-tickets'),__("Nauru", 'wpsc-support-tickets'),__("Nepal", 'wpsc-support-tickets'),__("Netherlands", 'wpsc-support-tickets'),__("Netherlands Antilles", 'wpsc-support-tickets'),__("New Caledonia", 'wpsc-support-tickets'),
+            __("Monaco", 'wpsc-support-tickets'),__("Mongolia", 'wpsc-support-tickets'),__("Montenegro", 'wpsc-support-tickets'),__("Montserrat", 'wpsc-support-tickets'),__("Morocco", 'wpsc-support-tickets'),__("Mozambique", 'wpsc-support-tickets'),__("Myanmar", 'wpsc-support-tickets'),__("Namibia", 'wpsc-support-tickets'),__("Nauru", 'wpsc-support-tickets'),__("Nepal", 'wpsc-support-tickets'),__("Netherlands", 'wpsc-support-tickets'),__("Netherlands Antilles", 'wpsc-support-tickets'),__("New Caledonia", 'wpsc-support-tickets'),
             __("New Zealand", 'wpsc-support-tickets'),__("Nicaragua", 'wpsc-support-tickets'),__("Niger", 'wpsc-support-tickets'),__("Nigeria", 'wpsc-support-tickets'),__("Niue", 'wpsc-support-tickets'),__("Norfolk Island", 'wpsc-support-tickets'),__("Northern Mariana Islands", 'wpsc-support-tickets'),__("Norway", 'wpsc-support-tickets'),__("Oman", 'wpsc-support-tickets'),__("Pakistan", 'wpsc-support-tickets'),__("Palau", 'wpsc-support-tickets'),
             __("Palestinian Territory, Occupied", 'wpsc-support-tickets'),__("Panama", 'wpsc-support-tickets'),__("Papua New Guinea", 'wpsc-support-tickets'),__("Paraguay", 'wpsc-support-tickets'),__("Peru", 'wpsc-support-tickets'),__("Philippines", 'wpsc-support-tickets'),__("Pitcairn", 'wpsc-support-tickets'),__("Poland", 'wpsc-support-tickets'),__("Portugal", 'wpsc-support-tickets'),__("Puerto Rico", 'wpsc-support-tickets'),
             __("Qatar", 'wpsc-support-tickets'),__("Reunion", 'wpsc-support-tickets'),__("Romania", 'wpsc-support-tickets'),__("Russian Federation", 'wpsc-support-tickets'),__("Rwanda", 'wpsc-support-tickets'),__("Saint Helena", 'wpsc-support-tickets'),__("Saint Kitts and Nevis", 'wpsc-support-tickets'),__("Saint Lucia", 'wpsc-support-tickets'),__("Saint Pierre and Miquelon", 'wpsc-support-tickets'),
-            __("Saint Vincent and The Grenadines", 'wpsc-support-tickets'),__("Samoa", 'wpsc-support-tickets'),__("San Marino", 'wpsc-support-tickets'),__("Sao Tome and Principe", 'wpsc-support-tickets'),__("Saudi Arabia", 'wpsc-support-tickets'),__("Senegal", 'wpsc-support-tickets'),__("Serbia and Montenegro", 'wpsc-support-tickets'),__("Seychelles", 'wpsc-support-tickets'),
+            __("Saint Vincent and The Grenadines", 'wpsc-support-tickets'),__("Samoa", 'wpsc-support-tickets'),__("San Marino", 'wpsc-support-tickets'),__("Sao Tome and Principe", 'wpsc-support-tickets'),__("Saudi Arabia", 'wpsc-support-tickets'),__("Senegal", 'wpsc-support-tickets'),__("Serbia", 'wpsc-support-tickets'),__("Seychelles", 'wpsc-support-tickets'),
             __("Sierra Leone", 'wpsc-support-tickets'),__("Singapore", 'wpsc-support-tickets'),__("Slovakia", 'wpsc-support-tickets'),__("Slovenia", 'wpsc-support-tickets'),__("Solomon Islands", 'wpsc-support-tickets'),__("Somalia", 'wpsc-support-tickets'),__("South Africa", 'wpsc-support-tickets'),__("South Georgia and The South Sandwich Islands", 'wpsc-support-tickets'),__("Spain", 'wpsc-support-tickets'),
             __("Sri Lanka", 'wpsc-support-tickets'),__("Sudan", 'wpsc-support-tickets'),__("Suriname", 'wpsc-support-tickets'),__("Svalbard and Jan Mayen", 'wpsc-support-tickets'),__("Swaziland", 'wpsc-support-tickets'),__("Sweden", 'wpsc-support-tickets'),__("Switzerland", 'wpsc-support-tickets'),__("Syrian Arab Republic", 'wpsc-support-tickets'),__("Taiwan, Province of China", 'wpsc-support-tickets'),
             __("Tajikistan", 'wpsc-support-tickets'),__("Tanzania, United Republic of", 'wpsc-support-tickets'),__("Thailand", 'wpsc-support-tickets'),__("Timor-leste", 'wpsc-support-tickets'),__("Togo", 'wpsc-support-tickets'),__("Tokelau", 'wpsc-support-tickets'),__("Tonga", 'wpsc-support-tickets'),__("Trinidad and Tobago", 'wpsc-support-tickets'),__("Tunisia", 'wpsc-support-tickets'),__("Turkey", 'wpsc-support-tickets'),
@@ -313,14 +313,11 @@ if (!class_exists("wpscSupportTickets")) {
 
         /**
          * 
-         * @deprecated since version 5.0
          * @global object $wp_roles
          */
         function wpscSupportTickets() { //constructor
             // Let's make sure the admin is always in charge
-            if (function_exists('is_multisite') && is_multisite()) {
-                
-            } else {
+            if (!is_multisite()) {
                 $this->addPermissions(); // 
             }
         }

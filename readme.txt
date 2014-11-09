@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.9.6
+Stable tag: 4.9.7
 
 == Description ==
 
@@ -102,6 +102,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Updated: New easier to use and less buggy permission system allows you to easily fine tune who can administrate what tickets (started in 4.7.32)
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
+
+= 4.9.7 =
+* Updated: Split "Serbia & Montenegro" into Montenegro and Serbia to reflect the current state of those countries.
+* Updated: Minor refactor
 
 = 4.9.6 =
 * Fixed: Dashboard widgets should now work for Super Admins.
