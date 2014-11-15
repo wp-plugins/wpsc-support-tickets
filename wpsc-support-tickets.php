@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.8
+  Version: 4.9.9
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -413,7 +413,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'email_encoding' => 'utf-8',
                 'hide_email_on_support_tickets' => 'false',
                 'enable_beta_testing' => 'false',
-                'disable_all_emails' => 'false'
+                'disable_all_emails' => 'false',
+                'override_wordpress_email' => 'false'
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -550,7 +551,9 @@ if (!class_exists("wpscSupportTickets")) {
                 if(isset($_POST['disable_all_emails'])) {
                     $devOptions['disable_all_emails'] = esc_sql($_POST['disable_all_emails']);
                 }                      
-                
+                if(isset($_POST['override_wordpress_email'])) {
+                    $devOptions['override_wordpress_email'] = esc_sql($_POST['override_wordpress_email']);
+                }
                 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -758,6 +761,27 @@ if (!class_exists("wpscSupportTickets")) {
                 foreach ($pagesY as $pagg) {
                     $option = '<option value="' . $pagg . '"';
                     if ($pagg == $devOptions['disable_all_emails']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                </p>
+
+                <p><strong>' . __('Override Wordpress Email Sent "Name" &amp; "From"', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email above, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') . '  <br />
+                <select name="override_wordpress_email">
+                 ';
+
+                $pagesY[0] = 'true';
+                $pagesY[1] = 'false';
+                foreach ($pagesY as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg == $devOptions['override_wordpress_email']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -2254,8 +2278,11 @@ if (isset($wpscSupportTickets)) {
     add_action('init', 'wpscLoadInit'); // Load other languages, and javascript
     
     add_action('admin_menu', 'wpscSupportTicketsAdminPanel'); // Create admin panel
-    add_filter( 'wp_mail_from', array(&$wpscSupportTickets, 'change_mail_from') );
-    add_filter( 'wp_mail_from_name', array(&$wpscSupportTickets, 'change_mail_name') );
+    
+    if($devOptions['override_wordpress_email']=='true') {
+        add_filter( 'wp_mail_from', array(&$wpscSupportTickets, 'change_mail_from') );
+        add_filter( 'wp_mail_from_name', array(&$wpscSupportTickets, 'change_mail_name') );
+    }
 }
 /**
  * ===============================================================================================================
