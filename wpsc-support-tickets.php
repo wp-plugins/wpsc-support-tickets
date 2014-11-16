@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.13
+  Version: 4.9.14
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -780,7 +780,9 @@ if (!class_exists("wpscSupportTickets")) {
                 </p>
 
                 
-                <p style="padding:5px;border:1px dotted black;"><strong>' . __('Override Wordpress Email Sent "Name" &amp; "From"', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email below, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') . '  <br />
+                <p style="padding:5px;border:1px dotted black;">
+<img src="' . plugins_url() . '/wpsc-support-tickets/images/bug_report.png" alt="' . __('Warning', 'wpsc-support-tickets') . '" style="float:left;" /> <strong style="font-size:1.2em;">' . __('Warning', 'wpsc-support-tickets') . ' - ' . __('Activating these overrides can cause registration emails to fail in some circumstances.  Please double check that new users receive their registration emails after enabling this override.', 'wpsc-support-tickets') . '</strong><br style="clear:both;"  /><br />
+<strong>' . __('Override Wordpress Email Sent "Name" &amp; "From"', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email below, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') . '  <br />
                 <select name="override_wordpress_email">
                  ';
 
