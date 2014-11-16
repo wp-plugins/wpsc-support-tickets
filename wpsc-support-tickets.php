@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.12
+  Version: 4.9.13
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -367,7 +367,7 @@ if (!class_exists("wpscSupportTickets")) {
          */
         function change_mail_from( $e ) {
             $settings = $this->getAdminOptions();
-            return $settings['email'];
+            return $settings['overrides_email'];
         }
         
         /**
@@ -414,7 +414,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'hide_email_on_support_tickets' => 'false',
                 'enable_beta_testing' => 'false',
                 'disable_all_emails' => 'false',
-                'override_wordpress_email' => 'false'
+                'override_wordpress_email' => 'false',
+                'overrides_email' => get_bloginfo('admin_email')
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -554,6 +555,10 @@ if (!class_exists("wpscSupportTickets")) {
                 if(isset($_POST['override_wordpress_email'])) {
                     $devOptions['override_wordpress_email'] = esc_sql($_POST['override_wordpress_email']);
                 }
+                if(isset($_POST['overrides_email'])) {
+                    $devOptions['overrides_email'] = esc_sql($_POST['overrides_email']);
+                }                
+                
                 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -676,7 +681,7 @@ if (!class_exists("wpscSupportTickets")) {
             <table class="widefat" style="background:transparent;"><tr><td>                
 
                 <strong>' . __('Email', 'wpsc-support-tickets') . ':</strong> ' . __('The admin email where all new ticket &amp; reply notification emails will be sent', 'wpsc-support-tickets') . '<br /><input name="email" value="' . $devOptions['email'] . '" style="width:95%;" /><br /><br />
-                <strong>' . __('Name Sent From', 'wpsc-support-tickets') .'</strong> '. __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') .'<br /><input name="email_name" value="' . $devOptions['email_name'] . '" style="width:95%;" /><br /><br />
+                
                 <strong>' . __('New Ticket Email', 'wpsc-support-tickets') . '</strong> ' . __('The subject &amp; body of the email sent to the customer when creating a new ticket.', 'wpsc-support-tickets') . '<br /><input name="email_new_ticket_subject" value="' . stripslashes(stripslashes($devOptions['email_new_ticket_subject'])) . '" style="width:95%;" />
                 <textarea style="width:95%;" name="email_new_ticket_body">' . stripslashes(stripslashes($devOptions['email_new_ticket_body'])) . '</textarea>
                 <br /><br />
@@ -774,7 +779,8 @@ if (!class_exists("wpscSupportTickets")) {
                 </select>
                 </p>
 
-                <p><strong>' . __('Override Wordpress Email Sent "Name" &amp; "From"', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email above, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') . '  <br />
+                
+                <p style="padding:5px;border:1px dotted black;"><strong>' . __('Override Wordpress Email Sent "Name" &amp; "From"', 'wpsc-support-tickets') . ':</strong> ' . __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email below, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') . '  <br />
                 <select name="override_wordpress_email">
                  ';
 
@@ -793,9 +799,10 @@ if (!class_exists("wpscSupportTickets")) {
 
                 echo '
                 </select>
-                </p>
-
-
+                <br />
+                <strong>' . __('Override Name Sent From', 'wpsc-support-tickets') .'</strong> '. __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') .'<br /><input name="email_name" value="' . $devOptions['email_name'] . '" style="width:95%;" /><br /><br />
+                <strong>' . __('Override Email Sent From', 'wpsc-support-tickets') .'</strong> '. __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') .'<br /><input name="overrides_email" value="' . $devOptions['overrides_email'] . '" style="width:95%;" /><br /><br />
+                    </p>
             </td></tr></table>
             <br /><br /><br />
             </div>
