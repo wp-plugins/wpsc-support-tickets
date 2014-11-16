@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.10
+  Version: 4.9.11
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -582,9 +582,10 @@ if (!class_exists("wpscSupportTickets")) {
                 <li><a href="#wst_tabs-5">' . __('Guests', 'wpsc-support-tickets') . '</a></li>    
                 <li><a href="#wst_tabs-6">' . __('Custom Fields', 'wpsc-support-tickets') . '</a></li>    
                 <li><a href="#wst_tabs-2">' . __('PRO', 'wpsc-support-tickets') . '</a></li>
+                <li><a href="#wst_tabs-7">' . __('Documentation', 'wpsc-support-tickets') . '</a></li>
             </ul>        
             
-
+            
             <div id="wst_tabs-1">
 
             <br />
@@ -956,6 +957,10 @@ if (!class_exists("wpscSupportTickets")) {
 
 
             </div>
+            <div id="wst_tabs-7">
+            <iframe src="http://wpscsupporttickets.com/wordpress-support-ticket-plugin/index.php#doc" style="border:0px #FFFFFF none;" name="myiFrame" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" height="900px" width="900px"></iframe>
+            </div>
+
             <div id="wst_tabs-2">';
 
             wpscSupportTickets_settings(); // Action hook
@@ -1076,12 +1081,17 @@ if (!class_exists("wpscSupportTickets")) {
 
             wpscSupportTickets_extraTabsIndex();
             echo '
+                            <li><a href="#wst_tabs-71">' . __('Documentation', 'wpsc-support-tickets') . '</a></li>
                         </ul>                             
 
                         ';
 
             $resolution = 'Open';
-            $output .= '<div id="wst_tabs-1">';
+            $output .= '               <div id="wst_tabs-71">
+            <iframe src="http://wpscsupporttickets.com/wordpress-support-ticket-plugin/index.php#doc" style="border:0px #FFFFFF none;" name="myiFrame" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" height="900px" width="900px"></iframe>
+            </div>
+            <div id="wst_tabs-1">';
+            
             $table_name = $wpdb->prefix . "wpscst_tickets";
             $sql = "SELECT * FROM `{$table_name}` WHERE `resolution`='{$resolution}' ORDER BY `last_updated` DESC;";
             $results = $wpdb->get_results($sql, ARRAY_A);
@@ -1389,6 +1399,7 @@ if (!class_exists("wpscSupportTickets")) {
         <div id="wst_tabs" style="padding:5px 5px 0px 5px;font-size:1.1em;border-color:#DDD;border-radius:6px;">
             <ul>
                 <li><a href="#wstct_tabs-1">' . __('Create Ticket', 'wpsc-support-tickets') . '</a></li>
+                    
             </ul>        
             <script type="text/javascript">
                 jQuery(function() {
@@ -1396,6 +1407,8 @@ if (!class_exists("wpscSupportTickets")) {
                     setTimeout(function(){ jQuery(".updated").fadeOut(); },3000);
                 });
             </script>
+
+
 
             <div id="wstct_tabs-1">                
             ';
