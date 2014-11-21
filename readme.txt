@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.9.14
+Stable tag: 4.9.15
 
 == Description ==
 
@@ -103,6 +103,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
 * Updated: Added randomized addition to filenames & updated the file upload presentation
+
+= 4.9.15 =
+* Updated: The .POT file for the warning message regarding the potential dangers of the email over ride system added in 4.9.14
 
 = 4.9.14 =
 * Added: Wrote a warning message regarding the potential dangers of the email over ride system
