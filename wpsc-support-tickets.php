@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.16
+  Version: 4.9.17
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -183,7 +183,7 @@ if(!function_exists('wpsctPromptForCustomFields')) {
             __("Sri Lanka", 'wpsc-support-tickets'),__("Sudan", 'wpsc-support-tickets'),__("Suriname", 'wpsc-support-tickets'),__("Svalbard and Jan Mayen", 'wpsc-support-tickets'),__("Swaziland", 'wpsc-support-tickets'),__("Sweden", 'wpsc-support-tickets'),__("Switzerland", 'wpsc-support-tickets'),__("Syrian Arab Republic", 'wpsc-support-tickets'),__("Taiwan, Province of China", 'wpsc-support-tickets'),
             __("Tajikistan", 'wpsc-support-tickets'),__("Tanzania, United Republic of", 'wpsc-support-tickets'),__("Thailand", 'wpsc-support-tickets'),__("Timor-leste", 'wpsc-support-tickets'),__("Togo", 'wpsc-support-tickets'),__("Tokelau", 'wpsc-support-tickets'),__("Tonga", 'wpsc-support-tickets'),__("Trinidad and Tobago", 'wpsc-support-tickets'),__("Tunisia", 'wpsc-support-tickets'),__("Turkey", 'wpsc-support-tickets'),
             __("Turkmenistan", 'wpsc-support-tickets'),__("Turks and Caicos Islands", 'wpsc-support-tickets'),__("Tuvalu", 'wpsc-support-tickets'),__("Uganda", 'wpsc-support-tickets'),__("Ukraine", 'wpsc-support-tickets'),__("United Arab Emirates", 'wpsc-support-tickets'),__("United States Minor Outlying Islands", 'wpsc-support-tickets'),__("Uruguay", 'wpsc-support-tickets'),
-            __("Uzbekistan", 'wpsc-support-tickets'),__("Vanuatu", 'wpsc-support-tickets'),__("Venezuela", 'wpsc-support-tickets'),__("Viet Nam", 'wpsc-support-tickets'),__("Virgin Islands, British", 'wpsc-support-tickets'),__("Virgin Islands, U.S.", 'wpsc-support-tickets'),__("Wallis and Futuna", 'wpsc-support-tickets'),__("Western Sahara", 'wpsc-support-tickets'),__("Yemen", 'wpsc-support-tickets'),
+            __("Uzbekistan", 'wpsc-support-tickets'),__("Vanuatu", 'wpsc-support-tickets'),__("Venezuela", 'wpsc-support-tickets'),__("Vietnam", 'wpsc-support-tickets'),__("Virgin Islands, British", 'wpsc-support-tickets'),__("Virgin Islands, U.S.", 'wpsc-support-tickets'),__("Wallis and Futuna", 'wpsc-support-tickets'),__("Western Sahara", 'wpsc-support-tickets'),__("Yemen", 'wpsc-support-tickets'),
             __("Zambia", 'wpsc-support-tickets'),__("Zimbabwe", 'wpsc-support-tickets'),
         );    
 
