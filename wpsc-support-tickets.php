@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.17
+  Version: 4.9.18
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -2613,50 +2613,50 @@ function wpscstSubmitTicket() {
         }
         // End custom fields 
 
-
-        $to      = $wpscst_email; // Send this to the ticket creator
-        if($devOptions['allow_html']=='true') {
-            $subject = $devOptions['email_new_ticket_subject'] .' "'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ).'"';
-        } else {
-            $subject = $devOptions['email_new_ticket_subject'] .' "'. strip_tags($_POST['wpscst_title']).'"';
-        }
-        $message = $devOptions['email_new_ticket_body'];
-        if($devOptions['use_ticket_in_email']=='true') {
-            $message .= "\r\n";
-            $message .= "\r\n";
+        if($devOptions['disable_all_emails']=='false') { // If we're sending out emails
+            $to      = $wpscst_email; // Send this to the ticket creator
             if($devOptions['allow_html']=='true') {
-                $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_initial_message']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
+                $subject = $devOptions['email_new_ticket_subject'] .' "'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ).'"';
             } else {
-                $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_initial_message']) .'"';
+                $subject = $devOptions['email_new_ticket_subject'] .' "'. strip_tags($_POST['wpscst_title']).'"';
             }
-            $message .= $cleaned_message;
-        }    
-        $headers = '';
+            $message = $devOptions['email_new_ticket_body'];
+            if($devOptions['use_ticket_in_email']=='true') {
+                $message .= "\r\n";
+                $message .= "\r\n";
+                if($devOptions['allow_html']=='true') {
+                    $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_initial_message']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
+                } else {
+                    $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_initial_message']) .'"';
+                }
+                $message .= $cleaned_message;
+            }    
+            $headers = '';
 
-        wpscSupportTickets_mail($to, $subject, $message, $headers);
+            wpscSupportTickets_mail($to, $subject, $message, $headers);
 
 
-        $to      = $devOptions['email']; // Send this to the admin
-        if($devOptions['allow_html']=='true') {
-            $subject = __("A new support ticket was received.", 'wpsc-support-tickets').' "'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
-        } else {
-            $subject = __("A new support ticket was received.", 'wpsc-support-tickets').' "'. strip_tags($_POST['wpscst_title']).'"';
-        }
-        $message = __('There is a new support ticket: ','wpsc-support-tickets').get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$lastID;
-        if($devOptions['use_ticket_in_email']=='true') {
-            $message .= "\r\n";
-            $message .= "\r\n";
+            $to      = $devOptions['email']; // Send this to the admin
             if($devOptions['allow_html']=='true') {
-                $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_initial_message']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES )  .'"';
+                $subject = __("A new support ticket was received.", 'wpsc-support-tickets').' "'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
             } else {
-                $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_initial_message']) .'"';
+                $subject = __("A new support ticket was received.", 'wpsc-support-tickets').' "'. strip_tags($_POST['wpscst_title']).'"';
             }
-            $message .= $cleaned_message;
-        }    
-        $headers = '';
+            $message = __('There is a new support ticket: ','wpsc-support-tickets').get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$lastID;
+            if($devOptions['use_ticket_in_email']=='true') {
+                $message .= "\r\n";
+                $message .= "\r\n";
+                if($devOptions['allow_html']=='true') {
+                    $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_initial_message']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES )  .'"';
+                } else {
+                    $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_initial_message']) .'"';
+                }
+                $message .= $cleaned_message;
+            }    
+            $headers = '';
 
-        wpscSupportTickets_mail($to, $subject, $message, $headers);
-
+            wpscSupportTickets_mail($to, $subject, $message, $headers);
+        }
     }
 
     if(!headers_sent()) {
@@ -2881,53 +2881,55 @@ function wpscstReplyTicket() {
                 }
                 $wpdb->query($updateSQL);
 
-                if (@isset($_POST['wpsctnoemail']) && $_POST['wpsctnoemail'] == 'on' && $results[0]['email'] != $wpscst_email) {
-                    $to      = $results[0]['email']; // Send this to the original ticket creator
-                    if($devOptions['allow_html']=='true') {
-                        $subject = $devOptions['email_new_reply_subject'].' "' . htmlspecialchars_decode( htmlentities( base64_decode($results[0]['title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
-                    } else {
-                        $subject = $devOptions['email_new_reply_subject'].' "' .  base64_decode($results[0]['title']) .'"';
-                    }                
-                    $message = $devOptions['email_new_reply_body'];
-                    if($devOptions['use_reply_in_email']=='true') {
-                        $message .= "\r\n";
-                        $message .= "\r\n";
+                if($devOptions['disable_all_emails']=='false') { // If emails are turned on
+                    if (@isset($_POST['wpsctnoemail']) && $_POST['wpsctnoemail'] == 'on' && $results[0]['email'] != $wpscst_email) {
+                        $to      = $results[0]['email']; // Send this to the original ticket creator
                         if($devOptions['allow_html']=='true') {
-                            $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_reply']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES )  .'"';
+                            $subject = $devOptions['email_new_reply_subject'].' "' . htmlspecialchars_decode( htmlentities( base64_decode($results[0]['title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
                         } else {
-                            $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_reply']) .'"';
-                        }
-                        $message .= $cleaned_message;
-                    }            
-                    $headers = '';
+                            $subject = $devOptions['email_new_reply_subject'].' "' .  base64_decode($results[0]['title']) .'"';
+                        }                
+                        $message = $devOptions['email_new_reply_body'];
+                        if($devOptions['use_reply_in_email']=='true') {
+                            $message .= "\r\n";
+                            $message .= "\r\n";
+                            if($devOptions['allow_html']=='true') {
+                                $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_reply']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES )  .'"';
+                            } else {
+                                $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_reply']) .'"';
+                            }
+                            $message .= $cleaned_message;
+                        }            
+                        $headers = '';
 
-                    wpscSupportTickets_mail($to, $subject, $message, $headers);
-                }
-
-                if( $devOptions['email']!=$results[0]['email'] && $results[0]['email'] != $wpscst_email) { 
-                    $to      = $devOptions['email']; // Send this to the admin
-                    if($devOptions['allow_html']=='true') {
-                        $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets').' "' . htmlspecialchars_decode( htmlentities( base64_decode($results[0]['title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
-                    } else {
-                        $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets').' "' .  base64_decode($results[0]['title']) .'"';
+                        wpscSupportTickets_mail($to, $subject, $message, $headers);
                     }
-                    $message = __('There is a new reply on support ticket: ','wpsc-support-tickets').get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$primkey.'';
-                    if($devOptions['use_reply_in_email']=='true') {
-                        $message .= "\r\n";
-                        $message .= "\r\n";
 
+                    if( $devOptions['email']!=$results[0]['email'] && $results[0]['email'] != $wpscst_email) { 
+                        $to      = $devOptions['email']; // Send this to the admin
                         if($devOptions['allow_html']=='true') {
-                            $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_reply']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES )  .'"';
+                            $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets').' "' . htmlspecialchars_decode( htmlentities( base64_decode($results[0]['title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
                         } else {
-                            $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_reply']) .'"';
+                            $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets').' "' .  base64_decode($results[0]['title']) .'"';
                         }
+                        $message = __('There is a new reply on support ticket: ','wpsc-support-tickets').get_admin_url().'admin.php?page=wpscSupportTickets-edit&primkey='.$primkey.'';
+                        if($devOptions['use_reply_in_email']=='true') {
+                            $message .= "\r\n";
+                            $message .= "\r\n";
+
+                            if($devOptions['allow_html']=='true') {
+                                $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_reply']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES )  .'"';
+                            } else {
+                                $cleaned_message = __("The content of the ticket is: ", 'wpsc-support-tickets'). '"'. strip_tags($_POST['wpscst_reply']) .'"';
+                            }
 
 
-                        $message .= $cleaned_message;
+                            $message .= $cleaned_message;
+                        }
+                        $headers = '';
+
+                        wpscSupportTickets_mail($to, $subject, $message, $headers);
                     }
-                    $headers = '';
-
-                    wpscSupportTickets_mail($to, $subject, $message, $headers);
                 }
         }
     }
