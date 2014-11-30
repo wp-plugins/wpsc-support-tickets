@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.18
+  Version: 4.9.19
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -133,7 +133,7 @@ if(!function_exists('wpsctPromptForCustomFields')) {
         if (session_id() == "") {@session_start();};
 
         // Custom form fields here
-        $table_name33 = $wpdb->prefix . "wpstorecart_meta";
+        $table_name33 = $wpdb->prefix . 'wpstorecart_meta';
         $grabrecord = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-requiredinfo' ORDER BY `foreignkey` ASC;";
 
         $resultscf = $wpdb->get_results( $grabrecord , ARRAY_A );
@@ -143,60 +143,60 @@ if(!function_exists('wpsctPromptForCustomFields')) {
         );
         
         $wpsct_states = array(
-            "not applicable" => 'Other (Non-US)',
-            "AL" => __('Alabama', 'wpsc-support-tickets'),      "AK" => __('Alaska', 'wpsc-support-tickets'),       "AZ" => __('Arizona', 'wpsc-support-tickets'),      "CA" => __('California', 'wpsc-support-tickets'),
-            "CO" => __('Colorado', 'wpsc-support-tickets'),     "CT" => __('Connecticut', 'wpsc-support-tickets'),  "DE" => __('Delaware', 'wpsc-support-tickets'),     "DC" => __('District Of Columbia', 'wpsc-support-tickets'),
-            "FL" => __('Florida', 'wpsc-support-tickets'),      "GA" => __('Georgia', 'wpsc-support-tickets'),      "HI" => __('Hawaii', 'wpsc-support-tickets'),       "ID" => __('Idaho', 'wpsc-support-tickets'), 
-            "IL" => __('Illinois', 'wpsc-support-tickets'),     "IN" => __('Indiana', 'wpsc-support-tickets'),      "IA" => __('Iowa', 'wpsc-support-tickets'),         "KS" => __('Kansas', 'wpsc-support-tickets'),       
-            "KY" => __('Kentucky', 'wpsc-support-tickets'),     "LA" => __('Louisiana', 'wpsc-support-tickets'),    "ME" => __('Maine', 'wpsc-support-tickets'),        "MD" => __('Maryland', 'wpsc-support-tickets'),
-            "MA" => __('Massachusetts', 'wpsc-support-tickets'),"MI" => __('Michigan', 'wpsc-support-tickets'),     "MN" => __('Minnesota', 'wpsc-support-tickets'),    "MS" => __('Mississippi', 'wpsc-support-tickets'),  
-            "MO" => __('Missouri', 'wpsc-support-tickets'),     "MT" => __('Montana', 'wpsc-support-tickets'),      "NE" => __('Nebraska', 'wpsc-support-tickets'),     "NV" => __('Nevada', 'wpsc-support-tickets'),       
-            "NH" => __('New Hampshire', 'wpsc-support-tickets'),"NJ" => __('New Jersey', 'wpsc-support-tickets'),   "NM" => __('New Mexico', 'wpsc-support-tickets'),   "NY" => __('New York', 'wpsc-support-tickets'),
-            "NC" => __('North Carolina', 'wpsc-support-tickets'),"ND" => __('North Dakota', 'wpsc-support-tickets'),"OH" => __('Ohio', 'wpsc-support-tickets'),         "OK" => __('Oklahoma', 'wpsc-support-tickets'),
-            "OR" => __('Oregon', 'wpsc-support-tickets'),       "PA" => __('Pennsylvania', 'wpsc-support-tickets'), "RI" => __('Rhode Island', 'wpsc-support-tickets'), "SC" => __('South Carolina', 'wpsc-support-tickets'),
-            "SD" => __('South Dakota', 'wpsc-support-tickets'), "TN" => __('Tennessee', 'wpsc-support-tickets'),    "TX" => __('Texas', 'wpsc-support-tickets'),        "UT" => __('Utah', 'wpsc-support-tickets'),
-            "VT" => __('Vermont', 'wpsc-support-tickets'),      "VA" => __('Virginia', 'wpsc-support-tickets'),     "WA" => __('Washington', 'wpsc-support-tickets'),   "WV" => __('West Virginia', 'wpsc-support-tickets'),
-            "WI" => __('Wisconsin', 'wpsc-support-tickets'),    "WY" => __('Wyoming', 'wpsc-support-tickets'),
+            'not applicable' => 'Other (Non-US)',
+            'AL' => __('Alabama', 'wpsc-support-tickets'),      'AK' => __('Alaska', 'wpsc-support-tickets'),       'AZ' => __('Arizona', 'wpsc-support-tickets'),      'CA' => __('California', 'wpsc-support-tickets'),
+            'CO' => __('Colorado', 'wpsc-support-tickets'),     'CT' => __('Connecticut', 'wpsc-support-tickets'),  'DE' => __('Delaware', 'wpsc-support-tickets'),     'DC' => __('District Of Columbia', 'wpsc-support-tickets'),
+            'FL' => __('Florida', 'wpsc-support-tickets'),      'GA' => __('Georgia', 'wpsc-support-tickets'),      'HI' => __('Hawaii', 'wpsc-support-tickets'),       'ID' => __('Idaho', 'wpsc-support-tickets'), 
+            'IL' => __('Illinois', 'wpsc-support-tickets'),     'IN' => __('Indiana', 'wpsc-support-tickets'),      'IA' => __('Iowa', 'wpsc-support-tickets'),         'KS' => __('Kansas', 'wpsc-support-tickets'),       
+            'KY' => __('Kentucky', 'wpsc-support-tickets'),     'LA' => __('Louisiana', 'wpsc-support-tickets'),    'ME' => __('Maine', 'wpsc-support-tickets'),        'MD' => __('Maryland', 'wpsc-support-tickets'),
+            'MA' => __('Massachusetts', 'wpsc-support-tickets'),'MI' => __('Michigan', 'wpsc-support-tickets'),     'MN' => __('Minnesota', 'wpsc-support-tickets'),    'MS' => __('Mississippi', 'wpsc-support-tickets'),  
+            'MO' => __('Missouri', 'wpsc-support-tickets'),     'MT' => __('Montana', 'wpsc-support-tickets'),      'NE' => __('Nebraska', 'wpsc-support-tickets'),     'NV' => __('Nevada', 'wpsc-support-tickets'),       
+            'NH' => __('New Hampshire', 'wpsc-support-tickets'),'NJ' => __('New Jersey', 'wpsc-support-tickets'),   'NM' => __('New Mexico', 'wpsc-support-tickets'),   'NY' => __('New York', 'wpsc-support-tickets'),
+            'NC' => __('North Carolina', 'wpsc-support-tickets'),'ND' => __('North Dakota', 'wpsc-support-tickets'),'OH' => __('Ohio', 'wpsc-support-tickets'),         'OK' => __('Oklahoma', 'wpsc-support-tickets'),
+            'OR' => __('Oregon', 'wpsc-support-tickets'),       'PA' => __('Pennsylvania', 'wpsc-support-tickets'), 'RI' => __('Rhode Island', 'wpsc-support-tickets'), 'SC' => __('South Carolina', 'wpsc-support-tickets'),
+            'SD' => __('South Dakota', 'wpsc-support-tickets'), 'TN' => __('Tennessee', 'wpsc-support-tickets'),    'TX' => __('Texas', 'wpsc-support-tickets'),        'UT' => __('Utah', 'wpsc-support-tickets'),
+            'VT' => __('Vermont', 'wpsc-support-tickets'),      'VA' => __('Virginia', 'wpsc-support-tickets'),     'WA' => __('Washington', 'wpsc-support-tickets'),   'WV' => __('West Virginia', 'wpsc-support-tickets'),
+            'WI' => __('Wisconsin', 'wpsc-support-tickets'),    'WY' => __('Wyoming', 'wpsc-support-tickets'),
         );    
         
         $wpsct_countries = array(
-            __("United States", 'wpsc-support-tickets'), __("Canada", 'wpsc-support-tickets'),__("United Kingdom", 'wpsc-support-tickets'),__("Ireland", 'wpsc-support-tickets'),__("Australia", 'wpsc-support-tickets'),__("New Zealand", 'wpsc-support-tickets'),__("Afghanistan", 'wpsc-support-tickets'),__("Albania", 'wpsc-support-tickets'),__("Algeria", 'wpsc-support-tickets'),__("American Samoa", 'wpsc-support-tickets'),
-            __("Andorra", 'wpsc-support-tickets'),__("Angola", 'wpsc-support-tickets'),__("Anguilla", 'wpsc-support-tickets'),__("Antarctica", 'wpsc-support-tickets'),__("Antigua and Barbuda", 'wpsc-support-tickets'),__("Argentina", 'wpsc-support-tickets'),__("Armenia", 'wpsc-support-tickets'),__("Aruba", 'wpsc-support-tickets'),__("Austria", 'wpsc-support-tickets'),__("Azerbaijan", 'wpsc-support-tickets'),
-            __("Bahamas", 'wpsc-support-tickets'),__("Bahrain", 'wpsc-support-tickets'),__("Bangladesh", 'wpsc-support-tickets'),__("Barbados", 'wpsc-support-tickets'),__("Belarus", 'wpsc-support-tickets'),__("Belgium", 'wpsc-support-tickets'),__("Belize", 'wpsc-support-tickets'),__("Benin", 'wpsc-support-tickets'),__("Bermuda", 'wpsc-support-tickets'),__("Bhutan", 'wpsc-support-tickets'),__("Bolivia", 'wpsc-support-tickets'),__("Bosnia and Herzegovina", 'wpsc-support-tickets'),
-            __("Botswana", 'wpsc-support-tickets'),__("Bouvet Island", 'wpsc-support-tickets'),__("Brazil", 'wpsc-support-tickets'),__("British Indian Ocean Territory", 'wpsc-support-tickets'),__("Brunei Darussalam", 'wpsc-support-tickets'),__("Bulgaria", 'wpsc-support-tickets'),__("Burkina Faso", 'wpsc-support-tickets'),__("Burundi", 'wpsc-support-tickets'),__("Cambodia", 'wpsc-support-tickets'),
-            __("Cameroon", 'wpsc-support-tickets'),__("Cape Verde", 'wpsc-support-tickets'),__("Cayman Islands", 'wpsc-support-tickets'),__("Central African Republic", 'wpsc-support-tickets'),__("Chad", 'wpsc-support-tickets'),__("Chile", 'wpsc-support-tickets'),__("China", 'wpsc-support-tickets'),__("Christmas Island", 'wpsc-support-tickets'),__("Cocos (Keeling) Islands", 'wpsc-support-tickets'),
-            __("Colombia", 'wpsc-support-tickets'),__("Comoros", 'wpsc-support-tickets'),__("Congo", 'wpsc-support-tickets'),__("Congo, The Democratic Republic of The", 'wpsc-support-tickets'), __("Cook Islands", 'wpsc-support-tickets'),__("Costa Rica", 'wpsc-support-tickets'),__("Cote D\'ivoire", 'wpsc-support-tickets'),__("Croatia", 'wpsc-support-tickets'),__("Cuba", 'wpsc-support-tickets'),__("Cyprus", 'wpsc-support-tickets'),
-            __("Czech Republic", 'wpsc-support-tickets'),__("Denmark", 'wpsc-support-tickets'),__("Djibouti", 'wpsc-support-tickets'),__("Dominica", 'wpsc-support-tickets'),__("Dominican Republic", 'wpsc-support-tickets'),__("East Timor", 'wpsc-support-tickets'),__("Ecuador", 'wpsc-support-tickets'),__("Egypt", 'wpsc-support-tickets'),__("El Salvador", 'wpsc-support-tickets'),__("Equatorial Guinea", 'wpsc-support-tickets'),__("Eritrea", 'wpsc-support-tickets'),__("Estonia", 'wpsc-support-tickets'),
-            __("Ethiopia", 'wpsc-support-tickets'),__("Falkland Islands (Malvinas)", 'wpsc-support-tickets'),__("Faroe Islands", 'wpsc-support-tickets'),__("Fiji", 'wpsc-support-tickets'),__("Finland", 'wpsc-support-tickets'),__("France", 'wpsc-support-tickets'),__("French Guiana", 'wpsc-support-tickets'),__("French Polynesia", 'wpsc-support-tickets'),__("French Southern Territories", 'wpsc-support-tickets'),
-            __("Gabon", 'wpsc-support-tickets'),__("Gambia", 'wpsc-support-tickets'),__("Georgia", 'wpsc-support-tickets'),__("Germany", 'wpsc-support-tickets'),__("Ghana", 'wpsc-support-tickets'),__("Gibraltar", 'wpsc-support-tickets'),__("Greece", 'wpsc-support-tickets'),__("Greenland", 'wpsc-support-tickets'),__("Grenada", 'wpsc-support-tickets'),__("Guadeloupe", 'wpsc-support-tickets'),__("Guam", 'wpsc-support-tickets'),__("Guatemala", 'wpsc-support-tickets'),__("Guinea", 'wpsc-support-tickets'),__("Guinea-bissau", 'wpsc-support-tickets'),
-            __("Guyana", 'wpsc-support-tickets'),__("Haiti", 'wpsc-support-tickets'),__("Heard Island and Mcdonald Islands", 'wpsc-support-tickets'),__("Holy See (Vatican City State)", 'wpsc-support-tickets'),__("Honduras", 'wpsc-support-tickets'),__("Hong Kong", 'wpsc-support-tickets'),__("Hungary", 'wpsc-support-tickets'),__("Iceland", 'wpsc-support-tickets'),__("India", 'wpsc-support-tickets'),__("Indonesia", 'wpsc-support-tickets'),
-            __("Iran, Islamic Republic of", 'wpsc-support-tickets'),__("Iraq", 'wpsc-support-tickets'),__("Israel", 'wpsc-support-tickets'),__("Italy", 'wpsc-support-tickets'),__("Jamaica", 'wpsc-support-tickets'),__("Japan", 'wpsc-support-tickets'),__("Jordan", 'wpsc-support-tickets'),__("Kazakhstan", 'wpsc-support-tickets'),__("Kenya", 'wpsc-support-tickets'),__("Kiribati", 'wpsc-support-tickets'),__("Korea, Democratic People\'s Republic of", 'wpsc-support-tickets'),
-            __("Korea, Republic of", 'wpsc-support-tickets'),__("Kosovo", 'wpsc-support-tickets'),__("Kuwait", 'wpsc-support-tickets'),__("Kyrgyzstan", 'wpsc-support-tickets'),__("Lao People\'s Democratic Republic", 'wpsc-support-tickets'),__("Latvia", 'wpsc-support-tickets'),__("Lebanon", 'wpsc-support-tickets'),__("Lesotho", 'wpsc-support-tickets'),__("Liberia", 'wpsc-support-tickets'),__("Libyan Arab Jamahiriya", 'wpsc-support-tickets'),
-            __("Liechtenstein", 'wpsc-support-tickets'),__("Lithuania", 'wpsc-support-tickets'),__("Luxembourg", 'wpsc-support-tickets'),__("Macao", 'wpsc-support-tickets'),__("Macedonia, The Republic of", 'wpsc-support-tickets'),__("Madagascar", 'wpsc-support-tickets'),__("Malawi", 'wpsc-support-tickets'),__("Malaysia", 'wpsc-support-tickets'),__("Maldives", 'wpsc-support-tickets'),__("Mali", 'wpsc-support-tickets'),
-            __("Malta", 'wpsc-support-tickets'),__("Marshall Islands", 'wpsc-support-tickets'),__("Martinique", 'wpsc-support-tickets'),__("Mauritania", 'wpsc-support-tickets'),__("Mauritius", 'wpsc-support-tickets'),__("Mayotte", 'wpsc-support-tickets'),__("Mexico", 'wpsc-support-tickets'),__("Micronesia, Federated States of", 'wpsc-support-tickets'),__("Moldova, Republic of", 'wpsc-support-tickets'),
-            __("Monaco", 'wpsc-support-tickets'),__("Mongolia", 'wpsc-support-tickets'),__("Montenegro", 'wpsc-support-tickets'),__("Montserrat", 'wpsc-support-tickets'),__("Morocco", 'wpsc-support-tickets'),__("Mozambique", 'wpsc-support-tickets'),__("Myanmar", 'wpsc-support-tickets'),__("Namibia", 'wpsc-support-tickets'),__("Nauru", 'wpsc-support-tickets'),__("Nepal", 'wpsc-support-tickets'),__("Netherlands", 'wpsc-support-tickets'),__("Netherlands Antilles", 'wpsc-support-tickets'),__("New Caledonia", 'wpsc-support-tickets'),
-            __("Nicaragua", 'wpsc-support-tickets'),__("Niger", 'wpsc-support-tickets'),__("Nigeria", 'wpsc-support-tickets'),__("Niue", 'wpsc-support-tickets'),__("Norfolk Island", 'wpsc-support-tickets'),__("Northern Mariana Islands", 'wpsc-support-tickets'),__("Norway", 'wpsc-support-tickets'),__("Oman", 'wpsc-support-tickets'),__("Pakistan", 'wpsc-support-tickets'),__("Palau", 'wpsc-support-tickets'),
-            __("Palestinian Territory, Occupied", 'wpsc-support-tickets'),__("Panama", 'wpsc-support-tickets'),__("Papua New Guinea", 'wpsc-support-tickets'),__("Paraguay", 'wpsc-support-tickets'),__("Peru", 'wpsc-support-tickets'),__("Philippines", 'wpsc-support-tickets'),__("Pitcairn", 'wpsc-support-tickets'),__("Poland", 'wpsc-support-tickets'),__("Portugal", 'wpsc-support-tickets'),__("Puerto Rico", 'wpsc-support-tickets'),
-            __("Qatar", 'wpsc-support-tickets'),__("Reunion", 'wpsc-support-tickets'),__("Romania", 'wpsc-support-tickets'),__("Russian Federation", 'wpsc-support-tickets'),__("Rwanda", 'wpsc-support-tickets'),__("Saint Helena", 'wpsc-support-tickets'),__("Saint Kitts and Nevis", 'wpsc-support-tickets'),__("Saint Lucia", 'wpsc-support-tickets'),__("Saint Pierre and Miquelon", 'wpsc-support-tickets'),
-            __("Saint Vincent and The Grenadines", 'wpsc-support-tickets'),__("Samoa", 'wpsc-support-tickets'),__("San Marino", 'wpsc-support-tickets'),__("Sao Tome and Principe", 'wpsc-support-tickets'),__("Saudi Arabia", 'wpsc-support-tickets'),__("Senegal", 'wpsc-support-tickets'),__("Serbia", 'wpsc-support-tickets'),__("Seychelles", 'wpsc-support-tickets'),
-            __("Sierra Leone", 'wpsc-support-tickets'),__("Singapore", 'wpsc-support-tickets'),__("Slovakia", 'wpsc-support-tickets'),__("Slovenia", 'wpsc-support-tickets'),__("Solomon Islands", 'wpsc-support-tickets'),__("Somalia", 'wpsc-support-tickets'),__("South Africa", 'wpsc-support-tickets'),__("South Georgia and The South Sandwich Islands", 'wpsc-support-tickets'),__("South Sudan", 'wpsc-support-tickets'),__("Spain", 'wpsc-support-tickets'),
-            __("Sri Lanka", 'wpsc-support-tickets'),__("Sudan", 'wpsc-support-tickets'),__("Suriname", 'wpsc-support-tickets'),__("Svalbard and Jan Mayen", 'wpsc-support-tickets'),__("Swaziland", 'wpsc-support-tickets'),__("Sweden", 'wpsc-support-tickets'),__("Switzerland", 'wpsc-support-tickets'),__("Syrian Arab Republic", 'wpsc-support-tickets'),__("Taiwan, Province of China", 'wpsc-support-tickets'),
-            __("Tajikistan", 'wpsc-support-tickets'),__("Tanzania, United Republic of", 'wpsc-support-tickets'),__("Thailand", 'wpsc-support-tickets'),__("Timor-leste", 'wpsc-support-tickets'),__("Togo", 'wpsc-support-tickets'),__("Tokelau", 'wpsc-support-tickets'),__("Tonga", 'wpsc-support-tickets'),__("Trinidad and Tobago", 'wpsc-support-tickets'),__("Tunisia", 'wpsc-support-tickets'),__("Turkey", 'wpsc-support-tickets'),
-            __("Turkmenistan", 'wpsc-support-tickets'),__("Turks and Caicos Islands", 'wpsc-support-tickets'),__("Tuvalu", 'wpsc-support-tickets'),__("Uganda", 'wpsc-support-tickets'),__("Ukraine", 'wpsc-support-tickets'),__("United Arab Emirates", 'wpsc-support-tickets'),__("United States Minor Outlying Islands", 'wpsc-support-tickets'),__("Uruguay", 'wpsc-support-tickets'),
-            __("Uzbekistan", 'wpsc-support-tickets'),__("Vanuatu", 'wpsc-support-tickets'),__("Venezuela", 'wpsc-support-tickets'),__("Vietnam", 'wpsc-support-tickets'),__("Virgin Islands, British", 'wpsc-support-tickets'),__("Virgin Islands, U.S.", 'wpsc-support-tickets'),__("Wallis and Futuna", 'wpsc-support-tickets'),__("Western Sahara", 'wpsc-support-tickets'),__("Yemen", 'wpsc-support-tickets'),
-            __("Zambia", 'wpsc-support-tickets'),__("Zimbabwe", 'wpsc-support-tickets'),
+            __('United States', 'wpsc-support-tickets'), __('Canada', 'wpsc-support-tickets'),__('United Kingdom', 'wpsc-support-tickets'),__('Ireland', 'wpsc-support-tickets'),__('Australia', 'wpsc-support-tickets'),__('New Zealand', 'wpsc-support-tickets'),__('Afghanistan', 'wpsc-support-tickets'),__('Albania', 'wpsc-support-tickets'),__('Algeria', 'wpsc-support-tickets'),__('American Samoa', 'wpsc-support-tickets'),
+            __('Andorra', 'wpsc-support-tickets'),__('Angola', 'wpsc-support-tickets'),__('Anguilla', 'wpsc-support-tickets'),__('Antarctica', 'wpsc-support-tickets'),__('Antigua and Barbuda', 'wpsc-support-tickets'),__('Argentina', 'wpsc-support-tickets'),__('Armenia', 'wpsc-support-tickets'),__('Aruba', 'wpsc-support-tickets'),__('Austria', 'wpsc-support-tickets'),__('Azerbaijan', 'wpsc-support-tickets'),
+            __('Bahamas', 'wpsc-support-tickets'),__('Bahrain', 'wpsc-support-tickets'),__('Bangladesh', 'wpsc-support-tickets'),__('Barbados', 'wpsc-support-tickets'),__('Belarus', 'wpsc-support-tickets'),__('Belgium', 'wpsc-support-tickets'),__('Belize', 'wpsc-support-tickets'),__('Benin', 'wpsc-support-tickets'),__('Bermuda', 'wpsc-support-tickets'),__('Bhutan', 'wpsc-support-tickets'),__('Bolivia', 'wpsc-support-tickets'),__('Bosnia and Herzegovina', 'wpsc-support-tickets'),
+            __('Botswana', 'wpsc-support-tickets'),__('Bouvet Island', 'wpsc-support-tickets'),__('Brazil', 'wpsc-support-tickets'),__('British Indian Ocean Territory', 'wpsc-support-tickets'),__('Brunei Darussalam', 'wpsc-support-tickets'),__('Bulgaria', 'wpsc-support-tickets'),__('Burkina Faso', 'wpsc-support-tickets'),__('Burundi', 'wpsc-support-tickets'),__('Cambodia', 'wpsc-support-tickets'),
+            __('Cameroon', 'wpsc-support-tickets'),__('Cape Verde', 'wpsc-support-tickets'),__('Cayman Islands', 'wpsc-support-tickets'),__('Central African Republic', 'wpsc-support-tickets'),__('Chad', 'wpsc-support-tickets'),__('Chile', 'wpsc-support-tickets'),__('China', 'wpsc-support-tickets'),__('Christmas Island', 'wpsc-support-tickets'),__('Cocos (Keeling) Islands', 'wpsc-support-tickets'),
+            __('Colombia', 'wpsc-support-tickets'),__('Comoros', 'wpsc-support-tickets'),__('Congo', 'wpsc-support-tickets'),__('Congo, The Democratic Republic of The', 'wpsc-support-tickets'), __('Cook Islands', 'wpsc-support-tickets'),__('Costa Rica', 'wpsc-support-tickets'),__('Cote D\'ivoire', 'wpsc-support-tickets'),__('Croatia', 'wpsc-support-tickets'),__('Cuba', 'wpsc-support-tickets'),__('Cyprus', 'wpsc-support-tickets'),
+            __('Czech Republic', 'wpsc-support-tickets'),__('Denmark', 'wpsc-support-tickets'),__('Djibouti', 'wpsc-support-tickets'),__('Dominica', 'wpsc-support-tickets'),__('Dominican Republic', 'wpsc-support-tickets'),__('East Timor', 'wpsc-support-tickets'),__('Ecuador', 'wpsc-support-tickets'),__('Egypt', 'wpsc-support-tickets'),__('El Salvador', 'wpsc-support-tickets'),__('Equatorial Guinea', 'wpsc-support-tickets'),__('Eritrea', 'wpsc-support-tickets'),__('Estonia', 'wpsc-support-tickets'),
+            __('Ethiopia', 'wpsc-support-tickets'),__('Falkland Islands (Malvinas)', 'wpsc-support-tickets'),__('Faroe Islands', 'wpsc-support-tickets'),__('Fiji', 'wpsc-support-tickets'),__('Finland', 'wpsc-support-tickets'),__('France', 'wpsc-support-tickets'),__('French Guiana', 'wpsc-support-tickets'),__('French Polynesia', 'wpsc-support-tickets'),__('French Southern Territories', 'wpsc-support-tickets'),
+            __('Gabon', 'wpsc-support-tickets'),__('Gambia', 'wpsc-support-tickets'),__('Georgia', 'wpsc-support-tickets'),__('Germany', 'wpsc-support-tickets'),__('Ghana', 'wpsc-support-tickets'),__('Gibraltar', 'wpsc-support-tickets'),__('Greece', 'wpsc-support-tickets'),__('Greenland', 'wpsc-support-tickets'),__('Grenada', 'wpsc-support-tickets'),__('Guadeloupe', 'wpsc-support-tickets'),__('Guam', 'wpsc-support-tickets'),__('Guatemala', 'wpsc-support-tickets'),__('Guinea', 'wpsc-support-tickets'),__('Guinea-bissau', 'wpsc-support-tickets'),
+            __('Guyana', 'wpsc-support-tickets'),__('Haiti', 'wpsc-support-tickets'),__('Heard Island and Mcdonald Islands', 'wpsc-support-tickets'),__('Holy See (Vatican City State)', 'wpsc-support-tickets'),__('Honduras', 'wpsc-support-tickets'),__('Hong Kong', 'wpsc-support-tickets'),__('Hungary', 'wpsc-support-tickets'),__('Iceland', 'wpsc-support-tickets'),__('India', 'wpsc-support-tickets'),__('Indonesia', 'wpsc-support-tickets'),
+            __('Iran, Islamic Republic of', 'wpsc-support-tickets'),__('Iraq', 'wpsc-support-tickets'),__('Israel', 'wpsc-support-tickets'),__('Italy', 'wpsc-support-tickets'),__('Jamaica', 'wpsc-support-tickets'),__('Japan', 'wpsc-support-tickets'),__('Jordan', 'wpsc-support-tickets'),__('Kazakhstan', 'wpsc-support-tickets'),__('Kenya', 'wpsc-support-tickets'),__('Kiribati', 'wpsc-support-tickets'),__('Korea, Democratic People\'s Republic of', 'wpsc-support-tickets'),
+            __('Korea, Republic of', 'wpsc-support-tickets'),__('Kosovo', 'wpsc-support-tickets'),__('Kuwait', 'wpsc-support-tickets'),__('Kyrgyzstan', 'wpsc-support-tickets'),__('Lao People\'s Democratic Republic', 'wpsc-support-tickets'),__('Latvia', 'wpsc-support-tickets'),__('Lebanon', 'wpsc-support-tickets'),__('Lesotho', 'wpsc-support-tickets'),__('Liberia', 'wpsc-support-tickets'),__('Libyan Arab Jamahiriya', 'wpsc-support-tickets'),
+            __('Liechtenstein', 'wpsc-support-tickets'),__('Lithuania', 'wpsc-support-tickets'),__('Luxembourg', 'wpsc-support-tickets'),__('Macao', 'wpsc-support-tickets'),__('Macedonia, The Republic of', 'wpsc-support-tickets'),__('Madagascar', 'wpsc-support-tickets'),__('Malawi', 'wpsc-support-tickets'),__('Malaysia', 'wpsc-support-tickets'),__('Maldives', 'wpsc-support-tickets'),__('Mali', 'wpsc-support-tickets'),
+            __('Malta', 'wpsc-support-tickets'),__('Marshall Islands', 'wpsc-support-tickets'),__('Martinique', 'wpsc-support-tickets'),__('Mauritania', 'wpsc-support-tickets'),__('Mauritius', 'wpsc-support-tickets'),__('Mayotte', 'wpsc-support-tickets'),__('Mexico', 'wpsc-support-tickets'),__('Micronesia, Federated States of', 'wpsc-support-tickets'),__('Moldova, Republic of', 'wpsc-support-tickets'),
+            __('Monaco', 'wpsc-support-tickets'),__('Mongolia', 'wpsc-support-tickets'),__('Montenegro', 'wpsc-support-tickets'),__('Montserrat', 'wpsc-support-tickets'),__('Morocco', 'wpsc-support-tickets'),__('Mozambique', 'wpsc-support-tickets'),__('Myanmar', 'wpsc-support-tickets'),__('Namibia', 'wpsc-support-tickets'),__('Nauru', 'wpsc-support-tickets'),__('Nepal', 'wpsc-support-tickets'),__('Netherlands', 'wpsc-support-tickets'),__('Netherlands Antilles', 'wpsc-support-tickets'),__('New Caledonia', 'wpsc-support-tickets'),
+            __('Nicaragua', 'wpsc-support-tickets'),__('Niger', 'wpsc-support-tickets'),__('Nigeria', 'wpsc-support-tickets'),__('Niue', 'wpsc-support-tickets'),__('Norfolk Island', 'wpsc-support-tickets'),__('Northern Mariana Islands', 'wpsc-support-tickets'),__('Norway', 'wpsc-support-tickets'),__('Oman', 'wpsc-support-tickets'),__('Pakistan', 'wpsc-support-tickets'),__('Palau', 'wpsc-support-tickets'),
+            __('Palestinian Territory, Occupied', 'wpsc-support-tickets'),__('Panama', 'wpsc-support-tickets'),__('Papua New Guinea', 'wpsc-support-tickets'),__('Paraguay', 'wpsc-support-tickets'),__('Peru', 'wpsc-support-tickets'),__('Philippines', 'wpsc-support-tickets'),__('Pitcairn', 'wpsc-support-tickets'),__('Poland', 'wpsc-support-tickets'),__('Portugal', 'wpsc-support-tickets'),__('Puerto Rico', 'wpsc-support-tickets'),
+            __('Qatar', 'wpsc-support-tickets'),__('Reunion', 'wpsc-support-tickets'),__('Romania', 'wpsc-support-tickets'),__('Russian Federation', 'wpsc-support-tickets'),__('Rwanda', 'wpsc-support-tickets'),__('Saint Helena', 'wpsc-support-tickets'),__('Saint Kitts and Nevis', 'wpsc-support-tickets'),__('Saint Lucia', 'wpsc-support-tickets'),__('Saint Pierre and Miquelon', 'wpsc-support-tickets'),
+            __('Saint Vincent and The Grenadines', 'wpsc-support-tickets'),__('Samoa', 'wpsc-support-tickets'),__('San Marino', 'wpsc-support-tickets'),__('Sao Tome and Principe', 'wpsc-support-tickets'),__('Saudi Arabia', 'wpsc-support-tickets'),__('Senegal', 'wpsc-support-tickets'),__('Serbia', 'wpsc-support-tickets'),__('Seychelles', 'wpsc-support-tickets'),
+            __('Sierra Leone', 'wpsc-support-tickets'),__('Singapore', 'wpsc-support-tickets'),__('Slovakia', 'wpsc-support-tickets'),__('Slovenia', 'wpsc-support-tickets'),__('Solomon Islands', 'wpsc-support-tickets'),__('Somalia', 'wpsc-support-tickets'),__('South Africa', 'wpsc-support-tickets'),__('South Georgia and The South Sandwich Islands', 'wpsc-support-tickets'),__('South Sudan', 'wpsc-support-tickets'),__('Spain', 'wpsc-support-tickets'),
+            __('Sri Lanka', 'wpsc-support-tickets'),__('Sudan', 'wpsc-support-tickets'),__('Suriname', 'wpsc-support-tickets'),__('Svalbard and Jan Mayen', 'wpsc-support-tickets'),__('Swaziland', 'wpsc-support-tickets'),__('Sweden', 'wpsc-support-tickets'),__('Switzerland', 'wpsc-support-tickets'),__('Syrian Arab Republic', 'wpsc-support-tickets'),__('Taiwan, Province of China', 'wpsc-support-tickets'),
+            __('Tajikistan', 'wpsc-support-tickets'),__('Tanzania, United Republic of', 'wpsc-support-tickets'),__('Thailand', 'wpsc-support-tickets'),__('Timor-leste', 'wpsc-support-tickets'),__('Togo', 'wpsc-support-tickets'),__('Tokelau', 'wpsc-support-tickets'),__('Tonga', 'wpsc-support-tickets'),__('Trinidad and Tobago', 'wpsc-support-tickets'),__('Tunisia', 'wpsc-support-tickets'),__('Turkey', 'wpsc-support-tickets'),
+            __('Turkmenistan', 'wpsc-support-tickets'),__('Turks and Caicos Islands', 'wpsc-support-tickets'),__('Tuvalu', 'wpsc-support-tickets'),__('Uganda', 'wpsc-support-tickets'),__('Ukraine', 'wpsc-support-tickets'),__('United Arab Emirates', 'wpsc-support-tickets'),__('United States Minor Outlying Islands', 'wpsc-support-tickets'),__('Uruguay', 'wpsc-support-tickets'),
+            __('Uzbekistan', 'wpsc-support-tickets'),__('Vanuatu', 'wpsc-support-tickets'),__('Venezuela', 'wpsc-support-tickets'),__('Vietnam', 'wpsc-support-tickets'),__('Virgin Islands, British', 'wpsc-support-tickets'),__('Virgin Islands, U.S.', 'wpsc-support-tickets'),__('Wallis and Futuna', 'wpsc-support-tickets'),__('Western Sahara', 'wpsc-support-tickets'),__('Yemen', 'wpsc-support-tickets'),
+            __('Zambia', 'wpsc-support-tickets'),__('Zimbabwe', 'wpsc-support-tickets'),
         );    
 
         $wpsct_style_width = '';
         $wpsct_style_inline = '';
-        if ($devOptions['disable_inline_styles'] == 'false') {
+        if ($devOptions['disable_inline_styles'] === 'false') {
             $wpsct_style_width ='style="width:100%"';
             $wpsct_style_inline = 'style="display:inline;"';
         }  
 
         if(isset($resultscf)) {
                 foreach ($resultscf as $field) {
-                    $specific_items = explode("||", $field['value']);
+                    $specific_items = explode('||', $field['value']);
                     $wpsct_required_item = '';
                     if ($specific_items[1]=='required'){ 
                         $wpsct_required_item = '<ins><div class="wpst-required-symbol" ' . $wpsct_style_inline . '>* </div></ins>';
@@ -210,13 +210,13 @@ if(!function_exists('wpsctPromptForCustomFields')) {
                                 . $wpsct_style_width . '  /></td></tr>';
                         }
                     }
-                    if ($specific_items[2] == 'textarea') {
+                    if ($specific_items[2] === 'textarea') {
                         $output .= '<tr><td><h3>' . $specific_items[0] . $wpsct_required_item
                             . '</h3><textarea  id="wpsct_custom_' . $field['primkey'] . '" name="wpsct_custom_' 
                             . $field['primkey'] . '" ' . $wpsct_style_width . '>' 
                             . $_SESSION['wpsct_custom_' . $field['primkey']] . '</textarea></td></tr>';
                     }
-                    if($specific_items[2]=='states' || $specific_items[2]=='taxstates') {
+                    if($specific_items[2]==='states' || $specific_items[2]==='taxstates') {
                         $selected[$prev_val] = ' selected="selected"';
                         $output .= '<tr><td><h3>'. $specific_items[0] . $wpsct_required_item 
                             . '</h3><select name="wpsct_custom_'.$field['primkey'].'" class="wpsct-states" ' . $wpsct_style_width . ">\n"
@@ -226,7 +226,7 @@ if(!function_exists('wpsctPromptForCustomFields')) {
                         }
                         $output.= '</select></td></tr>';
                     }
-                    if($specific_items[2]=='countries' || $specific_items[2]=='taxcountries') {
+                    if($specific_items[2]==='countries' || $specific_items[2]==='taxcountries') {
                         $output .= '<tr><td><h3>'. $specific_items[0] . $wpsct_required_item
                             . '</h3><select  name="wpsct_custom_'.$field['primkey'].'" class="wpsct-countries" '. $wpsct_style_width . ">\n";
                         $selected[$prev_val] = ' selected="selected"';
@@ -235,23 +235,23 @@ if(!function_exists('wpsctPromptForCustomFields')) {
                         }
                         $output.= '</select></td></tr>';                    
                     }
-                    if($specific_items[2]=='email') {
+                    if($specific_items[2]==='email') {
                         $output .= '<tr><td><h3>'. $specific_items[0] . $wpsct_required_item
                             . '</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'
                             . $_SESSION['wpsct_custom_'.$field['primkey']].'" name="wpsct_custom_'.$field['primkey'].'" ' . $wpsct_style_width
                             . ' /></td></tr>';
                     }
-                    if($specific_items[2]=='separator') {
+                    if($specific_items[2]==='separator') {
                         $output .= '<tr><td><center>'.$specific_items[0].'</center></td></tr>';
                     }
-                    if($specific_items[2]=='header') {
+                    if($specific_items[2]==='header') {
                         $output .= '<tr><td><h2>'.$specific_items[0] .'</h2></td></tr>';
                     }
-                    if($specific_items[2]=='text') {
+                    if($specific_items[2]==='text') {
                         $output .= '<tr><td>'.$specific_items[0] .'</td></tr>';
                     }
                     /** Added in 4.4.4 **/
-                    if($specific_items[2]=='dropdown') {
+                    if($specific_items[2]==='dropdown') {
                         $grabrecordz = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-custom-fields-mc' AND `foreignkey`='{$field['primkey']}';";
                         $resultszz = $wpdb->get_results( $grabrecordz , ARRAY_A );                         
                         if(@isset($resultszz[0]['primkey'])) {
@@ -265,7 +265,7 @@ if(!function_exists('wpsctPromptForCustomFields')) {
                             $output .= '</td></tr>';
                         }
                     }
-                    if($specific_items[2]=='checkbox') {
+                    if($specific_items[2]==='checkbox') {
                         $grabrecordz = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-custom-fields-mc' AND `foreignkey`='{$field['primkey']}';";
                         $resultszz = $wpdb->get_results( $grabrecordz , ARRAY_A );                         
                         if(@isset($resultszz[0]['primkey'])) {
@@ -277,7 +277,7 @@ if(!function_exists('wpsctPromptForCustomFields')) {
                             $output .= '</td></tr>';
                         }                        
                     }
-                    if($specific_items[2]=='radio') {
+                    if($specific_items[2]==='radio') {
                         $grabrecordz = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-custom-fields-mc' AND `foreignkey`='{$field['primkey']}';";
                         $resultszz = $wpdb->get_results( $grabrecordz , ARRAY_A );                         
                         if(@isset($resultszz[0]['primkey'])) {
@@ -563,7 +563,7 @@ if (!class_exists("wpscSupportTickets")) {
                 update_option($this->adminOptionsName, $devOptions);
 
                 echo '<div class="updated"><p><strong>';
-                _e("Settings Updated.", "wpsc-support-tickets");
+                _e('Settings Updated.', 'wpsc-support-tickets');
                 echo '</strong></p></div>';
             }
 
@@ -636,7 +636,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesYXX[1] = 'false';
                 foreach ($pagesYXX as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['display_severity_on_create']) {
+                    if ($pagg === $devOptions['display_severity_on_create']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -659,7 +659,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesYXX[1] = 'false';
                 foreach ($pagesYXX as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['enable_beta_testing']) {
+                    if ($pagg === $devOptions['enable_beta_testing']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -694,7 +694,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesY[1] = 'false';
                 foreach ($pagesY as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['use_ticket_in_email']) {
+                    if ($pagg === $devOptions['use_ticket_in_email']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -719,7 +719,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesY[1] = 'false';
                 foreach ($pagesY as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['use_reply_in_email']) {
+                    if ($pagg === $devOptions['use_reply_in_email']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -745,7 +745,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesYxxx[5] = 'euc-jp';
                 foreach ($pagesYxxx as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['email_encoding']) {
+                    if ($pagg === $devOptions['email_encoding']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -766,7 +766,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesY[1] = 'false';
                 foreach ($pagesY as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['disable_all_emails']) {
+                    if ($pagg === $devOptions['disable_all_emails']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -790,7 +790,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesY[1] = 'false';
                 foreach ($pagesY as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['override_wordpress_email']) {
+                    if ($pagg === $devOptions['override_wordpress_email']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -820,7 +820,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesX[1] = 'false';
                 foreach ($pagesX as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['disable_inline_styles']) {
+                    if ($pagg === $devOptions['disable_inline_styles']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -849,7 +849,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesY[1] = 'false';
                 foreach ($pagesY as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['allow_guests']) {
+                    if ($pagg === $devOptions['allow_guests']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -870,7 +870,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesXn[1] = 'false';
                 foreach ($pagesXn as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['hide_email_on_frontend_list']) {
+                    if ($pagg === $devOptions['hide_email_on_frontend_list']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -892,7 +892,7 @@ if (!class_exists("wpscSupportTickets")) {
                 $pagesXnr[1] = 'false';
                 foreach ($pagesXnr as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg == $devOptions['hide_email_on_support_tickets']) {
+                    if ($pagg === $devOptions['hide_email_on_support_tickets']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -926,7 +926,7 @@ if (!class_exists("wpscSupportTickets")) {
 
                 foreach ($pagesXX as $pagg) {
                     $option = '<option value="' . $pagg['valname'] . '"';
-                    if ($pagg['valname'] == $devOptions['custom_field_position']) {
+                    if ($pagg['valname'] === $devOptions['custom_field_position']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -949,7 +949,7 @@ if (!class_exists("wpscSupportTickets")) {
 
                 foreach ($pagesXY as $pagg) {
                     $option = '<option value="' . $pagg['valname'] . '"';
-                    if ($pagg['valname'] == $devOptions['custom_field_frontend_position']) {
+                    if ($pagg['valname'] === $devOptions['custom_field_frontend_position']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -1105,9 +1105,9 @@ if (!class_exists("wpscSupportTickets")) {
             $sql = "SELECT * FROM `{$table_name}` WHERE `resolution`='{$resolution}' ORDER BY `last_updated` DESC;";
             $results = $wpdb->get_results($sql, ARRAY_A);
             if (isset($results) && isset($results[0]['primkey'])) {
-                if ($resolution == 'Open') {
+                if ($resolution === 'Open') {
                     $output .= '<h3>' . __('View Open Tickets:', 'wpsc-support-tickets') . '</h3>';
-                } elseif ($resolution == 'Closed') {
+                } elseif ($resolution === 'Closed') {
                     $output .= '<h3>' . __('View Closed Tickets:', 'wpsc-support-tickets') . '</h3>';
                 }
                 $output .= '<table class="widefat" style="width:100%"><thead><tr><th>' . __('Ticket', 'wpsc-support-tickets') . '</th><th>' . __('Status', 'wpsc-support-tickets') . '</th><th>' . __('User', 'wpsc-support-tickets') . '</th><th>' . __('Last Reply', 'wpsc-support-tickets') . '</th></tr></thead><tbody>';
@@ -1119,7 +1119,7 @@ if (!class_exists("wpscSupportTickets")) {
                         $user = false; // Guest
                         $theusersname = __('Guest', 'wpsc-support-tickets');
                     }
-                    if (trim($result['last_staff_reply']) == '') {
+                    if (trim($result['last_staff_reply']) === '') {
                         $last_staff_reply = __('ticket creator', 'wpsc-support-tickets');
                     } else {
                         if ($result['last_updated'] > $result['last_staff_reply']) {
@@ -1213,7 +1213,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             echo '<br style="clear:both;" /><br />
             
-            <h2>'.__('','wpsc-support-tickets').'</h2>
+            <h2> </h2>
 
              <script type="text/javascript">
                 /* <![CDATA[ */
