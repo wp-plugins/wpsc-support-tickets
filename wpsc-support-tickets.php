@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.20
+  Version: 4.9.21
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -1905,7 +1905,7 @@ if (!class_exists("wpscSupportTickets")) {
                         'display' => 'tickets'
                             ), $atts));
 
-            if (session_id() == "") {
+            if (session_id() == '') {
                 @session_start();
             };
 
@@ -2368,9 +2368,15 @@ function wpscstSubmitTicket() {
     }
     $direct_to = get_permalink($devOptions['mainpage']);
 
-    if (session_id() == "") {@session_start();};
-    if(is_user_logged_in() || @isset($_SESSION['wpsct_email'])) {
+    if (session_id() == '') {@session_start();};
+    if(is_user_logged_in() || @isset($_SESSION['wpsct_email']) || @isset($_POST['guest_email']) ) {
 
+        if(!is_user_logged_in()) {
+            if(@trim($_SESSION['wpsct_email'])=='' || @!isset($_SESSION['wpsct_email'])) {
+                $_SESSION['wpsct_email'] = $_POST['guest_email'];
+            }
+        }
+        
         if(is_user_logged_in() && @isset($_POST['admin_created_ticket']) && function_exists('current_user_can') && current_user_can('manage_wpsct_support_tickets') ) {
             // redirect back to admin
             $direct_to = get_admin_url().'admin.php?page=wpscSupportTickets-admin';

@@ -3,7 +3,7 @@
 function wpsctDisplayCustomFieldsToFrontend($primkey) {
     global $wpdb;
     // Custom fields
-    $table_name33 = $wpdb->prefix . "wpstorecart_meta";
+    $table_name33 = $wpdb->prefix . 'wpstorecart_meta';
 
     $grabrecord = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-requiredinfo' ORDER BY `foreignkey` ASC;";
 
@@ -14,7 +14,7 @@ function wpsctDisplayCustomFieldsToFrontend($primkey) {
                 $specific_items = explode("||", $field['value']);
                 $res = $wpdb->get_results("SELECT * FROM `{$table_name33}` WHERE `type`='wpsct_custom_{$field['primkey']}' AND `foreignkey`='{$primkey}';", ARRAY_A);
                 if(@isset($res[0]['primkey'])) {
-                    echo '<tr><td><h4 style="display:inline;">'.$specific_items[0].':</h4> '.strip_tags(base64_decode($res[0]['value'])).'</td></tr>';
+                    echo '<tr><td><h4 style="display:inline;">',$specific_items[0],':</h4> ',strip_tags(base64_decode($res[0]['value'])),'</td></tr>';
 
                 }
             }
@@ -25,7 +25,7 @@ function wpsctDisplayCustomFieldsToFrontend($primkey) {
 function wpsctLoadTicket() {
     global $current_user, $wpdb;
     
-    if (session_id() == "") {@session_start();};
+    if (session_id() == '') {@session_start();}
 
     if((is_user_logged_in() || @isset($_SESSION['wpsct_email'])) && is_numeric($_POST['primkey'])) {
 
