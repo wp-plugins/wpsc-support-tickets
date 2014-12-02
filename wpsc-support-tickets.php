@@ -3,7 +3,7 @@
   Plugin Name: wpsc Support Tickets
   Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.22
+  Version: 4.9.23
   Author: Jeff Quindlen
   Author URI: URI: http://wpscsupporttickets.com/
   License: LGPL
@@ -2426,9 +2426,9 @@ function wpscstSubmitTicket() {
         $wpscst_initial_message = '';
 
         // Code for Session Cookie workaround
-        if (isset($_POST["PHPSESSID"])) {
+        if (@isset($_POST["PHPSESSID"])) {
                 session_id($_POST["PHPSESSID"]);
-        } else if (isset($_GET["PHPSESSID"])) {
+        } else if (@isset($_GET["PHPSESSID"])) {
                 session_id($_GET["PHPSESSID"]);
         }
 
@@ -2559,7 +2559,11 @@ function wpscstSubmitTicket() {
 
 
         $wpscst_title = base64_encode(strip_tags($_POST['wpscst_title']));
-        $wpscst_initial_message = base64_encode(nl2br($_POST['wpscst_initial_message'] . $wpscst_initial_message));
+        
+        //$wpscst_initial_message = base64_encode(nl2br($_POST['wpscst_initial_message'] . $wpscst_initial_message));
+        // Alternative new method for dealing with line breaks adding in 4.9.23
+        $wpscst_initial_message = base64_encode( '<p>'. preg_replace('/[\r\n]+/', '</p><p>', $_POST['wpscst_initial_message'] . $wpscst_initial_message) . '</p>' );
+        
         $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));    
         $wpscst_severity = $wpdb->escape($_POST['wpscst_severity']);
 
@@ -2850,8 +2854,10 @@ function wpscstReplyTicket() {
 
 
 
-                $wpscst_message = base64_encode(nl2br($_POST['wpscst_reply'] . $wpscst_message));
-
+                //$wpscst_message = base64_encode(nl2br($_POST['wpscst_reply'] . $wpscst_message));
+                // Alternative new method for dealing with line breaks adding in 4.9.23
+                $wpscst_message = base64_encode( '<p>'. preg_replace('/[\r\n]+/', '</p><p>', $_POST['wpscst_reply'] . $wpscst_message) . '</p>' );
+                
                 $sql = "
                 INSERT INTO `{$wpdb->prefix}wpscst_replies` (
                     `primkey` ,
