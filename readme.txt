@@ -4,7 +4,7 @@ Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.9.23
+Stable tag: 4.9.24
 
 == Description ==
 
@@ -70,7 +70,10 @@ Or, if you want to install manually:
 
 == Frequently Asked Questions ==
 
-= I have questions, where can I find answers? =
+= Q. My bbPress menus all disappeared! How can I get them back? =
+The fix is to deactivate wpsc Support Tickets, go into bbPress settings at wp-admin > Settings > Forums > and then uncheck the "Automatically give registered visitors the XXXX forum role" and save your settings. Once you've saved the settings, now just recheck the "Automatically give registered visitors the XXXX forum role" and save. Now reactivate wpsc Support Tickets and it should work perfectly with bbPress. 
+
+= Q. I have other questions, where can I find answers? =
 For full documentation, support, addons, and related tools, visit [our site](http://wpscsupporttickets.com/wordpress-support-ticket-plugin/ "our site")
 
 == Screenshots ==
@@ -103,6 +106,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
 * Updated: Added randomized addition to filenames & updated the file upload presentation
+
+= 4.9.24 =
+* Updated: Added an entry to the FAQ regarding bbPress troubleshooting
+* Updated: Minor bbPress permission addition for wpsc Suppport Tickets
 
 = 4.9.23 =
 * Updated: Implemented a better way to insure paragraphs are saved in the text editor for ticket submission and reply
