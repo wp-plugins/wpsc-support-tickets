@@ -1,11 +1,11 @@
 <?php
 /*
-  Plugin Name: wpsc Support Tickets
-  Plugin URI: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
+  Plugin Name: IDB Support Tickets
+  Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.24
-  Author: Jeff Quindlen
-  Author URI: URI: http://wpscsupporttickets.com/
+  Version: 4.9.25
+  Author: IndieDevBundle.com
+  Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
   Text Domain: wpsc-support-tickets
  */
@@ -446,7 +446,7 @@ if (!class_exists("wpscSupportTickets")) {
             if (!function_exists('wpscSupportTicketsPRO')) {
                 echo '<div style="float:left;"><img src="' , plugins_url() , '/wpsc-support-tickets/images/logo.png" alt="wpscSupportTickets" /></div>';
             } else {
-                echo '<div style="float:left;"><img src="' , plugins_url() , '/wpsc-support-tickets-pro/images/logo_pro.png" alt="wpscSupportTickets" /></div>';
+                echo '<div style="float:left;"><img src="' , plugins_url() , '/wpsc-support-tickets/images/logo_pro.png" alt="wpscSupportTickets" /></div>';
             }
 
 
@@ -586,7 +586,6 @@ if (!class_exists("wpscSupportTickets")) {
                 <li><a href="#wst_tabs-5">' , __('Guests', 'wpsc-support-tickets') , '</a></li>    
                 <li><a href="#wst_tabs-6">' , __('Custom Fields', 'wpsc-support-tickets') , '</a></li>    
                 <li><a href="#wst_tabs-2">' , __('PRO', 'wpsc-support-tickets') , '</a></li>
-                <li><a href="#wst_tabs-7">' , __('Documentation', 'wpsc-support-tickets') , '</a></li>
             </ul>        
             
             
@@ -965,9 +964,6 @@ if (!class_exists("wpscSupportTickets")) {
 
 
             </div>
-            <div id="wst_tabs-7">
-            <iframe src="http://wpscsupporttickets.com/wordpress-support-ticket-plugin/index.php#doc" style="border:0px #FFFFFF none;" name="myiFrame" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" height="900px" width="900px"></iframe>
-            </div>
 
             <div id="wst_tabs-2">';
 
@@ -990,15 +986,7 @@ if (!class_exists("wpscSupportTickets")) {
 
         ';
 
-            if (!function_exists('wpscSupportTicketsPRO')) {
-                echo '
-                <script type="text/javascript">
-                jQuery(document).ready(function() {
-                    jQuery(\'#buypro\').append(\'<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="FE6DBZ44KJ8TS"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>\');
-                });
-                </script>
-            ';
-            }
+
         }
 
         //Prints out the admin page ================================================================================
@@ -1023,30 +1011,31 @@ if (!class_exists("wpscSupportTickets")) {
             </script>
 
             <div id="wstct_tabs-1">  <table class="widefat" style="width:98%;"><tr><td>';
-                echo '
-                                
-                                <h2>',__('Upgrade now to wpsc Support Tickets PRO and unlock in depth statistics for the following and more:', 'wpsc-support-tickets'),'</h2> 
-                                    <ul>
-                                        <li>',__('Average ticket resolution time', 'wpsc-support-tickets'),'</li>
-                                        <li>',__('Number of tickets created in each category', 'wpsc-support-tickets'),'</li>
-                                        <li>',__('Number of tickets in each severity level', 'wpsc-support-tickets'),'</li>
-                                        <li>',__('Top 10 users who create the most tickets', 'wpsc-support-tickets'),'</li>
-                                        <li>',__('The number of completed tickets', 'wpsc-support-tickets'),'</li>
-                                        <li>',__('Display how long a ticket has been open', 'wpsc-support-tickets'),'</li>
-                                        <li>',__('Display how long it took to resolve a closed ticket', 'wpsc-support-tickets'),'</li>
-                                        <li>',__('Bar chart showing the amount of time it took to close the last 30 tickets', 'wpsc-support-tickets'),'</li>
-                                        <li>',__('And much more, upgrade to PRO today:', 'wpsc-support-tickets'),'</li>
-                                    </ul>
-                                    <div id="buyprostats"><strong>$9.99 USD</strong><br /></div>
-                                
-                              
-                                ';
-                echo '</td></tr></table></div></div>
-                <script type="text/javascript">
-                jQuery(document).ready(function() {
-                    jQuery(\'#buyprostats\').append(\'<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="FE6DBZ44KJ8TS"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>\');
-                });
-                </script>  ';                    
+
+                    echo '
+
+            <div id="idb_bt_wrap">
+                <iframe class="idb_bt_site" src="http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets"></iframe>
+            </div>
+
+            <style type="text/css">
+
+            #idb_bt_wrap {
+                width: 100%;
+                padding-bottom: 55%;
+                background: orange;
+            }
+            .idb_bt_site{
+                position: absolute;
+                top: 48px; 
+                left: 0;
+                width: 100%;
+                height: 87%;
+            }
+            </style>
+                    ';                  
+                
+                echo '</td></tr></table></div></div>';                    
             } else {
                 if(@function_exists('wstPROStats')) {
                     @set_time_limit(0);
@@ -1089,15 +1078,13 @@ if (!class_exists("wpscSupportTickets")) {
 
             wpscSupportTickets_extraTabsIndex();
             echo '
-                            <li><a href="#wst_tabs-71">' , __('Documentation', 'wpsc-support-tickets') , '</a></li>
+                            
                         </ul>                             
 
                         ';
 
             $resolution = 'Open';
-            $output .= '               <div id="wst_tabs-71">
-            <iframe src="http://wpscsupporttickets.com/wordpress-support-ticket-plugin/index.php#doc" style="border:0px #FFFFFF none;" name="myiFrame" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" height="900px" width="900px"></iframe>
-            </div>
+            $output .= '               
             <div id="wst_tabs-1">';
             
             $table_name = $wpdb->prefix . "wpscst_tickets";
@@ -2285,6 +2272,10 @@ if (isset($wpscSupportTickets)) {
     add_action('wp_dashboard_setup', array(&$wpscSupportTickets, 'wpscSupportTickets_main_add_dashboard_widgets')); // Dashboard widget
     //add_action('wp_head', array(&$wpscSupportTickets, 'addHeaderCode')); // Place wpscSupportTickets comment into header
     add_shortcode('wpscSupportTickets', array(&$wpscSupportTickets, 'wpscSupportTickets_mainshortcode'));
+    add_shortcode('wpscsupporttickets', array(&$wpscSupportTickets, 'wpscSupportTickets_mainshortcode'));
+    add_shortcode('IDBSupportTickets', array(&$wpscSupportTickets, 'wpscSupportTickets_mainshortcode'));
+    add_shortcode('idbsupporttickets', array(&$wpscSupportTickets, 'wpscSupportTickets_mainshortcode'));
+    
     
     add_action("wp_print_scripts", array(&$wpscSupportTickets, "addHeaderCode"));
     add_action('init', 'wpscLoadInit'); // Load other languages, and javascript
@@ -2303,45 +2294,33 @@ if (isset($wpscSupportTickets)) {
 if (!function_exists('wpscSupportTicketsPRO')) {
 
     function wstPROSettingsFakeForm() {
-        echo '<div style="opacity:0.5;">
-<p><center><u><h3>wpsc-Support-Tickets PRO Settings:</h3></u></center></p>
-        <p><strong>Allow ticket creators to upload file attachments:</strong> Set this to true if you want ticket creators to be able to upload files.  <br />
-        <select name="allow_uploads" disabled>
-            <option value="true">true</option><option value="false" selected="selected">false</option>
-        </select>
-        </p>
+        echo '<div>';
         
-        <p><strong>Who can view &amp; administrate all tickets:</strong> Users with the following roles will have full access to edit, reply to, close, re-open, and delete all tickets.  <br />
-            <ul>
-            <li><input type="checkbox" name="wstpro_admin[]" value="administrator" checked disabled /> Administrator</li><li><input type="checkbox" name="wstpro_admin[]" value="editor" disabled /> Editor</li><li><input type="checkbox" name="wstpro_admin[]" value="author" disabled /> Author</li><li><input type="checkbox" name="wstpro_admin[]"  value="contributor" disabled /> Contributor</li></ul>
-        </p>
+                    echo '
 
-        <p><strong>Allow users to close and reopen tickets?:</strong> Setting this to true, allows users (and/or guests, if the setting is turned on) to reopen or close tickets that they have permission to view.    <br />
-        <select name="allow_closing_ticket" disabled>
-            <option value="false" selected="selected">false</option><option value="true">true</option>
-        </select>
-        </p>
+            <div id="idb_bt_wrap">
+                <iframe class="idb_bt_site" src="http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets"></iframe>
+            </div>
 
-        <p><strong>Send HTML Emails?:</strong> Set this to true if you want emails to be sent in HTML format.  Note that you will need to add HTML markup to the emails in the Settings tab to take advantage of this feature.  <br />
-        <select name="allow_html" disabled>
-            <option value="false" selected="selected">false</option><option value="true">true</option>
-        </select>
-        </p>
+            <style type="text/css">
 
-
-        <p><strong>Allow everyone to see all tickets?:</strong> Setting this to true, allows all guests and users to view all tickets created by anyone. Do not use this setting if tickets will contain ANY confidential information, and be sure to inform your users that their information is being posted publically.  <br />
-        <select name="allow_all_tickets_to_be_viewed" disabled>
-            <option value="false" selected="selected">false</option><option value="true">true</option>
-        </select>
-        </p>
-
-        <p id="wstpro_reply"><strong>Allow everyone to reply to all open tickets?:</strong> Setting this to true, allows users (and/or guests, if the setting is turned on) to reply to all open tickets created by anyone.  Requires the *Allow everyone to see all tickets* setting to be set to True.  Do not use this setting if tickets will contain ANY confidential information, and be sure to inform your users that their information is being posted publically.  <br />
-        <select name="allow_all_tickets_to_be_replied" disabled>
-            <option value="false" selected="selected">false</option><option value="true">true</option>
-        </select>
-        </p>     </div>       
+            #idb_bt_wrap {
+                width: 100%;
+                padding-bottom: 55%;
+                background: orange;
+            }
+            .idb_bt_site{
+                position: absolute;
+                top: 48px; 
+                left: 0;
+                width: 100%;
+                height: 87%;
+            }
+            </style>
+                    ';          
         
-        <center><div style="border:3px solid red;width:40%;padding:10px;background:#FFF;position:relative;top:-480px;">Upgrade to wpsc Support Tickets PRO to unlock this page of settings, and much more, including:<br /><br /><ul style="text-align:left;font-size:0.8em;font-weight:bold;"><li>File Uploads & attachments (optional)</li><li>Minimum level to access admin panel can be set by admin</li><li>Bulk edit many tickets at a time</li><li>Send HTML Emails</li><li>Optionally allow all users to see all tickets</li><li>Advanced ticketing system with severity, categories, departments</li><li>Optionally allow users to reopen their own tickets</li> <li>Advanced ticket overview in admin panel</li>       <li>3 Premium Wordpress Themes</li>   </ul><br />$9.99 USD<br /><div  id="buypro"></div></div></center>
+     echo '</div>       
+        
 
         ';
     }
@@ -2994,30 +2973,31 @@ if (!function_exists('wstPROBulkTabIndex')) {
     
     function wstInformPROBulkTabContents() {
                 echo '<div id="wst_tabs-all"><table class="widefat" style="width:98%;"><tr><td>';
-                echo '
-                                
-                                <h2>'.__('Upgrade now to wpsc Support Tickets PRO and unlock advanced ticket management and more:', 'wpsc-support-tickets').'</h2> 
-                                    <ul>
-                                        <li>'.__('Average ticket resolution time', 'wpsc-support-tickets').'</li>
-                                        <li>'.__('Number of tickets created in each category', 'wpsc-support-tickets').'</li>
-                                        <li>'.__('Number of tickets in each severity level', 'wpsc-support-tickets').'</li>
-                                        <li>'.__('Top 10 users who create the most tickets', 'wpsc-support-tickets').'</li>
-                                        <li>'.__('The number of completed tickets', 'wpsc-support-tickets').'</li>
-                                        <li>'.__('Display how long a ticket has been open', 'wpsc-support-tickets').'</li>
-                                        <li>'.__('Display how long it took to resolve a closed ticket', 'wpsc-support-tickets').'</li>
-                                        <li>'.__('Bar chart showing the amount of time it took to close the last 30 tickets', 'wpsc-support-tickets').'</li>
-                                        <li>'.__('And much more, upgrade to PRO today:', 'wpsc-support-tickets').'</li>
-                                    </ul>
-                                    <div id="buyprostats"><strong>$9.99 USD</strong><br /></div>
-                                
-                              
-                                ';
-                echo '</td></tr></table></div>
-                <script type="text/javascript">
-                jQuery(document).ready(function() {
-                    jQuery(\'#buyprostats\').append(\'<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="FE6DBZ44KJ8TS"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>\');
-                });
-                </script>  ';          
+
+                    echo '
+
+            <div id="idb_bt_wrap">
+                <iframe class="idb_bt_site" src="http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets"></iframe>
+            </div>
+
+            <style type="text/css">
+
+            #idb_bt_wrap {
+                width: 100%;
+                padding-bottom: 55%;
+                background: orange;
+            }
+            .idb_bt_site{
+                position: absolute;
+                top: 48px; 
+                left: 0;
+                width: 100%;
+                height: 87%;
+            }
+            </style>
+                    ';                
+                
+                echo '</td></tr></table></div>  ';          
         
     }
     add_action( 'wpscSupportTickets_extraTabsContents', 'wstInformPROBulkTabContents' );

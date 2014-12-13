@@ -1,22 +1,22 @@
-=== wpsc Support Tickets  ===
+=== IDB Support Tickets  ===
 Contributors: jquindlen
-Donate link: http://wpscsupporttickets.com/wordpress-support-ticket-plugin/
+Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.0
-Stable tag: 4.9.24
+Stable tag: 4.9.25
 
 == Description ==
 
-[wpsc Support Tickets](http://wpscsupporttickets.com/wordpress-support-ticket-plugin/ "wpsc Support Tickets") is an open source Wordpress support ticket system.  
+[IDB Support Tickets](http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets "IDB Support Tickets") (formerly wpsc Support Tickets) is an open source Wordpress support ticket system.  
 This isn't some port of another ticket system that's been hacked to run inside Wordpress.  This is a new plugin designed from the ground up specifically for Wordpress.
 
 Support tickets are critical to most businesses that provide a product or service, 
 and is often used for clients, customers, members, authors, sponsors, pre-sale questions and more.   
 
-For full documentation, support, addons, and related tools, visit [our site](http://wpscsupporttickets.com/wordpress-support-ticket-plugin/ "our site")
+For full documentation, support, addons, and related tools, visit [our site](http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets "our site")
 
-While completely optional, wpsc Support Tickets can work in unison with [wpStoreCart](http://wordpress.org/extend/plugins/wpstorecart/ "wpStoreCart"), an open source ecommerce plugin for Wordpress.
+While completely optional, IDB Support Tickets can work in unison with [IDB Ecommerce](http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/ "IDB Ecommerce"), an open source ecommerce plugin for Wordpress.
 This can optionally allow you to keep your support ticket system accessible only to paying customers and/or current members.
 
 **Hightlighted Features:**
@@ -26,8 +26,8 @@ This can optionally allow you to keep your support ticket system accessible only
  * Admins, Super Admins, and any user granted the manage_wpsct_support_tickets capability, can reply to, close, or delete any ticket
  * Front end support ticket interface is done in jQuery, and utilizes Ajax ticket loading
  * Customizable departments, email messages, and CSS for custom solutions
- * You can hide support ticket capabilities from a user who has not purchased a specific product (requires [wpStoreCart](http://wordpress.org/extend/plugins/wpstorecart/ "wpStoreCart") 2.4.9 or higher)
- * Seamless integration with open source wpStoreCart ecommerce plugin, including a shared Guest system 
+ * You can hide support ticket capabilities from a user who has not purchased a specific product (requires [IDB Ecommerce](http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/ "IDB Ecommerce") 2.4.9 or higher)
+ * Seamless integration with open source IDB Ecommerce ecommerce plugin, including a shared Guest system 
  * Admin dashboard widget shows all open tickets
  * Both the admin and frontend provides a WYSIWYG HTML editor for formatting
  * Available in 16 languages
@@ -65,7 +65,7 @@ Or, if you want to install manually:
 1. Upload the `/wpsc-support-tickets/` directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Create a new page, call it something like Support Tickets
-1. Inside this page, place this shortcode only: [wpscSupportTickets]
+1. Inside this page, place this shortcode only: [IDBSupportTickets]
 1. Visit the wpsc Support Tickets admin page and select a "mainpage" for wpsc Support Tickets to use, like the Support Tickets page we told you to create
 
 == Frequently Asked Questions ==
@@ -106,6 +106,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
 * Updated: Added randomized addition to filenames & updated the file upload presentation
+
+= 4.9.25 =
+* Updated: Rebranded to match my other plugins
 
 = 4.9.24 =
 * Updated: Added an entry to the FAQ regarding bbPress troubleshooting
