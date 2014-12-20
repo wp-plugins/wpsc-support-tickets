@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.25
+  Version: 4.9.26
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -11,7 +11,7 @@
  */
 
 /*
-  Copyright 2012, 2013, 2014 Jeff Quindlen
+  Copyright 2012, 2013, 2014 Jeff Quindlen  (email : blacklodgegames@gmail.com)
 
   This library is free software; you can redistribute it and/or modify it under the terms
   of the GNU Lesser General Public License as published by the Free Software Foundation;

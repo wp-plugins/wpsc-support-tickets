@@ -3,8 +3,8 @@ Contributors: jquindlen
 Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
-Tested up to: 4.0
-Stable tag: 4.9.25
+Tested up to: 4.2
+Stable tag: 4.9.26
 
 == Description ==
 
@@ -94,6 +94,7 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 
 = 5.0.0 =
 * COMING SOON:
+* Added: Easier to use permissions system
 * Added: Assign specific support staff to a single or multiple departments
 * Added: Option for the ticket creator to choose a specific person from the department admins while creating the ticket (admin must enable this feature, as it's disabled by default)
 * Added: Ability to edit radio, checkboxes, and drop downs
@@ -106,6 +107,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
 * Updated: Added randomized addition to filenames & updated the file upload presentation
+
+= 4.9.26 =
+* Updated: Compatible with 4.1 and 4.2 nightly build
 
 = 4.9.25 =
 * Updated: Rebranded to match my other plugins
