@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.27
+  Version: 4.9.28
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -201,10 +201,10 @@ if(!function_exists('wpsctPromptForCustomFields')) {
                     if ($specific_items[1]=='required'){ 
                         $wpsct_required_item = '<ins><div class="wpst-required-symbol" ' . $wpsct_style_inline . '>* </div></ins>';
                     }
-                    $prev_val = $_SESSION['wpsct_custom_'.$field['primkey']];
+                    @$prev_val = $_SESSION['wpsct_custom_'.$field['primkey']];
                     foreach ($wpsct_text_fields as $wpsct_text_field) {
                         if($specific_items[2]==$wpsct_text_field) {
-                            $output .= '<tr><td><h3>'. $specific_items[0] . $wpsct_required_item
+                            @$output .= '<tr><td><h3>'. $specific_items[0] . $wpsct_required_item
                                 . '</h3><input  id="wpsct_custom_'.$field['primkey'].'" type="text"  value="'
                                 . $_SESSION['wpsct_custom_'.$field['primkey']] .'" name="wpsct_custom_'.$field['primkey'].'" ' 
                                 . $wpsct_style_width . '  /></td></tr>';
