@@ -4,7 +4,7 @@ Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsup
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.2
-Stable tag: 4.9.26
+Stable tag: 4.9.27
 
 == Description ==
 
@@ -107,6 +107,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
 * Updated: Added randomized addition to filenames & updated the file upload presentation
+
+= 4.9.27 =
+* Added: You can now easily rename the TITLE and YOUR MESSAGE form fields from the settings, custom fields tab.
 
 = 4.9.26 =
 * Updated: Compatible with 4.1 and 4.2 nightly build

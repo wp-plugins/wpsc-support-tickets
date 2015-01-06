@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.26
+  Version: 4.9.27
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -11,7 +11,7 @@
  */
 
 /*
-  Copyright 2012, 2013, 2014 Jeff Quindlen  (email : blacklodgegames@gmail.com)
+  Copyright 2012, 2013, 2014, 2015 Jeff Quindlen  (email : blacklodgegames@gmail.com)
 
   This library is free software; you can redistribute it and/or modify it under the terms
   of the GNU Lesser General Public License as published by the Free Software Foundation;
@@ -414,7 +414,9 @@ if (!class_exists("wpscSupportTickets")) {
                 'enable_beta_testing' => 'false',
                 'disable_all_emails' => 'false',
                 'override_wordpress_email' => 'false',
-                'overrides_email' => get_bloginfo('admin_email')
+                'overrides_email' => get_bloginfo('admin_email'),
+                'custom_title' => __('Title', 'wpsc-support-tickets'),
+                'custom_message' => __('Your message', 'wpsc-support-tickets')
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -556,6 +558,12 @@ if (!class_exists("wpscSupportTickets")) {
                 }
                 if(isset($_POST['overrides_email'])) {
                     $devOptions['overrides_email'] = esc_sql($_POST['overrides_email']);
+                }                
+                if(isset($_POST['custom_title'])) {
+                    $devOptions['custom_title'] = esc_sql($_POST['custom_title']);
+                }
+                if(isset($_POST['custom_message'])) {
+                    $devOptions['custom_message'] = esc_sql($_POST['custom_message']);
                 }                
                 
                 
@@ -959,6 +967,12 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '
                 </select>
                 </p>               
+                
+                <strong>' , __('Change TITLE to', 'wpsc-support-tickets') , ':</strong> ' , __('By default, a user must fill out a title when submitting a ticket.  This setting lets you easily change the name of the word TITLE so that you word this appropriately for your situation.', 'wpsc-support-tickets') , '<br /><input name="custom_title" value="' . $devOptions['custom_title'] . '" style="width:95%;" /><br /><br />
+                
+                <strong>' , __('Change MESSAGE to', 'wpsc-support-tickets') , ':</strong> ' , __('By default, a user must fill out a message when submitting a ticket.  This setting lets you easily change the name of the words YOUR MESSAGE so that you word this appropriately for your situation.', 'wpsc-support-tickets') , '<br /><input name="custom_message" value="' . $devOptions['custom_message'] . '" style="width:95%;" /><br /><br />
+                
+
                 <br /><br /><br /><br />
             </td></tr></table>
 
@@ -1442,7 +1456,7 @@ if (!class_exists("wpscSupportTickets")) {
                 echo  wpsctPromptForCustomFields();
             }                            
 
-            echo  '<tr><td><h3>' , __('Title', 'wpsc-support-tickets') , '</h3><input type="text" name="wpscst_title" id="wpscst_title" value=""  ';
+            echo  '<tr><td><h3>' , $devOptions['custom_title'] , '</h3><input type="text" name="wpscst_title" id="wpscst_title" value=""  ';
             if ($devOptions['disable_inline_styles'] == 'false') {
                 echo 'style="width:100%;margin:12px;"';
             } echo ' /></td></tr>';
@@ -1451,7 +1465,7 @@ if (!class_exists("wpscSupportTickets")) {
                 echo  wpsctPromptForCustomFields();
             }                            
 
-            echo  '<tr><td><h3>' . __('Your message', 'wpsc-support-tickets') . '</h3><div id="wpscst_nic_panel" ';
+            echo  '<tr><td><h3>' , $devOptions['custom_message'] , '</h3><div id="wpscst_nic_panel" ';
             if ($devOptions['disable_inline_styles'] == 'false') {
                 echo 'style="display:block;width:100%;"';
             } echo '></div> <textarea name="wpscst_initial_message" id="wpscst_initial_message" ';
@@ -1943,7 +1957,7 @@ if (!class_exists("wpscSupportTickets")) {
                                 $output .= wpsctPromptForCustomFields();
                             }                            
                             
-                            $output .= '<tr><td><h3>' . __('Title', 'wpsc-support-tickets') . '</h3><input type="text" name="wpscst_title" id="wpscst_title" value=""  ';
+                            $output .= '<tr><td><h3>' . $devOptions['custom_title'] . '</h3><input type="text" name="wpscst_title" id="wpscst_title" value=""  ';
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="width:100%"';
                             } $output .=' /></td></tr>';
@@ -1952,7 +1966,7 @@ if (!class_exists("wpscSupportTickets")) {
                                 $output .= wpsctPromptForCustomFields();
                             }                            
                             
-                            $output .= '<tr><td><h3>' . __('Your message', 'wpsc-support-tickets') . '</h3><div id="wpscst_nic_panel" ';
+                            $output .= '<tr><td><h3>' . $devOptions['custom_message'] . '</h3><div id="wpscst_nic_panel" ';
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="display:block;width:100%;"';
                             } $output.='></div> <textarea name="wpscst_initial_message" id="wpscst_initial_message" ';
