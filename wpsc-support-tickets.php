@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.29
+  Version: 4.9.30
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -416,7 +416,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'override_wordpress_email' => 'false',
                 'overrides_email' => get_bloginfo('admin_email'),
                 'custom_title' => __('Title', 'wpsc-support-tickets'),
-                'custom_message' => __('Your message', 'wpsc-support-tickets')
+                'custom_message' => __('Your message', 'wpsc-support-tickets'),
+                'show_login_text' => 'true'
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -565,7 +566,9 @@ if (!class_exists("wpscSupportTickets")) {
                 if(isset($_POST['custom_message'])) {
                     $devOptions['custom_message'] = esc_sql($_POST['custom_message']);
                 }                
-                
+                if(isset($_POST['show_login_text'])) {
+                    $devOptions['show_login_text'] = esc_sql($_POST['show_login_text']);
+                }                                
                 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -911,8 +914,28 @@ if (!class_exists("wpscSupportTickets")) {
                 </select>
                 </p>
 
+                
 
+                <p><strong>' , __('Show login/register links?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to false if you do not want a link to register or login to appear when a user is not logged in.', 'wpsc-support-tickets') , '  <br />
+                <select name="show_login_text">
+                 ';
 
+                $pagesXnr[0] = 'true';
+                $pagesXnr[1] = 'false';
+                foreach ($pagesXnr as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg === $devOptions['show_login_text']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                </p>
 
             </td></tr></table>
             <br /><br /><br />
@@ -2164,7 +2187,9 @@ if (!class_exists("wpscSupportTickets")) {
                             $output .= '</div>';
                         }
                     } else {
-                        $output .='<div id="wpscSupportTicketsRegisterMessage">'. __('Please', 'wpsc-support-tickets') . ' <a href="' . wp_login_url(get_permalink()) . '">' . __('log in', 'wpsc-support-tickets') . '</a> ' . __('or', 'wpsc-support-tickets') . ' <a href="' . site_url('/wp-login.php?action=register&redirect_to=' . get_permalink()) . '">' . __('register', 'wpsc-support-tickets') . '</a>.</div>';
+                        if ($devOptions['show_login_text']=='true') {
+                            $output .='<div id="wpscSupportTicketsRegisterMessage">'. __('Please', 'wpsc-support-tickets') . ' <a href="' . wp_login_url(get_permalink()) . '">' . __('log in', 'wpsc-support-tickets') . '</a> ' . __('or', 'wpsc-support-tickets') . ' <a href="' . site_url('/wp-login.php?action=register&redirect_to=' . get_permalink()) . '">' . __('register', 'wpsc-support-tickets') . '</a>.</div>';
+                        }
                     }
 
 
