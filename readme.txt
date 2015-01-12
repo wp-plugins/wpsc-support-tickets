@@ -4,7 +4,7 @@ Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsup
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.2
-Stable tag: 4.9.30
+Stable tag: 4.9.31
 
 == Description ==
 
@@ -107,6 +107,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
 * Updated: Added randomized addition to filenames & updated the file upload presentation (added 4.9.29 if you turn on beta testing)
+
+= 4.9.31 =
+* Updated: The .POT file has been updated to the latest version
 
 = 4.9.30 =
 * Added: New option on the Guests tab to hide register/login link that appears when you a user is not logged in
