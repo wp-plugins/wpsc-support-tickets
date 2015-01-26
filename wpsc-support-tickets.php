@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.32
+  Version: 4.9.33
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -2555,11 +2555,7 @@ function wpscstSubmitTicket() {
 
 
             // Validate file name (for our purposes we'll just remove invalid characters)
-                    if($devOptions['enable_beta_testing']=='true') {
-                        $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', "", basename(substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1) . $_FILES[$upload_name]['name']));
-                    } else {
-                        $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', "", basename($_FILES[$upload_name]['name']));
-                    }
+                    $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', "", basename(substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1) . $_FILES[$upload_name]['name']));
                     
                     if (strlen($file_name) == 0 || strlen($file_name) > $MAX_FILENAME_LENGTH) {
                             HandleError(__("Invalid file name", 'wpsc-support-tickets'));
@@ -2855,11 +2851,9 @@ function wpscstReplyTicket() {
 
 
                     // Validate file name (for our purposes we'll just remove invalid characters)
-                            if($devOptions['enable_beta_testing']=='true') {
-                                $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', "", basename(substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1) . $_FILES[$upload_name]['name']));
-                            } else {
-                                $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', "", basename($_FILES[$upload_name]['name']));
-                            }
+
+                            $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', "", basename(substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1) . $_FILES[$upload_name]['name']));
+
                             if (strlen($file_name) == 0 || strlen($file_name) > $MAX_FILENAME_LENGTH) {
                                     HandleError(__("Invalid file name", 'wpsc-support-tickets'));
                             }

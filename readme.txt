@@ -4,7 +4,7 @@ Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsup
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.2
-Stable tag: 4.9.32
+Stable tag: 4.9.33
 
 == Description ==
 
@@ -106,6 +106,9 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
 * Updated: Added randomized addition to filenames & updated the file upload presentation (added 4.9.29 if you turn on beta testing)
+
+= 4.9.33 =
+* Updated: Added randomized addition to filenames & updated the file upload presentation (now out of beta)
 
 = 4.9.32 =
 * Updated: Thanks to Ahrale, the Hebrew translation of IDB Support Tickets is now up to date.
