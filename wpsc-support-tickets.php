@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.33
+  Version: 4.9.34
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -2045,7 +2045,7 @@ if (!class_exists("wpscSupportTickets")) {
                             } $output.=' ><img ';
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="float:left;border:none;margin-right:5px;"';
-                            } $output.=' src="' . plugins_url('/images/stop.png', __FILE__) . '" alt="' . __('Cancel', 'wpsc-support-tickets') . '" /> ' . __('Cancel', 'wpsc-support-tickets') . '</button><button class="wpscst-button" type="submit" name="wpscst_submit" id="wpscst_submit" ';
+                            } $output.=' src="' . plugins_url('/images/stop.png', __FILE__) . '" alt="' . __('Cancel', 'wpsc-support-tickets') . '" /> ' . __('Cancel', 'wpsc-support-tickets') . '</button><button onclick="if(jQuery(\'#wpscst_title\').val().length === 0 || jQuery(\'#wpscst_initial_message\').val().length === 0) {alert(\'' . __('You cannot leave the description or title of your ticket empty!', 'wpsc-support-tickets') . '\');return false;} " class="wpscst-button" type="submit" name="wpscst_submit" id="wpscst_submit" ';
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="float:right;"';
                             }$output.='><img ';
