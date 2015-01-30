@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the IDB Support Tickets package.
 msgid ""
 msgstr ""
-"Project-Id-Version: IDB Support Tickets 4.9.30\n"
+"Project-Id-Version: IDB Support Tickets 4.9.35\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wpsc-support-tickets\n"
-"POT-Creation-Date: 2015-01-12 22:17:37+00:00\n"
+"POT-Creation-Date: 2015-01-30 17:05:20+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,21 +15,21 @@ msgstr ""
 #: php/publicajax.php:43 php/publicajax.php:45 php/publicajax.php:119
 #: wpsc-support-tickets.php:1143 wpsc-support-tickets.php:1179
 #: wpsc-support-tickets.php:1574 wpsc-support-tickets.php:1626
-#: wpsc-support-tickets.php:1770 wpsc-support-tickets.php:2120
-#: wpsc-support-tickets.php:2122 wpsc-support-tickets.php:2148
-#: wpsc-support-tickets.php:2150
+#: wpsc-support-tickets.php:1770 wpsc-support-tickets.php:2124
+#: wpsc-support-tickets.php:2126 wpsc-support-tickets.php:2152
+#: wpsc-support-tickets.php:2154
 msgid "Guest"
 msgstr ""
 
 #: php/publicajax.php:70 wpsc-support-tickets.php:1113
-#: wpsc-support-tickets.php:1726 wpsc-support-tickets.php:2088
-#: wpsc-support-tickets.php:2172
+#: wpsc-support-tickets.php:1726 wpsc-support-tickets.php:2092
+#: wpsc-support-tickets.php:2176
 msgid "Open"
 msgstr ""
 
 #: php/publicajax.php:72 wpsc-support-tickets.php:1114
-#: wpsc-support-tickets.php:1730 wpsc-support-tickets.php:2089
-#: wpsc-support-tickets.php:2174
+#: wpsc-support-tickets.php:1730 wpsc-support-tickets.php:2093
+#: wpsc-support-tickets.php:2178
 msgid "Closed"
 msgstr ""
 
@@ -1289,7 +1289,7 @@ msgstr ""
 msgid "Select page"
 msgstr ""
 
-#: wpsc-support-tickets.php:635 wpsc-support-tickets.php:2259
+#: wpsc-support-tickets.php:635 wpsc-support-tickets.php:2263
 msgid "Departments"
 msgstr ""
 
@@ -1533,7 +1533,7 @@ msgstr ""
 msgid "Update Settings"
 msgstr ""
 
-#: wpsc-support-tickets.php:1041 wpsc-support-tickets.php:2261
+#: wpsc-support-tickets.php:1041 wpsc-support-tickets.php:2265
 msgid "Statistics"
 msgstr ""
 
@@ -1557,13 +1557,13 @@ msgid "ID"
 msgstr ""
 
 #: wpsc-support-tickets.php:1136 wpsc-support-tickets.php:1172
-#: wpsc-support-tickets.php:1763 wpsc-support-tickets.php:2141
+#: wpsc-support-tickets.php:1763 wpsc-support-tickets.php:2145
 msgid "Ticket"
 msgstr ""
 
 #: wpsc-support-tickets.php:1136 wpsc-support-tickets.php:1172
 #: wpsc-support-tickets.php:1722 wpsc-support-tickets.php:1763
-#: wpsc-support-tickets.php:2141
+#: wpsc-support-tickets.php:2145
 msgid "Status"
 msgstr ""
 
@@ -1572,32 +1572,32 @@ msgid "User"
 msgstr ""
 
 #: wpsc-support-tickets.php:1136 wpsc-support-tickets.php:1172
-#: wpsc-support-tickets.php:1763 wpsc-support-tickets.php:2141
+#: wpsc-support-tickets.php:1763 wpsc-support-tickets.php:2145
 msgid "Last Reply"
 msgstr ""
 
 #: wpsc-support-tickets.php:1146 wpsc-support-tickets.php:1149
 #: wpsc-support-tickets.php:1182 wpsc-support-tickets.php:1185
-#: wpsc-support-tickets.php:1773 wpsc-support-tickets.php:1776
+#: wpsc-support-tickets.php:1774 wpsc-support-tickets.php:1778
 msgid "ticket creator"
 msgstr ""
 
 #: wpsc-support-tickets.php:1151 wpsc-support-tickets.php:1187
-#: wpsc-support-tickets.php:1778 wpsc-support-tickets.php:2158
+#: wpsc-support-tickets.php:1781 wpsc-support-tickets.php:2162
 msgid "Staff Member"
 msgstr ""
 
 #: wpsc-support-tickets.php:1154 wpsc-support-tickets.php:1190
-#: wpsc-support-tickets.php:1782 wpsc-support-tickets.php:2183
+#: wpsc-support-tickets.php:1786 wpsc-support-tickets.php:2187
 msgid "View"
 msgstr ""
 
 #: wpsc-support-tickets.php:1154 wpsc-support-tickets.php:1190
-#: wpsc-support-tickets.php:2183
+#: wpsc-support-tickets.php:2187
 msgid "by"
 msgstr ""
 
-#: wpsc-support-tickets.php:1215 wpsc-support-tickets.php:2267
+#: wpsc-support-tickets.php:1215 wpsc-support-tickets.php:2271
 msgid "User Fields"
 msgstr ""
 
@@ -1731,12 +1731,12 @@ msgstr ""
 msgid "Save All Edits"
 msgstr ""
 
-#: wpsc-support-tickets.php:1433 wpsc-support-tickets.php:2255
+#: wpsc-support-tickets.php:1433 wpsc-support-tickets.php:2259
 msgid "Create Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:1464 wpsc-support-tickets.php:1967
-#: wpsc-support-tickets.php:1977
+#: wpsc-support-tickets.php:1464 wpsc-support-tickets.php:1971
+#: wpsc-support-tickets.php:1981
 msgid "Create a New Ticket"
 msgstr ""
 
@@ -1745,22 +1745,22 @@ msgid "Create ticket on behalf of user"
 msgstr ""
 
 #: wpsc-support-tickets.php:1504 wpsc-support-tickets.php:1741
-#: wpsc-support-tickets.php:2005 wpsc-support-tickets.php:2082
+#: wpsc-support-tickets.php:2009 wpsc-support-tickets.php:2086
 msgid "Attach a file"
 msgstr ""
 
 #: wpsc-support-tickets.php:1512 wpsc-support-tickets.php:1671
-#: wpsc-support-tickets.php:2013
+#: wpsc-support-tickets.php:2017
 msgid "Department"
 msgstr ""
 
 #: wpsc-support-tickets.php:1524 wpsc-support-tickets.php:1745
-#: wpsc-support-tickets.php:2048 wpsc-support-tickets.php:2097
-#: wpsc-support-tickets.php:2100
+#: wpsc-support-tickets.php:2052 wpsc-support-tickets.php:2101
+#: wpsc-support-tickets.php:2104
 msgid "Cancel"
 msgstr ""
 
-#: wpsc-support-tickets.php:1530 wpsc-support-tickets.php:2054
+#: wpsc-support-tickets.php:1530 wpsc-support-tickets.php:2058
 msgid "Submit Ticket"
 msgstr ""
 
@@ -1776,27 +1776,27 @@ msgstr ""
 msgid "Delete Reply"
 msgstr ""
 
-#: wpsc-support-tickets.php:1688 wpsc-support-tickets.php:2024
+#: wpsc-support-tickets.php:1688 wpsc-support-tickets.php:2028
 msgid "Severity"
 msgstr ""
 
-#: wpsc-support-tickets.php:1694 wpsc-support-tickets.php:2029
+#: wpsc-support-tickets.php:1694 wpsc-support-tickets.php:2033
 msgid "Low"
 msgstr ""
 
-#: wpsc-support-tickets.php:1700 wpsc-support-tickets.php:2030
+#: wpsc-support-tickets.php:1700 wpsc-support-tickets.php:2034
 msgid "Normal"
 msgstr ""
 
-#: wpsc-support-tickets.php:1706 wpsc-support-tickets.php:2032
+#: wpsc-support-tickets.php:1706 wpsc-support-tickets.php:2036
 msgid "High"
 msgstr ""
 
-#: wpsc-support-tickets.php:1712 wpsc-support-tickets.php:2034
+#: wpsc-support-tickets.php:1712 wpsc-support-tickets.php:2038
 msgid "Urgent"
 msgstr ""
 
-#: wpsc-support-tickets.php:1718 wpsc-support-tickets.php:2036
+#: wpsc-support-tickets.php:1718 wpsc-support-tickets.php:2040
 msgid "Critical"
 msgstr ""
 
@@ -1816,150 +1816,154 @@ msgstr ""
 msgid "Update Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:1786
+#: wpsc-support-tickets.php:1790
 msgid "No open tickets!"
 msgstr ""
 
-#: wpsc-support-tickets.php:1794
-msgid "wpscSupportTickets Overview"
+#: wpsc-support-tickets.php:1798
+msgid "IDB Support Tickets Overview"
 msgstr ""
 
-#: wpsc-support-tickets.php:1950
+#: wpsc-support-tickets.php:1954
 msgid "Enter your email address"
 msgstr ""
 
-#: wpsc-support-tickets.php:1951
+#: wpsc-support-tickets.php:1955
 msgid "Submit"
 msgstr ""
 
-#: wpsc-support-tickets.php:2067
+#: wpsc-support-tickets.php:2052
+msgid "You cannot leave the description or title of your ticket empty!"
+msgstr ""
+
+#: wpsc-support-tickets.php:2071
 msgid "Loading"
 msgstr ""
 
-#: wpsc-support-tickets.php:2072
+#: wpsc-support-tickets.php:2076
 msgid "Your reply"
 msgstr ""
 
-#: wpsc-support-tickets.php:2106
+#: wpsc-support-tickets.php:2110
 msgid "Submit Reply"
 msgstr ""
 
-#: wpsc-support-tickets.php:2137
+#: wpsc-support-tickets.php:2141
 msgid "View Previous Tickets:"
 msgstr ""
 
-#: wpsc-support-tickets.php:2145 wpsc-support-tickets.php:2156
+#: wpsc-support-tickets.php:2149 wpsc-support-tickets.php:2160
 msgid "you"
 msgstr ""
 
-#: wpsc-support-tickets.php:2191
+#: wpsc-support-tickets.php:2195
 msgid "Please"
 msgstr ""
 
-#: wpsc-support-tickets.php:2191
+#: wpsc-support-tickets.php:2195
 msgid "log in"
 msgstr ""
 
-#: wpsc-support-tickets.php:2191
+#: wpsc-support-tickets.php:2195
 msgid "or"
 msgstr ""
 
-#: wpsc-support-tickets.php:2191
+#: wpsc-support-tickets.php:2195
 msgid "register"
 msgstr ""
 
-#: wpsc-support-tickets.php:2254
+#: wpsc-support-tickets.php:2258
 msgid "wpsc Support Tickets"
 msgstr ""
 
-#: wpsc-support-tickets.php:2254
+#: wpsc-support-tickets.php:2258
 msgid "Support Tickets"
 msgstr ""
 
-#: wpsc-support-tickets.php:2256
+#: wpsc-support-tickets.php:2260
 msgid "Settings"
 msgstr ""
 
-#: wpsc-support-tickets.php:2257
+#: wpsc-support-tickets.php:2261
 msgid "Reply to Support Ticket"
 msgstr ""
 
-#: wpsc-support-tickets.php:2257
+#: wpsc-support-tickets.php:2261
 msgid "Reply to Support Tickets"
 msgstr ""
 
-#: wpsc-support-tickets.php:2267
+#: wpsc-support-tickets.php:2271
 msgid "Edit User Fields Collected"
 msgstr ""
 
-#: wpsc-support-tickets.php:2457
+#: wpsc-support-tickets.php:2461
 msgid ""
 "There was a problem with your form.  Please resubmit after you add the "
 "required information for the following:"
 msgstr ""
 
-#: wpsc-support-tickets.php:2508 wpsc-support-tickets.php:2808
+#: wpsc-support-tickets.php:2512 wpsc-support-tickets.php:2808
 msgid "POST exceeded maximum allowed size."
 msgstr ""
 
-#: wpsc-support-tickets.php:2526 wpsc-support-tickets.php:2826
+#: wpsc-support-tickets.php:2530 wpsc-support-tickets.php:2826
 msgid "There is no error, the file uploaded with success"
 msgstr ""
 
-#: wpsc-support-tickets.php:2527 wpsc-support-tickets.php:2827
+#: wpsc-support-tickets.php:2531 wpsc-support-tickets.php:2827
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini"
 msgstr ""
 
-#: wpsc-support-tickets.php:2528 wpsc-support-tickets.php:2828
+#: wpsc-support-tickets.php:2532 wpsc-support-tickets.php:2828
 msgid ""
 "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
 "the HTML form"
 msgstr ""
 
-#: wpsc-support-tickets.php:2529 wpsc-support-tickets.php:2829
+#: wpsc-support-tickets.php:2533 wpsc-support-tickets.php:2829
 msgid "The uploaded file was only partially uploaded"
 msgstr ""
 
-#: wpsc-support-tickets.php:2530 wpsc-support-tickets.php:2830
+#: wpsc-support-tickets.php:2534 wpsc-support-tickets.php:2830
 msgid "No file was uploaded"
 msgstr ""
 
-#: wpsc-support-tickets.php:2531 wpsc-support-tickets.php:2831
+#: wpsc-support-tickets.php:2535 wpsc-support-tickets.php:2831
 msgid "Missing a temporary folder"
 msgstr ""
 
-#: wpsc-support-tickets.php:2541 wpsc-support-tickets.php:2841
+#: wpsc-support-tickets.php:2545 wpsc-support-tickets.php:2841
 msgid "Upload failed is_uploaded_file test."
 msgstr ""
 
-#: wpsc-support-tickets.php:2543 wpsc-support-tickets.php:2843
+#: wpsc-support-tickets.php:2547 wpsc-support-tickets.php:2843
 msgid "File has no name."
 msgstr ""
 
-#: wpsc-support-tickets.php:2549 wpsc-support-tickets.php:2849
+#: wpsc-support-tickets.php:2553 wpsc-support-tickets.php:2849
 msgid "File exceeds the maximum allowed size"
 msgstr ""
 
-#: wpsc-support-tickets.php:2553 wpsc-support-tickets.php:2853
+#: wpsc-support-tickets.php:2557 wpsc-support-tickets.php:2853
 msgid "File size outside allowed lower bound"
 msgstr ""
 
-#: wpsc-support-tickets.php:2565 wpsc-support-tickets.php:2864
+#: wpsc-support-tickets.php:2565 wpsc-support-tickets.php:2862
 msgid "Invalid file name"
 msgstr ""
 
-#: wpsc-support-tickets.php:2570 wpsc-support-tickets.php:2869
+#: wpsc-support-tickets.php:2570 wpsc-support-tickets.php:2867
 msgid "File could not be saved."
 msgstr ""
 
-#: wpsc-support-tickets.php:2578 wpsc-support-tickets.php:2877
+#: wpsc-support-tickets.php:2578 wpsc-support-tickets.php:2875
 msgid "ATTACHMENT"
 msgstr ""
 
 #: wpsc-support-tickets.php:2651 wpsc-support-tickets.php:2653
 #: wpsc-support-tickets.php:2673 wpsc-support-tickets.php:2675
-#: wpsc-support-tickets.php:2926 wpsc-support-tickets.php:2928
-#: wpsc-support-tickets.php:2950 wpsc-support-tickets.php:2952
+#: wpsc-support-tickets.php:2924 wpsc-support-tickets.php:2926
+#: wpsc-support-tickets.php:2948 wpsc-support-tickets.php:2950
 msgid "The content of the ticket is: "
 msgstr ""
 
@@ -1971,15 +1975,15 @@ msgstr ""
 msgid "There is a new support ticket: "
 msgstr ""
 
-#: wpsc-support-tickets.php:2940 wpsc-support-tickets.php:2942
+#: wpsc-support-tickets.php:2938 wpsc-support-tickets.php:2940
 msgid "Reply to a support ticket was received."
 msgstr ""
 
-#: wpsc-support-tickets.php:2944
+#: wpsc-support-tickets.php:2942
 msgid "There is a new reply on support ticket: "
 msgstr ""
 
-#: wpsc-support-tickets.php:3017
+#: wpsc-support-tickets.php:3015
 msgid "Advanced (PRO Only)"
 msgstr ""
 

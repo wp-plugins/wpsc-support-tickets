@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.35
+  Version: 4.9.36
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -320,12 +320,23 @@ if (!class_exists("wpscSupportTickets")) {
             if (!is_multisite()) {
                 $this->addPermissions(); // 
             }
+            $wsetting = $this->getAdminOptions();
+            if ($wsetting['override_mysql_timezone']=='true') {
+                $this->forceTimezoneSync();
+            }
+            unset($wsetting);
         }
-
-        function init() {
-            $this->getAdminOptions();
+       
+        function forceTimezoneSync() {
+            global $wpdb;
+            unset($wpdb);
+            $wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST );
+            $wpdb->db_connect();
+            $dt = new DateTime();
+            $offset = $dt->format("P");
+            $wpdb->query("SET time_zone='$offset';");            
         }
-
+        
         /**
          * Beginnings of the new permission system for 5.0
          */
@@ -417,7 +428,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'overrides_email' => get_bloginfo('admin_email'),
                 'custom_title' => __('Title', 'wpsc-support-tickets'),
                 'custom_message' => __('Your message', 'wpsc-support-tickets'),
-                'show_login_text' => 'true'
+                'show_login_text' => 'true',
+                'override_mysql_timezone' => 'false'
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -568,7 +580,10 @@ if (!class_exists("wpscSupportTickets")) {
                 }                
                 if(isset($_POST['show_login_text'])) {
                     $devOptions['show_login_text'] = esc_sql($_POST['show_login_text']);
-                }                                
+                }                      
+                if(isset($_POST['override_mysql_timezone'])) {
+                    $devOptions['override_mysql_timezone'] = esc_sql($_POST['override_mysql_timezone']);
+                }
                 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -680,6 +695,30 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '
                 </select>
                 </p> 
+                
+                <p style="padding:5px;border:1px dotted black;">
+<img src="' , plugins_url() , '/wpsc-support-tickets/images/bug_report.png" alt="' , __('Warning', 'wpsc-support-tickets') , '" style="float:left;" /> <strong style="font-size:1.2em;">' , __('Warning', 'wpsc-support-tickets') , ' - ' , __('This may fix issues on incorrectly configured servers, but it comes at a performance cost of an additional database connection and an additional query on every page load.  Generally, you should only turn this on if tickets do not change who replied last, and always say the Last Poster was the ticket creator, no matter how many times an admin makes a reply.  You should not change this setting unless you believe that your PHP timezone and MySQL are not set to the same thing, as evidence by the Last Poster issue.  If you turn this on when it is not needed, you will only slow down the performance of your website with no benefits. ', 'wpsc-support-tickets') , '</strong><br style="clear:both;"  /><br />
+<strong>' , __('Force Sync MySQL timezone to PHP timezone?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email below, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') , '  <br />
+                <select name="override_mysql_timezone">
+                 ';
+
+                $pagesY[0] = 'true';
+                $pagesY[1] = 'false';
+                foreach ($pagesY as $pagg) {
+                    $option = '<option value="' . $pagg . '"';
+                    if ($pagg === $devOptions['override_mysql_timezone']) {
+                        $option .= ' selected="selected"';
+                    }
+                    $option .='>';
+                    $option .= $pagg;
+                    $option .= '</option>';
+                    echo $option;
+                }
+
+                echo '
+                </select>
+                <br />
+                    </p>
 
 
             </td></tr></table>
