@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.36
+  Version: 4.9.37
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -429,7 +429,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'custom_title' => __('Title', 'wpsc-support-tickets'),
                 'custom_message' => __('Your message', 'wpsc-support-tickets'),
                 'show_login_text' => 'true',
-                'override_mysql_timezone' => 'false'
+                'override_mysql_timezone' => 'false',
+                'show_advanced_options' => 'false',
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -584,6 +585,9 @@ if (!class_exists("wpscSupportTickets")) {
                 if(isset($_POST['override_mysql_timezone'])) {
                     $devOptions['override_mysql_timezone'] = esc_sql($_POST['override_mysql_timezone']);
                 }
+                if(isset($_POST['show_advanced_options'])) {
+                    $devOptions['show_advanced_options'] = esc_sql($_POST['show_advanced_options']);
+                }
                 
                 update_option($this->adminOptionsName, $devOptions);
 
@@ -673,17 +677,15 @@ if (!class_exists("wpscSupportTickets")) {
                 </select>
                 </p> 
                 
-
-
-                <p><strong>' , __('Enabled & Test Beta Features?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true ONLY ON TEST websites.  This will enable new beta features as they are released. ', 'wpsc-support-tickets') , '  <br />
-                <select name="enable_beta_testing">
+                <p><strong>' , __('Show Advanced Settings?', 'wpsc-support-tickets') , ':</strong> ' , __('By default, some advanced settings are hidden that are either rarely used or that can problems.  Set this to true if you want to enable Advanced Settings.  Note that you will need to save your settings before any change will occur.', 'wpsc-support-tickets') , '  <br />
+                <select name="show_advanced_options">
                  ';
 
                 $pagesYXX[0] = 'true';
                 $pagesYXX[1] = 'false';
                 foreach ($pagesYXX as $pagg) {
                     $option = '<option value="' . $pagg . '"';
-                    if ($pagg === $devOptions['enable_beta_testing']) {
+                    if ($pagg === $devOptions['show_advanced_options']) {
                         $option .= ' selected="selected"';
                     }
                     $option .='>';
@@ -694,32 +696,58 @@ if (!class_exists("wpscSupportTickets")) {
 
                 echo '
                 </select>
-                </p> 
+                </p> ';
+
+                if($devOptions['show_advanced_options']=='true') {
                 
-                <p style="padding:5px;border:1px dotted black;">
-<img src="' , plugins_url() , '/wpsc-support-tickets/images/bug_report.png" alt="' , __('Warning', 'wpsc-support-tickets') , '" style="float:left;" /> <strong style="font-size:1.2em;">' , __('Warning', 'wpsc-support-tickets') , ' - ' , __('This may fix issues on incorrectly configured servers, but it comes at a performance cost of an additional database connection and an additional query on every page load.  Generally, you should only turn this on if tickets do not change who replied last, and always say the Last Poster was the ticket creator, no matter how many times an admin makes a reply.  You should not change this setting unless you believe that your PHP timezone and MySQL are not set to the same thing, as evidence by the Last Poster issue.  If you turn this on when it is not needed, you will only slow down the performance of your website with no benefits. ', 'wpsc-support-tickets') , '</strong><br style="clear:both;"  /><br />
-<strong>' , __('Force Sync MySQL timezone to PHP timezone?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email below, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') , '  <br />
-                <select name="override_mysql_timezone">
-                 ';
+                            echo '
+                            <p><strong>' , __('Enabled & Test Beta Features?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true ONLY ON TEST websites.  This will enable new beta features as they are released. ', 'wpsc-support-tickets') , '  <br />
+                            <select name="enable_beta_testing">
+                             ';
 
-                $pagesY[0] = 'true';
-                $pagesY[1] = 'false';
-                foreach ($pagesY as $pagg) {
-                    $option = '<option value="' . $pagg . '"';
-                    if ($pagg === $devOptions['override_mysql_timezone']) {
-                        $option .= ' selected="selected"';
-                    }
-                    $option .='>';
-                    $option .= $pagg;
-                    $option .= '</option>';
-                    echo $option;
+                            $pagesYXX[0] = 'true';
+                            $pagesYXX[1] = 'false';
+                            foreach ($pagesYXX as $pagg) {
+                                $option = '<option value="' . $pagg . '"';
+                                if ($pagg === $devOptions['enable_beta_testing']) {
+                                    $option .= ' selected="selected"';
+                                }
+                                $option .='>';
+                                $option .= $pagg;
+                                $option .= '</option>';
+                                echo $option;
+                            }
+
+                            echo '
+                            </select>
+                            </p> 
+
+                            <p style="padding:5px;border:1px dotted black;">
+            <img src="' , plugins_url() , '/wpsc-support-tickets/images/bug_report.png" alt="' , __('Warning', 'wpsc-support-tickets') , '" style="float:left;" /> <strong style="font-size:1.2em;">' , __('Warning', 'wpsc-support-tickets') , ' - ' , __('This may fix issues on incorrectly configured servers, but it comes at a performance cost of an additional database connection and an additional query on every page load.  Generally, you should only turn this on if tickets do not change who replied last, and always say the Last Poster was the ticket creator, no matter how many times an admin makes a reply.  You should not change this setting unless you believe that your PHP timezone and MySQL are not set to the same thing, as evidence by the Last Poster issue.  If you turn this on when it is not needed, you will only slow down the performance of your website with no benefits. ', 'wpsc-support-tickets') , '</strong><br style="clear:both;"  /><br />
+            <strong>' , __('Force Sync MySQL timezone to PHP timezone?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email below, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') , '  <br />
+                            <select name="override_mysql_timezone">
+                             ';
+
+                            $pagesY[0] = 'true';
+                            $pagesY[1] = 'false';
+                            foreach ($pagesY as $pagg) {
+                                $option = '<option value="' . $pagg . '"';
+                                if ($pagg === $devOptions['override_mysql_timezone']) {
+                                    $option .= ' selected="selected"';
+                                }
+                                $option .='>';
+                                $option .= $pagg;
+                                $option .= '</option>';
+                                echo $option;
+                            }
+
+                            echo '
+                            </select>
+                            <br />
+                                </p>';
                 }
-
-                echo '
-                </select>
-                <br />
-                    </p>
-
+                
+            echo '
 
             </td></tr></table>
             <br /><br /><br />
@@ -826,33 +854,38 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '
                 </select>
                 </p>
-
+                ';
                 
-                <p style="padding:5px;border:1px dotted black;">
-<img src="' , plugins_url() , '/wpsc-support-tickets/images/bug_report.png" alt="' , __('Warning', 'wpsc-support-tickets') , '" style="float:left;" /> <strong style="font-size:1.2em;">' , __('Warning', 'wpsc-support-tickets') , ' - ' , __('Activating these overrides can cause registration emails to fail in some circumstances.  Please double check that new users receive their registration emails after enabling this override.', 'wpsc-support-tickets') , '</strong><br style="clear:both;"  /><br />
-<strong>' , __('Override Wordpress Email Sent "Name" &amp; "From"', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email below, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') , '  <br />
-                <select name="override_wordpress_email">
-                 ';
+                if ($devOptions['show_advanced_options'] == 'true') {
+                                        echo ' 
+                                        <p style="padding:5px;border:1px dotted black;">
+                        <img src="' , plugins_url() , '/wpsc-support-tickets/images/bug_report.png" alt="' , __('Warning', 'wpsc-support-tickets') , '" style="float:left;" /> <strong style="font-size:1.2em;">' , __('Warning', 'wpsc-support-tickets') , ' - ' , __('Activating these overrides can cause registration emails to fail in some circumstances.  Please double check that new users receive their registration emails after enabling this override.', 'wpsc-support-tickets') , '</strong><br style="clear:both;"  /><br />
+                        <strong>' , __('Override Wordpress Email Sent "Name" &amp; "From"', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email below, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') , '  <br />
+                                        <select name="override_wordpress_email">
+                                         ';
 
-                $pagesY[0] = 'true';
-                $pagesY[1] = 'false';
-                foreach ($pagesY as $pagg) {
-                    $option = '<option value="' . $pagg . '"';
-                    if ($pagg === $devOptions['override_wordpress_email']) {
-                        $option .= ' selected="selected"';
-                    }
-                    $option .='>';
-                    $option .= $pagg;
-                    $option .= '</option>';
-                    echo $option;
+                                        $pagesY[0] = 'true';
+                                        $pagesY[1] = 'false';
+                                        foreach ($pagesY as $pagg) {
+                                            $option = '<option value="' . $pagg . '"';
+                                            if ($pagg === $devOptions['override_wordpress_email']) {
+                                                $option .= ' selected="selected"';
+                                            }
+                                            $option .='>';
+                                            $option .= $pagg;
+                                            $option .= '</option>';
+                                            echo $option;
+                                        }
+
+                                        echo '
+                                        </select>
+                                        <br />
+                                        <strong>' , __('Override Name Sent From', 'wpsc-support-tickets') ,'</strong> ', __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') ,'<br /><input name="email_name" value="' , $devOptions['email_name'] , '" style="width:95%;" /><br /><br />
+                                        <strong>' , __('Override Email Sent From', 'wpsc-support-tickets') ,'</strong> ', __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') ,'<br /><input name="overrides_email" value="' , $devOptions['overrides_email'] , '" style="width:95%;" /><br /><br />
+                                            </p>';
                 }
-
-                echo '
-                </select>
-                <br />
-                <strong>' , __('Override Name Sent From', 'wpsc-support-tickets') ,'</strong> ', __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') ,'<br /><input name="email_name" value="' , $devOptions['email_name'] , '" style="width:95%;" /><br /><br />
-                <strong>' , __('Override Email Sent From', 'wpsc-support-tickets') ,'</strong> ', __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') ,'<br /><input name="overrides_email" value="' , $devOptions['overrides_email'] , '" style="width:95%;" /><br /><br />
-                    </p>
+                
+                echo ' 
             </td></tr></table>
             <br /><br /><br />
             </div>
