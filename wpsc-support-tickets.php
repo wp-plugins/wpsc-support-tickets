@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.38
+  Version: 4.9.39
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -3003,7 +3003,7 @@ function wpscstReplyTicket() {
                         wpscSupportTickets_mail($to, $subject, $message);
                     }
 
-                    if( $devOptions['email']!=$results[0]['email'] && $results[0]['email'] != $wpscst_email) { 
+                    if( $devOptions['email']!=$results[0]['email']) { 
                         $to      = $devOptions['email']; // Send this to the admin
                         if($devOptions['allow_html']=='true') {
                             $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets').' "' . htmlspecialchars_decode( htmlentities( base64_decode($results[0]['title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
