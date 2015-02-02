@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.37
+  Version: 4.9.38
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -2973,7 +2973,7 @@ function wpscstReplyTicket() {
                 // Update the Last Updated time stamp
                 if($_POST['wpscst_is_staff_reply']=='yes' && current_user_can('manage_wpsct_support_tickets')) {
                         // This is a staff reply from the admin panel
-                        $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."', `last_staff_reply` = '".time()."' WHERE `primkey` ='{$primkey}';";
+                        $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."', `last_staff_reply` = '".current_time( 'timestamp' )."' WHERE `primkey` ='{$primkey}';";
                 } else {
                         // This is a reply from the front end
                         $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."' WHERE `primkey` ='{$primkey}';";
@@ -2999,9 +2999,8 @@ function wpscstReplyTicket() {
                             }
                             $message .= $cleaned_message;
                         }            
-                        $headers = '';
 
-                        wpscSupportTickets_mail($to, $subject, $message, $headers);
+                        wpscSupportTickets_mail($to, $subject, $message);
                     }
 
                     if( $devOptions['email']!=$results[0]['email'] && $results[0]['email'] != $wpscst_email) { 
@@ -3025,9 +3024,8 @@ function wpscstReplyTicket() {
 
                             $message .= $cleaned_message;
                         }
-                        $headers = '';
 
-                        wpscSupportTickets_mail($to, $subject, $message, $headers);
+                        wpscSupportTickets_mail($to, $subject, $message);
                     }
                 }
         }
