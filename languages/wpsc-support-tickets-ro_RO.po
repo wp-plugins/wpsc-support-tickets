@@ -1,0 +1,1606 @@
+# Copyright (C) 2012 wpsc Support Tickets
+# This file is distributed under the same license as the wpsc Support Tickets package.
+msgid ""
+msgstr ""
+"Project-Id-Version: wpsc Support Tickets 4.6.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wpsc-support-tickets\n"
+"POT-Creation-Date: 2014-06-08 22:36:18+00:00\n"
+"PO-Revision-Date: 2014-06-09 12:23+0200\n"
+"Last-Translator: Richard Vencu <richard.vencu@richardconsulting.ro>\n"
+"Language-Team: Richard Vncu <richard@vencu.ro>\n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-Basepath: ..\n"
+
+#: php/add_field.php:18 php/del_field.php:18 php/sort_fields.php:18
+#: wpsc-support-tickets.php:312 wpsc-support-tickets.php:646
+#: wpsc-support-tickets.php:706 wpsc-support-tickets.php:819
+#: wpsc-support-tickets.php:1011 wpsc-support-tickets.php:1114
+msgid "Unable to Authenticate"
+msgstr "Nu te putem autentifica"
+
+#: php/delete_ticket.php:15
+msgid "Cheatin&#8217; uh?"
+msgstr "Trișezi, nu-i așa?"
+
+#: php/load_ticket.php:50 php/load_ticket.php:118 wpsc-support-tickets.php:751
+#: wpsc-support-tickets.php:787 wpsc-support-tickets.php:1137
+#: wpsc-support-tickets.php:1189 wpsc-support-tickets.php:1311
+#: wpsc-support-tickets.php:1628
+msgid "Guest"
+msgstr "Musafir"
+
+#: php/load_ticket.php:74 wpsc-support-tickets.php:724
+#: wpsc-support-tickets.php:1271 wpsc-support-tickets.php:1597
+#: wpsc-support-tickets.php:1672
+msgid "Open"
+msgstr "Deschis"
+
+#: php/load_ticket.php:76 wpsc-support-tickets.php:725
+#: wpsc-support-tickets.php:1275 wpsc-support-tickets.php:1598
+#: wpsc-support-tickets.php:1674
+msgid "Closed"
+msgstr "Închis"
+
+#: php/load_ticket.php:88 php/load_ticket.php:122
+#: wpsc-support-tickets.php:1141 wpsc-support-tickets.php:1193
+msgid "Posted by"
+msgstr "Publicat de"
+
+#: php/reply_ticket.php:110 php/submit_ticket.php:134
+msgid "POST exceeded maximum allowed size."
+msgstr "Ai depășit mărimea permisă de POST"
+
+#: php/reply_ticket.php:128 php/submit_ticket.php:152
+msgid "There is no error, the file uploaded with success"
+msgstr "Fișierul a fost încărcat cu succes"
+
+#: php/reply_ticket.php:129 php/submit_ticket.php:153
+msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini"
+msgstr ""
+"Fișierul încărcat depășește directiva MAX_FILE_SIZE specificată în PHP.ini"
+
+#: php/reply_ticket.php:130 php/submit_ticket.php:154
+msgid ""
+"The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
+"the HTML form"
+msgstr ""
+"Fișierul încărcat depășește directiva MAX_FILE_SIZE specificată în formular"
+
+#: php/reply_ticket.php:131 php/submit_ticket.php:155
+msgid "The uploaded file was only partially uploaded"
+msgstr "Fișierul a fost încărcat doar parțial"
+
+#: php/reply_ticket.php:132 php/submit_ticket.php:156
+msgid "No file was uploaded"
+msgstr "Nu s-a încărcat nici un fișier"
+
+#: php/reply_ticket.php:133 php/submit_ticket.php:157
+msgid "Missing a temporary folder"
+msgstr "Nu am folder temporar"
+
+#: php/reply_ticket.php:143 php/submit_ticket.php:167
+msgid "Upload failed is_uploaded_file test."
+msgstr "Încărcarea fișierului a eșuat"
+
+#: php/reply_ticket.php:145 php/submit_ticket.php:169
+msgid "File has no name."
+msgstr "Fișierul nu are nume"
+
+#: php/reply_ticket.php:151 php/submit_ticket.php:175
+msgid "File exceeds the maximum allowed size"
+msgstr "Fișierul depășește mărimea limită"
+
+#: php/reply_ticket.php:155 php/submit_ticket.php:179
+msgid "File size outside allowed lower bound"
+msgstr "Fișierul este prea mic"
+
+#: php/reply_ticket.php:162 php/submit_ticket.php:186
+msgid "Invalid file name"
+msgstr "Nume fișier invalid"
+
+#: php/reply_ticket.php:167 php/submit_ticket.php:191
+msgid "File could not be saved."
+msgstr "Nu am putut salva fișierul"
+
+#: php/reply_ticket.php:175 php/submit_ticket.php:199
+msgid "ATTACHMENT"
+msgstr "ATAȘAMENT"
+
+#: php/reply_ticket.php:215 php/reply_ticket.php:235
+msgid "The content of the reply is: "
+msgstr "Continutul raspunsului este: "
+
+#: php/reply_ticket.php:230
+msgid "Reply to a support ticket was received."
+msgstr "Ai primit un răspuns la solicitarea de suport."
+
+#: php/reply_ticket.php:231
+msgid "There is a new reply on support ticket: "
+msgstr "Ați primit un nou răspuns la solicitarea dumneavoastră de suport:"
+
+#: php/submit_ticket.php:83
+msgid ""
+"There was a problem with your form.  Please resubmit after you add the "
+"required information for the following:"
+msgstr ""
+"Există o problemă cu formularul. Te rugăm să trimiți din nou după "
+"completarea câmpurilor oblogatorii:"
+
+#: php/submit_ticket.php:263 php/submit_ticket.php:283
+msgid "The content of the ticket is: "
+msgstr "Continutul solicitarii este: "
+
+#: php/submit_ticket.php:278
+msgid "A new support ticket was received."
+msgstr "O nouă solicitare de suport a fost receptionată."
+
+#: php/submit_ticket.php:279
+msgid "There is a new support ticket: "
+msgstr "A sosit o noua solicitare de suport: "
+
+#: wpsc-support-tickets.php:184
+msgid "Other (Non-US)"
+msgstr "Altele (nu în SUA)"
+
+#: wpsc-support-tickets.php:273
+msgid "Support"
+msgstr "Suport"
+
+#: wpsc-support-tickets.php:273
+msgid "Billing"
+msgstr "Facturare"
+
+#: wpsc-support-tickets.php:275
+msgid "Your support ticket was received."
+msgstr "Solicitarea ta de suport a fost recepționată."
+
+#: wpsc-support-tickets.php:276
+msgid ""
+"Thank you for opening a new support ticket.  We will look into your issue "
+"and respond as soon as possible."
+msgstr ""
+"Va multumim pentru solicitarea trimisa. Vom verifica și vom rezolva problema "
+"în cel mai scurt timp posibil."
+
+#: wpsc-support-tickets.php:277
+msgid "Your support ticket reply was received."
+msgstr "Răspunsul tău la solicitarea de suport a fost recepționat."
+
+#: wpsc-support-tickets.php:278
+msgid "A reply was posted to one of your support tickets."
+msgstr ""
+"Un raspuns a fost publicat la una dintre cererile dumneavoastra de suport."
+
+#: wpsc-support-tickets.php:391
+msgid "Settings Updated."
+msgstr "Setările au fost actualizate"
+
+#: wpsc-support-tickets.php:409 wpsc-support-tickets.php:1754
+msgid "Settings"
+msgstr "Setări"
+
+#: wpsc-support-tickets.php:410
+msgid "PRO"
+msgstr "PRO"
+
+#: wpsc-support-tickets.php:417
+msgid "General"
+msgstr "General"
+
+#: wpsc-support-tickets.php:420
+msgid "Main Page"
+msgstr "Pagina principală"
+
+#: wpsc-support-tickets.php:420
+msgid "You need to use a Page as the base for wpsc Support Tickets."
+msgstr "Trebuie să utilizezi o pagină de start pentru wpsc Support Tickets."
+
+#: wpsc-support-tickets.php:423
+msgid "Select page"
+msgstr "Alege o pagină"
+
+#: wpsc-support-tickets.php:442
+msgid "Departments"
+msgstr "Departamente"
+
+#: wpsc-support-tickets.php:442
+msgid "Separate these values with a double pipe, like this ||"
+msgstr "Separă valorile cu linii duble ca acestea ||"
+
+#: wpsc-support-tickets.php:446 wpsc-support-tickets.php:449
+msgid "Email"
+msgstr "E-mail"
+
+#: wpsc-support-tickets.php:449
+msgid ""
+"The admin email where all new ticket &amp; reply notification emails will be "
+"sent"
+msgstr ""
+"Adresa de e-mail unde vor fi trimise toate solicitările și răspunsurile la "
+"solicitările de suport."
+
+#: wpsc-support-tickets.php:451
+msgid "New Ticket Email"
+msgstr "Adresă de e-mail nouă pentru solicitare de suport."
+
+#: wpsc-support-tickets.php:451
+msgid ""
+"The subject &amp; body of the email sent to the customer when creating a new "
+"ticket."
+msgstr ""
+"Subiectul și conținutul mesajului trimis către client când acesta postează o "
+"nouă solicitare de suport."
+
+#: wpsc-support-tickets.php:455
+msgid "Include the ticket in New Ticket Email"
+msgstr "Include solicitarea în Mesajul de Solicitare Nouă"
+
+#: wpsc-support-tickets.php:455
+msgid ""
+"Set this to true if you want the content of the ticket included in the new "
+"ticket email."
+msgstr ""
+"Setează true dacă dorești să incluzi conținutul solicitării în mesajul de "
+"notificare."
+
+#: wpsc-support-tickets.php:476
+msgid "New Reply Email"
+msgstr "Adresă de e-mail nouă pentru răspuns"
+
+#: wpsc-support-tickets.php:476
+msgid ""
+"The subject &amp; body of the email sent to the customer when there is a new "
+"reply."
+msgstr ""
+"Subiectul și conținutul mesajului trimis către client când apare un nou "
+"răspuns."
+
+#: wpsc-support-tickets.php:480
+msgid "Include the reply in New Reply Email"
+msgstr "Include răspunsul în Mesajul de răspuns nou"
+
+#: wpsc-support-tickets.php:480
+msgid ""
+"Set this to true if you want the content of the reply included in the new "
+"reply email."
+msgstr ""
+"Setează true dacă dorești să incluzi conținutul răspunsului în mesajul de "
+"notificare."
+
+#: wpsc-support-tickets.php:503
+msgid "Styling"
+msgstr "Stilizare"
+
+#: wpsc-support-tickets.php:506
+msgid "Disable inline styles"
+msgstr "Dezactivează stilurile inline"
+
+#: wpsc-support-tickets.php:506
+msgid "Set this to true if you want to disable the inline CSS styles."
+msgstr "Setează true dacă dorești să dezactivezi formatarea CSS inline."
+
+#: wpsc-support-tickets.php:529
+msgid "Guests"
+msgstr "Oaspeți"
+
+#: wpsc-support-tickets.php:532
+msgid "Allow Guests"
+msgstr "Permiteți musafiri"
+
+#: wpsc-support-tickets.php:532
+msgid ""
+"Set this to true if you want Guests to be able to use the support ticket "
+"system."
+msgstr ""
+"Setează true dacă dorești ca sistemul să poată fi utilizat și de Musafiri."
+
+#: wpsc-support-tickets.php:555
+msgid "Custom Fields"
+msgstr "Custom Fields"
+
+#: wpsc-support-tickets.php:558
+msgid "Place custom form fields"
+msgstr "Plasează câmpuri personalizate"
+
+#: wpsc-support-tickets.php:558
+msgid ""
+"When creating a ticket, this determines where your custom fields are placed "
+"on the ticket submission form."
+msgstr ""
+"La crearea unei solicitări această setare determină unde se plasează "
+"câmpurile personalizate în formular."
+
+#: wpsc-support-tickets.php:562 wpsc-support-tickets.php:586
+msgid "before everything"
+msgstr "înainte de tot"
+
+#: wpsc-support-tickets.php:563 wpsc-support-tickets.php:587
+msgid "before message"
+msgstr "înainte de mesaj"
+
+#: wpsc-support-tickets.php:564
+msgid "after message"
+msgstr "după mesaj"
+
+#: wpsc-support-tickets.php:565
+msgid "after everything"
+msgstr "după tot"
+
+#: wpsc-support-tickets.php:582
+msgid "Display custom fields"
+msgstr "Afișare câmpuri personalizate"
+
+#: wpsc-support-tickets.php:582
+msgid ""
+"When a ticket creator views a ticket they created, this setting determines "
+"where the custom fields are placed on the page."
+msgstr ""
+"Atunci când creatorul unei solicitări o vizualizează această setare "
+"determină afișarea câmpurilor personalizate în pagină."
+
+#: wpsc-support-tickets.php:588
+msgid "after message &amp; replies"
+msgstr "după răspunsurile la mesaj"
+
+#: wpsc-support-tickets.php:619
+msgid "Update Settings"
+msgstr "Salvare setări"
+
+#: wpsc-support-tickets.php:687
+msgid ""
+"Your version of wpsc Support Tickets is out of date.  Please email "
+"admin@wpstorecart.com with your PayPal transaction ID to recieve the latest "
+"version."
+msgstr ""
+"Versiunea wpsc Support Tickets este expirată. Scrie un email către "
+"admin@wpstorecart.com și specifică ID-ul tranzacției PayPal pentru a primi "
+"ultima versiune."
+
+#: wpsc-support-tickets.php:740 wpsc-support-tickets.php:776
+msgid "View Open Tickets:"
+msgstr "Vezi solicitările de suport deschise:"
+
+#: wpsc-support-tickets.php:742 wpsc-support-tickets.php:778
+msgid "View Closed Tickets:"
+msgstr "Vezi solicitările de suport închise:"
+
+#: wpsc-support-tickets.php:744 wpsc-support-tickets.php:780
+#: wpsc-support-tickets.php:1304 wpsc-support-tickets.php:1646
+msgid "Ticket"
+msgstr "Solicitare de suport"
+
+#: wpsc-support-tickets.php:744 wpsc-support-tickets.php:780
+#: wpsc-support-tickets.php:1267 wpsc-support-tickets.php:1304
+#: wpsc-support-tickets.php:1646
+msgid "Status"
+msgstr "Status"
+
+#: wpsc-support-tickets.php:744 wpsc-support-tickets.php:780
+msgid "User"
+msgstr "Utilizator"
+
+#: wpsc-support-tickets.php:744 wpsc-support-tickets.php:780
+#: wpsc-support-tickets.php:1304 wpsc-support-tickets.php:1646
+msgid "Last Reply"
+msgstr "Ultimul răspuns"
+
+#: wpsc-support-tickets.php:754 wpsc-support-tickets.php:757
+#: wpsc-support-tickets.php:790 wpsc-support-tickets.php:793
+#: wpsc-support-tickets.php:1314 wpsc-support-tickets.php:1317
+msgid "ticket creator"
+msgstr "creatorul solicitării"
+
+#: wpsc-support-tickets.php:759 wpsc-support-tickets.php:795
+#: wpsc-support-tickets.php:1319 wpsc-support-tickets.php:1658
+msgid "Staff Member"
+msgstr "Angajat"
+
+#: wpsc-support-tickets.php:762 wpsc-support-tickets.php:798
+#: wpsc-support-tickets.php:1323 wpsc-support-tickets.php:1683
+msgid "View"
+msgstr "Vezi"
+
+#: wpsc-support-tickets.php:762 wpsc-support-tickets.php:798
+#: wpsc-support-tickets.php:1683
+msgid "by"
+msgstr "de"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:907
+msgid "First name"
+msgstr "Prenume"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:908
+msgid "Last name"
+msgstr "Nume familie"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:909
+msgid "Address"
+msgstr "Adresă"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:910
+msgid "City"
+msgstr "Oraș"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:911
+msgid "US States"
+msgstr "Statele SUA"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:912
+msgid "Countries"
+msgstr "Țări"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:913
+msgid "Zipcode"
+msgstr "Zipcode"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:914
+msgid "Email Address"
+msgstr "Adresa de e-mail"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:915
+msgid "Input (text)"
+msgstr "Câmp text"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:916
+msgid "Input (numeric)"
+msgstr "Câmp numeric"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+msgid "Input textarea"
+msgstr "Câmp arie text"
+
+#: wpsc-support-tickets.php:845
+msgid "Input Dropdown list"
+msgstr "Listă derulantă"
+
+#: wpsc-support-tickets.php:845
+msgid "Input Checkbox"
+msgstr "Checkbox"
+
+#: wpsc-support-tickets.php:845
+msgid "Input Radio button"
+msgstr "Butoane radio"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+msgid "Separator"
+msgstr "Separator"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+msgid "Header"
+msgstr "Antet"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+msgid "Text"
+msgstr "Text"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:951 wpsc-support-tickets.php:982
+msgid "Required"
+msgstr "Necesar"
+
+#: wpsc-support-tickets.php:845 wpsc-support-tickets.php:846
+#: wpsc-support-tickets.php:951 wpsc-support-tickets.php:982
+msgid "Optional"
+msgstr "Opțional"
+
+#: wpsc-support-tickets.php:917
+msgid "Input Textarea"
+msgstr "Câmp arie text"
+
+#: wpsc-support-tickets.php:923
+msgid "--- Separator ---"
+msgstr "--- Separator ---"
+
+#: wpsc-support-tickets.php:924
+msgid "Header &lt;h2&gt;&lt;/h2&gt;"
+msgstr "Antet &lt;h2&gt;&lt;/h2&gt;"
+
+#: wpsc-support-tickets.php:925
+msgid "Text &lt;p&gt;&lt;/p&gt;"
+msgstr "Text &lt;p&gt;&lt;/p&gt;"
+
+#: wpsc-support-tickets.php:931
+msgid "Add New Field"
+msgstr "Adăugare câmp nou"
+
+#: wpsc-support-tickets.php:931
+msgid "Name"
+msgstr "Nume"
+
+#: wpsc-support-tickets.php:931
+msgid "Type"
+msgstr "Tip"
+
+#: wpsc-support-tickets.php:944
+msgid "Add additional option"
+msgstr "Adăugare opțiune nouă"
+
+#: wpsc-support-tickets.php:951
+msgid "Save New Field"
+msgstr "Salvare câmp nou"
+
+#: wpsc-support-tickets.php:991
+msgid "Save All Edits"
+msgstr "Salvare completă"
+
+#: wpsc-support-tickets.php:1033 wpsc-support-tickets.php:1488
+#: wpsc-support-tickets.php:1497
+msgid "Create a New Ticket"
+msgstr "Crează o nouă solicitare de suport"
+
+#: wpsc-support-tickets.php:1035
+msgid "Create ticket on behalf of user"
+msgstr "Crează o solicitare în numele"
+
+#: wpsc-support-tickets.php:1051 wpsc-support-tickets.php:1503
+msgid "Title"
+msgstr "Titlu"
+
+#: wpsc-support-tickets.php:1060 wpsc-support-tickets.php:1219
+#: wpsc-support-tickets.php:1512
+msgid "Your message"
+msgstr "Mesajul tău"
+
+#: wpsc-support-tickets.php:1073 wpsc-support-tickets.php:1281
+#: wpsc-support-tickets.php:1525 wpsc-support-tickets.php:1591
+msgid "Attach a file"
+msgstr "Atașare fișier"
+
+#: wpsc-support-tickets.php:1081 wpsc-support-tickets.php:1223
+#: wpsc-support-tickets.php:1533
+msgid "Department"
+msgstr "Departament"
+
+#: wpsc-support-tickets.php:1093 wpsc-support-tickets.php:1284
+#: wpsc-support-tickets.php:1560 wpsc-support-tickets.php:1606
+#: wpsc-support-tickets.php:1609
+msgid "Cancel"
+msgstr "Anulare"
+
+#: wpsc-support-tickets.php:1099 wpsc-support-tickets.php:1566
+msgid "Submit Ticket"
+msgstr "Trimite solicitarea"
+
+#: wpsc-support-tickets.php:1193
+msgid "Are you sure you want to delete this reply?"
+msgstr "Sigur dorești ștergerea acestui răspuns?"
+
+#: wpsc-support-tickets.php:1193
+msgid "Delete Reply"
+msgstr "Șterge răspunsul"
+
+#: wpsc-support-tickets.php:1233 wpsc-support-tickets.php:1540
+msgid "Severity"
+msgstr "Severitate"
+
+#: wpsc-support-tickets.php:1239 wpsc-support-tickets.php:1541
+msgid "Low"
+msgstr "Nivel scăzut"
+
+#: wpsc-support-tickets.php:1245 wpsc-support-tickets.php:1542
+msgid "Normal"
+msgstr "Nivel normal"
+
+#: wpsc-support-tickets.php:1251 wpsc-support-tickets.php:1544
+msgid "High"
+msgstr "Nivel înalt"
+
+#: wpsc-support-tickets.php:1257 wpsc-support-tickets.php:1546
+msgid "Urgent"
+msgstr "Urgent"
+
+#: wpsc-support-tickets.php:1263 wpsc-support-tickets.php:1548
+msgid "Critical"
+msgstr "Nivel critic"
+
+#: wpsc-support-tickets.php:1277
+msgid "Actions"
+msgstr "Acțiuni"
+
+#: wpsc-support-tickets.php:1278
+msgid "Are you sure you want to delete this ticket?"
+msgstr "Sigur dorești ștergerea aceastei cereri de suport?"
+
+#: wpsc-support-tickets.php:1278
+msgid "Delete Ticket"
+msgstr "Șterge solicitarea de suport"
+
+#: wpsc-support-tickets.php:1284
+msgid "Are you sure you want to cancel?"
+msgstr "Sigur dorești să anulezi?"
+
+#: wpsc-support-tickets.php:1284
+msgid "Update Ticket"
+msgstr "Actualizare solicitare"
+
+#: wpsc-support-tickets.php:1327
+msgid "No open tickets!"
+msgstr "Nu ai solicitări suport deschise!"
+
+#: wpsc-support-tickets.php:1335
+msgid "wpscSupportTickets Overview"
+msgstr "Rezumat wpscSupportTickets"
+
+#: wpsc-support-tickets.php:1471
+msgid "Enter your email address"
+msgstr "Introdu adresa de e-mail"
+
+#: wpsc-support-tickets.php:1472
+msgid "Submit"
+msgstr "Trimite"
+
+#: wpsc-support-tickets.php:1576
+msgid "Loading"
+msgstr "Încărcare"
+
+#: wpsc-support-tickets.php:1581
+msgid "Your reply"
+msgstr "Răspunsul tău"
+
+#: wpsc-support-tickets.php:1615
+msgid "Submit Reply"
+msgstr "Trimite răspuns"
+
+#: wpsc-support-tickets.php:1642
+msgid "View Previous Tickets:"
+msgstr "Vezi solicitările de suport anterioare:"
+
+#: wpsc-support-tickets.php:1650 wpsc-support-tickets.php:1656
+msgid "you"
+msgstr "tine"
+
+#: wpsc-support-tickets.php:1690
+msgid "Please"
+msgstr "Te rugăm"
+
+#: wpsc-support-tickets.php:1690
+msgid "log in"
+msgstr "logare"
+
+#: wpsc-support-tickets.php:1690
+msgid "or"
+msgstr "sau"
+
+#: wpsc-support-tickets.php:1690
+msgid "register"
+msgstr "înregistrare"
+
+#. Plugin Name of the plugin/theme
+#: wpsc-support-tickets.php:1752
+msgid "wpsc Support Tickets"
+msgstr "wpsc Support Tickets"
+
+#: wpsc-support-tickets.php:1752
+msgid "Support Tickets"
+msgstr "Solicitări de suport"
+
+#: wpsc-support-tickets.php:1753
+msgid "Create Ticket"
+msgstr "Crează solicitare"
+
+#: wpsc-support-tickets.php:1755
+msgid "Reply to Support Ticket"
+msgstr "Răspuns la solicitarea de suport"
+
+#: wpsc-support-tickets.php:1755
+msgid "Reply to Support Tickets"
+msgstr "Răspuns la solicitarile de suport"
+
+#: wpsc-support-tickets.php:1756
+msgid "Statistics"
+msgstr "Statistici"
+
+#: wpsc-support-tickets.php:1762
+msgid "Edit User Fields Collected"
+msgstr "Editarea câmpurilor colectate"
+
+#: wpsc-support-tickets.php:1762
+msgid "User Fields"
+msgstr "Câmpuri utilizator"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wpscsupporttickets.com/wordpress-support-ticket-plugin/"
+msgstr "http://wpscsupporttickets.com/wordpress-support-ticket-plugin/"
+
+#. Description of the plugin/theme
+msgid ""
+"An open source help desk and support ticket system for Wordpress using "
+"jQuery. Easy to use for both users & admins."
+msgstr ""
+"Un sistem de suport open source pentru Wordpress care foloseste jQuery. Usor "
+"de utilizat atat de catre clienti cat si de catre administratorii."
+
+#. Author of the plugin/theme
+msgid "wpStoreCart, LLC"
+msgstr "wpStoreCart, LLC"
+
+#. Author URI of the plugin/theme
+msgid "URI: http://wpstorecart.com/"
+msgstr "URI: http://wpstorecart.com/"
+
+#~ msgid "Alabama"
+#~ msgstr "Alabama"
+
+#~ msgid "Alaska"
+#~ msgstr "Alaska"
+
+#~ msgid "Arizona"
+#~ msgstr "Arizona"
+
+#~ msgid "Arkansas"
+#~ msgstr "Arkansas"
+
+#~ msgid "California"
+#~ msgstr "California"
+
+#~ msgid "Colorado"
+#~ msgstr "Colorado"
+
+#~ msgid "Connecticut"
+#~ msgstr "Connecticut"
+
+#~ msgid "Delaware"
+#~ msgstr "Delaware"
+
+#~ msgid "District Of Columbia"
+#~ msgstr "District Of Columbia"
+
+#~ msgid "Florida"
+#~ msgstr "Florida"
+
+#~ msgid "Georgia"
+#~ msgstr "Georgia"
+
+#~ msgid "Hawaii"
+#~ msgstr "Hawaii"
+
+#~ msgid "Idaho"
+#~ msgstr "Idaho"
+
+#~ msgid "Illinois"
+#~ msgstr "Illinois"
+
+#~ msgid "Indiana"
+#~ msgstr "Indiana"
+
+#~ msgid "Iowa"
+#~ msgstr "Iowa"
+
+#~ msgid "Kansas"
+#~ msgstr "Kansas"
+
+#~ msgid "Kentucky"
+#~ msgstr "Kentucky"
+
+#~ msgid "Louisiana"
+#~ msgstr "Louisiana"
+
+#~ msgid "Maine"
+#~ msgstr "Maine"
+
+#~ msgid "Maryland"
+#~ msgstr "Maryland"
+
+#~ msgid "Massachusetts"
+#~ msgstr "Massachusetts"
+
+#~ msgid "Michigan"
+#~ msgstr "Michigan"
+
+#~ msgid "Minnesota"
+#~ msgstr "Minnesota"
+
+#~ msgid "Mississippi"
+#~ msgstr "Mississippi"
+
+#~ msgid "Missouri"
+#~ msgstr "Missouri"
+
+#~ msgid "Montana"
+#~ msgstr "Montana"
+
+#~ msgid "Nebraska"
+#~ msgstr "Nebraska"
+
+#~ msgid "Nevada"
+#~ msgstr "Nevada"
+
+#~ msgid "New Hampshire"
+#~ msgstr "New Hampshire"
+
+#~ msgid "New Jersey"
+#~ msgstr "New Jersey"
+
+#~ msgid "New Mexico"
+#~ msgstr "New Mexico"
+
+#~ msgid "New York"
+#~ msgstr "New York"
+
+#~ msgid "North Carolina"
+#~ msgstr "North Carolina"
+
+#~ msgid "North Dakota"
+#~ msgstr "North Dakota"
+
+#~ msgid "Ohio"
+#~ msgstr "Ohio"
+
+#~ msgid "Oklahoma"
+#~ msgstr "Oklahoma"
+
+#~ msgid "Oregon"
+#~ msgstr "Oregon"
+
+#~ msgid "Pennsylvania"
+#~ msgstr "Pennsylvania"
+
+#~ msgid "Rhode Island"
+#~ msgstr "Rhode Island"
+
+#~ msgid "South Carolina"
+#~ msgstr "South Carolina"
+
+#~ msgid "South Dakota"
+#~ msgstr "South Dakota"
+
+#~ msgid "Tennessee"
+#~ msgstr "Tennessee"
+
+#~ msgid "Texas"
+#~ msgstr "Texas"
+
+#~ msgid "Utah"
+#~ msgstr "Utah"
+
+#~ msgid "Vermont"
+#~ msgstr "Vermont"
+
+#~ msgid "Virginia"
+#~ msgstr "Virginia"
+
+#~ msgid "Washington"
+#~ msgstr "Washington"
+
+#~ msgid "West Virginia"
+#~ msgstr "West Virginia"
+
+#~ msgid "Wisconsin"
+#~ msgstr "Wisconsin"
+
+#~ msgid "Wyoming"
+#~ msgstr "Wyoming"
+
+#~ msgid "United States"
+#~ msgstr "United States"
+
+#~ msgid "Canada"
+#~ msgstr "Canada"
+
+#~ msgid "United Kingdom"
+#~ msgstr "United Kingdom"
+
+#~ msgid "Ireland"
+#~ msgstr "Ireland"
+
+#~ msgid "Australia"
+#~ msgstr "Australia"
+
+#~ msgid "New Zealand"
+#~ msgstr "New Zealand"
+
+#~ msgid "Afghanistan"
+#~ msgstr "Afghanistan"
+
+#~ msgid "Albania"
+#~ msgstr "Albania"
+
+#~ msgid "Algeria"
+#~ msgstr "Algeria"
+
+#~ msgid "American Samoa"
+#~ msgstr "American Samoa"
+
+#~ msgid "Andorra"
+#~ msgstr "Andorra"
+
+#~ msgid "Angola"
+#~ msgstr "Angola"
+
+#~ msgid "Anguilla"
+#~ msgstr "Anguilla"
+
+#~ msgid "Antarctica"
+#~ msgstr "Antarctica"
+
+#~ msgid "Antigua and Barbuda"
+#~ msgstr "Antigua and Barbuda"
+
+#~ msgid "Armenia"
+#~ msgstr "Armenia"
+
+#~ msgid "Aruba"
+#~ msgstr "Aruba"
+
+#~ msgid "Austria"
+#~ msgstr "Austria"
+
+#~ msgid "Azerbaijan"
+#~ msgstr "Azerbaijan"
+
+#~ msgid "Bahamas"
+#~ msgstr "Bahamas"
+
+#~ msgid "Bahrain"
+#~ msgstr "Bahrain"
+
+#~ msgid "Bangladesh"
+#~ msgstr "Bangladesh"
+
+#~ msgid "Barbados"
+#~ msgstr "Barbados"
+
+#~ msgid "Belarus"
+#~ msgstr "Belarus"
+
+#~ msgid "Belgium"
+#~ msgstr "Belgium"
+
+#~ msgid "Belize"
+#~ msgstr "Belize"
+
+#~ msgid "Benin"
+#~ msgstr "Benin"
+
+#~ msgid "Bermuda"
+#~ msgstr "Bermuda"
+
+#~ msgid "Bhutan"
+#~ msgstr "Bhutan"
+
+#~ msgid "Bolivia"
+#~ msgstr "Bolivia"
+
+#~ msgid "Bosnia and Herzegovina"
+#~ msgstr "Bosnia and Herzegovina"
+
+#~ msgid "Botswana"
+#~ msgstr "Botswana"
+
+#~ msgid "Bouvet Island"
+#~ msgstr "Bouvet Island"
+
+#~ msgid "Brazil"
+#~ msgstr "Brazil"
+
+#~ msgid "British Indian Ocean Territory"
+#~ msgstr "British Indian Ocean Territory"
+
+#~ msgid "Brunei Darussalam"
+#~ msgstr "Brunei Darussalam"
+
+#~ msgid "Bulgaria"
+#~ msgstr "Bulgaria"
+
+#~ msgid "Burkina Faso"
+#~ msgstr "Burkina Faso"
+
+#~ msgid "Burundi"
+#~ msgstr "Burundi"
+
+#~ msgid "Cambodia"
+#~ msgstr "Cambodia"
+
+#~ msgid "Cameroon"
+#~ msgstr "Cameroon"
+
+#~ msgid "Cape Verde"
+#~ msgstr "Cape Verde"
+
+#~ msgid "Cayman Islands"
+#~ msgstr "Cayman Islands"
+
+#~ msgid "Central African Republic"
+#~ msgstr "Central African Republic"
+
+#~ msgid "Chad"
+#~ msgstr "Chad"
+
+#~ msgid "Chile"
+#~ msgstr "Chile"
+
+#~ msgid "China"
+#~ msgstr "China"
+
+#~ msgid "Christmas Island"
+#~ msgstr "Christmas Island"
+
+#~ msgid "Cocos (Keeling) Islands"
+#~ msgstr "Cocos (Keeling) Islands"
+
+#~ msgid "Colombia"
+#~ msgstr "Colombia"
+
+#~ msgid "Comoros"
+#~ msgstr "Comoros"
+
+#~ msgid "Congo"
+#~ msgstr "Congo"
+
+#~ msgid "Congo, The Democratic Republic of The"
+#~ msgstr "Congo, The Democratic Republic of The"
+
+#~ msgid "Cook Islands"
+#~ msgstr "Cook Islands"
+
+#~ msgid "Costa Rica"
+#~ msgstr "Costa Rica"
+
+#~ msgid "Cote D'ivoire"
+#~ msgstr "Cote D'ivoire"
+
+#~ msgid "Croatia"
+#~ msgstr "Croatia"
+
+#~ msgid "Cuba"
+#~ msgstr "Cuba"
+
+#~ msgid "Cyprus"
+#~ msgstr "Cyprus"
+
+#~ msgid "Czech Republic"
+#~ msgstr "Czech Republic"
+
+#~ msgid "Denmark"
+#~ msgstr "Denmark"
+
+#~ msgid "Djibouti"
+#~ msgstr "Djibouti"
+
+#~ msgid "Dominica"
+#~ msgstr "Dominica"
+
+#~ msgid "Dominican Republic"
+#~ msgstr "Dominican Republic"
+
+#~ msgid "Ecuador"
+#~ msgstr "Ecuador"
+
+#~ msgid "Egypt"
+#~ msgstr "Egypt"
+
+#~ msgid "El Salvador"
+#~ msgstr "El Salvador"
+
+#~ msgid "Equatorial Guinea"
+#~ msgstr "Equatorial Guinea"
+
+#~ msgid "Eritrea"
+#~ msgstr "Eritrea"
+
+#~ msgid "Estonia"
+#~ msgstr "Estonia"
+
+#~ msgid "Ethiopia"
+#~ msgstr "Ethiopia"
+
+#~ msgid "Falkland Islands (Malvinas)"
+#~ msgstr "Falkland Islands (Malvinas)"
+
+#~ msgid "Faroe Islands"
+#~ msgstr "Faroe Islands"
+
+#~ msgid "Fiji"
+#~ msgstr "Fiji"
+
+#~ msgid "Finland"
+#~ msgstr "Finland"
+
+#~ msgid "France"
+#~ msgstr "France"
+
+#~ msgid "French Guiana"
+#~ msgstr "French Guiana"
+
+#~ msgid "French Polynesia"
+#~ msgstr "French Polynesia"
+
+#~ msgid "French Southern Territories"
+#~ msgstr "French Southern Territories"
+
+#~ msgid "Gabon"
+#~ msgstr "Gabon"
+
+#~ msgid "Gambia"
+#~ msgstr "Gambia"
+
+#~ msgid "Germany"
+#~ msgstr "Germany"
+
+#~ msgid "Ghana"
+#~ msgstr "Ghana"
+
+#~ msgid "Gibraltar"
+#~ msgstr "Gibraltar"
+
+#~ msgid "Greece"
+#~ msgstr "Greece"
+
+#~ msgid "Greenland"
+#~ msgstr "Greenland"
+
+#~ msgid "Grenada"
+#~ msgstr "Grenada"
+
+#~ msgid "Guadeloupe"
+#~ msgstr "Guadeloupe"
+
+#~ msgid "Guam"
+#~ msgstr "Guam"
+
+#~ msgid "Guatemala"
+#~ msgstr "Guatemala"
+
+#~ msgid "Guinea"
+#~ msgstr "Guinea"
+
+#~ msgid "Guinea-bissau"
+#~ msgstr "Guinea-bissau"
+
+#~ msgid "Guyana"
+#~ msgstr "Guyana"
+
+#~ msgid "Haiti"
+#~ msgstr "Haiti"
+
+#~ msgid "Heard Island and Mcdonald Islands"
+#~ msgstr "Heard Island and Mcdonald Islands"
+
+#~ msgid "Holy See (Vatican City State)"
+#~ msgstr "Holy See (Vatican City State)"
+
+#~ msgid "Honduras"
+#~ msgstr "Honduras"
+
+#~ msgid "Hong Kong"
+#~ msgstr "Hong Kong"
+
+#~ msgid "Hungary"
+#~ msgstr "Hungary"
+
+#~ msgid "Iceland"
+#~ msgstr "Iceland"
+
+#~ msgid "India"
+#~ msgstr "India"
+
+#~ msgid "Indonesia"
+#~ msgstr "Indonesia"
+
+#~ msgid "Iran, Islamic Republic of"
+#~ msgstr "Iran, Islamic Republic of"
+
+#~ msgid "Iraq"
+#~ msgstr "Iraq"
+
+#~ msgid "Israel"
+#~ msgstr "Israel"
+
+#~ msgid "Italy"
+#~ msgstr "Italy"
+
+#~ msgid "Jamaica"
+#~ msgstr "Jamaica"
+
+#~ msgid "Japan"
+#~ msgstr "Japan"
+
+#~ msgid "Jordan"
+#~ msgstr "Jordan"
+
+#~ msgid "Kazakhstan"
+#~ msgstr "Kazakhstan"
+
+#~ msgid "Kenya"
+#~ msgstr "Kenya"
+
+#~ msgid "Kiribati"
+#~ msgstr "Kiribati"
+
+#~ msgid "Korea, Democratic People's Republic of"
+#~ msgstr "Korea, Democratic People's Republic of"
+
+#~ msgid "Korea, Republic of"
+#~ msgstr "Korea, Republic of"
+
+#~ msgid "Kuwait"
+#~ msgstr "Kuwait"
+
+#~ msgid "Kyrgyzstan"
+#~ msgstr "Kyrgyzstan"
+
+#~ msgid "Lao People's Democratic Republic"
+#~ msgstr "Lao People's Democratic Republic"
+
+#~ msgid "Latvia"
+#~ msgstr "Latvia"
+
+#~ msgid "Lebanon"
+#~ msgstr "Lebanon"
+
+#~ msgid "Lesotho"
+#~ msgstr "Lesotho"
+
+#~ msgid "Liberia"
+#~ msgstr "Liberia"
+
+#~ msgid "Libyan Arab Jamahiriya"
+#~ msgstr "Libyan Arab Jamahiriya"
+
+#~ msgid "Liechtenstein"
+#~ msgstr "Liechtenstein"
+
+#~ msgid "Lithuania"
+#~ msgstr "Lithuania"
+
+#~ msgid "Luxembourg"
+#~ msgstr "Luxembourg"
+
+#~ msgid "Macao"
+#~ msgstr "Macao"
+
+#~ msgid "Macedonia, The Former Yugoslav Republic of"
+#~ msgstr "Macedonia, The Former Yugoslav Republic of"
+
+#~ msgid "Madagascar"
+#~ msgstr "Madagascar"
+
+#~ msgid "Malawi"
+#~ msgstr "Malawi"
+
+#~ msgid "Malaysia"
+#~ msgstr "Malaysia"
+
+#~ msgid "Maldives"
+#~ msgstr "Maldives"
+
+#~ msgid "Mali"
+#~ msgstr "Mali"
+
+#~ msgid "Malta"
+#~ msgstr "Malta"
+
+#~ msgid "Marshall Islands"
+#~ msgstr "Marshall Islands"
+
+#~ msgid "Martinique"
+#~ msgstr "Martinique"
+
+#~ msgid "Mauritania"
+#~ msgstr "Mauritania"
+
+#~ msgid "Mauritius"
+#~ msgstr "Mauritius"
+
+#~ msgid "Mayotte"
+#~ msgstr "Mayotte"
+
+#~ msgid "Mexico"
+#~ msgstr "Mexico"
+
+#~ msgid "Micronesia, Federated States of"
+#~ msgstr "Micronesia, Federated States of"
+
+#~ msgid "Moldova, Republic of"
+#~ msgstr "Moldova, Republic of"
+
+#~ msgid "Monaco"
+#~ msgstr "Monaco"
+
+#~ msgid "Mongolia"
+#~ msgstr "Mongolia"
+
+#~ msgid "Montserrat"
+#~ msgstr "Montserrat"
+
+#~ msgid "Morocco"
+#~ msgstr "Morocco"
+
+#~ msgid "Mozambique"
+#~ msgstr "Mozambique"
+
+#~ msgid "Myanmar"
+#~ msgstr "Myanmar"
+
+#~ msgid "Namibia"
+#~ msgstr "Namibia"
+
+#~ msgid "Nauru"
+#~ msgstr "Nauru"
+
+#~ msgid "Nepal"
+#~ msgstr "Nepal"
+
+#~ msgid "Netherlands"
+#~ msgstr "Netherlands"
+
+#~ msgid "Netherlands Antilles"
+#~ msgstr "Netherlands Antilles"
+
+#~ msgid "New Caledonia"
+#~ msgstr "New Caledonia"
+
+#~ msgid "Nicaragua"
+#~ msgstr "Nicaragua"
+
+#~ msgid "Niger"
+#~ msgstr "Niger"
+
+#~ msgid "Nigeria"
+#~ msgstr "Nigeria"
+
+#~ msgid "Niue"
+#~ msgstr "Niue"
+
+#~ msgid "Norfolk Island"
+#~ msgstr "Norfolk Island"
+
+#~ msgid "Northern Mariana Islands"
+#~ msgstr "Northern Mariana Islands"
+
+#~ msgid "Norway"
+#~ msgstr "Norway"
+
+#~ msgid "Oman"
+#~ msgstr "Oman"
+
+#~ msgid "Pakistan"
+#~ msgstr "Pakistan"
+
+#~ msgid "Palau"
+#~ msgstr "Palau"
+
+#~ msgid "Palestinian Territory, Occupied"
+#~ msgstr "Palestinian Territory, Occupied"
+
+#~ msgid "Panama"
+#~ msgstr "Panama"
+
+#~ msgid "Papua New Guinea"
+#~ msgstr "Papua New Guinea"
+
+#~ msgid "Paraguay"
+#~ msgstr "Paraguay"
+
+#~ msgid "Peru"
+#~ msgstr "Peru"
+
+#~ msgid "Philippines"
+#~ msgstr "Philippines"
+
+#~ msgid "Pitcairn"
+#~ msgstr "Pitcairn"
+
+#~ msgid "Poland"
+#~ msgstr "Poland"
+
+#~ msgid "Portugal"
+#~ msgstr "Portugal"
+
+#~ msgid "Puerto Rico"
+#~ msgstr "Puerto Rico"
+
+#~ msgid "Qatar"
+#~ msgstr "Qatar"
+
+#~ msgid "Reunion"
+#~ msgstr "Reunion"
+
+#~ msgid "Romania"
+#~ msgstr "Romania"
+
+#~ msgid "Russian Federation"
+#~ msgstr "Russian Federation"
+
+#~ msgid "Rwanda"
+#~ msgstr "Rwanda"
+
+#~ msgid "Saint Helena"
+#~ msgstr "Saint Helena"
+
+#~ msgid "Saint Kitts and Nevis"
+#~ msgstr "Saint Kitts and Nevis"
+
+#~ msgid "Saint Lucia"
+#~ msgstr "Saint Lucia"
+
+#~ msgid "Saint Pierre and Miquelon"
+#~ msgstr "Saint Pierre and Miquelon"
+
+#~ msgid "Saint Vincent and The Grenadines"
+#~ msgstr "Saint Vincent and The Grenadines"
+
+#~ msgid "Samoa"
+#~ msgstr "Samoa"
+
+#~ msgid "San Marino"
+#~ msgstr "San Marino"
+
+#~ msgid "Sao Tome and Principe"
+#~ msgstr "Sao Tome and Principe"
+
+#~ msgid "Saudi Arabia"
+#~ msgstr "Saudi Arabia"
+
+#~ msgid "Senegal"
+#~ msgstr "Senegal"
+
+#~ msgid "Serbia and Montenegro"
+#~ msgstr "Serbia and Montenegro"
+
+#~ msgid "Seychelles"
+#~ msgstr "Seychelles"
+
+#~ msgid "Sierra Leone"
+#~ msgstr "Sierra Leone"
+
+#~ msgid "Singapore"
+#~ msgstr "Singapore"
+
+#~ msgid "Slovakia"
+#~ msgstr "Slovakia"
+
+#~ msgid "Slovenia"
+#~ msgstr "Slovenia"
+
+#~ msgid "Solomon Islands"
+#~ msgstr "Solomon Islands"
+
+#~ msgid "Somalia"
+#~ msgstr "Somalia"
+
+#~ msgid "South Africa"
+#~ msgstr "South Africa"
+
+#~ msgid "South Georgia and The South Sandwich Islands"
+#~ msgstr "South Georgia and The South Sandwich Islands"
+
+#~ msgid "Spain"
+#~ msgstr "Spain"
+
+#~ msgid "Sri Lanka"
+#~ msgstr "Sri Lanka"
+
+#~ msgid "Sudan"
+#~ msgstr "Sudan"
+
+#~ msgid "Suriname"
+#~ msgstr "Suriname"
+
+#~ msgid "Svalbard and Jan Mayen"
+#~ msgstr "Svalbard and Jan Mayen"
+
+#~ msgid "Swaziland"
+#~ msgstr "Swaziland"
+
+#~ msgid "Sweden"
+#~ msgstr "Sweden"
+
+#~ msgid "Switzerland"
+#~ msgstr "Switzerland"
+
+#~ msgid "Syrian Arab Republic"
+#~ msgstr "Syrian Arab Republic"
+
+#~ msgid "Taiwan, Province of China"
+#~ msgstr "Taiwan, Province of China"
+
+#~ msgid "Tajikistan"
+#~ msgstr "Tajikistan"
+
+#~ msgid "Tanzania, United Republic of"
+#~ msgstr "Tanzania, United Republic of"
+
+#~ msgid "Thailand"
+#~ msgstr "Thailand"
+
+#~ msgid "Timor-leste"
+#~ msgstr "Timor-leste"
+
+#~ msgid "Togo"
+#~ msgstr "Togo"
+
+#~ msgid "Tokelau"
+#~ msgstr "Tokelau"
+
+#~ msgid "Tonga"
+#~ msgstr "Tonga"
+
+#~ msgid "Trinidad and Tobago"
+#~ msgstr "Trinidad and Tobago"
+
+#~ msgid "Tunisia"
+#~ msgstr "Tunisia"
+
+#~ msgid "Turkey"
+#~ msgstr "Turkey"
+
+#~ msgid "Turkmenistan"
+#~ msgstr "Turkmenistan"
+
+#~ msgid "Turks and Caicos Islands"
+#~ msgstr "Turks and Caicos Islands"
+
+#~ msgid "Tuvalu"
+#~ msgstr "Tuvalu"
+
+#~ msgid "Uganda"
+#~ msgstr "Uganda"
+
+#~ msgid "Ukraine"
+#~ msgstr "Ukraine"
+
+#~ msgid "United Arab Emirates"
+#~ msgstr "United Arab Emirates"
+
+#~ msgid "United States Minor Outlying Islands"
+#~ msgstr "United States Minor Outlying Islands"
+
+#~ msgid "Uruguay"
+#~ msgstr "Uruguay"
+
+#~ msgid "Uzbekistan"
+#~ msgstr "Uzbekistan"
+
+#~ msgid "Vanuatu"
+#~ msgstr "Vanuatu"
+
+#~ msgid "Venezuela"
+#~ msgstr "Venezuela"
+
+#~ msgid "Viet Nam"
+#~ msgstr "Viet Nam"
+
+#~ msgid "Virgin Islands, British"
+#~ msgstr "Virgin Islands, British"
+
+#~ msgid "Virgin Islands, U.S."
+#~ msgstr "Virgin Islands, U.S."
+
+#~ msgid "Wallis and Futuna"
+#~ msgstr "Wallis and Futuna"
+
+#~ msgid "Western Sahara"
+#~ msgstr "Western Sahara"
+
+#~ msgid "Yemen"
+#~ msgstr "Yemen"
+
+#~ msgid "Zambia"
+#~ msgstr "Zambia"
+
+#~ msgid "Zimbabwe"
+#~ msgstr "Zimbabwe"
+
+#~ msgid "Report a bug"
+#~ msgstr "Raportare bug"
+
+#~ msgid "Feature request"
+#~ msgstr "Solicitare funcționalitate"
+
+#~ msgid "Show tickets:"
+#~ msgstr "Afișare solicitări de suport:"
