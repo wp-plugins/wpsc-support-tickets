@@ -74,11 +74,11 @@ function wpsctLoadTicket() {
                 $resresolution = $results[0]['resolution'];
             }       
 
-            if (!function_exists('wpscSupportTicketDepartments')) {
-                echo '<strong>'.base64_decode($results[0]['title']).'</strong> ('.$resresolution.' - '.base64_decode($results[0]['type']).')</div>';
-            } else {
-                wpscSupportTicketsPRODepartments($results[0], $resresolution);
-            }
+            //if (!function_exists('wpscSupportTicketDepartments')) {
+            //    echo '<strong>'.base64_decode($results[0]['title']).'</strong> ('.$resresolution.' - '.base64_decode($results[0]['type']).')</div>';
+            //} else {
+                wpscSupportTicketsDepartments($results[0], $resresolution);
+            //}
             
 
             if($devOptions['custom_field_frontend_position']=='before message') {

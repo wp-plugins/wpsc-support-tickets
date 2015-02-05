@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.40
+  Version: 4.9.41
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -465,6 +465,9 @@ if (!class_exists("wpscSupportTickets")) {
                 echo '<div style="float:left;"><img src="' , plugins_url() , '/wpsc-support-tickets/images/logo_pro.png" alt="wpscSupportTickets" /></div>';
             }
 
+            if (function_exists('wpscSupportTicketsPRO') && !function_exists('wpsctFourNineFortyOne')) {
+                echo '<div style="float:left;border:1px solid red;padding:6px;background:pink;"><h3>Your version of IDB Support Tickets PRO is out of date and will not work correctly until you upgrade to the latest version.  There is now a much more powerful Departments system, but you must upgrade your PRO version to take advantage of the new features.  Failure to do so will result in bugs related to your Departments.  You can upgrade by logging in and redownloading your purchase here: <a href="http://indiedevbundle.com/bundles/your-downloads/">http://indiedevbundle.com/bundles/your-downloads/</a>  If you are having problems accessing your downloads please contact me here: <a href="http://indiedevbundle.com/contact/">http://indiedevbundle.com/contact/</a></h3></div><br />';
+            }
 
             echo '
             </div>
@@ -1492,7 +1495,7 @@ if (!class_exists("wpscSupportTickets")) {
         //END Prints out the admin page ================================================================================		
 
         function printAdminPageCreateTicket() {
-
+            global $wpdb;
             $devOptions = $this->getAdminOptions();
             $devOptions['disable_inline_styles'] = 'false';
             
@@ -1575,18 +1578,24 @@ if (!class_exists("wpscSupportTickets")) {
             if ($devOptions['allow_uploads'] == 'true') {
                 echo  '<tr><td><h3>' , __('Attach a file', 'wpsc-support-tickets') , '</h3> <input type="file" name="wpscst_file" id="wpscst_file"></td></tr>';
             }
-            $exploder = explode('||', $devOptions['departments']);
+            //$exploder = explode('||', $devOptions['departments']);
 
             if($devOptions['custom_field_position'] == 'after everything') {
                 echo  wpsctPromptForCustomFields();
             }                            
 
             echo  '<tr><td><h3>' , __('Department', 'wpsc-support-tickets') , '</h3><select name="wpscst_department" id="wpscst_department">';
-            if (isset($exploder[0])) {
-                foreach ($exploder as $exploded) {
-                    echo  '<option value="' , $exploded , '">' , $exploded , '</option>';
-                }
+            //if (isset($exploder[0])) {
+            //    foreach ($exploder as $exploded) {
+            //        echo  '<option value="' , $exploded , '">' , $exploded , '</option>';
+            //    }
+            //}
+            $dep_results = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpscst_departments` WHERE `enabled`=1;", ARRAY_A);
+            foreach ($dep_results as $dep_result) {
+                echo '<option value="'.$dep_result['primkey'].'">'.$dep_result['name'].'</option>';
             }
+            
+            
             echo  '</select><button class="wpscst-button" id="wpscst_cancel" onclick="cancelAdd();return false;"  ';
             if ($devOptions['disable_inline_styles'] == 'false') {
                 echo 'style="float:right;"';
@@ -1645,7 +1654,8 @@ if (!class_exists("wpscSupportTickets")) {
                     $user = false; // Guest
                     $theusersname = __('Guest', 'wpsc-support-tickets') . ' - <strong>' . $results[0]['email'] . '</strong>';
                 }
-                echo '<div id="wpscst_meta"><h1>' , base64_decode($results[0]['title']) , '</h1> (' , $results[0]['resolution'] , ' - ' , base64_decode($results[0]['type']) , ')</div>';
+                
+                echo '<div id="wpscst_meta"><h1>' , base64_decode($results[0]['title']) , '</h1> (' , $results[0]['resolution'] , ' - ' , wpscSupportTicketsGetDepartmentName($results[0]['type']) , ')</div>';
                 echo '<table class="widefat" style="width:100%;">';
                 echo '<thead><tr><th id="wpscst_results_posted_by">' , __('Posted by', 'wpsc-support-tickets') , ' ' , $theusersname , ' (<span id="wpscst_results_time_posted">' , date_i18n( get_option( 'date_format' ), $results[0]['time_posted']) , '</span>)</th></tr></thead>';
 
@@ -1736,25 +1746,11 @@ if (!class_exists("wpscSupportTickets")) {
             $output .= '<tr><td><h3>' . __('Your message', 'wpsc-support-tickets') . '</h3><div id="wpscst_nic_panel2" style="display:block;width:100%;"></div> <textarea name="wpscst_reply" id="wpscst_reply" style="display:block;width:100%;margin:0 auto 0 auto;background-color:#FFF;" rows="5" columns="6"></textarea>';
             $output .= '</td></tr>';
             
-            if (!function_exists('wpscSupportTicketDepartments')) {
-                $exploder = explode('||', $devOptions['departments']);
-            }
 
             $output .= '<tr><td><div style="float:left;"><h3>' . __('Department', 'wpsc-support-tickets') . '</h3><select name="wpscst_department" id="wpscst_department">';
+
+            $output.= wpscSupportTicketsListDepartments($results[0]['type']);
             
-            if (!function_exists('wpscSupportTicketDepartments')) {
-                // Old department system
-                if (isset($exploder[0])) {
-                    foreach ($exploder as $exploded) {
-                        $output .= '<option value="' . $exploded . '"';
-                        if (base64_decode($results[0]['type']) == $exploded) {
-                            $output.= ' selected="selected" ';
-                        } $output.='>' . $exploded . '</option>';
-                    }
-                }
-            } else {
-                $output.= wpscSupportTicketsPROListDepartments();
-            }
             
             $output .= '</select></div>
                 <div style="float:left;margin-left:20px;"><h3>' . __('Severity', 'wpsc-support-tickets') . '</h3>
@@ -1878,6 +1874,7 @@ if (!class_exists("wpscSupportTickets")) {
                 if (@!class_exists('AGCA')) {
                     wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
                 }
+                wp_enqueue_script('wpsc-jeditable', plugins_url() . '/wpsc-support-tickets/js/jquery.jeditable.mini.js');
                 wp_enqueue_style('wpsc-support-tickets-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
             }
         }
@@ -2080,18 +2077,22 @@ if (!class_exists("wpscSupportTickets")) {
                             if ($devOptions['allow_uploads'] == 'true') {
                                 $output .= '<tr><td><h3>' . __('Attach a file', 'wpsc-support-tickets') . '</h3> <input type="file" name="wpscst_file" id="wpscst_file"></td></tr>';
                             }
-                            $exploder = explode('||', $devOptions['departments']);
+                            //$exploder = explode('||', $devOptions['departments']);
 
                             if($devOptions['custom_field_position'] == 'after everything') {
                                 $output .= wpsctPromptForCustomFields();
                             }                            
                             
                             $output .= '<tr><td><h3>' . __('Department', 'wpsc-support-tickets') . '</h3><select name="wpscst_department" id="wpscst_department">';
-                            if (isset($exploder[0])) {
-                                foreach ($exploder as $exploded) {
-                                    $output .= '<option value="' . $exploded . '">' . $exploded . '</option>';
-                                }
-                            }
+                            //if (isset($exploder[0])) {
+                            //    foreach ($exploder as $exploded) {
+                            //        $output .= '<option value="' . $exploded . '">' . $exploded . '</option>';
+                            //    }
+                            //}
+                            $dep_results = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpscst_departments` WHERE `enabled`=1;", ARRAY_A);
+                            foreach ($dep_results as $dep_result) {
+                                $output .=  '<option value="'.$dep_result['primkey'].'">'.$dep_result['name'].'</option>';
+                            }                            
                             $output .= '</select> 
                             <h3';
                             if ($devOptions['display_severity_on_create'] == 'false') {
@@ -2658,7 +2659,7 @@ function wpscstSubmitTicket() {
         // Alternative new method for dealing with line breaks adding in 4.9.23
         $wpscst_initial_message = base64_encode( '<p>'. preg_replace('/[\r\n]+/', '</p><p>', $_POST['wpscst_initial_message'] . $wpscst_initial_message) . '</p>' );
         
-        $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));    
+        $wpscst_department = intval($_POST['wpscst_department']);    
         $wpscst_severity = $wpdb->escape($_POST['wpscst_severity']);
 
         $sql = "
@@ -2751,6 +2752,32 @@ function wpscstSubmitTicket() {
             $headers = '';
 
             wpscSupportTickets_mail($to, $subject, $message, $headers);
+            
+            // New department emails
+            $dep_results = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpscst_departments` WHERE `primkey`='{$wpscst_department}' ;", ARRAY_A);
+            if (@isset($dep_results[0]['name']) ) {
+                
+                $email_department_admin = null;
+                if($dep_results[0]['admin_user_id']!=0 && $dep_results[0]['admin_user_id']!=null) {
+                    global $user_info;
+                    $user_info = get_userdata($dep_results[0]['admin_user_id']);    
+                    $email_department_admin = $user_info->user_email;                 
+
+                    if ($devOptions['email'] != $email_department_admin) { // If the Department head is different from the admin, send the Department head an email as well.
+                        wpscSupportTickets_mail($email_department_admin, $subject, $message, $headers); 
+                    }
+                
+                }
+                if ($dep_results[0]['forward_all_department_emails'] == 1) {
+                    if($dep_results[0]['main_department_email'] != $devOptions['email']) {
+                        if($dep_results[0]['main_department_email'] != $email_department_admin) { // If the main department email hasn't gotten an email, but department forwarding is on, lets send it
+                            wpscSupportTickets_mail($dep_results[0]['main_department_email'], $subject, $message, $headers); 
+                        }                        
+                    }
+                }
+            }
+            // End new department code
+            
         }
     }
 
@@ -2786,7 +2813,7 @@ function wpscstReplyTicket() {
 
     if ( current_user_can('manage_wpsct_support_tickets')) { // admin edits such as closing tickets should happen here first:
         if(@isset($_POST['wpscst_status']) && @isset($_POST['wpscst_department']) && is_numeric($_POST['wpscst_edit_primkey'])) {
-            $wpscst_department = base64_encode(strip_tags($_POST['wpscst_department']));
+            $wpscst_department = intval($_POST['wpscst_department']);
             $wpscst_status = $wpdb->escape($_POST['wpscst_status']);
             $wpscst_severity = $wpdb->escape($_POST['wpscst_severity']);
             $primkey = intval($_POST['wpscst_edit_primkey']);
@@ -3027,6 +3054,38 @@ function wpscstReplyTicket() {
 
                         wpscSupportTickets_mail($to, $subject, $message);
                     }
+                    
+                    
+                    // New department emails
+                    $dep_results = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpscst_departments` WHERE `primkey`='{$wpscst_department}' ;", ARRAY_A);
+                    if (@isset($dep_results[0]['name']) ) {
+
+                        $email_department_admin = null;
+                        if($dep_results[0]['admin_user_id']!=0 && $dep_results[0]['admin_user_id']!=null) {
+                            global $user_info;
+                            $user_info = get_userdata($dep_results[0]['admin_user_id']);    
+                            $email_department_admin = $user_info->user_email;                 
+
+                            if ($devOptions['email'] != $email_department_admin) { // If the Department head is different from the admin, send the Department head an email as well.
+                                if ($results[0]['email'] != $email_department_admin) {
+                                    wpscSupportTickets_mail($email_department_admin, $subject, $message); 
+                                }
+                            }
+
+                        }
+                        if ($dep_results[0]['forward_all_department_emails'] == 1) {
+                            if($dep_results[0]['main_department_email'] != $devOptions['email']) {
+                                if($dep_results[0]['main_department_email'] != $email_department_admin) { // If the main department email hasn't gotten an email, but department forwarding is on, lets send it
+                                    if ($results[0]['email'] != $dep_results[0]['main_department_email']) {
+                                        wpscSupportTickets_mail($dep_results[0]['main_department_email'], $subject, $message); 
+                                    }
+                                }                        
+                            }
+                        }
+                    }
+                    // End new department code                    
+                    
+                    
                 }
         }
     }
@@ -3120,7 +3179,420 @@ if (!function_exists('wstPROBulkTabIndex')) {
 }
 
 
+if(!function_exists('wpscSupportTicketsReturnValidManagers')) {
+    /**
+     * Returns an array of IDs of users who can manage issues
+     * 
+     * @global object $wpdb
+     * @return array 
+     */
+    function wpscSupportTicketsReturnValidManagers() {
+        global $wpdb;
+        
+        $valid_managers = array();
+
+        $search = $wpdb->get_results("SELECT `ID` FROM `{$wpdb->prefix}users` ORDER BY `ID`;", ARRAY_A);
+
+        foreach ($search as $userid) {
+            if (user_can($userid['ID'],  'manage_wpsct_support_tickets')) {
+                $valid_managers[] = $userid['ID'];
+            }
+        } 
+
+        return $valid_managers;
+    }
+}
 
 
+    function wpscSupportTickets_installDepartments() {
+        global $wpdb;
+
+        $devOptions = get_option('wpscSupportTicketsAdminOptions');
+
+        /**
+         * Install the department system if the table isn't present
+         */
+        $table_name = $wpdb->prefix . "wpscst_departments";
+        if ($wpdb->get_var("show tables like '$table_name'") != $table_name) { // Create 
+
+            $sql = "
+            CREATE TABLE `{$table_name}` (
+                `primkey` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+                `name` VARCHAR(512) NOT NULL, 
+                `description` TEXT NOT NULL, 
+                `admin_user_id` INT NOT NULL, 
+                `enabled` TINYINT(1) NOT NULL DEFAULT '1', 
+                `group_name_slug` VARCHAR(256) NOT NULL, 
+                `parent_department` INT NOT NULL, 
+                `forward_all_department_emails` TINYINT(1) NOT NULL DEFAULT '0',  
+                `main_department_email` VARCHAR(512) NOT NULL,
+                `display_list_order` INT NOT NULL, 
+                `target_response_time` VARCHAR(128) NOT NULL
+            );				
+            ";
+
+            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+            dbDelta($sql);
+
+            $retrieve_user = get_user_by( 'email', get_option('admin_email'));
+            $admin_user_id = intval($retrieve_user->ID);
+            $exploder = explode('||', $devOptions['departments']);
+            $count = 0;
+            if (isset($exploder[0])) {
+                foreach ($exploder as $exploded) {
+
+                    $exploded = $exploded;
+
+                    $insert_sql = "INSERT INTO `{$table_name}` (`primkey`, `name`, `description`, `admin_user_id`, `enabled`, `group_name_slug`, `parent_department`, `forward_all_department_emails`, `main_department_email`, `display_list_order`, `target_response_time`) VALUES (NULL, '".esc_sql(trim($exploded))."', '', '".$admin_user_id."', '1', '".esc_sql(wpsctSlug(trim($exploded)))."', '0', '0', '".esc_sql(get_bloginfo('admin_email'))."', '".$count."', '2 days');";
+                    $wpdb->query($insert_sql);
+                    $lastID = $wpdb->insert_id;
+
+                    $update_sql = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `type`='{$lastID}' WHERE `type`='".base64_encode($exploded)."' ;";
+                    $wpdb->query($update_sql);
+
+                    $count++;
+                }
+            } else {
+                $insert_sql = "INSERT INTO `{$table_name}` (`primkey`, `name`, `description`, `admin_user_id`, `enabled`, `group_name_slug`, `parent_department`, `forward_all_department_emails`, `main_department_email`, `display_list_order`, `target_response_time`) VALUES (NULL, 'General', '', '".$admin_user_id."', '1', 'general-support', '0', '0', '".esc_sql(get_bloginfo('admin_email'))."', '0', '2 days');";
+                $wpdb->query($insert_sql);
+            }
+            $devOptions['departments'] = '';
+            update_option( 'wpscSupportTicketsAdminOptions', $devOptions ); // Remove the old departments
+        }    
+    }
+
+
+    function wpscSupportTicketsGetDepartments() {
+        global $wpdb;
+        $table_name = $wpdb->prefix . "wpscst_departments";  
+        $dep_results = $wpdb->get_results("SELECT * FROM `{$table_name}` ;", ARRAY_A);    
+        return $dep_results;
+    }
+
+    
+    function wpscSupportTicketsGetDepartmentName($key) {
+        global $wpdb;
+        $key = intval($key);
+        $departmentName = null;
+        $table_name = $wpdb->prefix . "wpscst_departments"; 
+        $new_results = $wpdb->get_results("SELECT `name` FROM `{$table_name}` WHERE `primkey`='{$key}';", ARRAY_A);  
+        if(@isset($new_results[0]['name'])) {
+            $departmentName = $new_results[0]['name'];
+        }        
+        return $departmentName;
+    }
+    
+
+    /**
+     * 
+     * A function to display the department on tickets
+     * 
+     * @param type $result
+     * @param type $resresolution
+     */
+    function wpscSupportTicketsDepartments($result, $resresolution) {
+
+        $final_cat_name = '';
+
+        $new_results = wpscSupportTicketsGetDepartmentName(intval($result['type']));                
+        if(@isset($new_results) && $new_results!=null) {
+            $final_cat_name = $new_results;
+        }
+        
+        echo '<strong>'.base64_decode($result['title']).'</strong> ('.$resresolution.' - '.$final_cat_name.')</div>';
+
+
+    }
+
+    function wpscSupportTicketsListDepartments($selected=null) {
+        $results = wpscSupportTicketsGetDepartments();
+        $string = '';
+        if (@isset($results[0])) {
+            foreach ($results as $result) {
+                $string .= '<option value="'.$result['primkey'].'"'; 
+                if($selected == $result['primkey']) {
+                    $string .= ' selected="selected" ';
+                }
+                $string .= '>'.$result['name'].'</option>';
+            }
+        }
+        return $string;
+    }
+
+
+    /**
+     * New Departments system in 
+     * @global object $wpdb
+     */
+    function wpscSupportTicketDepartments() {
+        global $wpdb;
+
+        if (function_exists('current_user_can') && !current_user_can('manage_wpsct_support_tickets')) {
+            die(__('Unable to Authenticate', 'wpsc-support-tickets'));
+        }     
+
+        wpscSupportTickets_installDepartments();
+
+        $table_name = $wpdb->prefix . "wpscst_departments";  
+        
+        
+        if(@isset($_POST['dep_description'])) {
+            $sql = " 
+                INSERT INTO `new_wordpress`.`wp_wpscst_departments` (
+                `primkey` ,
+                `name` ,
+                `description` ,
+                `admin_user_id` ,
+                `enabled` ,
+                `group_name_slug` ,
+                `parent_department` ,
+                `forward_all_department_emails` ,
+                `main_department_email` ,
+                `display_list_order` ,
+                `target_response_time`
+                )
+                VALUES (
+                    NULL , '".$wpdb->escape($_POST['dep_name'])."', '".$wpdb->escape($_POST['dep_description'])."', '".intval($_POST['dep_lead_admin'])."', '".intval($_POST['dep_enabled'])."', '".$wpdb->escape($_POST['dep_slug'])."', '".intval($_POST['dep_parent'])."', '".intval($_POST['dep_forward_all_emails'])."', '".$wpdb->escape($_POST['dep_email'])."', '0', '2 days'
+                );
+                ";
+            $wpdb->query($sql);
+        }
+        
+        
+        $dep_results = $wpdb->get_results("SELECT * FROM `{$table_name}` ;", ARRAY_A);
+                
+        
+        echo '<div class="wrap">';
+
+
+            
+        echo '<div id="wst_tabs" style="padding:5px 5px 0px 5px;font-size:1.1em;border-color:#DDD;border-radius:6px;">
+            <ul>
+                <li><a href="#wstcf_tabs-1">' , __('Departments', 'wpsc-support-tickets') , '</a></li>
+            </ul>        
+            <script type="text/javascript">
+                jQuery(function() {
+                    jQuery( "#wpsct-new-department-form" ).hide();
+                    jQuery( "#wpsct-hide-nf" ).hide();
+                    jQuery( "#wst_tabs" ).tabs();
+                    setTimeout(function(){ jQuery(".updated").fadeOut(); },3000);
+                });
+                ';
+        echo " 
+                jQuery(document).ready(function() {
+                    jQuery('.wpsct-edit').editable(ajaxurl+'?action=wpsct_save_department_edit', { 
+                        type      : 'text',
+                            width     : '180px',
+                            height    : '20px',                        
+                        cancel    : '".__('Cancel', 'wpsc-support-tickets')."',
+                        submit    : '".__('Save', 'wpsc-support-tickets')."',
+                        tooltip   : '".__('Click to Edit', 'wpsc-support-tickets')."'
+                    });
+                    
+
+                    jQuery('.wpsct-edit-enabled').editable(ajaxurl+'?action=wpsct_save_department_edit', {
+                        submit : \"".__('Save', 'wpsc-support-tickets')."\",
+                        cancel : \"".__('Cancel', 'wpsc-support-tickets')."\",
+                        type   : \"select\",
+                        data   :  { '1' : '".__('Enabled', 'wpsc-support-tickets')."',                
+                            '0' : '".__('Disabled', 'wpsc-support-tickets')."' }
+
+                    });
+
+
+                    jQuery('.wpsct-edit-user').editable(ajaxurl+'?action=wpsct_save_department_edit', {
+                        submit : \"".__('Save', 'wpsc-support-tickets')."\",
+                        cancel : \"".__('Cancel', 'wpsc-support-tickets')."\",
+                        type   : \"select\",
+                        data   : \" {'0':'".__('Unassigned', 'wpsc-support-tickets')."'"; 
+                        $wpscBlogUsers = wpscSupportTicketsReturnValidManagers();
+                        foreach ($wpscBlogUsers as $wpbt_manager) {
+                            global $user_info;
+                            $user_info = get_userdata($wpbt_manager);                            
+                            echo  ",'{$user_info->ID}' : '".htmlentities($user_info->display_name)."' ";
+                        }       
+                        echo '}"
+
+                    });';
+                    
+                    echo " 
+                    jQuery('.wpsct-edit-parent').editable(ajaxurl+'?action=wpsct_save_department_edit', {
+                        submit : \"".__('Save', 'wpsc-support-tickets')."\",
+                        cancel : \"".__('Cancel', 'wpsc-support-tickets')."\",
+                        type   : \"select\",
+                        data   : \" {'0':'".__('Unassigned', 'wpsc-support-tickets')."'"; 
+                        if(@isset($dep_results[0])) {
+                          foreach ($dep_results as $dep_result) {
+                              echo  ",'{$dep_result['primkey']}' : '".htmlentities($dep_result['name'])."' ";
+                          }
+                        }                   
+
+                        echo '}"
+
+                    });';    
+                        
+            echo '
+                    
+                 });
+
+            </script>
+
+            <div id="wstcf_tabs-1">    ';         
+
+        echo '<table style="width:500px;max-width:500px;">';
+        echo '<tr><td>';
+        echo '<button onclick="jQuery(\'#wpsct-new-department-form\').show();jQuery(\'#wpsct-hide-nf\').show();jQuery(\'#wpsct-make-nf\').hide();return false;" class="button-primary" id="wpsct-make-nf">',__('Create new Department', 'wpsc-support-tickets'),'</button>'; 
+        echo '<button onclick="jQuery(\'#wpsct-new-department-form\').hide();jQuery(\'#wpsct-make-nf\').show();jQuery(\'#wpsct-hide-nf\').hide();return false;" class="button-secondary" id="wpsct-hide-nf">',__('Close new Department form', 'wpsc-support-tickets'),'</button><br /><br />'; 
+        
+        echo '<form action="#" method="post">';
+        echo '<table class="widefat" id="wpsct-new-department-form">';
+        echo '<tr><td><h3> ',__('Add New Department', 'wpsc-support-tickets'),'</h3></td><td></td></tr>';
+        echo '<tr><td>'.__('Name', 'wpsc-support-tickets') , '<br /><input type="text" name="dep_name" /> </td>';
+        echo '<td>'.__('Description', 'wpsc-support-tickets') , '<br /><input type="text" name="dep_description" /></td></tr>';
+
+        echo '<tr><td>'.__('Lead Admin', 'wpsc-support-tickets'); 
+        echo '<br /><select name="dep_lead_admin" id="dep_lead_admin">';
+        $wpbt_managers = wpscSupportTicketsReturnValidManagers();
+        foreach ($wpbt_managers as $wpbt_manager) {
+            global $user_info;
+            $user_info = get_userdata($wpbt_manager);
+            echo '<option value="'.$wpbt_manager.'">'.$user_info->user_login.'</option>';
+        }
+        echo '</select>';
+        echo '</td>';
+        echo '<td>',__('Enabled?', 'wpsc-support-tickets') , '<br /><select name="dep_enabled"><option value="1">'.__('Enabled', 'wpsc-support-tickets').'</option><option value="0">'.__('Disabled', 'wpsc-support-tickets').'</option></select></td></tr>';        
+
+        echo '<tr><td>',__('Slug', 'wpsc-support-tickets') , '<br /><input type="text" name="dep_slug" /> </td>';
+        echo '<td>',__('Parent Department', 'wpsc-support-tickets');
+        
+        if(@isset($dep_results[0])) {
+        echo '<br /><select name="dep_parent" id="dep_parent">';
+            foreach ($dep_results as $dep_result) {
+                echo '<option value="'.$dep_result['primkey'].'">'.$dep_result['name'].'</option>';
+            }
+        echo '</select>';            
+        }
+        
+        echo '</td></tr>';
+        
+        echo '<tr><td>',__('Forward All Emails?', 'wpsc-support-tickets') , '<br /><select name="dep_forward_all_emails"><option value="1">'.__('Enabled', 'wpsc-support-tickets').'</option><option value="0">'.__('Disabled', 'wpsc-support-tickets').'</option></select></td>';
+        echo '<td>',__('Department Email', 'wpsc-support-tickets') , '<br /><input type="text" name="dep_email" /></td></tr>';    
+        
+        echo '<tr><td></td><td><input type="submit" value="',__('Save This Department', 'wpsc-support-tickets') , '" class="button-primary"></td></tr>';
+        
+        echo '</table></form></td></tr>';
+        
+        echo '</table><br />';
+        
+        if(@isset($dep_results[0])) {
+            echo '<table class="widefat">';
+            echo '<thead><tr><th>',__('ID', 'wpsc-support-tickets'),'</th><th>',__('Name', 'wpsc-support-tickets'),'</th><th>',__('Description', 'wpsc-support-tickets'),'</th><th>',__('Lead Admin', 'wpsc-support-tickets'),'</th><th>',__('Enabled?', 'wpsc-support-tickets'),'</th><th>',__('Slug', 'wpsc-support-tickets'),'</th><th>',__('Parent Department', 'wpsc-support-tickets'),'</th><th>',__('Forward All Emails?', 'wpsc-support-tickets'),'</th><th>',__('Department Email', 'wpsc-support-tickets'),'</th></tr></thead><tbody>';
+            foreach ($dep_results as $dep_result) {
+                $user_info = get_userdata($dep_result['admin_user_id']);
+                $username = $user_info->user_login;                
+                $parent = '';
+                if($dep_result['parent_department'] > 0) { // If our parent department is set
+                    $parent_id = intval($dep_result['parent_department']);
+                    $parent_results = $wpdb->get_results("SELECT `name` FROM `{$table_name}` WHERE `primkey`='{$parent_id}' ;", ARRAY_A);
+                    if(@isset($parent_results[0]['name'])) {
+                        $parent = $parent_results[0]['name'];
+                    }
+                } 
+                echo '<tr id="wpsct_department_'.$dep_result['primkey'] .'"><td><img src="'.plugins_url().'/wpsc-support-tickets/images/delete.png" style="cursor:pointer;" onclick="if ( confirm(\''.__('Are you sure you wish to delete this department?', 'wpsc-support-tickets').'\') ) { jQuery.post(ajaxurl+\'?action=wpsct_delete_department\', { wpsct_primkey: '.$dep_result['primkey'] .'}, function(data) { jQuery(\'#wpsct_department_'.$dep_result['primkey'] .'\').remove(); });  }" />'.$dep_result['primkey'].'</td><td class="wpsct-edit" id="wpsctDepEditName_'.$dep_result['primkey'].'">'.$dep_result['name'].'</td><td class="wpsct-edit" id="wpsctDepEditDesc_'.$dep_result['primkey'].'">'.$dep_result['description'].'</td><td class="wpsct-edit-user" id="wpsctDepEditLeadUser_'.$dep_result['primkey'].'">'.$username.'</td><td id="wpsctDepEditEnabled_'.$dep_result['primkey'].'" class="wpsct-edit-enabled">';
+                if ($dep_result['enabled']==1) {echo __('Enabled', 'wpsc-support-tickets');} else {echo __('Disabled', 'wpsc-support-tickets');}
+                echo '</td><td class="wpsct-edit" id="wpsctDepEditSlug_'.$dep_result['primkey'].'">'.$dep_result['group_name_slug'].'</td><td id="wpsctDepEditParent_'.$dep_result['primkey'].'" class="wpsct-edit-parent">'.$parent.'</td><td id="wpsctDepEditForward_'.$dep_result['primkey'].'" class="wpsct-edit-enabled">';
+                if ($dep_result['forward_all_department_emails']==1) {echo __('Enabled', 'wpsc-support-tickets');} else {echo __('Disabled', 'wpsc-support-tickets');}
+                echo '</td><td class="wpsct-edit" id="wpsctDepEditEmail_'.$dep_result['primkey'].'">'.$dep_result['main_department_email'].'</td></tr>';
+            }
+            echo '</tbody></table>';
+        }
+
+        echo '</div></div></div>';
+
+    }
+
+    add_action('wpscSupportTickets_departmentsHook', 'wpscSupportTicketDepartments');
+
+function wpsctAjaxSaveDepartmentEdit() {
+        global $wpdb;
+
+        if(is_user_logged_in()) {
+            wpscSupportTickets::checkPermissions();        
+
+            $id_raw = $_POST['id'];
+            $value = $_POST['value'];
+
+            $sql = null;
+            $to_be_replaced = array("wpsctDepEditName_", "wpsctDepEditDesc_", "wpsctDepEditLeadUser_", "wpsctDepEditEnabled_", "wpsctDepEditSlug_", "wpsctDepEditParent_", "wpsctDepEditForward_", "wpsctDepEditEmail_");
+            $id = intval(str_replace($to_be_replaced, "", $id_raw));
+
+            if (strpos($id_raw,'wpsctDepEditName') !== false) {
+                $sql = "UPDATE `{$wpdb->prefix}wpscst_departments` SET `name`='$value' WHERE `primkey`='{$id}'; ";
+            }  
+
+            if (strpos($id_raw,'wpsctDepEditDesc') !== false) {
+                $sql = "UPDATE `{$wpdb->prefix}wpscst_departments` SET `description`='$value' WHERE `primkey`='{$id}'; ";
+            }  
+
+            if (strpos($id_raw,'wpsctDepEditLeadUser') !== false) {
+                $value = intval($value);
+                $sql = "UPDATE `{$wpdb->prefix}wpscst_departments` SET `admin_user_id`='$value' WHERE `primkey`='{$id}'; ";
+                global $user_info;
+                $user_info = get_userdata($value);    
+                $value = $user_info->user_login;                
+            }      
+
+            if (strpos($id_raw,'wpsctDepEditEnabled') !== false) {
+                $value = intval($value);
+                $sql = "UPDATE `{$wpdb->prefix}wpscst_departments` SET `enabled`='$value' WHERE `primkey`='{$id}'; ";
+                if ($value==1) {$value = __('Enabled', 'wpsc-support-tickets');} else {$value = __('Disabled', 'wpsc-support-tickets');}
+            }   
+
+            if (strpos($id_raw,'wpsctDepEditParent') !== false) {
+                $value = intval($value);
+                $sql = "UPDATE `{$wpdb->prefix}wpscst_departments` SET `parent_department`='$value' WHERE `primkey`='{$id}'; ";
+                $parent_results = $wpdb->get_results("SELECT `name` FROM `{$wpdb->prefix}wpscst_departments` WHERE `primkey`='{$value}' ;", ARRAY_A);
+                if(@isset($parent_results[0]['name'])) {
+                    $value = $parent_results[0]['name'];
+                }                
+            } 
+
+            if (strpos($id_raw,'wpsctDepEditForward') !== false) {
+                $value = intval($value);
+                $sql = "UPDATE `{$wpdb->prefix}wpscst_departments` SET `forward_all_department_emails`='$value' WHERE `primkey`='{$id}'; ";
+                if ($value==1) {$value = __('Enabled', 'wpsc-support-tickets');} else {$value = __('Disabled', 'wpsc-support-tickets');}
+            }  
+            
+            if (strpos($id_raw,'wpsctDepEditEmail') !== false) {
+                $sql = "UPDATE `{$wpdb->prefix}wpscst_departments` SET `main_department_email`='$value' WHERE `primkey`='{$id}'; ";
+            }              
+
+            if($sql!=null) {
+                $wpdb->query($sql);
+            }
+
+
+            echo stripslashes($value);
+        }
+        die();     
+}
+add_action( 'wp_ajax_wpsct_save_department_edit', 'wpsctAjaxSaveDepartmentEdit' );
+
+if(!function_exists('wpsctAjaxDeleteDepartment')) {
+    function wpsctAjaxDeleteDepartment() {
+        global $wpdb;
+        if(is_user_logged_in()) {
+            wpscSupportTickets::checkPermissions();
+
+            $id = intval($_POST['wpsct_primkey']);
+            
+            $wpdb->query( "DELETE FROM `{$wpdb->prefix}wpscst_departments` WHERE `primkey`='{$id}'; ");
+            
+        
+        }
+        die();
+    }
+}
+add_action( 'wp_ajax_wpsct_delete_department', 'wpsctAjaxDeleteDepartment' );
 
 ?>
