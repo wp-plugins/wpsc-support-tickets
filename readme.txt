@@ -4,7 +4,7 @@ Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsup
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.2
-Stable tag: 4.9.42
+Stable tag: 4.9.43
 
 == Description ==
 
@@ -25,7 +25,10 @@ This can optionally allow you to keep your support ticket system accessible only
  * Guests can use tickets as well, using just their email address.  Disabled by default.
  * Admins, Super Admins, and any user granted the manage_wpsct_support_tickets capability, can reply to, close, or delete any ticket
  * Front end support ticket interface is done in jQuery, and utilizes Ajax ticket loading
- * Customizable departments, email messages, and CSS for custom solutions
+ * New robust customizable ajax departments
+ * Individual, department lead, and department wide email support on a department by department basis.
+ * Customizable email messages, and CSS for custom solutions
+ * Save any support ticket to PDF for easy printing
  * You can hide support ticket capabilities from a user who has not purchased a specific product (requires [IDB Ecommerce](http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/ "IDB Ecommerce") 2.4.9 or higher)
  * Seamless integration with open source IDB Ecommerce ecommerce plugin, including a shared Guest system 
  * Admin dashboard widget shows all open tickets
@@ -106,6 +109,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
 * Updated: Added randomized addition to filenames & updated the file upload presentation (added 4.9.29 if you turn on beta testing)
+
+= 4.9.43 =
+* Added: Print to PDF feature added to beta features (to use it, turn on beta testing from wp-admin > Support Tickets > Settings > General > Enable & Test Beta Features? > and set to True) Currently not UTF8 compatible. Currently no replies are included.  Working on fixing both and more.
+* Fixed: Network activation fixed
 
 = 4.9.42 =
 * Updated: Hebrew translation updated by http://atar4u.com/

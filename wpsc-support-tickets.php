@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.42
+  Version: 4.9.43
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -1618,6 +1618,53 @@ if (!class_exists("wpscSupportTickets")) {
         }
         
         
+        function wpsctMakePDFText($string, $maxLength, $start = 75) {
+            $string = preg_replace('/^\s+|\n|\r|\t|\s+$/m', ' ', $string);
+            $output = array();
+            while (strlen($string) > $maxLength) {
+                $index = strpos($string, ' ', $maxLength);
+                $output[] = trim(substr($string, 0, $index), " \t\n\r\0\x0B");
+                $string = substr($string, $index);
+            }
+            $output[] = trim($string, " \t\n\r\0\x0B");
+
+            foreach ($output as $out) {
+                echo 'doc.text(20, '.$start.', "'. strip_tags(trim($out), " \t\n\r\0\x0B") .'"); ';
+                $start = $start + 5;
+                if (strpos($out,'<br') !== false || strpos($out,'<p') !== false)  {
+                    $start = $start + 5;
+                }
+                if($start > 232) {
+                    echo 'doc.addPage();';
+                    $start = 20;
+                }
+            }
+           
+        }
+        
+        
+        function wpsctMakePDFReplyText($string, $maxLength, $start = 75) {
+            $output = array();
+            while (strlen($string) > $maxLength) {
+                $index = strpos($string, ' ', $maxLength);
+                $output[] = trim(substr($string, 0, $index), " \t\n\r\0\x0B");
+                $string = substr($string, $index);
+            }
+            $output[] = trim($string, " \t\n\r\0\x0B");
+
+            foreach ($output as $out) {
+                echo 'doc.text(20, '.$start.', "'. strip_tags(trim($out), " \t\n\r\0\x0B") .'"); ';
+                $start = $start + 5;
+
+                if($start > 232) {
+                    echo 'doc.addPage();';
+                    $start = 20;
+                }
+            }
+           
+        }        
+        
+        
         function printAdminPageEdit() {
             global $wpdb;
 
@@ -1628,25 +1675,12 @@ if (!class_exists("wpscSupportTickets")) {
 
             $this->adminHeader();
 
-            echo '        <div id="wst_tabs" style="padding:5px 5px 0px 5px;font-size:1.1em;border-color:#DDD;border-radius:6px;">
-            <ul>
-                <li><a href="#wstct_tabs-1">' , __('Edit Ticket', 'wpsc-support-tickets') , '</a></li>
-            </ul>        
-            <script type="text/javascript">
-                jQuery(function() {
-                    jQuery( "#wst_tabs" ).tabs();
-                    setTimeout(function(){ jQuery(".updated").fadeOut(); },3000);
-                });
-            </script>
-
-            <div id="wstct_tabs-1">  <br style="clear:both;" /><br />';
-
             $primkey = intval($_GET['primkey']);
-
+            
+            $blog_title = htmlentities(get_bloginfo('name'));
             $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$primkey}' LIMIT 0, 1;";
-            $results = $wpdb->get_results($sql, ARRAY_A);
-            if (isset($results[0])) {
-                echo '<table class="widefat"><tr><td>';
+            $results = $wpdb->get_results($sql, ARRAY_A);    
+            if (isset($results[0])) { // First processing here
                 if ($results[0]['user_id'] != 0) {
                     @$user = get_userdata($results[0]['user_id']);
                     $theusersname = '<a href="' . get_admin_url() . 'user-edit.php?user_id=' . $results[0]['user_id'] . '&wp_http_referer=' . urlencode(get_admin_url() . 'admin.php?page=wpscSupportTickets-admin') . '">' . $user->user_nicename . ' </a>';
@@ -1655,26 +1689,161 @@ if (!class_exists("wpscSupportTickets")) {
                     $theusersname = __('Guest', 'wpsc-support-tickets') . ' - <strong>' . $results[0]['email'] . '</strong>';
                 }
                 
-                echo '<div id="wpscst_meta"><h1>' , base64_decode($results[0]['title']) , '</h1> (' , $results[0]['resolution'] , ' - ' , wpscSupportTicketsGetDepartmentName($results[0]['type']) , ')</div>';
-                echo '<table class="widefat" style="width:100%;">';
-                echo '<thead><tr><th id="wpscst_results_posted_by">' , __('Posted by', 'wpsc-support-tickets') , ' ' , $theusersname , ' (<span id="wpscst_results_time_posted">' , date_i18n( get_option( 'date_format' ), $results[0]['time_posted']) , '</span>)</th></tr></thead>';
-
                 $messageData = strip_tags(base64_decode($results[0]['initial_message']), '<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
                 $messageData = explode('\\', $messageData);
                 $messageWhole = '';
                 foreach ($messageData as $messagePart) {
                     $messageWhole .= $messagePart;
+                }                
+            }
+            
+            // Custom fields
+            $table_name33 = $wpdb->prefix . "wpstorecart_meta";
+            $grabrecord = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-requiredinfo' ORDER BY `foreignkey` ASC;";
+            $resultscf = $wpdb->get_results( $grabrecord , ARRAY_A );            
+
+            // Replies
+            $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_replies` WHERE `ticket_id`='{$primkey}' ORDER BY `timestamp` ASC;";
+            $result2 = $wpdb->get_results($sql, ARRAY_A);            
+            
+            echo '        <div id="wst_tabs" style="padding:5px 5px 0px 5px;font-size:1.1em;border-color:#DDD;border-radius:6px;">
+            <ul>
+                <li><a href="#wstct_tabs-1">' , __('Edit Ticket', 'wpsc-support-tickets') , '</a></li>
+            </ul>        
+            <script type="text/javascript">
+                jQuery(function() {
+                    jQuery( "#wst_tabs" ).tabs();
+                    setTimeout(function(){ jQuery(".updated").fadeOut(); },3000);
+                });';
+            
+            if ($devOptions['enable_beta_testing']=='true') {
+                echo ' 
+
+                    function wpscSaveToPDF() {
+                        var doc = new jsPDF();
+
+                        doc.setDrawColor(193, 193, 193);
+                        doc.setFillColor(240,240,240);
+                        doc.rect(10, 5, 190, 50, "F"); 
+
+                        var imgData = \'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAEnSAABJ0gGoRYr4AAAACXZwQWcAAAEAAAABAACyZ9yKAAAr90lEQVR42u2dd3gc1aH231k1N7nbci+yiiXZxoBFsHE3ptt0SOJ8aYAh1ARSb560597c5IYEuIAh9g0hJHEIoTcbgoONIWAjDLiqF2PjIkuWqyRLuzvfH7sjzc6emTlTztTz+pF39pwzszOz8/7eM3UFURTBxcUVTkXcngEuLi73xAHAxRVicQBwcYVYHABcXCEWBwAXV4jFAcDFFWJxAHBxhVgcAFxcIRYHABdXiJXp9gxwOavylWuzAOTJ/gDgsPRXsWZFt9vzyOWcBH4pcPBVvnLtVACXJf/mA8hSadoNYDOAdQDWVaxZUeX2vHOxFQdAgFW+cu18AL8EMNfkJN4D8OOKNSs2u70sXGzEARBAla9cOxPArwFcbNMk3wTww4o1Kz51e9m47BUHQMBUvnLtzQBWAci2edJdAO6oWLPiD24vI5d94gAIiMpXrs0E8ACAu2jajxjcF6WThkEUgT1NrWg53kH7UY8AuLdizYqo28vMZV0cAAFQ+cq12QCeBbBcrc3EUQOx+NyJmFmYh6njB2Nobk5KfevJM6j6rA3ba5ux4aMm7Gs+qfWRrwC4vmLNii63l53LmjgAfC4980cEAbdeNRNfvagEmRkC1TS7Y3H8cf0ePPHqdmhsHhwCARAHgI+VNP9zAJaR6ifkDcSvb1uAwrEDTU2/ct8x/Gj1Znyu3ht4FcB1HAL+FQeAT6Vn/uXzCvG9L56LPlkZlj6noyuG+/++Da++V6vWhEPAx+IA8KH0zP/FC0tx7w1ng67Dry9RBH737Md4ZkOlWhMOAZ+K3wvgMzltfgAQBOC+68/BjReWqDVZBuC55Lxx+UgcAD6SG+aXxCEQTHEA+ERuml8Sh0DwxAHgA3nB/JI4BIIlDgCPy0vml8QhEBzxswAeFkvznz4Txc69xyEAmDFpMPpmGz9dyM8O+F8cAB4VS/PXHDiJp9/9DCc6Es/+GNQ/CyvmTcSUUQMMT4tDwN/iAPCgWJp/977jeGpjE2Lx1O89M0PANxZPxlQTVw1yCPhX/BiAx+SG+QEgGhPx5NuNqPr8hOHp8mMC/hUHgIfklvklcQiETxwAHpHb5pfEIRAucQB4QF4xvyQOgfCIA8BlJY3wPDxifkl2QOCGJZoQeJ5DwH1xALgomfmvINW7ZX5JViHw3Rs0IXAFOARcFweAS/K6+SVxCARbHAAuyC/ml8QhEFxxADgsv5lfEodAMMUB4KD8an5JHALBEweAQ/K7+SVxCARLHAAOiKX5d33mnPklcQgERxwAjMXa/H/e5Kz5JXEIBEMcAAwVVPNL4hDwvzgAGCno5pfEIeBvcQAwUFjML4lDwL/iALBZYTO/JA4Bf4oDwEaF1fySOAT8Jw4AmxR280viEPCXOABsUHKDfAEhN78kByDwAoeAPeIAsCiZ+S8n1YfN/JIYQ+BycAjYIg4AC+Lm15YdELh+MYcAS3EAmBQ3P52sQuB7N3IIsBQHgAlx8xsTh4B3xQFgUNz85sQh4E1xABgQN781SRCo3M8h4BXxnwajlJ75b7ywFPdx86tKvp0lfoYsHyXjzP0M2f3PbMOzb1epNXkdwDX8Z8joxAFAIW5+81LbvjgEvCEOAB1x8xsX7TbFIeC+OAA0xM1vTEa2JTH5X2aGgG8u4RBwSxwAKuLmp5PR7YfUPDMDSQgMMvH5HAJWxAFAEDe/vsykPaG0R709AXMQ+M0z2/Ach4BhcQAoVL5ybQ4Sd/Vx8ytkR9oTSNCjjAwB31ycj9LxJiHw9214bqMmBK6tWLPijFPryw/iAJCJm58su9OeWJMckHoCHALOiAMgqaT5XwBwGak+bOZnnfaiRjVjCKxDYneAQwAcAAC4+eVyMu21ppyAwBQOAcYKPQC4+d1Ne2VLOSQyMwTcdCGHAEuFGgBhN79X0l6rPYcAW4UWAGE1v1fTXkscAuwUSgCE0fx+SHutsTIzBNzMIWC7QgeAMJnfj2lPbJb8oMwMATcvLbAAgY/w3MZqtSahhECoAMDS/Ds/O46/eMT8fk972YKk1XMI2KvQAEDf/CW474ZzfGv+oKW9ljKSECgzCYH/efojPL+JQwAICQCCbP4gp73WXGZGkhCYwCFgRYEHQBDNH6a01+KVtDvAIWBegQZA0Mwf1rSHBsAyMwTctLQA0yYMpl438tn49dMf4YUQQyCwAAiK+XnaqxdKQ1JPgEPAuAIJgCCYn6c9uVCtOiMi4JaLOQSMKnAA8LP5edqrF9K05xAwrkABwK/mD23a6yyLQb4lrhjkEDCkwAAgaf4XAVxKqvea+Q2nfc9/aaUG2gPZmRH0y8lAn+wM9MnKQN/sCHKyMhCJCOjsiiX+uuOy4Vjacnsh7bXGyowIuOWiQkybONjQOgaoILAewNVBgUAgAOAn8zuV9v37ZGL88H4YOagPRg7KSb72weD+WYbn+eipLnze2o79rR2J16PtOHpCe/unT2/RYHtllUhsn+gJcAjoyfcA8IP5nUj7CARMHNkfU8fmomTcIIwf3g+CmYWmVPuZKHY0HUNFbSvqDp7smTun015rnIyIgJUcApryNQC8bn7WaT+oXxZKxg5EybhBKBqbi77ZGabn1YraTnfho7qj+LC2FYfaOjRmnU3aa00qk0NAU74FgFfNzzLtMzMETM4bgKljB6Jk3ECMHtLX6mq0VSKALVUtePnD/TjdGU1bFpZpr7XWMwVg5SVFHAIE+RIATM2/9zj+8o5x87NO+1uWTkHh6FxkZ3r/B51PdUbx8tZ92FrdgrjqCtBYN8pGlGmfXpF6YJBDIF2+A4CXzO/kkfyHbjrH+spzWHUHT+IPb9XhVGfUsbQnreSeKwYjAm7lEEiR9+NEJq+YXxRFavOLSGw8ogjFSfaUAqTVkKt9pYLRubhn2VTk9iGfeehdRNnCqq8aqK4SwkomTSYaF7H6jRrs2nvM8LIIAvDDL83CNQuK1ZpcCuDF5DbqG/kGAG6bXzK9UeOnnzQX9dv73PhyjR7SF/csK0Zu36yUNSAqLapjek3jK/oQWrsF0ZiI1estQODLs3B1gCDgCwC4aX5vpL2/iTAqCYF+fTLT1wWjtE+bkKyyOy7i9+ursbOpzfCyCALwoy/PwtULitSa+AoCngeAW+b3RtqLyX/+16ghfXHVF8alrhrCLr+daU+efuJ/aXfAPATKAwEBTwOAtfn/rDC/kW6+0bSXj6Of9jLjB2iXYPbUEZg8coDKEqutCmtpn7o2U8fiEPAwAJwwfzxpfifSnsb4KZtpgIwvSQBw47yJEARn015rnGhMxO/fqMGOkELAkwBwJPljce+mfcCML9f44f1xfvEIlVXBLu1J40iD0ViiJxBGCHgOAKzN/9SmRsRicar2PO3Z6LyiYfJV4VjayweVLRMQqA4dBDwFgOQKegkMzL9j7zE8tamxp9uvJnZpn2hpNO2DyIaC0bnon53hStprNYxGRaxebw0CV2lD4CWvQcAzVwLKzH8Jqd6q+f+8qUnT/D2mTC810J7cMq0DQTVW6gc9fMssE0ue0Oet7ajcfxxHjp/BifZuHO/oxon2bpzq7MaAPlkYOiAbw3JzMDQ3B6XjBmLK6FzTn0Wrp/5Vj601LYbPfopqFYRx9FGfOiiVZGYIuO3SYsyYNMTwcoki8N9/q8BL79SoNXkDwFVeuWLQEwBwy/xGTa8+DrllqolpxlD/ICMA6OiKoWr/CezZdxyV+47heHs3eTZU5qt0/CAsO28cxg/vR/2ZRvVJw1GsebOWYkUYM712S1FvsEdhgYDrAHDD/KbSXrtJTwM70p4kGgDsa2nHO7sOY1t9K6IxFdtQ+kiAiIXTR+G6ORPoFsKgTrR34wdPfaw5X06kvZbCAAFXjwEwNX9Tuvkt7dtTHtQzum/fO472fKgpHhfxccNRPPhKFX7zwm5srWlBNEbYM6Y6RtY7VyKAjTsOYUt1i4m1r68BfTMTDywhHtSzd9+eNKipZKPuaByPr6syfUzgP7SPCVwCDxwTcA0AzM2fPM+fclCvRxSbDbXpjV2wk2Z6UX9eSIrHRWze3YyfPb0DT26oR8Ohk+ns0YBRapX6YfJn3m3CgaMdJr4FbUUEAf1zem8SUpwQ1VwZFNjWGlRXDyR65yMaEwMNAVcA4IT5YzGR/eW5jNKeONsyVe0/gV89vxvP/nsvjp3uspz2WuOcicbx5icHTHwT+hrYN9ORtNc90CgicU2ICoBsgcB8b0LAcQCwNP/2pmN4alPC/L1S3wyMpD3R+DqylPaE2T5y4gzWvFmLVeuqcbCtw/a0V5ufz46cNvFt6Cu3n8oDSl1Key1FYyIef70KOxpNQmBFOa6a5z0IOAoA1uZP3ee3N+1pb9U1kvbEuSQ2F/Hy1v345T92YsfeY8zSXm0Rm9s60dkdM/R90KiP/BmGHkl79XGA7piIx9ZZgMBXvAcBxwDgjPnj8FPaa6d3b6EI4K3tBxGNixrtSVXG0z69IrEmDrS2m/hmtHWivduTaS+NI4rK6YuIxuJ4bF0ltjceNby8vRAoVGviOAQcAYCu+ZdYNX9j0vzp8mPaE+yr0V5tLHNpn6hMBZgIJO/lt1dtJ8/oLJZ7aS+SKpKSjglsbzAHgR95CALMAUBl/hutmp/8dTFPe4BJ2tPu26fOiz1pLz9dIrWNCAJGDOxj8NvRVlwUcay929Npr9qbFIHuaGJ3wAwEIoLgGQgwBYDT5nc87TUuonIi7e15rFY6wJRtxw3vh4yIvb8ycqK9WwFub6a9vFj5lUdj/ocAMwA4ZX6e9tA1PrmCnPak9gun5VF/N7Q6eqorfS49mvbpkOiVHRC40kUIMAGAE+aPxUWe9gzSXjmxgX2zUF44DHarct8x+CnttSYejcWx6vVKfGoSAv/hIgRsB0D5yrUCgL+CkfkT9/OLVFsJT3upgj7tlZVXz56AzAz7c6KiusV3aU9aSdI40ZiIx9hC4K9Jb9kqFj2AnwC4jlRh2fwbGxGPaX09PO17K42nvbLy3IKhOL94OOzW/pbTOKC8kEl7hXgm7eWmV47DGALXIeEtW2UrAMpXrr0OwM9JdbaYn3g/P0/71ArzaS9fm0Nzs/HlBZOpvyMj+rCmVbuBwvS0xjeS9mRIaK8kGlAwhsDPkx6zTbYBoHzl2mEAngDSPc7G/Dzteyutp738mvyB/bJw97IS9Mux/9x/LC7iw1rCHYYOpz2t8dXSXmu1dkdFrHqNCQQEAE8kvWaL7OwB/BjAQGXhBTPGmTd/o9L8PO1TK+xJe7nZcvtm4TtXliJvsL3n/SWt3/Y5jp6U3QLv47RPGUuRLtFYHKte22MJAhdMH0uqHoiE12yRLQAoX7l2IoDbleWDB+TgZ1+fbd78Pef5edr3Vtqb9nL1z8nEPctKmP3s+Oet7Xi9Yn8g0r5nrNSNLGVeojHREgR++vXZGDSACOLbk56zLLt6AD8EkHaa4qffnIshA7INTyxh/gbE43Fvp73OfHk97eUa0j8b3726DOMYPQYsHhfxpw11idu0PZH2srViwvTpxierOybiUZMQGJqbg59+fTapKgcJz1mWZQAkT01coyy/+LzJmDdtlOHpbW9sw582NRg4z+9i2mumt7fTXj7OqMF98f1rp2H0UDbJDwBvfnwATc2nPJT2Frr5evt5ivbRqIhHXzUHgfkzxuDS8/NJVdfYcVrQjh5AOYCRysJ7bzzX8IQ+bWzDnzYlT/XxtFefd80F0097+Tj5o3LxvWvKTPXUaFV/6CRe+XCffkOfp70oG0fZLBqTIKBzBoSg739pFulajJFIeM+S7ADAFcqCMcP7Y2iusQuXPm1sozjPz9Neq5Im7eWzWDh2IL59ZQn6M7jTT9L+lnY8/Eolomo/xhKwtNeidDQWxyOv7sEn9cYgMKBvFgrHDSZVXWFoQgTZAYC0qJ9VMtbQBHrMH6c0Mk97RRFd2svfFo7JxZ2XT0V2Jrv7wZqPdeLBl3ej/UyUOF9BTfv0Vr1D0u6AUQjMLCTej2G8m62QHd/+GGXBWQUjqEc+fKwTf9V4bj9Pe3Kl0bSXt5wyKhd3XTEVOVnszN92qgsPvLQ78dAPxTyFIe3TthRZ+8TuQCX2t9A/aq1sMvGKzDHUE1CRHVvAaGVB8fjB1CM//e5edCu6hzztyZVm016uyXkDcPeyqcjJygArnezoxgMv7UardL6fmPYaa8uJtAf7tNf6gqOxOP7vjWrqdVo8gfjbBKOpJ6AiO3b+0uJ+4ki6n5bq6Iqh8fApSOuqR2JaSZpE3YLUQrr2OmOJeu1JlaLB9qQinS1b1By9RxNH9sc9y0tSn8Vns060d+OhV/bgUPJR4tRLT2343mkY/U2b1M2Krk9B+2WJ5GLNMRsPn0LLiU4Mp3jYyoQRA5CZEVEeS6HvaqvIjh7AKWVB68lOqhFzMiPIzoqYT3toFfC0l9eMGJSDby8vQV+G5m8+3olfP7sTnzWf5mlPMWa/7AwM7k939uXY6S7SgdRTVCNryA4ApD00vuHACboPjwhYNmus+X17FWf7e99ePi/a42hvc9IOd+KqspuWFjK5tl9SU/Mp/OofO9F8XA5/lTl0et+e4oISO/bttZdANmZywb+8aAr1rdY1+9pIxZZ/sMEOABxUFlTvo7/gYV7ZSJydn75/Q5/eQUt7fepQ9ZFkja4oH4fJeQOovxOj2vPZMdz//G6c7JAO+PG0TxtTcRDkgtI8zDdwodyeJqKnDlJPQEV2ACDtJ14/qT5MPbIA4GuL8jFz8hDFSktK1C7kaS+rJfh/yuhcXDrL2GlZI9q5tw0Pv1qFM91R1YXkaZ/aZk7JSNxyabGh9fxJ7SFSca2hiRBkBwDWKwv2NLVQfNmymYgI+PrifJw1WdYT4Gmvs1jktJe3z8yI4KalhYgItj9IBgCwo6kNq16rQjRG+NEQnvbEceaUjMTKy6Ya/k72NBKvG1hvaCIE2QGAtwCk/MTxqY5uvPZBo7EZiQj4xuJkT4Cnvam0V7Y/a/IQDBvI5nmS2xuP4rHXFVf48bTXHGe2SfO//O8GnGjvUhafQcJ7lmQZABVrVpwG8C9l+f1/+xBHjtOdDeiZGQkC+UPA016lIVX7hL7A4HFeQOK23tXrqxGN9c5IINKeZqUqx9RIe3nb2SUjcasJ8x882o7fPl1BqvpX0nuWZNelYA8rCzrORPFff95iaFcASIWAO2kP76W9bJCyR4r+OZmYPnEI7NaZ7hh+v74KXdF48NJeY76Mpr18cnNMmj8uivj5kx+gsytKqn7Y0MRUZAsAKtaseBPARmX5+zs/x0vvNRifqYiAbyyekjg7YDTtCW91ihVpnzpFT6S9qLt9powqiiJm5g+1/cc8AOC59/biQGuHqYdo0o/h77SXT9+s+QHg72/X4ONq4sG/jUnPWZadF4P/gFR4/9+24pO6FqPTkkFgaEq5btoT0zjYad/bvvfCobwh9j/S63RnFO/u1jvDE+60lxfMKTVv/i17DuGR5z5Wq/6BkWlpyTYAVKxZUQFglbK8OxrHnQ+8ZR4CS/Jxdv5QnvYqo6r9QAbtFWZG9H5lc9p9G2lrJcRpL6eMJfNXHsK9j25Uu4V6VdJrtsju28G+DWCTsrDLBgic03NgEDztFWlPEgsANDUrrzzlaU+iwJzSPGvmf2QjuqNE829CwmO2yVYAVKxZEUXiBwwalXXWITAF5+QP5WmvY3xJLJ7w03Yy9ff8eNqn184pzcNtbMzfCOC6pMdsk+03hFesWdEK4DIAaUcvbIHAlMQxAZ72Gu1FoE+2/df9n+jo4mmvQRnJ/IL95j8E4LKkt2wVkydCVKxZUQVgERhB4OwpQ9MrQ5z2pBBjce2fSOn6QKV9ygTSa6V3jM2/KOkp28XskTAsIfBNWU8gtGmfHEft6TodXVF0dMVS/87Q/kWJf/G47uwEL+1VACYvucCn5gcAgZbqZlW+cu1UJK4RSLv1KTszgkfvXYqzC4xfsRaPi/jjhjp8XJ+4S0pzKUS1IpF6HJGmoUjTPn1UasMnxxG1JkbdXn0aRjYJUX2Asr32sojkYroxKXoGRmaQ1N7P5gccAADAFgJPyCCQJovGp9yUU0KfSrYZXwNLBmfG70/X0VlRGu31P1ANFBeU+dv8gEMAAByGANH4PO1J0+BpT64VdSYSBPMDDgIAYAyBt9J7AjztydPgaa/+gXrGB4JjfsBhAADOQICnPXkaPO3JtTSml2TJ/HsSV/h5xfyACwAA2ENgG+lHFyykvf44qY142pOXxY9pLy+eWzYSt11WEhjzAy4BANCHwCP3LsU5ViHg4bQnT5+nPXFM+g6d7gwaMX1vlYi5ZXmBMz/gIgAAByBQ18rTXm8sW9NeNi90i6jSxP20l1cG1fyAywAA2EPgozrl7gBPe5UByvaarQKR9nIF2fyABwAAUEDgOxfinELjP4KSCoFgpb2xcXja06a9XHNL83Db5cE1P+ARAACsIVCLj2p7ewJBT/shA3Iwq3CY4XXV8ymEzzjZ0Y0PKpsR5LSXF80tC775AQ8BAGAMgX/WoqKO4maqAKR98bhB+MF10w2vJy3tO3IaP/nLNsOmVyyFZ9NeXhwW8wMMbwYyI70biO56cAO21R4xvpARATddVIhZBSqpKCb+jN6BlxiH0KVVSRb622gT0xANjCN9qvYddeaVMlmKz+iZH/UVRWhL94Ga7UW16RMqCePMLRsVGvMDHgMAoA+Buy1A4GYlBKRtk9b0yXHS7yhV3/qMPjlXbnzK2VHcUceIAJST7m1CXFHakyMuh6jeXmOeJNNrGl9RlDB/cC7yoZHnAAA4BAEjxvd82mvEnwNimfaAHiiIaxOqplcpnhdC8wMeBQDAHgLn0hwkC3Pa086P+opSaUtajeppL2pORF5Mn/bK4rCaH/AwAAC2ELjlokLMKiRcXxCAtGeJBMfTXrXQfNrLi8NsfsDjAAAchIDBtNfZ9lMbOpD2KaBgJFfSnmhi82kvL51Xlhdq8wM+AABACYEakxC4uBCzCoYbTnta4xtJ+56xDKY9xdO3bJD/0z5RkViOeSE72q8mXwAAoIDAQyYhIAi45ZJClBcOg9tpb+9DNJ2RX9Je/oXMm2be/B8EyPyAjwAAsIZAEcrlxwR8mfbOEMFvaS+vmGvR/PcFyPyAzwAAOAMB5j91bXva91ayRIAf017edu60UfgWN3+KfAcAgD0EzivSuvtQMr2Fg3q2pr3KI7NZyidpL287j5ufKF8CAHADAh5OeycOAvos7eUl3Pzq8i0AADoIfGQJAokDg6FOe+J8aJVAx8Q2pD3hqKxaW25+bfkaAIA+BO6xBIHi1AODGkpPbx+nPe2y6hZKVTanvag7CQDAfG5+XfkeAABbCKy8tFjzmEBqerub9qm4sF9m0l5UM72FtNddHWLC/Pxov74CAQDAWQh4Le1TxqQ/hWFeLqe93iqcP52bn1aBAQDAHgLlRcM9l/a0P35pizya9vIG3PzGFCgAALQQaDY83Ygg4NZLi3Fe8XB4Lu1dOh7ghbSXz8k8bn7DChwAABoI/MsiBNIfS+altGfJAy+lvXxO5k8fzQ/4mZCnnglot/SeMfi/316CWUUjDU83LopYvb4aW6uTuxOaq1BMH6Jc5SljUkBC0sB+WSgdP0Sl1pxOdXZjRyPhV5hVJi2qlYrUk1BpkP4IF25+8wo0AADGEFgng0CKCKZPe0NW2pgGjE/zgSLVROTF9A7X3DEyanzCgpHac/NbU+ABAFBA4J4lmFVsBwScT/v0AmumT1QZinVH014ubn7rCgUAANYQqMLW6iM87aUaRmkv1/xpo/GtK7j5rSo0AADYQ2BL9RHjxudprzcnaePMn87O/GI8tnjbE1+rDIsvQgGA5IYiAMC5Nz01VYhkvA0VCDx0zxKUW4FAFfk6A5726gtmBBTzpo/G7YzMH4+eWfLxkzdVyj856P4ILADkppeKpIGzv7amJCO73wY4AAGe9uQG1I9jlw3OZ2j+WFf7hZ88tbJKMacpw0H0SuAAoGV82bAw8/89XpzZJ5cJBH7fAwGe9soCI6CQt2Vp/mjnyQs//cu3qhUfGwoQBAYAGsZXLTtrxaPFWf0GbwCQp5yeZQi8XoUtVeoXG/G0Vx9H2XoBu33+w12njy7d8be75Qf8tAAQOBD4HgBmjC8fnv7FB6fm5I74JxyCAE978jhqAEqYv5SJ+c+cPHLRzr9/pxoGTE8q87OHfA0AhfkNGV9eNu2G307tMyjvTUBgAoEPlD0Bnvb68wJYM//uQ7hvlZr5xcOdxw9fvOsf35WbXz47Rst8CwFfAkDF+KQyahhMu/43xX0Gj36DBIGs5ClCsxB4XOoJBCXt0xrYk/ZyMTX/sYOX7Hr2+zT7/JqmJ9X5zU++AgBFd99SXdm1vyrqO3ScKgQeumcxzitOq9JVXBTx+GtV2FJ1OK3OnbQHSM83czPt5W8XzGBn/vbWzy7d88KPq+WFKq+W6vziK98AwER331Rd6dX/Wdxv+KR1bCBQ2XNMgKc9+e38GaNxOyvztzRdtufFn9SAkemVr37wli8AoGN+I4angkLJlb8o7j8i/3UIbCCQckwg5GkvH1zAyvyiePj0kYbLK1/+mdz88jkwYnYjbTwPAU8DwECX33YYTF3+s6IBIwteYwaBSvIpwjClvbyGpflPNdddUfXKL2oUH8vM9KRxvOozzwLAxIE+22EwddlPigbkFb0GQUg7+peVGcFDdy/GeVPtgUDY0l4uhuZvPnmo6orq136pZn5SmR2m980BQk8CgLLLT9PGMgyKr/hxYe6oqUwg8Nhrlfig8jC5QYDTXi6W5j9xYM+ymnW/UppfPszc9MpXr/nNcwBgsL9veRpFl/2ocOCY0ldZ9QTelyAQgrSXi6n5P9+1vGb9/9TIS3VeadoE7riApwDggvmpp1l4yfeKBo2b8TIzCOxJ7Qn4Lu1lRTRbFEvzH9+/48raN+6vhTOm9zUEvAYAJ0xuHgIX31c0aPzMl1hCIKhpL2+1YPoY3L6Mkfn3fXpV7Zu/c8v81J/pFQJ4BgAG0981GBRcdG/R4Alnv8jqmEBqTyAYaZ9omGi54KwxzJL/2GefXF33zwe0zA84b3pP9wI8AQC/mF96LVj67aLBE899gRkEdqc9zdy3aS9n2EJm5o83H9v78TV1bz3k1eT3LAS8AgC3zW5412PKhXcXDpk06wUIESIEHrxrMb5QYhICr+7p6Qn4Oe3l7VmZXxTjzceaPrqmfsPDdaA3Hk0bR17dJoDrPwxiZoNwYrb0Xus3PFzX1lhxrSjG067o6Y7G8Z1H3sZWtVN8GooIAm5fVorZpXkaxwNkf0jYXtQzf0p7kpkVpbLPILcnjC8mf0odDpq/seLa+g0P10vfC+WrZ+T29u96D8CD6W/oNX/xHYVD8r/wnMCgJ7BK1hMA4Ju0l4ul+dsatl7X8PYqI8nvyVc3ewGu9gAcoB9zCDS8vaqurX7L9Sx6AncsK8Wckjxfpb1cDM1/pK1+y/UNb68ymvx27BraLjd7Aa7vAujIk1+YUg0bH5MgkPZIYMsQWF6KOaUjaWyfZmKRVEkwPrk9afqS8fXbWjH/+zrmP1r3wfUNGx+rMzxh6/LF9mhEbgPAzRVmazo0bHys/mjdB4wgUIYLSlV2I3TT25m0l2vhDGvm/66m+f99Q+Omx+v0vg8LryzlOUC4BgAPdP9tV+Omx+uO1v37Bkcg4KG0l3/GwhnmL/KhM/9q1snvOZOylNs9ADvlxheVtpE0blpd11r7HlsIeCjtk6NAFJPdfkbmb61974bGTav19vmdEJPPdOs4QBAA4Maa0/zMpnfW1LOEwJwy+e6Ae2kvb7/orNHszF+z+camd9bUU0zKc9uC1xUEAHhSTe+sqW+t2XyjNgQOGZ5uRBBw5/IyzC3Lg5tp33vyT0yav8yk+Q/qm3/zH2jMz2VCQQCAG+dQSVeWpalp8x90ILDRNATuWF6GuWWjKE75KefcetrLP2nRWWMsmn+Tqvlbqt/5IqX5qb4PRrLlM926FCAIAJCkddmnW58tsobABWWjKIxvLu1BSHv52ItmjmVq/r3vPiEd8KO5tJe13PxsZnINAA4Sz+xVWrapafMf6luq3/kiCwjceWWyJ0Bccmtpn2r8VC2aOdbCqT4q87Pq9ru+PXhJbvcAvPwl2Hq55953n6hzBgJs0l4uh8zP6vJbJ+XleQPgPgCMivVGwfSab/YQyGOS9j3NRWDRWb42v9PfO93X4OL9OK4CQLHgbna1WHy2CxCYhrnTRmk3NJj2QO+R/8Uzx1o41Web+e1U0LY5w/LC3YCAR+7ss/FVt83EeTcVDC9e8HdBiIxQrpOszAgeuHMRzi/VMTNBcVHEIy/vwnu7FBBJ6xnoHDZUVHvE/PK5cqqXwPTV7ecBuA4AIHAQoG47af7NU4YVzX+GGQR2JiCQevpOW6TNwQHzyy/vDRUE3Paf344B2Ck7v0xlP1qvjQjonyK899GN2LLH3O7AXcndAdp9e+lPKZbmb63ZfKPiVB/pz8o6N/PqmNw2P+CRHgDgWi+A9bhUdZPm31zArCfw0i68u+sgsV7vq2dt/uRFPkaSXavOjp6BlXF9l/6AhwAAOA4BVuMYrQMAYdKClVOGFc79B2sI0H3dYtL8bC7yaa197wbZtf1a5iOVsYaBmXF8aX7AYwAAHIOA3W2Njkccnrzw1oKhBRcwgcDDL6r3BHqV2BYcMD9pn19tmMagWu3NGNtIW9+aH/AgAADInxMI+N/0emUpw5MX3lroLARSv/9FZ43FHcvZmF92P7+e6eXDdpR5BgZe85snAQDYBgG729pVpjk8eeG3CoYWzH6W1e7A5p0HkXZuIHmen535P7g++SSfno80MexrGHjRa54FAGB6d8Cutkbr9MoMDecvur1gyJTzn2MBgf9bV4l/btvXczxAALBs9iR8bWkRS/PXyottGGZx7ECrzhIMvOozTwMAoIYATRvWpjdSTzWcv/iOAq1HjpuFAABsqz2Cf27bj8yIgEvPm4Bpk4aamo6O+Zvb6rdc37DxsVpllQ3DVgDhKAy87DHPAwBQhQCpzPemV76fsuSugsGTy59Xg8Dv7lyE2SYhYFW65k88t1/L/Mr3gYKBp52flC8A0DOzxo4LGK2jbW+k3sxw2vspS+4q9BoE9Mx/rLHi2vp/PaI84AewAYB8mPVZBa06X6S+XL4CAGCpN8CyzOqw7nu93yJ0EgJa5ocYb25L/62+nloD7904TkBb5uvUl8t3AOiZce3eAKnM66YnHX1LKdP7VWInIKBnfsKv9PbUEiYnatR7EQaadX70km8BAKT1BuTDdhvcldQnvZ9y4d1FgyfNekFtd+C3dyzEnLLR1lcuQXpH+9vqt1zXsPGxagBxWEt/5Xu3jxOQynxtfEm+BkDPQtgHAiP1ZoatvM9A4uYtYfLCbxVpXSfAAgKU1/bXoNf8cQAxqYlyFAvv3YZBT52vnZ9UIADQszD6IDBTZnXYSJ3ae8n8PX8T591UqPU8gd/dsRCzbYLA5u2f44erN6vf0lu18ct733uyFgnTK/9isM/wWnWO7RoEwfiSAgWAnoUyBgIj9bTDRuq03gtINX4KCCbM+WrRiNIL/0qCgCAAX7moFLctn4HsrAxT67GzK4aHn/8Ez26sJtaL8VhL8563vrLvg7/WIWF0pfHlwz2jKSdj4L2bpxCD5PseBRIAKQtIPlgoH3ajq697wC+pDMi6/or3EQAZ489fUTCy7KK/CJGM4aTlzx8zGL/45hxMnTDE0Hrb2dCKnz35PvYdPkGsF+OxluZdb35139a/1YNseCn55e/TJqNT5oVdg0AaX1LgAdCzoOZ7BbTDRupI70njRwBkIhUAEUV5ZNwXvlSQN+2Sp9QgEIkI+MrSEiyZNREFYwap9ghOdnSjau9RbPp0H57bWIO4yrYhxmMth3eu+/r+D5+RzC/9RZHe9ZfKlQDQM7/ee+a9gTB4IzQASFlo/WsJaIeN1NG8V86XZPiU1CcMZ4yddX1+3ozLVkUysiZpLXskIiB/9GCUTBqK0knDkCEI2N5wBDvrW/CZStrLFY91Nx3a/tqdB7Y934jU5Ff2AOKEepLRoFLmBgxCYXq5QgmAnoXv3TswAgO76vTKlIlPgkFK+cBx0wfmL77zN5k5/eezWF/RM6febdjwyA9OHNh9HAnTkMyvBoVocjI05ieVmTG8Vl1oTS9XqAEglw4MlO9Zpb5cqgf/oAGDSFZOZunV/3Vrn4GjboYg5NiyckTxTOfxg3/c8+JPfh+PnjFierUeQMrUKcrsOBYgfx9q08vFAaAijWMGymE73quVaZlda5cgMrx4Qd6Yc6+5Nbv/0GsBIdPcWhCjXaeOvnBg2/OrW2o2N0P7KL/aKUAp/Z0wv/J96PbpjYoDgEKE3oHWMOm92TZAr7HVAECCQc/pw1EzLh8/vHjBZVn9hy7MyOozHfpPgo7Hujt3dZ1q3dRa887rh3as+xypppYf2Y/r/MVgr/n12pCuzQeXujgATIgCCDTv1cpI5XKTZyLd+ILiVX7WoKduWMEFw4YXLzg3s0/uqEhWnxGRzOyRABCPdh2Jd3c0RztPHTpSvenjo3XvtyJhIMns0v6+9D6uqFMaXzobQHMRkFY5bdpzs5sUB4BNIuwy0Lw3Uk68IhDqIJD/RZB6bEM5XWVyyo0Vl5UpoaCV/DSn/YyU83RnIA4AhlKBgpEyUp2a6VPSHqnmh6KMNF0SBKQyJQTkvQLSboHWgTjo1BGNz7dTNuIAcFiKZ+5ZAYHyMmFl2pN6AgLFZ8jTXyv5pTL5sQDSdLQ+I+093x6dFQeAx0QBCFK53Px6xtcyvyTlboASAvLjAKRxVcv49uYtcQD4VDpP71Xr+pvZBVCaX1V8W/KfOABCLOlGKX6CPLziAODiCrHC/PPgXFyhFwcAF1eIxQHAxRVicQBwcYVYHABcXCEWBwAXV4jFAcDFFWJxAHBxhVgcAFxcIRYHABdXiMUBwMUVYnEAcHGFWBwAXFwhFgcAF1eI9f8BZMA1gxjVYz8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMTAtMDEtMTFUMDk6MTE6MDYtMDc6MDAF0tXNAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDEwLTAxLTExVDA5OjExOjA2LTA3OjAwdI9tcQAAADR0RVh0TGljZW5zZQBodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9saWNlbnNlcy9HUEwvMi4wL2xqBqgAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAF3RFWHRTb3VyY2UAR05PTUUgSWNvbiBUaGVtZcH5JmkAAAAgdEVYdFNvdXJjZV9VUkwAaHR0cDovL2FydC5nbm9tZS5vcmcvMuSReQAAAABJRU5ErkJggg==\';
+                        doc.addImage(imgData, "JPEG", 20, 10, 10, 10);
+                        doc.setFontSize(20);
+                        doc.text(32, 18, "'.$blog_title.'");
+                        doc.setFontSize(14);
+                        ';
+
+                if (isset($results[0])) {
+                    echo ' 
+                        doc.setFontSize(20);
+                        doc.text(20, 30, "'.__('Ticket', 'wpsc-support-tickets').' '.htmlentities($results[0]['primkey'].' : '.base64_decode($results[0]['title'])).'"); 
+                        doc.setFontSize(12);
+                        doc.text(20, 40, "'.__('Department', 'wpsc-support-tickets').': '.htmlentities(wpscSupportTicketsGetDepartmentName($results[0]['type'])).'"); 
+                        doc.text(150, 40, "'.__('Resolution', 'wpsc-support-tickets').': '.htmlentities($results[0]['resolution']).'"); 
+                        doc.text(20, 48, "'.__('Posted by', 'wpsc-support-tickets').' '.htmlentities(strip_tags( $theusersname .' ('. date_i18n( get_option( 'date_format' ), $results[0]['time_posted']) )).')"); 
+                        doc.text(150, 48, "'.__('Severity', 'wpsc-support-tickets').': '.htmlentities($results[0]['severity']).'"); 
+
+                        doc.setFontSize(20);
+                        doc.text(20, 68, "'.__('Initial Message', 'wpsc-support-tickets').':"); 
+                        doc.setFontSize(12);
+
+                        ';
+                        $this->wpsctMakePDFText($messageWhole, 80);
+
+                        // Replies
+                        //if (isset($result2) && @$result2[0]['user_id']!=null) {
+                        //    $replyWhole = '';
+                        //    echo 'doc.addPage();';
+                        //    echo 'doc.setFontSize(20);';
+                        //    echo 'doc.text(20, 30, "'.__('Replies', 'wpsc-support-tickets').'"); ';
+                        //    echo 'doc.setFontSize(12);';                             
+                        //    foreach ($result2 as $resultsX) {
+                        //        $styleModifier1 = NULL;
+                        //        $styleModifier2 = NULL;
+                        //        if ($resultsX['user_id'] != 0) {
+                        //            @$user = get_userdata($resultsX['user_id']);
+                        //            @$userdata = new WP_User($resultsX['user_id']);
+                        //            $theusersname = $user->user_nicename;
+                        //        } else {
+                        //            $user = false; // Guest
+                        //            $theusersname = __('Guest', 'wpsc-support-tickets');
+                        //        }
+                        //
+                        //        $replyWhole .= '                                                                                                                                                                                              ';
+                        //        $replyWhole .= __('Posted by', 'wpsc-support-tickets') . ' ' . $theusersname . ' (' . date_i18n( get_option( 'date_format' , $resultsX['timestamp'])) . ') :';
+                        //        
+                        //        $replyData = strip_tags(base64_decode($resultsX['message']));
+                        //        $replyData = explode('\\', $replyData);
+                        //        
+                        //        foreach ($replyData as $replyPart) {
+                        //            $replyWhole .= $replyPart;
+                        //        }
+                        //        
+                        //        
+                        //
+                        //   }
+                        //    $this->wpsctMakePDFReplyText($replyWhole, 80, 40);
+                        //}
+
+
+                        //----------
+                        if(isset($resultscf) && @$resultscf[0]['primkey']!=null) { // Custom fields
+                            $thereIsAValueSet = false;
+                            foreach ($resultscf as $field) {
+                                $specific_items = explode("||", $field['value']);
+                                $res = $wpdb->get_results("SELECT * FROM `{$table_name33}` WHERE `type`='wpsct_custom_{$field['primkey']}' AND `foreignkey`='{$primkey}';", ARRAY_A);
+                                if(@isset($res[0]['primkey'])) {
+                                    $thereIsAValueSet = true;
+                                }
+                            }                        
+                            if($thereIsAValueSet) {
+                                echo 'doc.addPage();';
+                                echo 'doc.setFontSize(24);';
+                                echo 'doc.text(20, 30, "'.__('User Fields', 'wpsc-support-tickets').'"); ';
+                                echo 'doc.setFontSize(12);';
+                                $theCollectedUserFields = '';
+                                foreach ($resultscf as $field) {
+                                    $specific_items = explode("||", $field['value']);
+                                    $res = $wpdb->get_results("SELECT * FROM `{$table_name33}` WHERE `type`='wpsct_custom_{$field['primkey']}' AND `foreignkey`='{$primkey}';", ARRAY_A);
+                                    if(@isset($res[0]['primkey'])) {
+                                        $theCollectedUserFields .= $specific_items[0].': '.strip_tags(base64_decode($res[0]['value'])).'<br />';
+
+                                    }
+                                }
+                                $this->wpsctMakePDFText($theCollectedUserFields, 80, 40);
+                            }
+                        }                      
                 }
+
+                echo ' 
+                        doc.save("ticket-'.$primkey.'.pdf");
+
+                        return false;
+                    } 
+                ';
+            } // End beta testing
+            echo ' 
+            </script>
+
+            <div id="wstct_tabs-1">  <br style="clear:both;" /><br />';
+
+            
+
+
+            if (isset($results[0])) {
+                echo '<table class="widefat"><tr><td>';
+
+                
+                echo '<div id="wpscst_meta"><h1>' , base64_decode($results[0]['title']) , '</h1> (' , $results[0]['resolution'] , ' - ' , wpscSupportTicketsGetDepartmentName($results[0]['type']) , ')</div>';
+                echo '<table class="widefat" style="width:100%;">';
+                echo '<thead><tr><th id="wpscst_results_posted_by">' , __('Posted by', 'wpsc-support-tickets') , ' ' , $theusersname , ' (<span id="wpscst_results_time_posted">' , date_i18n( get_option( 'date_format' ), $results[0]['time_posted']) , '</span>)</th></tr></thead>';
+
+
                 echo '<tbody><tr><td id="wpscst_results_initial_message"><br />' . $messageWhole;
                 
                 echo '</tbody></table>';
 
                 // Custom fields
-                $table_name33 = $wpdb->prefix . "wpstorecart_meta";
-                
-                $grabrecord = "SELECT * FROM `{$table_name33}` WHERE `type`='wpst-requiredinfo' ORDER BY `foreignkey` ASC;";
-
-                $resultscf = $wpdb->get_results( $grabrecord , ARRAY_A );
                 if(isset($resultscf)) {
                         echo '<table class="widefat"><tbody>';
                         foreach ($resultscf as $field) {
@@ -1689,8 +1858,7 @@ if (!class_exists("wpscSupportTickets")) {
                 }                
                 
 
-                $sql = "SELECT * FROM `{$wpdb->prefix}wpscst_replies` WHERE `ticket_id`='{$primkey}' ORDER BY `timestamp` ASC;";
-                $result2 = $wpdb->get_results($sql, ARRAY_A);
+
                 if (isset($result2)) {
                     foreach ($result2 as $resultsX) {
                         $styleModifier1 = NULL;
@@ -1715,13 +1883,13 @@ if (!class_exists("wpscSupportTickets")) {
                         echo "<input type='hidden' name='action' value='delete-support-ticket' /><input type='hidden' name='replyid' value='{$resultsX['primkey']}' /><input type='hidden' name='ticketid' value='{$primkey}' />";  
                         echo '<button type="submit" onclick="if(confirm(\'' , __('Are you sure you want to delete this reply?', 'wpsc-support-tickets') , '\')){return true;}return false;"><img src="' , plugins_url('/images/delete.png', __FILE__) , '" alt="delete" /> ' , __('Delete Reply', 'wpsc-support-tickets') , '</button></form></div></th></tr></thead>';
 
-                        $messageData = strip_tags(base64_decode($resultsX['message']), '<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
-                        $messageData = explode('\\', $messageData);
-                        $messageWhole = '';
-                        foreach ($messageData as $messagePart) {
-                            $messageWhole .= $messagePart;
+                        $replyData = strip_tags(base64_decode($resultsX['message']), '<p><br><a><br><strong><b><u><ul><li><strike><sub><sup><img><font>');
+                        $replyData = explode('\\', $replyData);
+                        $replyWhole = '';
+                        foreach ($replyData as $replyPart) {
+                            $replyWhole .= $replyPart;
                         }
-                        echo '<tbody><tr><td class="wpscst_results_message"><br />' , $messageWhole , '</td></tr>';
+                        echo '<tbody><tr><td class="wpscst_results_message"><br />' , $replyWhole , '</td></tr>';
                         echo '</tbody></table>';
                     }
                 }
@@ -1800,8 +1968,8 @@ if (!class_exists("wpscSupportTickets")) {
                         <div style="float:left;margin-left:20px;"><h3>' . __('Actions', 'wpsc-support-tickets') . '</h3>';
 
 
-                        $output.= '<button type="submit" onclick="if(confirm(\'' . __('Are you sure you want to delete this reply?', 'wpsc-support-tickets') . '\')){jQuery(\'#wpscst_hidden_action_field\').val(\'delete-support-ticket\');return true;}return false;"><img src="' . plugins_url('/images/delete.png', __FILE__) . '" alt="delete" /> ' . __('Delete Reply', 'wpsc-support-tickets') . '</button>';
-
+                        $output.= '<button type="submit" onclick="if(confirm(\'' . __('Are you sure you want to delete this reply?', 'wpsc-support-tickets') . '\')){jQuery(\'#wpscst_hidden_action_field\').val(\'delete-support-ticket\');return true;}return false;"><img src="' . plugins_url('/images/delete.png', __FILE__) . '" alt="' . __('Delete Reply', 'wpsc-support-tickets') . '" /> ' . __('Delete Reply', 'wpsc-support-tickets') . '</button> ';
+                        if ($devOptions['enable_beta_testing']=='true') { $output.= '<button onclick="wpscSaveToPDF();return false;"><img src="' . plugins_url('/images/page_white_text.png', __FILE__) . '" alt="' . __('Save to PDF', 'wpsc-support-tickets') . '" /> ' . __('Save to PDF', 'wpsc-support-tickets') . '</button><br />'; }
             
                             $output .= '<input type="checkbox" name="wpsctnoemail" id="wpsctnoemail" checked="checked" value="on" /> ' . __('Send email to ticket creator on reply.', 'wpsc-support-tickets') . '
                         </div>';
@@ -1875,6 +2043,7 @@ if (!class_exists("wpscSupportTickets")) {
                     wp_enqueue_script('wpscstniceditor', plugins_url('/js/nicedit/nicEdit.js', __FILE__), array('jquery'), '1.3.2');
                 }
                 wp_enqueue_script('wpsc-jeditable', plugins_url() . '/wpsc-support-tickets/js/jquery.jeditable.mini.js');
+                wp_enqueue_script('jspdf', plugins_url() . '/wpsc-support-tickets/js/jspdf.min.js');
                 wp_enqueue_style('wpsc-support-tickets-admin-ui-css', plugins_url('/css/custom-theme/jquery-ui-1.10.3.custom.css', __FILE__), false, 2, false);
             }
         }
@@ -1930,6 +2099,30 @@ if (!class_exists("wpscSupportTickets")) {
             global $wpdb;
             global $wpscSupportTickets_db_version;
 
+            $table_name = $wpdb->prefix . "wpscst_departments";
+            if ($wpdb->get_var("show tables like '$table_name'") != $table_name) { // Create 
+
+                $sql = "
+                CREATE TABLE `{$table_name}` (
+                    `primkey` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+                    `name` VARCHAR(512) NOT NULL, 
+                    `description` TEXT NOT NULL, 
+                    `admin_user_id` INT NOT NULL, 
+                    `enabled` TINYINT(1) NOT NULL DEFAULT '1', 
+                    `group_name_slug` VARCHAR(256) NOT NULL, 
+                    `parent_department` INT NOT NULL, 
+                    `forward_all_department_emails` TINYINT(1) NOT NULL DEFAULT '0',  
+                    `main_department_email` VARCHAR(512) NOT NULL,
+                    `display_list_order` INT NOT NULL, 
+                    `target_response_time` VARCHAR(128) NOT NULL
+                );				
+                ";
+
+                require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+                dbDelta($sql);
+            }
+            
+            
             $table_name = $wpdb->prefix . "wpscst_tickets";
             if ($wpdb->get_var("show tables like '$table_name'") != $table_name) {
 
