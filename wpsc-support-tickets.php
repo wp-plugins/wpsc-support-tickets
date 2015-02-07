@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.44
+  Version: 4.9.45
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -431,7 +431,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'show_login_text' => 'true',
                 'override_mysql_timezone' => 'false',
                 'show_advanced_options' => 'false',
-                'converted_departments_phase2' => 'false'
+                'converted_departments_phase2' => 'false',
+                'custom_new_ticket_button_text' => __('Create a New Ticket', 'wpsc-support-tickets')
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -592,7 +593,10 @@ if (!class_exists("wpscSupportTickets")) {
                 if(isset($_POST['show_advanced_options'])) {
                     $devOptions['show_advanced_options'] = esc_sql($_POST['show_advanced_options']);
                 }
-                
+                if(isset($_POST['custom_new_ticket_button_text'])) {
+                    $devOptions['custom_new_ticket_button_text'] = esc_sql($_POST['custom_new_ticket_button_text']);
+                }                
+ 
                 update_option($this->adminOptionsName, $devOptions);
 
                 echo '<div class="updated"><p><strong>';
@@ -627,7 +631,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             <br />
             <h1>' , __('General', 'wpsc-support-tickets') , '</h1>
-            <table class="widefat" style="background:transparent;"><tr><td>
+            <table class="widefat" style="background:#FFF;"><tr><td>
 
                 <p><strong>' , __('Main Page', 'wpsc-support-tickets') , ':</strong> ' , __('You need to use a Page as the base for wpsc Support Tickets.', 'wpsc-support-tickets') , '  <br />
                 <select name="wpscSupportTicketsmainpage">
@@ -758,7 +762,7 @@ if (!class_exists("wpscSupportTickets")) {
             </div>
             <div id="wst_tabs-3">            
             <h1>' , __('Email', 'wpsc-support-tickets') , '</h1>
-            <table class="widefat" style="background:transparent;"><tr><td>                
+            <table class="widefat" style="background:#FFF;"><tr><td>                
 
                 <strong>' , __('Email', 'wpsc-support-tickets') , ':</strong> ' , __('The admin email where all new ticket &amp; reply notification emails will be sent', 'wpsc-support-tickets') , '<br /><input name="email" value="' . $devOptions['email'] . '" style="width:95%;" /><br /><br />
                 
@@ -895,7 +899,7 @@ if (!class_exists("wpscSupportTickets")) {
             </div>
             <div id="wst_tabs-4">            
             <h1>' , __('Styling', 'wpsc-support-tickets') , '</h1>
-            <table class="widefat" style="background:transparent;"><tr><td> 
+            <table class="widefat" style="background:#FFF;"><tr><td> 
 
                 <p><strong>' , __('Disable inline styles', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to disable the inline CSS styles.', 'wpsc-support-tickets') , '  <br />
                 <select name="disable_inline_styles">
@@ -924,7 +928,7 @@ if (!class_exists("wpscSupportTickets")) {
             </div>
             <div id="wst_tabs-5">            
             <h1>' , __('Guests', 'wpsc-support-tickets') , '</h1>
-            <table class="widefat" style="background:transparent;"><tr><td> 
+            <table class="widefat" style="background:#FFF;"><tr><td> 
 
                 <p><strong>' , __('Allow Guests', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want Guests to be able to use the support ticket system.', 'wpsc-support-tickets') , '  <br />
                 <select name="allow_guests">
@@ -1018,7 +1022,7 @@ if (!class_exists("wpscSupportTickets")) {
             </div>
             <div id="wst_tabs-6">            
             <h1>' , __('Custom Fields', 'wpsc-support-tickets') , '</h1>
-            <table class="widefat" style="background:transparent;"><tr><td> 
+            <table class="widefat" style="background:#FFF;"><tr><td> 
 
                 <p><strong>' , __('Place custom form fields', 'wpsc-support-tickets') , ':</strong> ' , __('When creating a ticket, this determines where your custom fields are placed on the ticket submission form.', 'wpsc-support-tickets') , '  <br />
                 <select name="custom_field_position">
@@ -1070,7 +1074,11 @@ if (!class_exists("wpscSupportTickets")) {
                 <strong>' , __('Change TITLE to', 'wpsc-support-tickets') , ':</strong> ' , __('By default, a user must fill out a title when submitting a ticket.  This setting lets you easily change the name of the word TITLE so that you word this appropriately for your situation.', 'wpsc-support-tickets') , '<br /><input name="custom_title" value="' . $devOptions['custom_title'] . '" style="width:95%;" /><br /><br />
                 
                 <strong>' , __('Change MESSAGE to', 'wpsc-support-tickets') , ':</strong> ' , __('By default, a user must fill out a message when submitting a ticket.  This setting lets you easily change the name of the words YOUR MESSAGE so that you word this appropriately for your situation.', 'wpsc-support-tickets') , '<br /><input name="custom_message" value="' . $devOptions['custom_message'] . '" style="width:95%;" /><br /><br />
+                ';
                 
+                echo '<strong>' , __('Change New Ticket button text to', 'wpsc-support-tickets') , ':</strong> ' , __('By default, this button says Create a New Ticket, but here you can change it to whatever you want.', 'wpsc-support-tickets') , '<br /><input name="custom_new_ticket_button_text" value="' . $devOptions['custom_new_ticket_button_text'] . '" style="width:95%;" /><br /><br />';
+                
+                echo ' 
 
                 <br /><br /><br /><br />
             </td></tr></table>
@@ -2244,7 +2252,7 @@ if (!class_exists("wpscSupportTickets")) {
                             } $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);return false;"><img ';
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="float:left;border:none;margin-right:5px;"';
-                            } $output.=' src="' . plugins_url('/images/Add.png', __FILE__) . '" alt="' . __('Create a New Ticket', 'wpsc-support-tickets') . '" /> ' . __('Create a New Ticket', 'wpsc-support-tickets') . '</button><br /><br />';
+                            } $output.=' src="' . plugins_url('/images/Add.png', __FILE__) . '" alt="' . $devOptions['custom_new_ticket_button_text'] . '" /> ' . $devOptions['custom_new_ticket_button_text'] . '</button><br /><br />';
                             $output.=  '<form action="' . get_admin_url().'admin-post.php" method="post" enctype="multipart/form-data">';
                             $output.= "<input type='hidden' name='action' value='submit-new-support-ticket' />";                                 
                             if (@isset($_POST['guest_email'])) {
@@ -2254,7 +2262,7 @@ if (!class_exists("wpscSupportTickets")) {
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="width:100%"';
                             } 
-                            $output .='><tr><th><img src="' . plugins_url('/images/Chat.png', __FILE__) . '" alt="' . __('Create a New Ticket', 'wpsc-support-tickets') . '" /> ' . __('Create a New Ticket', 'wpsc-support-tickets') . '</th></tr>';
+                            $output .='><tr><th><img src="' . plugins_url('/images/Chat.png', __FILE__) . '" alt="' .  $devOptions['custom_new_ticket_button_text']  . '" /> ' .  $devOptions['custom_new_ticket_button_text']  . '</th></tr>';
 
                             if($devOptions['custom_field_position'] == 'before everything') {
                                 $output .= wpsctPromptForCustomFields();
