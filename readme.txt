@@ -4,7 +4,7 @@ Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsup
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.2
-Stable tag: 4.9.43
+Stable tag: 4.9.44
 
 == Description ==
 
@@ -109,6 +109,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
 * Updated: Added randomized addition to filenames & updated the file upload presentation (added 4.9.29 if you turn on beta testing)
+
+= 4.9.44 =
+* Fixed: UTF8 and other non-latin characters should now work properly with the new departments system
+* Fixed: Parent department can now be left blank when creating a new department
 
 = 4.9.43 =
 * Added: Print to PDF feature added to beta features (to use it, turn on beta testing from wp-admin > Support Tickets > Settings > General > Enable & Test Beta Features? > and set to True) Currently not UTF8 compatible. Currently no replies are included.  Working on fixing both and more.
