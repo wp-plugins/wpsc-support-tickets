@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.46
+  Version: 4.9.47
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -96,7 +96,7 @@ if (!function_exists('wpscSupportTickets_mail')) {
      * @param string $message
      * @param string $headers
      */
-    function wpscSupportTickets_mail($to, $subject, $message, $headers='') {
+    function wpscSupportTickets_mail($to, $subject, $message, $headers='', $cc=null) {
         $devOptions = get_option('wpscSupportTicketsAdminOptions');
         if($devOptions['disable_all_emails']=='false') {
             $headers .= 'MIME-Version: 1.0' . "\r\n";
@@ -109,8 +109,13 @@ if (!function_exists('wpscSupportTickets_mail')) {
             $headers .= "Content-type: {$email_content_type}; charset={$devOptions['email_encoding']} \r\n";                
 
             $headers .= 'From: ' . $devOptions['email'] . "\r\n" .
-            'Reply-To: ' . $devOptions['email'] .  "\r\n" .
-            'X-Mailer: PHP/' . phpversion();        
+            'Reply-To: ' . $devOptions['email'] .  "\r\n";
+            
+            if($cc != null) {
+                $headers .= "CC: " . $cc . "\r\n";                
+            }
+            
+            $headers .= 'X-Mailer: PHP/' . phpversion();        
             wp_mail($to, $subject, $message, $headers);
         }
     }
@@ -432,7 +437,13 @@ if (!class_exists("wpscSupportTickets")) {
                 'override_mysql_timezone' => 'false',
                 'show_advanced_options' => 'false',
                 'converted_departments_phase2' => 'false',
-                'custom_new_ticket_button_text' => __('Create a New Ticket', 'wpsc-support-tickets')
+                'custom_new_ticket_button_text' => __('Create a New Ticket', 'wpsc-support-tickets'),
+                'cc_all_new_tickets' => 'false',
+                'cc_all_new_tickets_to_email' => get_bloginfo('admin_email'),
+                'cc_all_user_replies' => 'false',
+                'cc_all_user_replies_to_email' => get_bloginfo('admin_email'),
+                'cc_all_admin_replies' => 'false',
+                'cc_all_admin_replies_to_email' => get_bloginfo('admin_email')                 
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -597,6 +608,25 @@ if (!class_exists("wpscSupportTickets")) {
                     $devOptions['custom_new_ticket_button_text'] = esc_sql($_POST['custom_new_ticket_button_text']);
                 }                
  
+                if(isset($_POST['cc_all_new_tickets'])) {
+                    $devOptions['cc_all_new_tickets'] = esc_sql($_POST['cc_all_new_tickets']);
+                }  
+                if(isset($_POST['cc_all_new_tickets_to_email'])) {
+                    $devOptions['cc_all_new_tickets_to_email'] = esc_sql($_POST['cc_all_new_tickets_to_email']);
+                }  
+                if(isset($_POST['cc_all_user_replies'])) {
+                    $devOptions['cc_all_user_replies'] = esc_sql($_POST['cc_all_user_replies']);
+                }                  
+                if(isset($_POST['cc_all_user_replies_to_email'])) {
+                    $devOptions['cc_all_user_replies_to_email'] = esc_sql($_POST['cc_all_user_replies_to_email']);
+                }  
+                if(isset($_POST['cc_all_admin_replies'])) {
+                    $devOptions['cc_all_admin_replies'] = esc_sql($_POST['cc_all_admin_replies']);
+                }  
+                if(isset($_POST['cc_all_admin_replies_to_email'])) {
+                    $devOptions['cc_all_admin_replies_to_email'] = esc_sql($_POST['cc_all_admin_replies_to_email']);
+                }  
+                
                 update_option($this->adminOptionsName, $devOptions);
 
                 echo '<div class="updated"><p><strong>';
@@ -865,6 +895,90 @@ if (!class_exists("wpscSupportTickets")) {
                 ';
                 
                 if ($devOptions['show_advanced_options'] == 'true') {
+                    
+                    echo '
+                    <div style="padding:5px;border:1px dotted black;">
+                    <p><strong>' , __('CC All New Tickets?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to CC the below email address on all new tickets.', 'wpsc-support-tickets') , '  <br />
+                    <select name="cc_all_new_tickets">
+                     ';
+
+                    $pagesY[0] = 'true';
+                    $pagesY[1] = 'false';
+                    foreach ($pagesY as $pagg) {
+                        $option = '<option value="' . $pagg . '"';
+                        if ($pagg === $devOptions['cc_all_new_tickets']) {
+                            $option .= ' selected="selected"';
+                        }
+                        $option .='>';
+                        $option .= $pagg;
+                        $option .= '</option>';
+                        echo $option;
+                    }
+
+                    echo '
+                    </select>
+                    </p>
+                    <strong>' , __('Email Address to CC on New Tickets', 'wpsc-support-tickets') , '</strong> ' , __('When enabled, the email address to CC on new tickets.', 'wpsc-support-tickets') , '<br /><input name="cc_all_new_tickets_to_email" value="' , $devOptions['cc_all_new_tickets_to_email'] , '" style="width:95%;" />
+                    <br /><br />                    
+                    ';                    
+                    
+                    
+                    echo '
+                    <p><strong>' , __('CC All User Replies?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to CC the below email address on all user replies to tickets.', 'wpsc-support-tickets') , '  <br />
+                    <select name="cc_all_user_replies">
+                     ';
+
+                    $pagesY[0] = 'true';
+                    $pagesY[1] = 'false';
+                    foreach ($pagesY as $pagg) {
+                        $option = '<option value="' . $pagg . '"';
+                        if ($pagg === $devOptions['cc_all_user_replies']) {
+                            $option .= ' selected="selected"';
+                        }
+                        $option .='>';
+                        $option .= $pagg;
+                        $option .= '</option>';
+                        echo $option;
+                    }
+
+                    echo '
+                    </select>
+                    </p>
+                    <strong>' , __('Email Address to CC on All User Replies', 'wpsc-support-tickets') , '</strong> ' , __('When enabled, the email address to CC on new user replies.', 'wpsc-support-tickets') , '<br /><input name="cc_all_user_replies_to_email" value="' , $devOptions['cc_all_user_replies_to_email'] , '" style="width:95%;" />
+                    <br /><br />                    
+                    ';                       
+                    
+                    
+                    
+                    echo '
+                    <p><strong>' , __('CC All Admin Replies?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to CC the below email address on all admin replies to tickets.', 'wpsc-support-tickets') , '  <br />
+                    <select name="cc_all_admin_replies">
+                     ';
+
+                    $pagesY[0] = 'true';
+                    $pagesY[1] = 'false';
+                    foreach ($pagesY as $pagg) {
+                        $option = '<option value="' . $pagg . '"';
+                        if ($pagg === $devOptions['cc_all_admin_replies']) {
+                            $option .= ' selected="selected"';
+                        }
+                        $option .='>';
+                        $option .= $pagg;
+                        $option .= '</option>';
+                        echo $option;
+                    }
+
+                    echo '
+                    </select>
+                    </p>
+                    <strong>' , __('Email Address to CC on All Admin Replies', 'wpsc-support-tickets') , '</strong> ' , __('When enabled, the email address to CC on new admin replies.', 'wpsc-support-tickets') , '<br /><input name="cc_all_admin_replies_to_email" value="' , $devOptions['cc_all_admin_replies_to_email'] , '" style="width:95%;" />
+                    <br /><br />   
+                    </div>
+                    <br /><br />  
+                    ';                      
+                    
+                    
+                    
                                         echo ' 
                                         <p style="padding:5px;border:1px dotted black;">
                         <img src="' , plugins_url() , '/wpsc-support-tickets/images/bug_report.png" alt="' , __('Warning', 'wpsc-support-tickets') , '" style="float:left;" /> <strong style="font-size:1.2em;">' , __('Warning', 'wpsc-support-tickets') , ' - ' , __('Activating these overrides can cause registration emails to fail in some circumstances.  Please double check that new users receive their registration emails after enabling this override.', 'wpsc-support-tickets') , '</strong><br style="clear:both;"  /><br />
@@ -889,7 +1003,7 @@ if (!class_exists("wpscSupportTickets")) {
                                         </select>
                                         <br />
                                         <strong>' , __('Override Name Sent From', 'wpsc-support-tickets') ,'</strong> ', __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') ,'<br /><input name="email_name" value="' , $devOptions['email_name'] , '" style="width:95%;" /><br /><br />
-                                        <strong>' , __('Override Email Sent From', 'wpsc-support-tickets') ,'</strong> ', __('The name of the admin email sender, such as "Business Name Support Team", or whatever is appropriate for your situation.', 'wpsc-support-tickets') ,'<br /><input name="overrides_email" value="' , $devOptions['overrides_email'] , '" style="width:95%;" /><br /><br />
+                                        <strong>' , __('Override Email Sent From', 'wpsc-support-tickets') ,'</strong> ', __('The email address that all outgoing emails will appear to be sent from.', 'wpsc-support-tickets') ,'<br /><input name="overrides_email" value="' , $devOptions['overrides_email'] , '" style="width:95%;" /><br /><br />
                                             </p>';
                 }
                 
@@ -2925,6 +3039,11 @@ function wpscstSubmitTicket() {
         // End custom fields 
 
         if($devOptions['disable_all_emails']=='false') { // If we're sending out emails
+            $cc = null;
+            if($devOptions['cc_all_new_tickets'] == 'true') {
+               $cc = $devOptions['cc_all_new_tickets_to_email'];
+            }	            
+            
             $to      = $wpscst_email; // Send this to the ticket creator
             if($devOptions['allow_html']=='true') {
                 $subject = $devOptions['email_new_ticket_subject'] .' "'. htmlspecialchars_decode( htmlentities( strip_tags($_POST['wpscst_title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ).'"';
@@ -2942,9 +3061,9 @@ function wpscstSubmitTicket() {
                 }
                 $message .= $cleaned_message;
             }    
-            $headers = '';
 
-            wpscSupportTickets_mail($to, $subject, $message, $headers);
+
+            wpscSupportTickets_mail($to, $subject, $message, null, $cc);
 
 
             $to      = $devOptions['email']; // Send this to the admin
@@ -3025,8 +3144,11 @@ function wpscstReplyTicket() {
     $devOptions = get_option("wpscSupportTicketsAdminOptions");
 
     if (session_id() == "") {@session_start();};
+    
+    $is_an_admin_reply = false;
 
     if ( current_user_can('manage_wpsct_support_tickets')) { // admin edits such as closing tickets should happen here first:
+        $is_an_admin_reply = true;
         if(@isset($_POST['wpscst_status']) && @isset($_POST['wpscst_department']) && is_numeric($_POST['wpscst_edit_primkey'])) {
             $wpscst_department = intval($_POST['wpscst_department']);
             $wpscst_status = $wpdb->escape($_POST['wpscst_status']);
@@ -3224,6 +3346,11 @@ function wpscstReplyTicket() {
 
                 if($devOptions['disable_all_emails']=='false') { // If emails are turned on
                     if (@isset($_POST['wpsctnoemail']) && $_POST['wpsctnoemail'] == 'on' && $results[0]['email'] != $wpscst_email) {
+                        $cc = null;
+                        if($devOptions['cc_all_user_replies'] == 'true' && !$is_an_admin_reply) {
+                           $cc = $devOptions['cc_all_user_replies_to_email'];
+                        }                        
+                        
                         $to      = $results[0]['email']; // Send this to the original ticket creator
                         if($devOptions['allow_html']=='true') {
                             $subject = $devOptions['email_new_reply_subject'].' "' . htmlspecialchars_decode( htmlentities( base64_decode($results[0]['title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
@@ -3242,10 +3369,15 @@ function wpscstReplyTicket() {
                             $message .= $cleaned_message;
                         }            
 
-                        wpscSupportTickets_mail($to, $subject, $message);
+                        wpscSupportTickets_mail($to, $subject, $message, null, $cc);
                     }
 
                     if( $devOptions['email']!=$results[0]['email']) { 
+                        $cc = null;
+                        if($devOptions['cc_all_admin_replies'] == 'true' && $is_an_admin_reply) {
+                           $cc = $devOptions['cc_all_admin_replies'];
+                        }                                  
+                        
                         $to      = $devOptions['email']; // Send this to the admin
                         if($devOptions['allow_html']=='true') {
                             $subject = __("Reply to a support ticket was received.", 'wpsc-support-tickets').' "' . htmlspecialchars_decode( htmlentities( base64_decode($results[0]['title']), ENT_NOQUOTES, strtoupper($devOptions['email_encoding']), false ), ENT_NOQUOTES ) .'"';
@@ -3267,7 +3399,7 @@ function wpscstReplyTicket() {
                             $message .= $cleaned_message;
                         }
 
-                        wpscSupportTickets_mail($to, $subject, $message);
+                        wpscSupportTickets_mail($to, $subject, $message, null, $cc);
                     }
                     
                     

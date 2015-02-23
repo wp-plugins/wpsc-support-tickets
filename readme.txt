@@ -4,7 +4,7 @@ Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsup
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.2
-Stable tag: 4.9.46
+Stable tag: 4.9.47
 
 == Description ==
 
@@ -108,7 +108,11 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Updated: New easier to use and less buggy permission system allows you to easily fine tune who can administrate what tickets (started in 4.7.32)
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
-* Updated: Added randomized addition to filenames & updated the file upload presentation (added 4.9.29 if you turn on beta testing)
+* Updated: Added randomized addition to filenames & updated the file upload presentation (added in 4.9.29 as beta feature, went live for all in 4.9.33)
+
+= 4.9.47 =
+* Added: A bunch of new CC options added
+* Updated: Changed the description of email address over-ride setting so that it accurately described the feature
 
 = 4.9.46 =
 * Updated: The .POT file has been updated to the latest version
