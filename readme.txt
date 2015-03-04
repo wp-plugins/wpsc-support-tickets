@@ -4,7 +4,7 @@ Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsup
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.2
-Stable tag: 4.9.47
+Stable tag: 4.9.48
 
 == Description ==
 
@@ -73,8 +73,15 @@ Or, if you want to install manually:
 
 == Frequently Asked Questions ==
 
+= Q. How can I change the email sender from Wordpress to my own site? =
+IDB Support Tickets uses Wordpress to send all emails, so that your email settings are respected.  With that said, since this question kept coming up, I added a feature to address this.  Goto wp-admin > Support Tickets > Settings > 
+
+Now make sure in the General tab that Show Advanced Settings? is set to True.  If it is not, then set it to True and click the Update Settings button.
+
+Once Advanced Settings are activated, click on the Email tab, and use the following settings to override your default Wordpress email settings: Override Wordpress Email Sent "Name" & "From", Override Name Sent From, Override Email Sent From
+
 = Q. My bbPress menus all disappeared! How can I get them back? =
-The fix is to deactivate wpsc Support Tickets, go into bbPress settings at wp-admin > Settings > Forums > and then uncheck the "Automatically give registered visitors the XXXX forum role" and save your settings. Once you've saved the settings, now just recheck the "Automatically give registered visitors the XXXX forum role" and save. Now reactivate wpsc Support Tickets and it should work perfectly with bbPress. 
+The fix is to deactivate IDB Support Tickets, go into bbPress settings at wp-admin > Settings > Forums > and then uncheck the "Automatically give registered visitors the XXXX forum role" and save your settings. Once you've saved the settings, now just recheck the "Automatically give registered visitors the XXXX forum role" and save. Now reactivate wpsc Support Tickets and it should work perfectly with bbPress. 
 
 = Q. I have other questions, where can I find answers? =
 For full documentation, support, addons, and related tools, visit [our site](http://wpscsupporttickets.com/wordpress-support-ticket-plugin/ "our site")
@@ -107,8 +114,13 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: The ability to have different custom fields display depending on the selected department while creating a ticket.
 * Updated: New easier to use and less buggy permission system allows you to easily fine tune who can administrate what tickets (started in 4.7.32)
 * Added: the ability for users to reply by email
-* Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.)
+* Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.) (added in 4.9.48 as a beta feature for frontend, admin coming later)
 * Updated: Added randomized addition to filenames & updated the file upload presentation (added in 4.9.29 as beta feature, went live for all in 4.9.33)
+
+= 4.9.48 =
+* Added: Search function added to frontend (to use it, turn on beta testing from wp-admin > Support Tickets > Settings > General > Enable & Test Beta Features? > and set to True)
+* Updated: It may seem like a performance increase, but all I did was decreased the jQuery effects time on all front end effects so that everything appears to respond quicker than before (again, just on the front end, no admin changes)
+* Updated: Actions taken in the front end that once scrolled you to the top of the support tickets shortcode, now scroll you to the top of the entire page instead (also much quicker than before)
 
 = 4.9.47 =
 * Added: A bunch of new CC options added

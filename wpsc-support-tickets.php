@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.47
+  Version: 4.9.48
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -443,7 +443,8 @@ if (!class_exists("wpscSupportTickets")) {
                 'cc_all_user_replies' => 'false',
                 'cc_all_user_replies_to_email' => get_bloginfo('admin_email'),
                 'cc_all_admin_replies' => 'false',
-                'cc_all_admin_replies_to_email' => get_bloginfo('admin_email')                 
+                'cc_all_admin_replies_to_email' => get_bloginfo('admin_email'),
+                'allow_search' => 'false'
             );             
             
             if ($this->wpscstSettings != NULL) { // If we haven't cached stuff already
@@ -525,9 +526,6 @@ if (!class_exists("wpscSupportTickets")) {
                 }
                 if (isset($_POST['turnwpscSupportTicketsOn'])) {
                     $devOptions['turnon_wpscSupportTickets'] = esc_sql($_POST['turnwpscSupportTicketsOn']);
-                }
-                if (isset($_POST['departments'])) {
-                    //$devOptions['departments'] = esc_sql($_POST['departments']);
                 }
                 if (isset($_POST['email'])) {
                     $devOptions['email'] = esc_sql($_POST['email']);
@@ -626,7 +624,9 @@ if (!class_exists("wpscSupportTickets")) {
                 if(isset($_POST['cc_all_admin_replies_to_email'])) {
                     $devOptions['cc_all_admin_replies_to_email'] = esc_sql($_POST['cc_all_admin_replies_to_email']);
                 }  
-                
+                if(isset($_POST['allow_search'])) {
+                    $devOptions['allow_search'] = esc_sql($_POST['allow_search']);
+                }                  
                 update_option($this->adminOptionsName, $devOptions);
 
                 echo '<div class="updated"><p><strong>';
@@ -686,14 +686,6 @@ if (!class_exists("wpscSupportTickets")) {
                     </select>
                     </p>';
 
-                    // Brand new Departments management coming in version 5
-                    //if (!function_exists('wpscSupportTicketDepartments')) {
-                    //    echo ' 
-                    //    <strong>' , __('Departments', 'wpsc-support-tickets') , ':</strong> ' , __('Separate these values with a double pipe, like this ||', 'wpsc-support-tickets') , ' <br /><input name="departments" value="' , $devOptions['departments'] , '" style="width:95%;" /><br /><br />
-                    //
-                    //    ';
-                    //}
-                
                 echo '<p><strong>' , __('Allow user to select Severity on ticket creation?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want the user to select the severity of their ticket when creating it.', 'wpsc-support-tickets') , '  <br />
                 <select name="display_severity_on_create">
                  ';
@@ -761,6 +753,34 @@ if (!class_exists("wpscSupportTickets")) {
                             </p> 
 
                             <p style="padding:5px;border:1px dotted black;">
+            ';  
+
+            // New search system, now in beta                            
+            if ($devOptions['enable_beta_testing'] == 'true') {
+                                        echo '<br />
+                                        <strong>', __('BETA', 'wpsc-support-tickets') ,': ' , __('Enable Ticket Search?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to "true" to show a ticket search box on the "Main Page" you set. If you have "Allow Guests" set to "false" and "Allow everyone to see all tickets" (PRO only) set to "false", then search will only work for registered users and they can only search their own tickets.  If you have "Allow Guests" set to "true", but "Allow everyone to see all tickets" (PRO only) set to "false", then users and guests can search, but are limited to their own tickets.   If you have "Allow Guests" set to "true", and "Allow everyone to see all tickets" (PRO only) set to "true", then users and guests can search everyone\'s tickets, making everything publicly searchable. ', 'wpsc-support-tickets') , '  <br />
+                                        <select name="allow_search">
+                                         ';
+
+                                        $pagesYXX[0] = 'true';
+                                        $pagesYXX[1] = 'false';
+                                        foreach ($pagesYXX as $pagg) {
+                                            $option = '<option value="' . $pagg . '"';
+                                            if ($pagg === $devOptions['allow_search']) {
+                                                $option .= ' selected="selected"';
+                                            }
+                                            $option .='>';
+                                            $option .= $pagg;
+                                            $option .= '</option>';
+                                            echo $option;
+                                        }
+
+                                        echo '
+                                        </select>
+                                        <br /><br /> ';    
+            }                            
+                            
+            echo ' 
             <img src="' , plugins_url() , '/wpsc-support-tickets/images/bug_report.png" alt="' , __('Warning', 'wpsc-support-tickets') , '" style="float:left;" /> <strong style="font-size:1.2em;">' , __('Warning', 'wpsc-support-tickets') , ' - ' , __('This may fix issues on incorrectly configured servers, but it comes at a performance cost of an additional database connection and an additional query on every page load.  Generally, you should only turn this on if tickets do not change who replied last, and always say the Last Poster was the ticket creator, no matter how many times an admin makes a reply.  You should not change this setting unless you believe that your PHP timezone and MySQL are not set to the same thing, as evidence by the Last Poster issue.  If you turn this on when it is not needed, you will only slow down the performance of your website with no benefits. ', 'wpsc-support-tickets') , '</strong><br style="clear:both;"  /><br />
             <strong>' , __('Force Sync MySQL timezone to PHP timezone?', 'wpsc-support-tickets') , ':</strong> ' , __('Set this to true if you want to make emails come from your wpsc Support Ticket admin email below, and to change your sent from name to your Blog\'s name.', 'wpsc-support-tickets') , '  <br />
                             <select name="override_mysql_timezone">
@@ -2199,6 +2219,200 @@ if (!class_exists("wpscSupportTickets")) {
             }
         }        
 
+        /**
+         * Method to return a string full of search results
+         * 
+         * @global object $wpdb
+         * @global type $current_user
+         * @param type $mode
+         * @return string
+         */
+        function search($mode='search') {
+            global $wpdb, $current_user;
+            $devOptions = $this->getAdminOptions();
+            $mode = strtolower($mode);
+            if($devOptions['allow_search']=='true' && $mode=='form') { // If search is on and we need the form
+                $form = '<form method="post" action="'.get_permalink($devOptions['mainpage']).'" id="wpscst-search-form"><br /><br />'.__('Search Tickets', 'wpsc-support-tickets').': <input type="text" value="" name="wpsc-support-tickets-search" id="wpsc-support-tickets-search" /> <input type="submit" value="'.__('Search', 'wpsc-support-tickets').'" name="wpsc-support-tickets-search-button" id="wpsc-support-tickets-search-button" class="wpscst-button" /></form> ';
+                return $form;
+            } else {
+                if($mode=='search' && $devOptions['allow_search']=='true') {
+                    if (session_id() == '') {
+                        @session_start();
+                    }                    
+                    if($devOptions['allow_search']=='true' && @isset($_POST['wpsc-support-tickets-search'])) {
+                        //is_user_logged_in() || @isset($_SESSION['wpsct_email'])
+                        if ($devOptions['allow_all_tickets_to_be_viewed']=='true') {
+                            if ($devOptions['allow_guests']=='true') { // Everyone can search all tickets
+                                    $sql_tickets = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets`;";
+                                    $sql_replies = null;
+                            } else { // Registered users can search all tickets
+                                if(is_user_logged_in()) {
+                                    $sql_tickets = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets`;";
+                                    $sql_replies = null;                                 
+                                } else { // Guest are not allowed to search
+                                    $sql_tickets = null;
+                                    $sql_replies = null;
+                                }
+                            }                    
+                        } else {
+                            if ($devOptions['allow_guests']=='true') { // Guest and registered users, their own tickets only
+                                if(is_user_logged_in()) {
+                                    $sql_tickets = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `user_id`='{$current_user->ID}';";
+                                    $sql_replies = null;  
+                                } else {
+                                    if(@isset($_SESSION['wpsct_email'])) {
+                                        $sql_tickets = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `email`='{$wpdb->escape($_SESSION['wpsct_email'])}' AND `user_id`='0';";
+                                        $sql_replies = null; // Replies SQL has to be calculated later for guests                                   
+                                    } else { // The guest wasn't logged in as a guest
+                                        $sql_tickets = null;
+                                        $sql_replies = null;                                        
+                                    }
+                                }
+                            } else { // Registered users only, their own tickets only
+                                if(is_user_logged_in()) {
+                                    $sql_tickets = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `user_id`='{$current_user->ID}';";
+                                    $sql_replies = null;                                      
+                                } else { // Guest are not allowed
+                                    $sql_tickets = null;
+                                    $sql_replies = null;                                     
+                                }
+                            }                    
+                        }
+                        
+                        // Actual searching done here down here
+                        if($sql_tickets==null && $sql_replies==null) {
+                            return ''; // return an empty string if someone was trying to search in a way they weren't supposed to
+                        } else {
+                            $result_tickets = $wpdb->get_results($sql_tickets, ARRAY_A);
+                            if($sql_replies!=null) {
+                                $result_replies = $wpdb->get_results($sql_replies, ARRAY_A);
+                            } else { // In this block of code, we're dealing with a guest who may or may not have any replies. Now that we know the tickets they have access to, we can build a query for replies
+                                if(@isset($result_tickets[0]['primkey'])) {
+                                    $sql_replies = "SELECT * FROM `{$wpdb->prefix}wpscst_replies` WHERE ";
+                                    foreach($result_tickets as $result_ticket) {
+                                        $sql_replies .= '`ticket_id`="'.$result_ticket['primkey'].'" OR ';
+                                    }  
+                                    $sql_replies = substr($sql_replies, 0, -3); // Takes out the last OR
+                                    $sql_replies .= ';';
+                                    $result_replies = $wpdb->get_results($sql_replies, ARRAY_A);
+                                } else { // Down here it means the guest had no access to any tickets, so therefore has no access to any replies
+                                    $result_replies = null;
+                                }
+                            }
+                        }
+                        
+                        // Time for searching through the tickets we have access to:
+                        $actualticketsresult = 0;
+                        if( @isset($result_tickets[0]['primkey']) || @isset($result_tickets[0]['primkey']) ) {
+                            
+                                $output = '<table class="widefat wpscst_search_results_table" ';
+                                if ($devOptions['disable_inline_styles'] == 'false') {
+                                    $output.='style="width:100%"';
+                                }$output.='><tr><th>' . __('Ticket', 'wpsc-support-tickets') . '</th><th>' . __('Status', 'wpsc-support-tickets') . '</th><th>' . __('Last Reply', 'wpsc-support-tickets') . '</th></tr>';
+                                
+                                // Search Initial Tickets
+                                if( @isset($result_tickets[0]['primkey']) ) {
+                                    
+                                        foreach ($result_tickets as $result) {
+
+                                            //$_POST['wpsc-support-tickets-search']
+                                            if (strripos(base64_decode($result['title']),$_POST['wpsc-support-tickets-search']) !== false) {
+                                                // we're good to go
+                                                $actualticketsresult = $actualticketsresult + 1;
+                                            } else {
+                                                if (strripos(strip_tags(base64_decode($result['initial_message'])),$_POST['wpsc-support-tickets-search']) !== false) {
+                                                    // we're good to go
+                                                    $actualticketsresult = $actualticketsresult + 1;
+                                                } else {
+                                                    continue; // we didn't find an occurance in the ticket or the message
+                                                }
+                                            }
+                                            $final_result[] = $result; // add it the array
+                                        }
+                                }
+                                
+                                // Search Replies and display as Tickets
+                                if( @isset($result_replies[0]['primkey']) ) {
+                                    foreach ($result_replies as $result) {
+
+                                            if (strripos(strip_tags(base64_decode($result['message'])),$_POST['wpsc-support-tickets-search']) !== false) {
+                                                // we're good to go
+                                                $actualticketsresult = $actualticketsresult + 1;
+                                                $new_result = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `primkey`='{$result['ticket_id']}';", ARRAY_A);
+                                                $final_result[] = $new_result[0]; // add it the array                                                                                        
+                                            } else {
+                                                continue; // we didn't find an occurance in the reply
+                                            }
+                                    }
+                                }
+                                
+                                
+                                if($actualticketsresult > 0) {
+                                    $final_result = array_map("unserialize", array_unique(array_map("serialize", $final_result))); // Gives us only unique results by removing duplicate arrays
+                                    foreach($final_result as $result) {
+                                        if (trim($result['last_staff_reply']) == '') {
+                                            if ($devOptions['allow_all_tickets_to_be_viewed'] == 'false') {
+                                                $last_staff_reply = __('you', 'wpsc-support-tickets');
+                                            } else {
+                                                if ($devOptions['hide_email_on_frontend_list']=='true') {
+                                                    $last_staff_reply = __('Guest', 'wpsc-support-tickets') . ' (' . $wpscst_email . ')';
+                                                } else {
+                                                    $last_staff_reply = __('Guest', 'wpsc-support-tickets');
+                                                }                                            
+
+                                            }
+                                        } else {
+                                            if ($result['last_updated'] > $result['last_staff_reply']) {
+                                                $last_staff_reply = __('you', 'wpsc-support-tickets');
+                                            } else {
+                                                $last_staff_reply = '<strong>' . __('Staff Member', 'wpsc-support-tickets') . '</strong>';
+                                            }
+                                        }
+                                        if ($devOptions['allow_closing_ticket'] == 'true') {
+                                            if ($result['resolution'] == 'Closed') {
+                                                $canReopen = 'Reopenable';
+                                            } else {
+                                                $canReopen = $result['resolution'];
+                                            }
+                                        } else {
+                                            $canReopen = $result['resolution'];
+                                        }
+                                        $output .= '<tr><td><a href="" onclick="loadTicket(' . $result['primkey'] . ',\'' . $canReopen . '\');return false;" ';
+                                        if ($result['resolution'] == strtolower('open') ) {
+                                            $resresolution = __('Open', 'wpsc-support-tickets');
+                                        } elseif ($result['resolution'] == strtolower('closed') ) {
+                                            $resresolution = __('Closed', 'wpsc-support-tickets');
+                                        } else {
+                                            $resresolution = $result['resolution'];
+                                        }
+                                        if ($devOptions['disable_inline_styles'] == 'false') {
+                                            $output.='style="border:none;text-decoration:none;"';
+                                        }$output.='><img';
+                                        if ($devOptions['disable_inline_styles'] == 'false') {
+                                            $output.=' style="float:left;border:none;margin-right:5px;"';
+                                        }$output.=' src="' . plugins_url('/images/page_edit.png', __FILE__) . '" alt="' . __('View', 'wpsc-support-tickets') . '"  /> ' . base64_decode($result['title']) . '</a></td><td>' . $resresolution . '</td><td>' . date_i18n( get_option( 'date_format' ), $result['last_updated']) . ' ' . __('by', 'wpsc-support-tickets') . ' ' . $last_staff_reply . '</td></tr>';                                    
+
+                                    }
+                                    $output .= '</table>';
+                                    return $output;                                    
+                                } else {
+                                    return '';
+                                }                                
+                                
+                        } else {
+                            return '';
+                        }                       
+                        
+                        
+                    } else { // return an empty string if search is off or the search was not set
+                        return '';
+                    }
+                } else { // Mode should only equal search here, so if not, return an empty string
+                    return '';
+                }
+            }
+        }
+        
         function wpscSupportTickets_install($network) {   
             global $wpdb;
             if (function_exists('is_multisite') && is_multisite()) {
@@ -2332,7 +2546,7 @@ if (!class_exists("wpscSupportTickets")) {
 
             if (session_id() == '') {
                 @session_start();
-            };
+            }
 
             if ($display == null || trim($display) == '') {
                 $display = 'tickets';
@@ -2360,13 +2574,16 @@ if (!class_exists("wpscSupportTickets")) {
                         if (!$this->hasDisplayed) {
                             global $current_user;
 
+                            $searchstuff = $this::search('form');
+                            $searchresults = $this::search('search');
+                            
                             $output .= '<div id="wpscst_top_page" ';
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="display:inline;"';
-                            } $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'slow\');jQuery(\'#wpscst-new\').fadeOut(\'slow\');jQuery(\'#wpscst_edit_div\').fadeOut(\'slow\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'#wpscst_top_page\').offset().top}, 2000);return false;"><img ';
+                            } $output.='></div><button class="wpscst-button" id="wpscst-new" onclick="jQuery(\'.wpscst-table\').fadeIn(\'fast\');jQuery(\'#wpscst-new\').fadeOut(\'fast\');jQuery(\'#wpscst_edit_div\').fadeOut(\'fast\');jQuery(\'html, body\').animate({scrollTop: jQuery(\'html\').offset().top}, 100);try { jQuery(\'#wpscst-search-form\').fadeOut(\'fast\'); } catch (e) {};try {jQuery(\'#wpscst_search_results\').fadeOut(\'fast\');} catch (e) {};return false;"><img ';
                             if ($devOptions['disable_inline_styles'] == 'false') {
                                 $output.='style="float:left;border:none;margin-right:5px;"';
-                            } $output.=' src="' . plugins_url('/images/Add.png', __FILE__) . '" alt="' . $devOptions['custom_new_ticket_button_text'] . '" /> ' . $devOptions['custom_new_ticket_button_text'] . '</button><br /><br />';
+                            } $output.=' src="' . plugins_url('/images/Add.png', __FILE__) . '" alt="' . $devOptions['custom_new_ticket_button_text'] . '" /> ' . $devOptions['custom_new_ticket_button_text'] . '</button> '.$searchstuff.'<br /><br />';
                             $output.=  '<form action="' . get_admin_url().'admin-post.php" method="post" enctype="multipart/form-data">';
                             $output.= "<input type='hidden' name='action' value='submit-new-support-ticket' />";                                 
                             if (@isset($_POST['guest_email'])) {
@@ -2413,11 +2630,6 @@ if (!class_exists("wpscSupportTickets")) {
                             }                            
                             
                             $output .= '<tr><td><h3>' . __('Department', 'wpsc-support-tickets') . '</h3><select name="wpscst_department" id="wpscst_department">';
-                            //if (isset($exploder[0])) {
-                            //    foreach ($exploder as $exploded) {
-                            //        $output .= '<option value="' . $exploded . '">' . $exploded . '</option>';
-                            //    }
-                            //}
                             $dep_results = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpscst_departments` WHERE `enabled`=1;", ARRAY_A);
                             foreach ($dep_results as $dep_result) {
                                 $output .=  '<option value="'.$dep_result['primkey'].'">'.base64_decode($dep_result['name']).'</option>';
@@ -2529,6 +2741,12 @@ if (!class_exists("wpscSupportTickets")) {
                                 }
                             }
 
+                            if($searchresults!='') {
+                                $output .= '<div id="wpscst_search_results">';
+                                $output .= '<h3>' . __('Search Results', 'wpsc-support-tickets') . ':</h3>';
+                                $output.= $searchresults;
+                                $output .= '</div>';
+                            }
                             $output .= '<div id="wpscst_edit_div">';
 
                             if ($devOptions['allow_all_tickets_to_be_viewed'] == 'true') {
