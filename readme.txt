@@ -4,7 +4,7 @@ Donate link: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsup
 Tags: support,tickets,supporttickets,support-tickets,client,clients,help,helpdesk,help-desk,wpstorecart
 Requires at least: 3.5.0
 Tested up to: 4.2
-Stable tag: 4.9.48
+Stable tag: 4.9.49
 
 == Description ==
 
@@ -116,6 +116,10 @@ For full documentation, support, addons, and related tools, visit [our site](htt
 * Added: the ability for users to reply by email
 * Added: the ability to search through ticket content (backend always, frontend on public guest enabled blogs.) (added in 4.9.48 as a beta feature for frontend, admin coming later)
 * Updated: Added randomized addition to filenames & updated the file upload presentation (added in 4.9.29 as beta feature, went live for all in 4.9.33)
+
+= 4.9.49 =
+* Updated: Replaced depreciated calls to wpdb::escape() with esc_sql() instead
+* Updated: Replaced depreciated call to attribute_escape() with esc_attr() instead
 
 = 4.9.48 =
 * Added: Search function added to frontend (to use it, turn on beta testing from wp-admin > Support Tickets > Settings > General > Enable & Test Beta Features? > and set to True)

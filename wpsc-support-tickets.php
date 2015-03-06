@@ -3,7 +3,7 @@
   Plugin Name: IDB Support Tickets
   Plugin URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   Description: An open source help desk and support ticket system for Wordpress using jQuery. Easy to use for both users & admins.
-  Version: 4.9.48
+  Version: 4.9.49
   Author: IndieDevBundle.com
   Author URI: URI: http://indiedevbundle.com/app/idb-ultimate-wordpress-bundle/#idbsupporttickets
   License: LGPL
@@ -666,7 +666,7 @@ if (!class_exists("wpscSupportTickets")) {
                 <p><strong>' , __('Main Page', 'wpsc-support-tickets') , ':</strong> ' , __('You need to use a Page as the base for wpsc Support Tickets.', 'wpsc-support-tickets') , '  <br />
                 <select name="wpscSupportTicketsmainpage">
                  <option value="">';
-                attribute_escape(__('Select page', 'wpsc-support-tickets'));
+                esc_attr(__('Select page', 'wpsc-support-tickets'));
                 echo '</option>';
 
                 $pages = get_pages();
@@ -2261,7 +2261,7 @@ if (!class_exists("wpscSupportTickets")) {
                                     $sql_replies = null;  
                                 } else {
                                     if(@isset($_SESSION['wpsct_email'])) {
-                                        $sql_tickets = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `email`='{$wpdb->escape($_SESSION['wpsct_email'])}' AND `user_id`='0';";
+                                        $sql_tickets = "SELECT * FROM `{$wpdb->prefix}wpscst_tickets` WHERE `email`='".esc_sql($_SESSION['wpsct_email'])."' AND `user_id`='0';";
                                         $sql_replies = null; // Replies SQL has to be calculated later for guests                                   
                                     } else { // The guest wasn't logged in as a guest
                                         $sql_tickets = null;
@@ -3058,9 +3058,9 @@ function wpscstSubmitTicket() {
             }
         } else {
             $wpscst_userid = 0;
-            $wpscst_email = $wpdb->escape($_SESSION['wpsct_email']);     
+            $wpscst_email = esc_sql($_SESSION['wpsct_email']);     
             if(trim($wpscst_email)=='') {
-                $wpscst_email = @$wpdb->escape($_POST['guest_email']);
+                $wpscst_email = @esc_sql($_POST['guest_email']);
             }
         }
 
@@ -3207,7 +3207,7 @@ function wpscstSubmitTicket() {
         $wpscst_initial_message = base64_encode( '<p>'. preg_replace('/[\r\n]+/', '</p><p>', $_POST['wpscst_initial_message'] . $wpscst_initial_message) . '</p>' );
         
         $wpscst_department = intval($_POST['wpscst_department']);    
-        $wpscst_severity = $wpdb->escape($_POST['wpscst_severity']);
+        $wpscst_severity = esc_sql($_POST['wpscst_severity']);
 
         $sql = "
         INSERT INTO `{$wpdb->prefix}wpscst_tickets` (
@@ -3369,8 +3369,8 @@ function wpscstReplyTicket() {
         $is_an_admin_reply = true;
         if(@isset($_POST['wpscst_status']) && @isset($_POST['wpscst_department']) && is_numeric($_POST['wpscst_edit_primkey'])) {
             $wpscst_department = intval($_POST['wpscst_department']);
-            $wpscst_status = $wpdb->escape($_POST['wpscst_status']);
-            $wpscst_severity = $wpdb->escape($_POST['wpscst_severity']);
+            $wpscst_status = esc_sql($_POST['wpscst_status']);
+            $wpscst_severity = esc_sql($_POST['wpscst_severity']);
             $primkey = intval($_POST['wpscst_edit_primkey']);
             // Update the Last Updated time stamp
             $updateSQL = "UPDATE `{$wpdb->prefix}wpscst_tickets` SET `last_updated` = '".current_time( 'timestamp' )."', `type`='{$wpscst_department}', `resolution`='{$wpscst_status}', `severity`='{$wpscst_severity}' WHERE `primkey` ='{$primkey}';";
@@ -3409,9 +3409,9 @@ function wpscstReplyTicket() {
             $wpscst_email = $current_user->user_email;
         } else {
             $wpscst_userid = 0;
-            $wpscst_email = $wpdb->escape($_SESSION['wpsct_email']);  
+            $wpscst_email = esc_sql($_SESSION['wpsct_email']);  
             if(trim($wpscst_email)=='') {
-                $wpscst_email = @$wpdb->escape($_POST['guest_email']);
+                $wpscst_email = @esc_sql($_POST['guest_email']);
             }        
         }    
 
@@ -3917,7 +3917,7 @@ if(!function_exists('wpscSupportTicketsReturnValidManagers')) {
                 `target_response_time`
                 )
                 VALUES (
-                    NULL , '".base64_encode($_POST['dep_name'])."', '".base64_encode($_POST['dep_description'])."', '".intval($_POST['dep_lead_admin'])."', '".intval($_POST['dep_enabled'])."', '".base64_encode($_POST['dep_slug'])."', '".intval($_POST['dep_parent'])."', '".intval($_POST['dep_forward_all_emails'])."', '".$wpdb->escape($_POST['dep_email'])."', '0', '2 days'
+                    NULL , '".base64_encode($_POST['dep_name'])."', '".base64_encode($_POST['dep_description'])."', '".intval($_POST['dep_lead_admin'])."', '".intval($_POST['dep_enabled'])."', '".base64_encode($_POST['dep_slug'])."', '".intval($_POST['dep_parent'])."', '".intval($_POST['dep_forward_all_emails'])."', '".esc_sql($_POST['dep_email'])."', '0', '2 days'
                 );
                 ";
             $wpdb->query($sql);

@@ -12,9 +12,9 @@ function wpsctAjaxAddField() {
         wpscSupportTickets::checkPermissions();
 
         $table_name = $wpdb->prefix . "wpstorecart_meta";
-        $createnewfieldname = $wpdb->escape($_POST['createnewfieldname']);
-        $createnewfieldtype = $wpdb->escape($_POST['createnewfieldtype']);
-        $createnewfieldrequired = $wpdb->escape($_POST['createnewfieldrequired']);
+        $createnewfieldname = esc_sql($_POST['createnewfieldname']);
+        $createnewfieldtype = esc_sql($_POST['createnewfieldtype']);
+        $createnewfieldrequired = esc_sql($_POST['createnewfieldrequired']);
 
         $insert = "
         INSERT INTO `{$table_name}` (
@@ -31,7 +31,7 @@ function wpsctAjaxAddField() {
         $lastID = $wpdb->insert_id;
         
 
-        $customfieldmc = $wpdb->escape($_POST['customfieldmc']);
+        $customfieldmc = esc_sql($_POST['customfieldmc']);
         if (@isset($customfieldmc) && trim($customfieldmc)!='') {
             $insert = "
             INSERT INTO `{$table_name}` (
@@ -65,7 +65,7 @@ function wpsctAjaxDelField() {
 
         wpscSupportTickets::checkPermissions();
 
-        $delete = $wpdb->escape($_POST['delete']);
+        $delete = esc_sql($_POST['delete']);
 
         $table_name = $wpdb->prefix . "wpstorecart_meta";
 

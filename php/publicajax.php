@@ -38,7 +38,7 @@ function wpsctLoadTicket() {
             $wpscst_username = $current_user->display_name;
         } else {
             $wpscst_userid = 0;
-            $wpscst_email = $wpdb->escape($_SESSION['wpsct_email']);   
+            $wpscst_email = esc_sql($_SESSION['wpsct_email']);   
             if ($devOptions['hide_email_on_support_tickets']=='true') {
                 $wpscst_username = __('Guest', 'wpsc-support-tickets').' ('.$wpscst_email.')';
             } else {
